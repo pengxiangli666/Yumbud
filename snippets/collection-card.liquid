@@ -66,13 +66,13 @@
     <span class="visually-hidden">{{ collection.title }}</span>
   </a>
   <div class="collection-card__inner">
-    {%- assign hover_video = collection.metafields.custom.hover_video.value -%}
+    {%- assign hover_video = collection.metafields.custom.hover_video -%}
     <div class="collection-card__media-wrapper">
       {{ card_image }}
       {%- if hover_video != blank -%}
         <video
           class="collection-card__hover-video"
-          src="{{ hover_video.url }}"
+          src="{{ hover_video.value }}"
           muted
           loop
           playsinline
