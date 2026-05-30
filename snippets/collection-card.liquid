@@ -57,7 +57,7 @@
   "
   {{- block.shopify_attributes -}}
 >
-  <a
+  
     class="collection-card__link"
     {% unless onboarding %}
       href="{{ collection.url }}"
@@ -66,13 +66,14 @@
     <span class="visually-hidden">{{ collection.title }}</span>
   </a>
   <div class="collection-card__inner">
-    {%- assign hover_video = collection.metafields.custom.hover_video -%}
+    {%- assign hover_video_meta = collection.metafields.custom.hover_video -%}
+    {%- assign hover_video_url = hover_video_meta.value | file_url -%}
     <div class="collection-card__media-wrapper">
       {{ card_image }}
-      {%- if hover_video != blank -%}
+      {%- if hover_video_meta != blank -%}
         <video
           class="collection-card__hover-video"
-          src="{{ hover_video.value }}"
+          src="{{ hover_video_url }}"
           muted
           loop
           playsinline
