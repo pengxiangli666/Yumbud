@@ -1,0 +1,199 @@
+{%- comment -%}
+  ============================================================
+  YumBud · Build the Bowl  (Online Store 2.0)
+  Horizontal row of large "range" cards in the K9 "Build Your Bowl"
+  style. Each card shows a poster IMAGE and plays its VIDEO on hover
+  (tap on mobile), with a title, description and a Shop link below.
+  Drag, scroll, or use the side arrows. Each card is a block.
+
+  Install: Edit code > Sections > Add a new section
+  "yumbud-build-bowl", paste, Save. Then Customize > Add section
+  > "YumBud · Build the Bowl".
+
+  Tip: this can REPLACE the single "YumBud · Hover Video" feature if
+  you'd rather have the hover-video as this card row.
+  ============================================================
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+<style>
+  #shopify-section-{{ uid }}{
+    --yb-bg:{{ s.bg_color }}; --yb-ink:{{ s.text_color }}; --yb-muted:{{ s.muted_color }};
+    --yb-accent:{{ s.accent_color }}; --yb-line:{{ s.text_color }}1f; --yb-cream:#FAF8F3;
+    --yb-serif:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};
+    --yb-cardw:{{ s.card_width }}px; --yb-ease:cubic-bezier(.22,.61,.36,1);
+  }
+  .yb-bb-{{ uid }}{ background:var(--yb-bg); color:var(--yb-ink); overflow:hidden; padding:{{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+  .yb-bb-head-{{ uid }}{ text-align:center; max-width:900px; margin:0 auto 46px; padding:0 40px; }
+  .yb-bb-eyebrow-{{ uid }}{ font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--yb-muted); font-weight:500; margin-bottom:16px; }
+  .yb-bb-head-{{ uid }} h2{ font-family:var(--yb-serif); font-weight:500; line-height:1.06; letter-spacing:-.01em;
+    font-size:clamp(34px,4.6vw,60px); color:var(--yb-accent); }
+  .yb-bb-wrap-{{ uid }}{ position:relative; }
+  .yb-bb-scroller-{{ uid }}{ display:flex; gap:24px; overflow-x:auto; padding:6px 40px 12px; scroll-snap-type:x mandatory;
+    cursor:grab; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+  .yb-bb-scroller-{{ uid }}::-webkit-scrollbar{ display:none; }
+  .yb-bb-scroller-{{ uid }}.yb-drag{ cursor:grabbing; scroll-snap-type:none; }
+  .yb-bb-card-{{ uid }}{ flex:none; width:var(--yb-cardw); max-width:88vw; scroll-snap-align:start; display:flex; flex-direction:column; }
+  .yb-bb-media-{{ uid }}{ position:relative; aspect-ratio:4/5; border-radius:3px; overflow:hidden; background:#15120f;
+    box-shadow:0 40px 70px -52px rgba(43,36,32,.6); cursor:pointer; }
+  .yb-bb-media-{{ uid }} img,.yb-bb-media-{{ uid }} video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .yb-bb-media-{{ uid }} video{ opacity:0; transition:opacity .55s var(--yb-ease); }
+  .yb-bb-media-{{ uid }}.playing video{ opacity:1; }
+  .yb-bb-media-{{ uid }}.playing .yb-bb-poster-{{ uid }}{ opacity:0; }
+  .yb-bb-poster-{{ uid }}{ transition:opacity .55s var(--yb-ease); z-index:1; }
+  .yb-bb-hint-{{ uid }}{ position:absolute; z-index:3; left:16px; bottom:16px; display:flex; align-items:center; gap:8px;
+    font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#fff; font-weight:500;
+    background:rgba(20,17,14,.45); backdrop-filter:blur(6px); padding:8px 13px; border-radius:40px; transition:.4s; }
+  .yb-bb-media-{{ uid }}.playing .yb-bb-hint-{{ uid }}{ opacity:0; transform:translateY(6px); }
+  .yb-bb-hint-{{ uid }} i{ width:0; height:0; border-left:6px solid #fff; border-top:4px solid transparent; border-bottom:4px solid transparent; }
+  .yb-bb-title-{{ uid }}{ font-family:var(--yb-serif); font-weight:500; font-size:27px; color:var(--yb-accent); margin:22px 0 0; line-height:1.1; }
+  .yb-bb-desc-{{ uid }}{ font-size:14px; color:var(--yb-muted); font-weight:300; line-height:1.65; margin-top:12px; }
+  .yb-bb-link-{{ uid }}{ display:inline-block; margin-top:16px; font-size:13px; color:var(--yb-accent);
+    border-bottom:1px solid var(--yb-accent); padding-bottom:2px; transition:.3s; }
+  .yb-bb-link-{{ uid }}:hover{ opacity:.7; }
+  .yb-bb-arw-{{ uid }}{ position:absolute; top:34%; transform:translateY(-50%); z-index:4; width:52px; height:52px; border-radius:50%;
+    border:1px solid var(--yb-line); background:rgba(250,248,243,.92); backdrop-filter:blur(4px); color:var(--yb-ink);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; transition:.3s var(--yb-ease); box-shadow:0 10px 30px -14px rgba(43,36,32,.4); }
+  .yb-bb-arw-{{ uid }}:hover{ background:var(--yb-ink); color:var(--yb-cream); border-color:var(--yb-ink); }
+  .yb-bb-arw-{{ uid }}:disabled{ opacity:0; pointer-events:none; }
+  .yb-bb-arw-{{ uid }} svg{ width:18px; height:18px; stroke:currentColor; stroke-width:1.5; fill:none; }
+  .yb-bb-prev-{{ uid }}{ left:16px; } .yb-bb-next-{{ uid }}{ right:16px; }
+  @media (max-width:780px){
+    .yb-bb-scroller-{{ uid }}{ padding-inline:24px; }
+    .yb-bb-arw-{{ uid }}{ display:none; }
+    .yb-bb-head-{{ uid }}{ padding-inline:24px; }
+  }
+</style>
+
+<section class="yb-bb-{{ uid }}">
+  <div class="yb-bb-head-{{ uid }}">
+    {% if s.eyebrow != blank %}<div class="yb-bb-eyebrow-{{ uid }}">{{ s.eyebrow }}</div>{% endif %}
+    {% if s.heading != blank %}<h2>{{ s.heading }}</h2>{% endif %}
+  </div>
+
+  <div class="yb-bb-wrap-{{ uid }}">
+    {% if s.show_arrows %}
+      <button class="yb-bb-arw-{{ uid }} yb-bb-prev-{{ uid }}" data-yb-prev aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="yb-bb-arw-{{ uid }} yb-bb-next-{{ uid }}" data-yb-next aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    {% endif %}
+
+    <div class="yb-bb-scroller-{{ uid }}" data-yb-scroller>
+      {% for block in section.blocks %}
+        <div class="yb-bb-card-{{ uid }}" {{ block.shopify_attributes }}>
+          <div class="yb-bb-media-{{ uid }}" data-yb-hoverv>
+            {% if block.settings.poster != blank %}
+              <img class="yb-bb-poster-{{ uid }}" src="{{ block.settings.poster | image_url: width: 900 }}" alt="{{ block.settings.poster.alt | escape }}" loading="lazy" width="{{ block.settings.poster.width }}" height="{{ block.settings.poster.height }}">
+            {% else %}
+              <img class="yb-bb-poster-{{ uid }}" src="{{ 'lifestyle-1.png' | placeholder_svg_tag }}" alt="">
+            {% endif %}
+
+            {%- comment -%} source priority: native video > external mp4 {%- endcomment -%}
+            {% if block.settings.card_video != blank %}
+              <video muted loop playsinline preload="none" {% if block.settings.poster != blank %}poster="{{ block.settings.poster | image_url: width: 900 }}"{% endif %}>
+                {% for src in block.settings.card_video.sources %}<source src="{{ src.url }}" type="{{ src.mime_type }}">{% endfor %}
+              </video>
+            {% elsif block.settings.external_mp4 != blank %}
+              <video muted loop playsinline preload="none" {% if block.settings.poster != blank %}poster="{{ block.settings.poster | image_url: width: 900 }}"{% endif %}>
+                <source src="{{ block.settings.external_mp4 }}" type="video/mp4">
+              </video>
+            {% endif %}
+
+            {% if s.show_hint %}<div class="yb-bb-hint-{{ uid }}"><i></i> {{ s.hint_text }}</div>{% endif %}
+          </div>
+
+          {% if block.settings.title != blank %}<h3 class="yb-bb-title-{{ uid }}">{{ block.settings.title }}</h3>{% endif %}
+          {% if block.settings.description != blank %}<p class="yb-bb-desc-{{ uid }}">{{ block.settings.description }}</p>{% endif %}
+          {% if block.settings.link_label != blank %}<a class="yb-bb-link-{{ uid }}" href="{{ block.settings.link | default: '#' }}">{{ block.settings.link_label }} &rarr;</a>{% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root=document.getElementById('shopify-section-{{ uid }}');
+  if(!root) return;
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  root.querySelectorAll('[data-yb-hoverv]').forEach(function(box){
+    var v=box.querySelector('video'); if(!v) return;
+    function play(){ if(reduce) return; box.classList.add('playing'); v.play().catch(function(){}); }
+    function stop(){ box.classList.remove('playing'); v.pause(); try{v.currentTime=0;}catch(e){} }
+    box.addEventListener('mouseenter',play);
+    box.addEventListener('mouseleave',stop);
+    box.addEventListener('click',function(){ box.classList.contains('playing')?stop():play(); });
+  });
+
+  var scroller=root.querySelector('[data-yb-scroller]');
+  if(!scroller) return;
+  var prevB=root.querySelector('[data-yb-prev]'), nextB=root.querySelector('[data-yb-next]');
+  function step(){ var c=scroller.querySelector('.yb-bb-card-{{ uid }}'); return c?c.offsetWidth+24:440; }
+  if(prevB) prevB.onclick=function(){ scroller.scrollBy({left:-step(),behavior:'smooth'}); };
+  if(nextB) nextB.onclick=function(){ scroller.scrollBy({left:step(),behavior:'smooth'}); };
+  function arrowState(){
+    if(!prevB||!nextB) return;
+    prevB.disabled=scroller.scrollLeft<8;
+    nextB.disabled=scroller.scrollLeft+scroller.clientWidth>=scroller.scrollWidth-8;
+  }
+  scroller.addEventListener('scroll',arrowState,{passive:true});
+  addEventListener('resize',arrowState); arrowState();
+
+  var down=false,sx=0,sl=0,moved=0;
+  scroller.addEventListener('pointerdown',function(e){ down=true;moved=0;sx=e.clientX;sl=scroller.scrollLeft;scroller.classList.add('yb-drag'); });
+  scroller.addEventListener('pointermove',function(e){ if(!down)return; var d=e.clientX-sx;moved=Math.abs(d);scroller.scrollLeft=sl-d; });
+  var up=function(){ down=false;scroller.classList.remove('yb-drag'); };
+  scroller.addEventListener('pointerup',up);
+  scroller.addEventListener('pointerleave',up);
+  scroller.querySelectorAll('[data-yb-hoverv]').forEach(function(m){
+    m.addEventListener('click',function(e){ if(moved>6){ e.stopImmediatePropagation(); e.preventDefault(); } },true);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "YumBud · Build the Bowl",
+  "tag": "section",
+  "class": "yumbud-build-bowl-section",
+  "max_blocks": 10,
+  "settings": [
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Range" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Build their bowl with our range." },
+    { "type": "checkbox", "id": "show_arrows", "label": "Show side arrows", "default": true },
+    { "type": "header", "content": "Cards" },
+    { "type": "range", "id": "card_width", "label": "Card width", "min": 300, "max": 520, "step": 10, "unit": "px", "default": 440 },
+    { "type": "checkbox", "id": "show_hint", "label": "Show \"hover to play\" badge", "default": true },
+    { "type": "text", "id": "hint_text", "label": "Badge text", "default": "Hover to play" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2F1EC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
+    { "type": "color", "id": "muted_color", "label": "Description text", "default": "#8C8578" },
+    { "type": "color", "id": "accent_color", "label": "Heading / titles / links", "info": "Slate by default; try the brand orange #DC6D32 for the K9 warmth.", "default": "#535B72" },
+    { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "cormorant_garamond_n5" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    { "type": "range_card", "name": "Range card", "settings": [
+      { "type": "image_picker", "id": "poster", "label": "Poster image (shown when idle)" },
+      { "type": "video", "id": "card_video", "label": "Video (plays on hover)" },
+      { "type": "text", "id": "external_mp4", "label": "…or external MP4 URL", "info": "Used only if no video is uploaded above." },
+      { "type": "text", "id": "title", "label": "Title", "default": "Chew Rings" },
+      { "type": "textarea", "id": "description", "label": "Description", "default": "Chicken wrapped around dried apple — three ingredients, gently dehydrated for a clean, savoury chew." },
+      { "type": "text", "id": "link_label", "label": "Link label", "default": "Shop Chew Rings" },
+      { "type": "url", "id": "link", "label": "Link" }
+    ] }
+  ],
+  "presets": [
+    { "name": "YumBud · Build the Bowl", "blocks": [
+      { "type": "range_card", "settings": { "title": "Chew Rings", "description": "Chicken wrapped around dried apple — three ingredients, gently dehydrated for a clean, savoury chew.", "link_label": "Shop Chew Rings" } },
+      { "type": "range_card", "settings": { "title": "Biscuits", "description": "Goat cheese, flaxseed and garden herbs, gently baked into a crisp little biscuit dogs come running for.", "link_label": "Shop Biscuits" } },
+      { "type": "range_card", "settings": { "title": "Crisps", "description": "Whole cuts of chicken layered with fresh greens, then dried thin and shatter-crisp. Dual nutrition.", "link_label": "Shop Crisps" } },
+      { "type": "range_card", "settings": { "title": "Boosters", "description": "Nutrient-dense toppers to scatter over any bowl. A little extra goodness, no fillers.", "link_label": "Shop Boosters" } }
+    ] }
+  ]
+}
+{% endschema %}
