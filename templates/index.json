@@ -11,7 +11,6 @@
   "sections": {
     "yumbud_pantry_TJ9rGB": {
       "type": "yumbud-pantry",
-      "disabled": true,
       "name": "YumBud · Pantry Grid",
       "settings": {
         "eyebrow": "The Pantry",
@@ -22,17 +21,45 @@
         "columns": 4,
         "show_desc": true,
         "button_label": "Add +",
-        "bg_color": "#F2F1EC",
-        "text_color": "#2B2420",
-        "muted_color": "#8C8578",
-        "accent_color": "#535B72",
+        "bg_color": "#f2f1ec",
+        "text_color": "#2b2420",
+        "muted_color": "#8c8578",
+        "accent_color": "#535b72",
         "heading_font": "assistant_n4",
         "padding_top": 104,
         "padding_bottom": 104
       }
+    },
+    "yumbud_hero_mFrVEx": {
+      "type": "yumbud-hero",
+      "name": "YumBud · Hero",
+      "settings": {
+        "eyebrow": "Single-ingredient · Small batch · Los Angeles",
+        "heading": "Real food, gently made for the <em>bowl.</em>",
+        "body": "<p>Human-grade chicken, garden herbs and real produce — slow-dehydrated by hand. Nothing artificial, nothing rendered. Just treats worth the wag.</p>",
+        "button1_label": "Shop the Pantry",
+        "button1_link": "",
+        "button2_label": "Our Story",
+        "button2_link": "",
+        "stamp_text": "· GENTLY DEHYDRATED · HUMAN GRADE · MADE IN CALIFORNIA",
+        "stat1_num": "4",
+        "stat1_label": "Whole ingredients",
+        "stat2_num": "0",
+        "stat2_label": "Artificial additives",
+        "stat3_num": "4.9",
+        "stat3_label": "Average rating",
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#574F46",
+        "accent_color": "#535B72",
+        "heading_font": "assistant_n4",
+        "padding_top": 88,
+        "padding_bottom": 72
+      }
     }
   },
   "order": [
-    "yumbud_pantry_TJ9rGB"
+    "yumbud_pantry_TJ9rGB",
+    "yumbud_hero_mFrVEx"
   ]
 }
