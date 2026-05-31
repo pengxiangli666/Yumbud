@@ -1,0 +1,71 @@
+{%- comment -%}
+  ============================================================
+  YumBud · Proof Strip (Online Store 2.0)
+  A centred row of big stats with hairline dividers. Each stat is
+  a block (number + optional stars + label).
+  ============================================================
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+<style>
+  #shopify-section-{{ uid }}{
+    --yb-bg:{{ s.bg_color }}; --yb-ink:{{ s.text_color }}; --yb-muted:{{ s.muted_color }};
+    --yb-sand:{{ s.stars_color }}; --yb-line:{{ s.text_color }}1f;
+    --yb-serif:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};
+  }
+  .yb-pr-{{ uid }}{ background:var(--yb-bg); color:var(--yb-ink); text-align:center; padding:{{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+  .yb-pr-in-{{ uid }}{ max-width:1280px; margin:0 auto; padding:0 40px; display:flex; justify-content:center; flex-wrap:wrap; align-items:stretch; }
+  .yb-pf-{{ uid }}{ padding:14px 56px; display:flex; flex-direction:column; gap:8px; align-items:center; position:relative; }
+  .yb-pf-{{ uid }}+.yb-pf-{{ uid }}::before{ content:""; position:absolute; left:0; top:14%; height:72%; width:1px; background:var(--yb-line); }
+  .yb-pf-{{ uid }} .num{ font-family:var(--yb-serif); font-size:clamp(42px,5vw,64px); font-weight:500; line-height:.9; }
+  .yb-pf-{{ uid }} .stars{ color:var(--yb-sand); letter-spacing:3px; font-size:16px; }
+  .yb-pf-{{ uid }} .lb{ font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--yb-muted); max-width:170px; }
+  @media (max-width:880px){ .yb-pr-in-{{ uid }}{ flex-direction:column; gap:34px; }
+    .yb-pf-{{ uid }}+.yb-pf-{{ uid }}::before{ display:none; } .yb-pf-{{ uid }}{ padding:0; } }
+</style>
+
+<section class="yb-pr-{{ uid }}">
+  <div class="yb-pr-in-{{ uid }}">
+    {% for block in section.blocks %}
+      <div class="yb-pf-{{ uid }}" {{ block.shopify_attributes }}>
+        {% if block.settings.number != blank %}<span class="num">{{ block.settings.number }}</span>{% endif %}
+        {% if block.settings.show_stars %}<span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>{% endif %}
+        {% if block.settings.label != blank %}<span class="lb">{{ block.settings.label }}</span>{% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "YumBud · Proof Strip",
+  "tag": "section",
+  "class": "yumbud-proof-section",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2F1EC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
+    { "type": "color", "id": "muted_color", "label": "Label text", "default": "#8C8578" },
+    { "type": "color", "id": "stars_color", "label": "Stars", "default": "#B8A88B" },
+    { "type": "font_picker", "id": "heading_font", "label": "Number font", "default": "cormorant_garamond_n5" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    { "type": "stat", "name": "Stat", "settings": [
+      { "type": "text", "id": "number", "label": "Number", "default": "9 in 10" },
+      { "type": "checkbox", "id": "show_stars", "label": "Show 5 stars", "default": false },
+      { "type": "text", "id": "label", "label": "Label", "default": "bowls licked clean" }
+    ] }
+  ],
+  "presets": [
+    { "name": "YumBud · Proof Strip", "blocks": [
+      { "type": "stat", "settings": { "number": "9 in 10", "label": "bowls licked clean" } },
+      { "type": "stat", "settings": { "number": "4.9", "show_stars": true, "label": "from 2,400+ households" } },
+      { "type": "stat", "settings": { "number": "100%", "label": "human-grade ingredients" } }
+    ] }
+  ]
+}
+{% endschema %}

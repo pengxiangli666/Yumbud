@@ -1,0 +1,116 @@
+{%- comment -%}
+  ============================================================
+  YumBud · Ethos Split (Online Store 2.0)
+  Image on one side, heading + body + a list of value rows on the
+  other. Each value row is a block (icon + title + text).
+  ============================================================
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+<style>
+  #shopify-section-{{ uid }}{
+    --yb-bg:{{ s.bg_color }}; --yb-ink:{{ s.text_color }}; --yb-muted:{{ s.muted_color }};
+    --yb-accent:{{ s.accent_color }}; --yb-line:{{ s.text_color }}1f;
+    --yb-serif:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};
+  }
+  .yb-e-{{ uid }}{ background:var(--yb-bg); color:var(--yb-ink); padding:{{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+  .yb-e-grid-{{ uid }}{ max-width:1280px; margin:0 auto; padding:0 40px; display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; }
+  {% if s.media_position == 'right' %}.yb-e-grid-{{ uid }} .yb-e-img-{{ uid }}{ order:2; }{% endif %}
+  .yb-e-img-{{ uid }}{ position:relative; border-radius:3px; overflow:hidden; aspect-ratio:5/6; box-shadow:0 50px 80px -55px rgba(43,36,32,.55); }
+  .yb-e-img-{{ uid }} img{ width:100%; height:100%; object-fit:cover; }
+  .yb-e-img-{{ uid }} .cap{ position:absolute; left:20px; bottom:18px; color:#fff; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; text-shadow:0 1px 8px rgba(0,0,0,.4); }
+  .yb-e-eyebrow-{{ uid }}{ font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--yb-muted); font-weight:500; margin-bottom:20px; }
+  .yb-e-{{ uid }} h2{ font-family:var(--yb-serif); font-weight:500; line-height:1.05; letter-spacing:-.01em; font-size:clamp(32px,4vw,52px); margin-bottom:22px; color:var(--yb-ink); }
+  .yb-e-body-{{ uid }}{ color:var(--yb-muted); font-size:16px; font-weight:300; margin-bottom:34px; max-width:460px; line-height:1.6; }
+  .yb-vlist-{{ uid }}{ display:flex; flex-direction:column; border-top:1px solid var(--yb-line); }
+  .yb-vrow-{{ uid }}{ display:flex; gap:20px; align-items:flex-start; padding:22px 0; border-bottom:1px solid var(--yb-line); }
+  .yb-vrow-{{ uid }} .vi{ flex:none; width:34px; height:34px; color:var(--yb-accent); }
+  .yb-vrow-{{ uid }} .vi svg{ width:34px; height:34px; stroke:currentColor; stroke-width:1.1; fill:none; }
+  .yb-vrow-{{ uid }} h4{ font-family:var(--yb-serif); font-size:21px; font-weight:500; margin-bottom:3px; }
+  .yb-vrow-{{ uid }} p{ font-size:13.5px; color:var(--yb-muted); font-weight:300; }
+  @media (max-width:880px){ .yb-e-grid-{{ uid }}{ grid-template-columns:1fr; gap:40px; padding:0 24px; }
+    .yb-e-grid-{{ uid }} .yb-e-img-{{ uid }}{ order:0; aspect-ratio:4/5; max-width:480px; margin:0 auto; width:100%; } }
+</style>
+
+<section class="yb-e-{{ uid }}" id="ethos">
+  <div class="yb-e-grid-{{ uid }}">
+    <div class="yb-e-img-{{ uid }}">
+      {% if s.image != blank %}
+        <img src="{{ s.image | image_url: width: 1000 }}" alt="{{ s.image.alt | escape }}" loading="lazy" width="{{ s.image.width }}" height="{{ s.image.height }}">
+      {% else %}
+        <img src="{{ 'lifestyle-2.png' | placeholder_svg_tag }}" alt="">
+      {% endif %}
+      {% if s.image_caption != blank %}<span class="cap">{{ s.image_caption }}</span>{% endif %}
+    </div>
+    <div class="yb-e-copy-{{ uid }}">
+      {% if s.eyebrow != blank %}<div class="yb-e-eyebrow-{{ uid }}">{{ s.eyebrow }}</div>{% endif %}
+      {% if s.heading != blank %}<h2>{{ s.heading }}</h2>{% endif %}
+      {% if s.body != blank %}<div class="yb-e-body-{{ uid }}">{{ s.body }}</div>{% endif %}
+      {% if section.blocks.size > 0 %}
+        <div class="yb-vlist-{{ uid }}">
+          {% for block in section.blocks %}
+            <div class="yb-vrow-{{ uid }}" {{ block.shopify_attributes }}>
+              <span class="vi">
+                {% case block.settings.icon %}
+                  {% when 'heart' %}<svg viewBox="0 0 32 32"><path d="M16 28C9 22 6 17 6 12a6 6 0 0 1 10-4 6 6 0 0 1 10 4c0 5-3 10-10 16Z"/></svg>
+                  {% when 'check' %}<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="M11 16l3.4 3.4L21 12"/></svg>
+                  {% when 'leaf' %}<svg viewBox="0 0 32 32"><path d="M7 25c0-10 8-18 18-18 0 10-8 18-18 18Z"/><path d="M7 25c4-7 9-11 14-13"/></svg>
+                  {% when 'paw' %}<svg viewBox="0 0 32 32"><circle cx="9" cy="14" r="2"/><circle cx="14" cy="10" r="2"/><circle cx="20" cy="10" r="2"/><circle cx="25" cy="14" r="2"/><path d="M11 21c0-2.5 2.5-4 5-4s5 1.5 5 4-2.5 5-5 5-5-2.5-5-5Z"/></svg>
+                  {% else %}<svg viewBox="0 0 32 32"><rect x="6" y="6" width="20" height="20" rx="10"/><path d="M11 11l10 10M21 11 11 21"/></svg>
+                {% endcase %}
+              </span>
+              <div>
+                {% if block.settings.title != blank %}<h4>{{ block.settings.title }}</h4>{% endif %}
+                {% if block.settings.text != blank %}<p>{{ block.settings.text }}</p>{% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "YumBud · Ethos Split",
+  "tag": "section",
+  "class": "yumbud-ethos-section",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why YumBud" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Made the way you'd make it yourself." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>We started in a small Los Angeles kitchen with one rule: if we wouldn't put it on the counter, it doesn't go in the bag. No fillers, no rendered meals, no mystery.</p>" },
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_caption", "label": "Image caption", "default": "Carried everywhere · Made for the few" },
+    { "type": "select", "id": "media_position", "label": "Image position", "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ], "default": "left" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#ECEAE3" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#8C8578" },
+    { "type": "color", "id": "accent_color", "label": "Icon colour", "default": "#535B72" },
+    { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "cormorant_garamond_n5" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 104 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 104 }
+  ],
+  "blocks": [
+    { "type": "value", "name": "Value row", "settings": [
+      { "type": "select", "id": "icon", "label": "Icon", "options": [
+        { "value": "heart", "label": "Heart" }, { "value": "check", "label": "Check" },
+        { "value": "leaf", "label": "Leaf" }, { "value": "paw", "label": "Paw" }, { "value": "no", "label": "No / cross" } ], "default": "heart" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Ingredients you can name" },
+      { "type": "text", "id": "text", "label": "Text", "default": "Four or fewer per recipe — and you can pronounce all of them." }
+    ] }
+  ],
+  "presets": [
+    { "name": "YumBud · Ethos Split", "blocks": [
+      { "type": "value", "settings": { "icon": "heart", "title": "Ingredients you can name", "text": "Four or fewer per recipe — and you can pronounce all of them." } },
+      { "type": "value", "settings": { "icon": "check", "title": "Gently dehydrated, never fried", "text": "Low-and-slow drying keeps the nutrition in and the additives out." } },
+      { "type": "value", "settings": { "icon": "no", "title": "No colours, flavours or preservatives", "text": "Ever. The only thing added is a little time." } }
+    ] }
+  ]
+}
+{% endschema %}

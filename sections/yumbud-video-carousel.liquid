@@ -1,0 +1,240 @@
+{%- comment -%}
+  ============================================================
+  YumBud · Horizontal Video Wall  (Online Store 2.0)
+  Compatible with Shopify "Zest" and other OS2.0 themes.
+
+  INSTALL
+  1. Online Store > Themes > ⋯ > Edit code
+  2. Sections > Add a new section > name it: yumbud-video-carousel
+  3. Paste this whole file, Save.
+  4. Theme Customizer > Add section > "YumBud · Video Wall".
+  5. Each card = one block. Add a card, upload a Poster image and a
+     Video (or paste an MP4 URL), then type the pet's name + a label.
+
+  Behaviour: a row of portrait video cards you can drag, scroll, or
+  step through with the arrows. Each card shows its poster IMAGE and
+  plays the muted/looping VIDEO on hover (desktop) or tap (mobile).
+  Matches the prototype's "Tails at the table" section.
+  ============================================================
+{%- endcomment -%}
+
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+
+<style>
+  #shopify-section-{{ uid }}{
+    --yb-bg: {{ s.bg_color }};
+    --yb-fg: {{ s.text_color }};
+    --yb-muted: {{ s.muted_color }};
+    --yb-card: {{ s.card_color }};
+    --yb-line: {{ s.text_color }}24;
+    --yb-serif: {{ s.heading_font.family }}, {{ s.heading_font.fallback_families }};
+    --yb-cardw: {{ s.card_width }}px;
+    --yb-gap: 20px;
+    --yb-ease: cubic-bezier(.22,.61,.36,1);
+  }
+  .yb-table-{{ uid }}{ background:var(--yb-bg); color:var(--yb-fg);
+    padding:{{ s.padding_top }}px 0 {{ s.padding_bottom }}px; overflow:hidden; }
+  .yb-thead-{{ uid }}{ display:flex; justify-content:space-between; align-items:flex-end;
+    max-width:1280px; margin:0 auto; padding:0 40px 40px; gap:24px; }
+  .yb-eyebrow-{{ uid }}{ font-size:11px; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--yb-muted); font-weight:500; margin-bottom:16px; }
+  .yb-thead-{{ uid }} h2{ font-family:var(--yb-serif); font-weight:500; line-height:1.05;
+    font-size:clamp(34px,4.4vw,56px); letter-spacing:-.01em; margin:0; }
+  .yb-tnav-{{ uid }}{ display:flex; gap:10px; flex:none; }
+  .yb-arw-{{ uid }}{ width:50px; height:50px; border-radius:50%; border:1px solid var(--yb-line);
+    display:flex; align-items:center; justify-content:center; background:var(--yb-card);
+    color:var(--yb-fg); cursor:pointer; transition:.35s var(--yb-ease); }
+  .yb-arw-{{ uid }}:hover{ background:var(--yb-fg); color:var(--yb-bg); border-color:var(--yb-fg); }
+  .yb-arw-{{ uid }}:disabled{ opacity:.3; cursor:default; background:transparent; }
+  .yb-arw-{{ uid }}:disabled:hover{ color:var(--yb-fg); }
+  .yb-arw-{{ uid }} svg{ width:18px; height:18px; stroke:currentColor; stroke-width:1.5; fill:none; }
+
+  .yb-scroller-{{ uid }}{ display:flex; gap:var(--yb-gap); overflow-x:auto; padding:6px 40px 40px;
+    scroll-snap-type:x mandatory; cursor:grab; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+  .yb-scroller-{{ uid }}::-webkit-scrollbar{ display:none; }
+  .yb-scroller-{{ uid }}.yb-drag{ cursor:grabbing; scroll-snap-type:none; }
+  .yb-scroller-{{ uid }}::before,.yb-scroller-{{ uid }}::after{ content:""; flex:none;
+    width:max(0px,calc((100vw - 1280px)/2)); }
+  .yb-vcard-{{ uid }}{ flex:none; width:var(--yb-cardw); scroll-snap-align:start;
+    display:flex; flex-direction:column; gap:14px; }
+  .yb-vmedia-{{ uid }}{ position:relative; border-radius:3px; overflow:hidden; aspect-ratio:3/4;
+    background:#15120f; box-shadow:0 36px 60px -48px rgba(20,17,14,.6); cursor:pointer; }
+  .yb-vmedia-{{ uid }} img,.yb-vmedia-{{ uid }} video{ position:absolute; inset:0;
+    width:100%; height:100%; object-fit:cover; }
+  .yb-vmedia-{{ uid }} video{ opacity:0; transition:opacity .55s var(--yb-ease); }
+  .yb-vmedia-{{ uid }}.playing video{ opacity:1; }
+  .yb-vmedia-{{ uid }}.playing .yb-vposter{ opacity:0; }
+  .yb-vposter-{{ uid }}{ transition:opacity .55s var(--yb-ease); z-index:1; }
+  .yb-vgrad-{{ uid }}{ position:absolute; inset:0; z-index:2;
+    background:linear-gradient(to top,rgba(20,17,14,.5),transparent 42%); }
+  .yb-vplay-{{ uid }}{ position:absolute; z-index:3; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:54px; height:54px; border-radius:50%; background:rgba(20,17,14,.34); backdrop-filter:blur(4px);
+    border:1px solid rgba(255,255,255,.55); display:flex; align-items:center; justify-content:center; transition:.4s; }
+  .yb-vplay-{{ uid }}::before{ content:""; border-left:13px solid #fff; border-top:8px solid transparent;
+    border-bottom:8px solid transparent; margin-left:3px; }
+  .yb-vmedia-{{ uid }}.playing .yb-vplay-{{ uid }}{ opacity:0; transform:translate(-50%,-50%) scale(.7); }
+  .yb-vcap-{{ uid }}{ display:flex; flex-direction:column; gap:2px; padding:0 2px; }
+  .yb-vcap-{{ uid }} b{ font-family:var(--yb-serif); font-size:19px; font-weight:500; }
+  .yb-vcap-{{ uid }} span{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--yb-muted); }
+  .yb-hint-{{ uid }}{ max-width:1280px; margin:0 auto; padding:0 40px; font-size:10.5px; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--yb-muted); display:flex; align-items:center; gap:10px; }
+  .yb-hint-{{ uid }}::before{ content:""; width:26px; height:1px; background:var(--yb-line); }
+
+  @media (max-width:780px){
+    .yb-thead-{{ uid }}{ flex-direction:column; align-items:flex-start; gap:22px; }
+    .yb-tnav-{{ uid }}{ display:none; }
+    .yb-scroller-{{ uid }}{ padding-inline:24px; }
+    .yb-scroller-{{ uid }}::before,.yb-scroller-{{ uid }}::after{ width:0; }
+    .yb-hint-{{ uid }}{ padding-inline:24px; }
+  }
+</style>
+
+<section class="yb-table-{{ uid }}">
+  <div class="yb-thead-{{ uid }}">
+    <div>
+      {% if s.eyebrow != blank %}<div class="yb-eyebrow-{{ uid }}">{{ s.eyebrow }}</div>{% endif %}
+      {% if s.heading != blank %}<h2>{{ s.heading }}</h2>{% endif %}
+    </div>
+    {% if s.show_arrows %}
+      <div class="yb-tnav-{{ uid }}">
+        <button class="yb-arw-{{ uid }}" data-yb-prev aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="yb-arw-{{ uid }}" data-yb-next aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="yb-scroller-{{ uid }}" data-yb-scroller>
+    {% for block in section.blocks %}
+      <div class="yb-vcard-{{ uid }}" {{ block.shopify_attributes }}>
+        <div class="yb-vmedia-{{ uid }}" data-yb-hoverv>
+          {% if block.settings.poster != blank %}
+            <img class="yb-vposter-{{ uid }} yb-vposter" src="{{ block.settings.poster | image_url: width: 800 }}" alt="{{ block.settings.poster.alt | escape }}" loading="lazy" width="{{ block.settings.poster.width }}" height="{{ block.settings.poster.height }}">
+          {% else %}
+            <img class="yb-vposter-{{ uid }} yb-vposter" src="{{ 'product-apparel-1.png' | placeholder_svg_tag }}" alt="">
+          {% endif %}
+          <div class="yb-vgrad-{{ uid }}"></div>
+
+          {%- comment -%} Video source priority: native upload > external MP4 url {%- endcomment -%}
+          {% if block.settings.card_video != blank %}
+            <video muted loop playsinline preload="none"
+              {% if block.settings.poster != blank %}poster="{{ block.settings.poster | image_url: width: 800 }}"{% endif %}>
+              {% for src in block.settings.card_video.sources %}
+                <source src="{{ src.url }}" type="{{ src.mime_type }}">
+              {% endfor %}
+            </video>
+          {% elsif block.settings.external_mp4 != blank %}
+            <video muted loop playsinline preload="none"
+              {% if block.settings.poster != blank %}poster="{{ block.settings.poster | image_url: width: 800 }}"{% endif %}>
+              <source src="{{ block.settings.external_mp4 }}" type="video/mp4">
+            </video>
+          {% endif %}
+
+          <span class="yb-vplay-{{ uid }}"></span>
+        </div>
+        <div class="yb-vcap-{{ uid }}">
+          {% if block.settings.name != blank %}<b>{{ block.settings.name }}</b>{% endif %}
+          {% if block.settings.label != blank %}<span>{{ block.settings.label }}</span>{% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if s.hint_text != blank %}<div class="yb-hint-{{ uid }}">{{ s.hint_text }}</div>{% endif %}
+</section>
+
+<script>
+(function(){
+  var root=document.getElementById('shopify-section-{{ uid }}');
+  if(!root) return;
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* hover / tap to play, per card */
+  root.querySelectorAll('[data-yb-hoverv]').forEach(function(box){
+    var v=box.querySelector('video'); if(!v) return;
+    function play(){ if(reduce) return; box.classList.add('playing'); v.play().catch(function(){}); }
+    function stop(){ box.classList.remove('playing'); v.pause(); try{v.currentTime=0;}catch(e){} }
+    box.addEventListener('mouseenter',play);
+    box.addEventListener('mouseleave',stop);
+    box.addEventListener('click',function(){ box.classList.contains('playing')?stop():play(); });
+  });
+
+  /* horizontal scroll: arrows + drag */
+  var scroller=root.querySelector('[data-yb-scroller]');
+  if(!scroller) return;
+  var prevB=root.querySelector('[data-yb-prev]'), nextB=root.querySelector('[data-yb-next]');
+  function step(){ var c=scroller.querySelector('.yb-vcard-{{ uid }}'); return c?c.offsetWidth+20:340; }
+  if(prevB) prevB.onclick=function(){ scroller.scrollBy({left:-step()*1.5,behavior:'smooth'}); };
+  if(nextB) nextB.onclick=function(){ scroller.scrollBy({left:step()*1.5,behavior:'smooth'}); };
+  function arrowState(){
+    if(!prevB||!nextB) return;
+    prevB.disabled=scroller.scrollLeft<8;
+    nextB.disabled=scroller.scrollLeft+scroller.clientWidth>=scroller.scrollWidth-8;
+  }
+  scroller.addEventListener('scroll',arrowState,{passive:true});
+  addEventListener('resize',arrowState); arrowState();
+
+  var down=false,sx=0,sl=0,moved=0;
+  scroller.addEventListener('pointerdown',function(e){ down=true;moved=0;sx=e.clientX;sl=scroller.scrollLeft;scroller.classList.add('yb-drag'); });
+  scroller.addEventListener('pointermove',function(e){ if(!down)return; var d=e.clientX-sx;moved=Math.abs(d);scroller.scrollLeft=sl-d; });
+  var up=function(){ down=false;scroller.classList.remove('yb-drag'); };
+  scroller.addEventListener('pointerup',up);
+  scroller.addEventListener('pointerleave',up);
+  /* swallow the click that ends a drag so it doesn't toggle a video */
+  scroller.querySelectorAll('[data-yb-hoverv]').forEach(function(m){
+    m.addEventListener('click',function(e){ if(moved>6){ e.stopImmediatePropagation(); e.preventDefault(); } },true);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "YumBud · Video Wall",
+  "tag": "section",
+  "class": "yumbud-video-carousel-section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "At the Table" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Tails at the table." },
+    { "type": "text", "id": "hint_text", "label": "Hint line", "default": "Drag, scroll or use the arrows · Hover a card to play" },
+    { "type": "checkbox", "id": "show_arrows", "label": "Show prev / next arrows", "default": true },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "card_width", "label": "Card width", "min": 240, "max": 420, "step": 10, "unit": "px", "default": 320 },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#ECEAE3" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
+    { "type": "color", "id": "muted_color", "label": "Caption / muted text", "default": "#8C8578" },
+    { "type": "color", "id": "card_color", "label": "Arrow button fill", "default": "#FAF8F3" },
+    { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "cormorant_garamond_n5" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "video_card",
+      "name": "Video card",
+      "settings": [
+        { "type": "image_picker", "id": "poster", "label": "Poster image (shown when idle)" },
+        { "type": "video", "id": "card_video", "label": "Video (plays on hover)" },
+        { "type": "text", "id": "external_mp4", "label": "…or external MP4 URL", "info": "Used only if no video is uploaded above. Paste a direct .mp4 link." },
+        { "type": "text", "id": "name", "label": "Pet name", "default": "Bao" },
+        { "type": "text", "id": "label", "label": "Caption / product", "default": "Apple Chew Rings" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "YumBud · Video Wall",
+      "blocks": [
+        { "type": "video_card", "settings": { "name": "Bao",   "label": "Apple Chew Rings" } },
+        { "type": "video_card", "settings": { "name": "Olive", "label": "Arugula Crisps" } },
+        { "type": "video_card", "settings": { "name": "Hazel", "label": "Herb Biscuits" } },
+        { "type": "video_card", "settings": { "name": "Miso",  "label": "Cucumber Crisps" } },
+        { "type": "video_card", "settings": { "name": "Wren",  "label": "The whole pantry" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

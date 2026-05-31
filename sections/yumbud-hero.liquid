@@ -1,0 +1,127 @@
+{%- comment -%}
+  ============================================================
+  YumBud · Hero  (Online Store 2.0)  — split hero with product
+  image, rotating stamp and stat row. Drop-in, fully editable.
+  Install: Edit code > Sections > Add a new section "yumbud-hero",
+  paste, Save. Then Customize > Add section > "YumBud · Hero".
+  ============================================================
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+<style>
+  #shopify-section-{{ uid }}{
+    --yb-bg:{{ s.bg_color }}; --yb-ink:{{ s.text_color }}; --yb-muted:{{ s.muted_color }};
+    --yb-accent:{{ s.accent_color }}; --yb-line:{{ s.text_color }}24;
+    --yb-cream:#FAF8F3; --yb-linen:#E5E1D7; --yb-paper2:#ECEAE3; --yb-sand:#B8A88B;
+    --yb-serif:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};
+    --yb-ease:cubic-bezier(.22,.61,.36,1);
+  }
+  .yb-h-{{ uid }}{ background:var(--yb-bg); color:var(--yb-ink); position:relative; overflow:hidden;
+    padding:{{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+  .yb-h-{{ uid }} .wrapx{ max-width:1280px; margin:0 auto; padding:0 40px;
+    display:grid; grid-template-columns:1.05fr .95fr; gap:40px; align-items:center; }
+  .yb-h-eyebrow-{{ uid }}{ font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--yb-muted); font-weight:500; margin-bottom:26px; }
+  .yb-h-{{ uid }} h1{ font-family:var(--yb-serif); font-weight:500; line-height:1.04; letter-spacing:-.01em;
+    font-size:clamp(46px,6.6vw,92px); margin-bottom:26px; color:var(--yb-ink); }
+  .yb-h-{{ uid }} h1 em{ font-style:italic; color:var(--yb-accent); }
+  .yb-h-sub-{{ uid }}{ font-size:17px; color:var(--yb-muted); max-width:430px; margin-bottom:38px; font-weight:300; line-height:1.6; }
+  .yb-h-cta-{{ uid }}{ display:flex; gap:14px; flex-wrap:wrap; }
+  .yb-btn-{{ uid }}{ display:inline-flex; align-items:center; gap:.6em; font-size:12px; letter-spacing:.16em;
+    text-transform:uppercase; font-weight:500; padding:15px 30px; border-radius:3px; transition:.4s var(--yb-ease); white-space:nowrap; }
+  .yb-btn-fill-{{ uid }}{ background:var(--yb-ink); color:var(--yb-cream); }
+  .yb-btn-fill-{{ uid }}:hover{ background:var(--yb-accent); }
+  .yb-btn-line-{{ uid }}{ border:1px solid var(--yb-line); color:var(--yb-ink); }
+  .yb-btn-line-{{ uid }}:hover{ background:var(--yb-ink); color:var(--yb-cream); border-color:var(--yb-ink); }
+  .yb-h-meta-{{ uid }}{ margin-top:46px; display:flex; gap:34px; align-items:center; }
+  .yb-h-meta-{{ uid }} .m b{ display:block; font-family:var(--yb-serif); font-size:30px; font-weight:500; line-height:1; }
+  .yb-h-meta-{{ uid }} .m span{ font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--yb-muted); }
+  .yb-h-meta-{{ uid }} .vr{ width:1px; height:42px; background:var(--yb-line); }
+  .yb-h-visual-{{ uid }}{ position:relative; height:560px; display:flex; align-items:center; justify-content:center; }
+  .yb-h-arch-{{ uid }}{ position:absolute; width:380px; height:480px; border-radius:190px 190px 18px 18px;
+    background:linear-gradient(165deg,var(--yb-cream),var(--yb-linen)); box-shadow:0 40px 90px -50px rgba(43,36,32,.5);
+    top:50%; left:50%; transform:translate(-50%,-50%); }
+  .yb-h-arch-{{ uid }}::after{ content:""; position:absolute; inset:14px; border:1px solid rgba(43,36,32,.08); border-radius:176px 176px 8px 8px; }
+  .yb-h-prod-{{ uid }}{ position:relative; z-index:2; height:500px; width:auto; object-fit:contain; filter:drop-shadow(0 50px 60px rgba(43,36,32,.28)); }
+  .yb-h-stamp-{{ uid }}{ position:absolute; z-index:3; right:0; top:18px; width:118px; height:118px; opacity:.78; animation:yb-spin-{{ uid }} 36s linear infinite; }
+  @keyframes yb-spin-{{ uid }}{ to{ transform:rotate(360deg); } }
+  .yb-h-stamp-{{ uid }} text{ font-family:ui-sans-serif,system-ui,sans-serif; font-size:8.4px; letter-spacing:.22em; font-weight:500; fill:var(--yb-muted); }
+  @media (max-width:880px){
+    .yb-h-{{ uid }} .wrapx{ grid-template-columns:1fr; gap:10px; padding:0 24px; }
+    .yb-h-visual-{{ uid }}{ height:420px; order:-1; }
+    .yb-h-prod-{{ uid }}{ height:360px; } .yb-h-arch-{{ uid }}{ width:280px; height:360px; }
+    .yb-h-stamp-{{ uid }}{ width:92px; height:92px; right:6%; }
+  }
+</style>
+
+<section class="yb-h-{{ uid }}">
+  <div class="wrapx">
+    <div class="yb-h-copy-{{ uid }}">
+      {% if s.eyebrow != blank %}<div class="yb-h-eyebrow-{{ uid }}">{{ s.eyebrow }}</div>{% endif %}
+      {% if s.heading != blank %}<h1>{{ s.heading }}</h1>{% endif %}
+      {% if s.body != blank %}<div class="yb-h-sub-{{ uid }}">{{ s.body }}</div>{% endif %}
+      <div class="yb-h-cta-{{ uid }}">
+        {% if s.button1_label != blank %}<a href="{{ s.button1_link | default: '#' }}" class="yb-btn-{{ uid }} yb-btn-fill-{{ uid }}">{{ s.button1_label }} <span>&rarr;</span></a>{% endif %}
+        {% if s.button2_label != blank %}<a href="{{ s.button2_link | default: '#' }}" class="yb-btn-{{ uid }} yb-btn-line-{{ uid }}">{{ s.button2_label }}</a>{% endif %}
+      </div>
+      {% if s.stat1_num != blank or s.stat2_num != blank or s.stat3_num != blank %}
+        <div class="yb-h-meta-{{ uid }}">
+          {% if s.stat1_num != blank %}<div class="m"><b>{{ s.stat1_num }}</b><span>{{ s.stat1_label }}</span></div>{% endif %}
+          {% if s.stat2_num != blank %}<div class="vr"></div><div class="m"><b>{{ s.stat2_num }}</b><span>{{ s.stat2_label }}</span></div>{% endif %}
+          {% if s.stat3_num != blank %}<div class="vr"></div><div class="m"><b>{{ s.stat3_num }}</b><span>{{ s.stat3_label }}</span></div>{% endif %}
+        </div>
+      {% endif %}
+    </div>
+    <div class="yb-h-visual-{{ uid }}">
+      <div class="yb-h-arch-{{ uid }}"></div>
+      {% if s.stamp_text != blank %}
+        <svg class="yb-h-stamp-{{ uid }}" viewBox="0 0 120 120">
+          <defs><path id="yb-circ-{{ uid }}" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+          <text><textPath href="#yb-circ-{{ uid }}" startOffset="0">{{ s.stamp_text }}</textPath></text>
+        </svg>
+      {% endif %}
+      {% if s.image != blank %}
+        <img class="yb-h-prod-{{ uid }}" src="{{ s.image | image_url: width: 900 }}" alt="{{ s.image.alt | escape }}" width="{{ s.image.width }}" height="{{ s.image.height }}" loading="eager">
+      {% else %}
+        <img class="yb-h-prod-{{ uid }}" src="{{ 'product-1.png' | placeholder_svg_tag }}" alt="">
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "YumBud · Hero",
+  "tag": "section",
+  "class": "yumbud-hero-section",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Single-ingredient · Small batch · Los Angeles" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "info": "Tip: italicise a word for the accent colour.", "default": "Real food, gently made for the <em>bowl.</em>" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Human-grade chicken, garden herbs and real produce — slow-dehydrated by hand. Nothing artificial, nothing rendered. Just treats worth the wag.</p>" },
+    { "type": "text", "id": "button1_label", "label": "Primary button label", "default": "Shop the Pantry" },
+    { "type": "url", "id": "button1_link", "label": "Primary button link" },
+    { "type": "text", "id": "button2_label", "label": "Secondary button label", "default": "Our Story" },
+    { "type": "url", "id": "button2_link", "label": "Secondary button link" },
+    { "type": "header", "content": "Hero image" },
+    { "type": "image_picker", "id": "image", "label": "Product image (transparent PNG works best)" },
+    { "type": "text", "id": "stamp_text", "label": "Rotating stamp text", "default": "· GENTLY DEHYDRATED · HUMAN GRADE · MADE IN CALIFORNIA " },
+    { "type": "header", "content": "Stats" },
+    { "type": "text", "id": "stat1_num", "label": "Stat 1 number", "default": "4" },
+    { "type": "text", "id": "stat1_label", "label": "Stat 1 label", "default": "Whole ingredients" },
+    { "type": "text", "id": "stat2_num", "label": "Stat 2 number", "default": "0" },
+    { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Artificial additives" },
+    { "type": "text", "id": "stat3_num", "label": "Stat 3 number", "default": "4.9" },
+    { "type": "text", "id": "stat3_label", "label": "Stat 3 label", "default": "Average rating" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2F1EC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#574F46" },
+    { "type": "color", "id": "accent_color", "label": "Accent (italic words)", "default": "#535B72" },
+    { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "cormorant_garamond_n5" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 70 }
+  ],
+  "presets": [ { "name": "YumBud · Hero" } ]
+}
+{% endschema %}

@@ -1,0 +1,56 @@
+{%- comment -%}
+  ============================================================
+  YumBud · Quote (Online Store 2.0)
+  A large centred testimonial. Italicise a phrase in the quote
+  for the accent colour. Optional stars + attribution.
+  ============================================================
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+<style>
+  #shopify-section-{{ uid }}{
+    --yb-bg:{{ s.bg_color }}; --yb-ink:{{ s.text_color }}; --yb-muted:{{ s.muted_color }};
+    --yb-accent:{{ s.accent_color }}; --yb-sand:{{ s.stars_color }}; --yb-line:{{ s.text_color }}0d;
+    --yb-serif:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};
+  }
+  .yb-q-{{ uid }}{ background:var(--yb-bg); color:var(--yb-ink); text-align:center; border-top:1px solid var(--yb-line);
+    padding:{{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+  .yb-q-in-{{ uid }}{ max-width:1280px; margin:0 auto; padding:0 40px; }
+  .yb-q-{{ uid }} .stars{ color:var(--yb-sand); letter-spacing:3px; font-size:18px; margin-bottom:24px; display:block; }
+  .yb-q-{{ uid }} blockquote{ font-family:var(--yb-serif); font-size:clamp(28px,3.6vw,46px); font-weight:500;
+    line-height:1.18; max-width:880px; margin:0 auto 26px; color:var(--yb-ink); letter-spacing:-.01em; }
+  .yb-q-{{ uid }} blockquote em{ font-style:italic; color:var(--yb-accent); }
+  .yb-q-{{ uid }} cite{ font-style:normal; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--yb-muted); }
+</style>
+
+<section class="yb-q-{{ uid }}">
+  <div class="yb-q-in-{{ uid }}">
+    {% if s.show_stars %}<span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>{% endif %}
+    {% if s.quote != blank %}<blockquote>{{ s.quote }}</blockquote>{% endif %}
+    {% if s.attribution != blank %}<cite>{{ s.attribution }}</cite>{% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "YumBud · Quote",
+  "tag": "section",
+  "class": "yumbud-quote-section",
+  "settings": [
+    { "type": "checkbox", "id": "show_stars", "label": "Show 5 stars", "default": true },
+    { "type": "inline_richtext", "id": "quote", "label": "Quote", "info": "Italicise a phrase for the accent colour.", "default": "“My vet asked what I'd changed in her diet. <em>It was only the treats.</em>”" },
+    { "type": "text", "id": "attribution", "label": "Attribution", "default": "Darla N. · A YumBud household, Pasadena" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FAF8F3" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
+    { "type": "color", "id": "muted_color", "label": "Attribution text", "default": "#8C8578" },
+    { "type": "color", "id": "accent_color", "label": "Accent (italic words)", "default": "#535B72" },
+    { "type": "color", "id": "stars_color", "label": "Stars", "default": "#B8A88B" },
+    { "type": "font_picker", "id": "heading_font", "label": "Quote font", "default": "cormorant_garamond_n5" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 104 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 104 }
+  ],
+  "presets": [ { "name": "YumBud · Quote" } ]
+}
+{% endschema %}

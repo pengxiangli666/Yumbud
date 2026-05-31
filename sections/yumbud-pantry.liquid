@@ -1,0 +1,137 @@
+{%- comment -%}
+  ============================================================
+  YumBud · Pantry Grid (Online Store 2.0)
+  Editorial product grid wired to a REAL collection — real prices
+  and a working Add-to-cart (adds the first available variant).
+  Badges show automatically for products tagged "bestseller" or "new".
+  Pick a collection in the Customizer; nothing is hard-coded.
+  ============================================================
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+<style>
+  #shopify-section-{{ uid }}{
+    --yb-bg:{{ s.bg_color }}; --yb-ink:{{ s.text_color }}; --yb-muted:{{ s.muted_color }};
+    --yb-accent:{{ s.accent_color }}; --yb-cream:#FAF8F3; --yb-linen:#E5E1D7; --yb-paper2:#ECEAE3;
+    --yb-line:{{ s.text_color }}14; --yb-line-soft:{{ s.text_color }}0d; --yb-sand:#B8A88B;
+    --yb-serif:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};
+    --yb-ease:cubic-bezier(.22,.61,.36,1);
+  }
+  .yb-p-{{ uid }}{ background:var(--yb-bg); color:var(--yb-ink); padding:{{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+  .yb-p-{{ uid }} .wrapx{ max-width:1280px; margin:0 auto; padding:0 40px; }
+  .yb-p-head-{{ uid }}{ text-align:center; max-width:680px; margin:0 auto 56px; }
+  .yb-p-eyebrow-{{ uid }}{ font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--yb-muted); font-weight:500; margin-bottom:18px; }
+  .yb-p-head-{{ uid }} h2{ font-family:var(--yb-serif); font-weight:500; line-height:1.04; letter-spacing:-.01em; font-size:clamp(34px,4.4vw,56px); color:var(--yb-ink); }
+  .yb-p-head-{{ uid }} p{ color:var(--yb-muted); font-size:16px; margin-top:18px; font-weight:300; line-height:1.6; }
+  .yb-pgrid-{{ uid }}{ display:grid; grid-template-columns:repeat({{ s.columns }},1fr); gap:22px; }
+  .yb-card-{{ uid }}{ background:var(--yb-cream); border:1px solid var(--yb-line-soft); border-radius:3px; overflow:hidden;
+    transition:.5s var(--yb-ease); display:flex; flex-direction:column; }
+  .yb-card-{{ uid }}:hover{ transform:translateY(-6px); box-shadow:0 38px 60px -42px rgba(43,36,32,.45); }
+  .yb-cimg-{{ uid }}{ position:relative; aspect-ratio:4/5; background:linear-gradient(170deg,var(--yb-linen),var(--yb-paper2));
+    display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .yb-cimg-{{ uid }} img{ height:84%; width:auto; object-fit:contain; transition:transform .8s var(--yb-ease); filter:drop-shadow(0 24px 26px rgba(43,36,32,.2)); }
+  .yb-card-{{ uid }}:hover .yb-cimg-{{ uid }} img{ transform:scale(1.05) rotate(-1deg); }
+  .yb-tag-{{ uid }}{ position:absolute; top:14px; left:14px; font-size:9.5px; letter-spacing:.16em; text-transform:uppercase;
+    background:rgba(250,248,243,.9); border:1px solid var(--yb-line-soft); padding:5px 10px; border-radius:40px; color:var(--yb-muted); font-weight:500; }
+  .yb-cbody-{{ uid }}{ padding:22px 22px 24px; display:flex; flex-direction:column; flex:1; }
+  .yb-cbody-{{ uid }} h3{ font-family:var(--yb-serif); font-size:23px; line-height:1.08; margin-bottom:8px; font-weight:500; }
+  .yb-cbody-{{ uid }} h3 a{ color:inherit; text-decoration:none; }
+  .yb-desc-{{ uid }}{ font-size:13px; color:var(--yb-muted); min-height:38px; font-weight:300; line-height:1.5; }
+  .yb-cfoot-{{ uid }}{ margin-top:18px; display:flex; align-items:center; justify-content:space-between; }
+  .yb-price-{{ uid }}{ font-family:var(--yb-serif); font-size:21px; font-weight:500; }
+  .yb-price-{{ uid }} s{ color:var(--yb-muted); font-size:15px; margin-right:6px; }
+  .yb-add-{{ uid }}{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; font-weight:600; color:var(--yb-ink);
+    border:1px solid var(--yb-line); padding:9px 16px; border-radius:40px; transition:.35s var(--yb-ease); background:none; cursor:pointer; }
+  .yb-add-{{ uid }}:hover{ background:var(--yb-ink); color:var(--yb-cream); border-color:var(--yb-ink); }
+  .yb-add-{{ uid }}[disabled]{ opacity:.4; cursor:default; }
+  @media (max-width:1024px){ .yb-pgrid-{{ uid }}{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .yb-pgrid-{{ uid }}{ grid-template-columns:1fr; gap:18px; } .yb-p-{{ uid }} .wrapx{ padding:0 24px; } }
+</style>
+
+<section class="yb-p-{{ uid }}" id="pantry">
+  <div class="wrapx">
+    <div class="yb-p-head-{{ uid }}">
+      {% if s.eyebrow != blank %}<div class="yb-p-eyebrow-{{ uid }}">{{ s.eyebrow }}</div>{% endif %}
+      {% if s.heading != blank %}<h2>{{ s.heading }}</h2>{% endif %}
+      {% if s.body != blank %}<p>{{ s.body }}</p>{% endif %}
+    </div>
+
+    <div class="yb-pgrid-{{ uid }}">
+      {% if s.collection != blank and collections[s.collection].products_count > 0 %}
+        {% for product in collections[s.collection].products limit: s.product_limit %}
+          {% assign variant = product.selected_or_first_available_variant %}
+          <article class="yb-card-{{ uid }}">
+            <a href="{{ product.url }}" class="yb-cimg-{{ uid }}">
+              {% if product.tags contains 'bestseller' %}<span class="yb-tag-{{ uid }}">Bestseller</span>
+              {% elsif product.tags contains 'new' %}<span class="yb-tag-{{ uid }}">New</span>{% endif %}
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.featured_image.alt | escape }}" loading="lazy" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}">
+              {% else %}
+                <img src="{{ 'product-1.png' | placeholder_svg_tag }}" alt="">
+              {% endif %}
+            </a>
+            <div class="yb-cbody-{{ uid }}">
+              <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+              {% if s.show_desc %}<p class="yb-desc-{{ uid }}">{{ product.description | strip_html | truncatewords: 14 }}</p>{% endif %}
+              <div class="yb-cfoot-{{ uid }}">
+                <span class="yb-price-{{ uid }}">
+                  {% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s>{% endif %}{{ product.price | money }}
+                </span>
+                {% if variant %}
+                  <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="{{ variant.id }}">
+                    <button type="submit" class="yb-add-{{ uid }}" {% unless product.available %}disabled{% endunless %}>
+                      {% if product.available %}{{ s.button_label }}{% else %}Sold out{% endif %}
+                    </button>
+                  </form>
+                {% endif %}
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      {% else %}
+        {%- comment -%} placeholder cards shown in the editor until a collection is chosen {%- endcomment -%}
+        {% for i in (1..s.columns) %}
+          <article class="yb-card-{{ uid }}">
+            <div class="yb-cimg-{{ uid }}"><img src="{{ 'product-1.png' | placeholder_svg_tag }}" alt=""></div>
+            <div class="yb-cbody-{{ uid }}">
+              <h3>Product title</h3>
+              {% if s.show_desc %}<p class="yb-desc-{{ uid }}">Pick a collection in the section settings to show real products here.</p>{% endif %}
+              <div class="yb-cfoot-{{ uid }}"><span class="yb-price-{{ uid }}">$00</span><button class="yb-add-{{ uid }}" disabled>{{ s.button_label }}</button></div>
+            </div>
+          </article>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "YumBud · Pantry Grid",
+  "tag": "section",
+  "class": "yumbud-pantry-section",
+  "settings": [
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Pantry" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Four recipes. Real ingredients." },
+    { "type": "text", "id": "body", "label": "Body", "default": "Each batch is built on whole cuts and real produce, then gently dehydrated for a clean, savoury finish your dog can actually smell." },
+    { "type": "header", "content": "Products" },
+    { "type": "collection", "id": "collection", "label": "Collection", "info": "The products shown come from this collection." },
+    { "type": "range", "id": "product_limit", "label": "Max products", "min": 2, "max": 12, "step": 1, "default": 4 },
+    { "type": "range", "id": "columns", "label": "Columns (desktop)", "min": 2, "max": 4, "step": 1, "default": 4 },
+    { "type": "checkbox", "id": "show_desc", "label": "Show short description", "default": true },
+    { "type": "text", "id": "button_label", "label": "Add-to-cart label", "default": "Add +" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2F1EC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#8C8578" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#535B72" },
+    { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "cormorant_garamond_n5" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 104 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 104 }
+  ],
+  "presets": [ { "name": "YumBud · Pantry Grid" } ]
+}
+{% endschema %}

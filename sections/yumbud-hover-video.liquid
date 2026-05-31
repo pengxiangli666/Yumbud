@@ -1,0 +1,161 @@
+{%- comment -%}
+  ============================================================
+  YumBud · Hover-to-Play Video Feature  (Online Store 2.0)
+  Compatible with Shopify "Zest" and other OS2.0 themes.
+
+  INSTALL
+  1. Online Store > Themes > ⋯ > Edit code
+  2. Sections > Add a new section > name it: yumbud-hover-video
+  3. Paste this whole file, Save.
+  4. Go to the theme Customizer > Add section > "YumBud · Hover Video".
+  5. Upload a Poster image + a Video (or paste an MP4 URL). Done.
+
+  Behaviour: shows the poster IMAGE by default; plays the muted/looping
+  VIDEO on hover (desktop) or tap (mobile). Exactly matches the prototype.
+  ============================================================
+{%- endcomment -%}
+
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+
+<style>
+  #shopify-section-{{ uid }}{
+    --yb-bg: {{ s.bg_color }};
+    --yb-fg: {{ s.text_color }};
+    --yb-muted: {{ s.muted_color }};
+    --yb-line: {{ s.text_color }}33;
+    --yb-serif: {{ s.heading_font.family }}, {{ s.heading_font.fallback_families }};
+  }
+  .yb-kitchen-{{ uid }}{ background:var(--yb-bg); color:var(--yb-fg);
+    padding:{{ s.padding_top }}px 0 {{ s.padding_bottom }}px; overflow:hidden; }
+  .yb-kwrap-{{ uid }}{ max-width:1280px; margin:0 auto; padding:0 40px;
+    display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+  {% if s.media_position == 'left' %}.yb-kwrap-{{ uid }} .yb-kcopy-{{ uid }}{ order:2; }{% endif %}
+  .yb-eyebrow-{{ uid }}{ font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--yb-muted); font-weight:500; }
+  .yb-kcopy-{{ uid }} h2{ font-family:var(--yb-serif); font-weight:500; line-height:1.05;
+    font-size:clamp(34px,4.4vw,58px); margin:18px 0 22px; letter-spacing:-.01em; }
+  .yb-kcopy-{{ uid }} .yb-body{ color:var(--yb-muted); font-size:16px; font-weight:300; max-width:440px; margin-bottom:34px; }
+  .yb-btn-{{ uid }}{ display:inline-flex; align-items:center; gap:.6em; font-size:12px; letter-spacing:.16em;
+    text-transform:uppercase; font-weight:500; padding:15px 30px; border-radius:3px;
+    border:1px solid var(--yb-line); color:var(--yb-fg); transition:.4s cubic-bezier(.22,.61,.36,1); }
+  .yb-btn-{{ uid }}:hover{ background:var(--yb-fg); color:var(--yb-bg); border-color:var(--yb-fg); }
+  .yb-stats-{{ uid }}{ display:flex; gap:30px; margin-top:42px; }
+  .yb-stats-{{ uid }} .yb-stat b{ display:block; font-family:var(--yb-serif); font-size:30px; font-weight:500; margin-bottom:4px; }
+  .yb-stats-{{ uid }} .yb-stat span{ font-size:12px; color:var(--yb-muted); font-weight:300; max-width:140px; display:block; }
+
+  .yb-hoverv-{{ uid }}{ position:relative; border-radius:3px; overflow:hidden; aspect-ratio:5/6;
+    cursor:pointer; background:#15120f; box-shadow:0 60px 100px -60px rgba(0,0,0,.7);
+    max-width:520px; width:100%; margin:0 auto; }
+  .yb-hoverv-{{ uid }} img,.yb-hoverv-{{ uid }} video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .yb-hoverv-{{ uid }} video{ opacity:0; transition:opacity .6s cubic-bezier(.22,.61,.36,1); }
+  .yb-hoverv-{{ uid }}.playing video{ opacity:1; }
+  .yb-hoverv-{{ uid }}.playing .yb-poster{ opacity:0; }
+  .yb-poster{ transition:opacity .6s cubic-bezier(.22,.61,.36,1); z-index:1; }
+  .yb-frame-{{ uid }}{ position:absolute; inset:16px; border:1px solid #ffffff38; z-index:3; pointer-events:none; }
+  .yb-badge-{{ uid }}{ position:absolute; z-index:4; left:18px; bottom:18px; display:flex; align-items:center; gap:9px;
+    font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:#fff; font-weight:500;
+    background:rgba(20,17,14,.5); backdrop-filter:blur(6px); padding:9px 14px; border-radius:40px; transition:.4s; }
+  .yb-hoverv-{{ uid }}.playing .yb-badge-{{ uid }}{ opacity:0; transform:translateY(6px); }
+  .yb-badge-{{ uid }} i{ width:0;height:0;border-left:6px solid #fff;border-top:4px solid transparent;border-bottom:4px solid transparent; }
+  @media (max-width:880px){
+    .yb-kwrap-{{ uid }}{ grid-template-columns:1fr; gap:40px; text-align:center; }
+    .yb-kwrap-{{ uid }} .yb-kcopy-{{ uid }}{ order:0; }
+    .yb-kcopy-{{ uid }} .yb-body{ margin-inline:auto; } .yb-stats-{{ uid }}{ justify-content:center; }
+  }
+</style>
+
+<section class="yb-kitchen-{{ uid }}">
+  <div class="yb-kwrap-{{ uid }}">
+    <div class="yb-kcopy-{{ uid }}">
+      {% if s.eyebrow != blank %}<div class="yb-eyebrow-{{ uid }}">{{ s.eyebrow }}</div>{% endif %}
+      {% if s.heading != blank %}<h2>{{ s.heading }}</h2>{% endif %}
+      {% if s.body != blank %}<div class="yb-body">{{ s.body }}</div>{% endif %}
+      {% if s.button_label != blank %}<a class="yb-btn-{{ uid }}" href="{{ s.button_link }}">{{ s.button_label }} <span>&rarr;</span></a>{% endif %}
+      {% if s.stat1_number != blank or s.stat2_number != blank %}
+        <div class="yb-stats-{{ uid }}">
+          {% if s.stat1_number != blank %}<div class="yb-stat"><b>{{ s.stat1_number }}</b><span>{{ s.stat1_label }}</span></div>{% endif %}
+          {% if s.stat2_number != blank %}<div class="yb-stat"><b>{{ s.stat2_number }}</b><span>{{ s.stat2_label }}</span></div>{% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="yb-hoverv-{{ uid }}" data-yb-hoverv>
+      {% if s.poster != blank %}
+        <img class="yb-poster" src="{{ s.poster | image_url: width: 1100 }}" alt="{{ s.poster.alt | escape }}" loading="lazy" width="{{ s.poster.width }}" height="{{ s.poster.height }}">
+      {% else %}
+        <img class="yb-poster" src="{{ 'lifestyle-1.png' | placeholder_svg_tag }}" alt="">
+      {% endif %}
+
+      {%- comment -%} Video source priority: native upload > external MP4 url {%- endcomment -%}
+      {% if s.feature_video != blank %}
+        <video muted loop playsinline preload="metadata"
+          {% if s.poster != blank %}poster="{{ s.poster | image_url: width: 1100 }}"{% endif %}>
+          {% for src in s.feature_video.sources %}
+            <source src="{{ src.url }}" type="{{ src.mime_type }}">
+          {% endfor %}
+        </video>
+      {% elsif s.external_mp4 != blank %}
+        <video muted loop playsinline preload="metadata"
+          {% if s.poster != blank %}poster="{{ s.poster | image_url: width: 1100 }}"{% endif %}>
+          <source src="{{ s.external_mp4 }}" type="video/mp4">
+        </video>
+      {% endif %}
+
+      <div class="yb-frame-{{ uid }}"></div>
+      {% if s.badge_text != blank %}<div class="yb-badge-{{ uid }}"><i></i> {{ s.badge_text }}</div>{% endif %}
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root=document.getElementById('shopify-section-{{ uid }}');
+  if(!root) return;
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  root.querySelectorAll('[data-yb-hoverv]').forEach(function(box){
+    var v=box.querySelector('video'); if(!v) return;
+    function play(){ if(reduce) return; box.classList.add('playing'); v.play().catch(function(){}); }
+    function stop(){ box.classList.remove('playing'); v.pause(); try{v.currentTime=0;}catch(e){} }
+    box.addEventListener('mouseenter',play);
+    box.addEventListener('mouseleave',stop);
+    box.addEventListener('click',function(){ box.classList.contains('playing')?stop():play(); });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "YumBud · Hover Video",
+  "tag": "section",
+  "class": "yumbud-hover-video-section",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "In the Kitchen" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "From whole cuts to the final crisp." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Every batch is dried by hand over hours, not minutes. Hover to watch a batch come together.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "See how it's made" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "badge_text", "label": "Hover badge text", "default": "Hover to play" },
+    { "type": "header", "content": "Optional stats" },
+    { "type": "text", "id": "stat1_number", "label": "Stat 1 number", "default": "8h" },
+    { "type": "text", "id": "stat1_label", "label": "Stat 1 label", "default": "Average gentle-dry time per batch" },
+    { "type": "text", "id": "stat2_number", "label": "Stat 2 number", "default": "1" },
+    { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Facility, in California — start to finish" },
+    { "type": "header", "content": "Media" },
+    { "type": "image_picker", "id": "poster", "label": "Poster image (shown when idle)" },
+    { "type": "video", "id": "feature_video", "label": "Video (plays on hover)" },
+    { "type": "text", "id": "external_mp4", "label": "…or external MP4 URL", "info": "Used only if no video is uploaded above. Paste a direct .mp4 link." },
+    { "type": "select", "id": "media_position", "label": "Media position", "options": [
+      { "value": "right", "label": "Right" }, { "value": "left", "label": "Left" } ], "default": "right" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#211D18" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#E9E3D8" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#B7B0A2" },
+    { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "cormorant_garamond_n5" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 104 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 104 }
+  ],
+  "presets": [ { "name": "YumBud · Hover Video" } ]
+}
+{% endschema %}
