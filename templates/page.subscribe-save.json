@@ -22,44 +22,44 @@
     "yumbud_subscribe_selector_R6im73": {
       "type": "yumbud-subscribe-selector",
       "blocks": {
+        "flavor_eDTMxX": {
+          "type": "flavor",
+          "settings": {
+            "product": "chicken-arugula-crisps",
+            "name_override": "",
+            "desc_override": ""
+          }
+        },
         "flavor_MtXAKP": {
           "type": "flavor",
           "settings": {
-            "name": "Beef",
-            "desc": "Rich & meaty",
-            "price": 36
+            "product": "chicken-herb-biscuits",
+            "name_override": "",
+            "desc_override": ""
           }
         },
         "flavor_8PqfDY": {
           "type": "flavor",
           "settings": {
-            "name": "Beef",
-            "desc": "Rich & meaty",
-            "price": 36
+            "product": "chicken-wrapped-apple-chew-rings",
+            "name_override": "",
+            "desc_override": ""
           }
         },
         "flavor_WYCY8F": {
           "type": "flavor",
           "settings": {
-            "name": "Chicken",
-            "desc": "Rich & meaty",
-            "price": 36
-          }
-        },
-        "flavor_PNiFh9": {
-          "type": "flavor",
-          "settings": {
-            "name": "Lamb",
-            "desc": "Rich & meaty",
-            "price": 36
+            "product": "cucumber-chicken-crisps",
+            "name_override": "",
+            "desc_override": ""
           }
         }
       },
       "block_order": [
+        "flavor_eDTMxX",
         "flavor_MtXAKP",
         "flavor_8PqfDY",
-        "flavor_WYCY8F",
-        "flavor_PNiFh9"
+        "flavor_WYCY8F"
       ],
       "name": "YumBud · Subscribe",
       "settings": {
@@ -85,7 +85,6 @@
         "discount_label": "Subscriber discount",
         "total_label": "Total",
         "button_label": "Start Subscription",
-        "button_link": "",
         "note": "Free shipping · Skip or cancel anytime",
         "bg_color": "#f2f1ec",
         "text_color": "#2b2420",
