@@ -448,11 +448,83 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "yumbud_build_bowl_ixfnec": {
+      "type": "yumbud-build-bowl",
+      "blocks": {
+        "range_card_KygtUk": {
+          "type": "range_card",
+          "settings": {
+            "poster": "shopify://shop_images/be_2.png",
+            "card_video": "shopify://files/videos/24088bf25ce799315f7f0d7fa68fc43a.mp4",
+            "external_mp4": "",
+            "title": "Chew Rings",
+            "description": "Chicken wrapped around dried apple — three ingredients, gently dehydrated for a clean, savoury chew.",
+            "link_label": "Shop Chew Rings",
+            "link": ""
+          }
+        },
+        "range_card_CWdfLD": {
+          "type": "range_card",
+          "settings": {
+            "poster": "shopify://shop_images/1f4e137d-5932-47c5-ab03-2beafe27244c.png",
+            "card_video": "shopify://files/videos/24088bf25ce799315f7f0d7fa68fc43a.mp4",
+            "external_mp4": "",
+            "title": "Biscuits",
+            "description": "Goat cheese, flaxseed and garden herbs, gently baked into a crisp little biscuit dogs come running for.",
+            "link_label": "Shop Biscuits",
+            "link": ""
+          }
+        },
+        "range_card_bPmVw7": {
+          "type": "range_card",
+          "settings": {
+            "external_mp4": "",
+            "title": "Crisps",
+            "description": "Whole cuts of chicken layered with fresh greens, then dried thin and shatter-crisp. Dual nutrition.",
+            "link_label": "Shop Crisps",
+            "link": ""
+          }
+        },
+        "range_card_EWd6z8": {
+          "type": "range_card",
+          "settings": {
+            "external_mp4": "",
+            "title": "Boosters",
+            "description": "Nutrient-dense toppers to scatter over any bowl. A little extra goodness, no fillers.",
+            "link_label": "Shop Boosters",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "range_card_KygtUk",
+        "range_card_CWdfLD",
+        "range_card_bPmVw7",
+        "range_card_EWd6z8"
+      ],
+      "name": "YumBud · Build the Bowl",
+      "settings": {
+        "eyebrow": "Our Range",
+        "heading": "Build their bowl with our range.",
+        "show_arrows": true,
+        "card_width": 440,
+        "show_hint": true,
+        "hint_text": "Hover to play",
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#8C8578",
+        "accent_color": "#535B72",
+        "heading_font": "assistant_n4",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
     "product_list_fa6P9H",
-    "collection_list_aqf8J6"
+    "collection_list_aqf8J6",
+    "yumbud_build_bowl_ixfnec"
   ]
 }
