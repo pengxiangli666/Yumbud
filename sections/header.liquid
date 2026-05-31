@@ -1,19 +1,6 @@
 {%- comment -%}
   ============================================================
-  YumBud · Header + Mega Menu  (custom header for Dawn / OS2.0)
-  Maev-style bar:  [ ☰ Shop & Learn ] ... logo ... [ Help | account | cart ]
-  Clicking "Shop & Learn" drops a FULL-WIDTH mega menu:
-    • SHOP  — image + label links (optional badge)   ← shop_link blocks
-    • LEARN — two columns of text links               ← learn_link blocks
-    • Featured — a tinted review / promo column        ← section settings
-  While open the bar forces its solid colours and the trigger
-  becomes "✕ Close". Transparent over the homepage hero, solid on
-  scroll. Mobile: the mega menu becomes a full-screen stacked panel.
-
-  INSTALL ON DAWN: Edit code > open sections/header.liquid > back up
-  its contents > replace ALL with this file > Save. Then Customize >
-  Header: add your SHOP links (with thumbnails) and LEARN links as
-  blocks, set logos & colours. Hide the theme's own announcement bar.
+  YumBud · Header + Mega Menu  (Main menu integrated)
   ============================================================
 {%- endcomment -%}
 {%- assign s = section.settings -%}
@@ -21,6 +8,7 @@
 {%- assign logo = s.logo_light -%}
 {%- assign overlay = false -%}
 {%- if s.transparent_home and request.page_type == 'index' -%}{%- assign overlay = true -%}{%- endif -%}
+{%- assign main_menu = linklists[s.main_menu] -%}
 
 <style>
   #shopify-section-{{ uid }}{
@@ -53,14 +41,12 @@
   .yb-divided-{{ uid }} .yb-right-{{ uid }} .yb-cell-{{ uid }}{ border-left:1px solid var(--yb-line-trans); transition:border-color .4s var(--yb-ease); }
   .yb-ic-{{ uid }}{ width:19px; height:19px; stroke:currentColor; stroke-width:1.4; fill:none; }
   .yb-count-{{ uid }}{ position:absolute; top:12px; right:14px; background:var(--yb-accent); color:#fff; font-size:9px; font-weight:600; min-width:15px; height:15px; padding:0 3px; border-radius:9px; display:flex; align-items:center; justify-content:center; }
-  /* SOLID + OPEN states share light styling */
   .yb-top-{{ uid }}.yb-solid .yb-hdr-{{ uid }},.yb-top-{{ uid }}.yb-open .yb-hdr-{{ uid }}{ background:var(--yb-bg); color:var(--yb-ink); }
   .yb-top-{{ uid }}.yb-solid.yb-divided-{{ uid }} .yb-bar-{{ uid }},.yb-top-{{ uid }}.yb-open.yb-divided-{{ uid }} .yb-bar-{{ uid }},
   .yb-top-{{ uid }}.yb-solid.yb-divided-{{ uid }} .yb-trig-{{ uid }},.yb-top-{{ uid }}.yb-open.yb-divided-{{ uid }} .yb-trig-{{ uid }},
   .yb-top-{{ uid }}.yb-solid.yb-divided-{{ uid }} .yb-right-{{ uid }} .yb-cell-{{ uid }},.yb-top-{{ uid }}.yb-open.yb-divided-{{ uid }} .yb-right-{{ uid }} .yb-cell-{{ uid }}{ border-color:var(--yb-line-solid); }
   .yb-top-{{ uid }}.yb-open .yb-trig-{{ uid }} .yb-tc{ display:none; }
   .yb-top-{{ uid }}.yb-open .yb-trig-{{ uid }} .yb-to{ display:flex; }
-  /* mega menu */
   .yb-mscrim-{{ uid }}{ position:fixed; inset:0; top:var(--yb-h,108px); background:rgba(33,29,24,.32); z-index:1; opacity:0; pointer-events:none; transition:.4s; }
   .yb-top-{{ uid }}.yb-open .yb-mscrim-{{ uid }}{ opacity:1; pointer-events:auto; }
   .yb-mega-{{ uid }}{ position:fixed; left:0; right:0; top:var(--yb-h,108px); z-index:2; background:var(--yb-bg); color:var(--yb-ink);
@@ -130,13 +116,20 @@
       <div class="yb-col-{{ uid }}">
         {% if s.shop_heading != blank %}<div class="yb-ct-{{ uid }}">{{ s.shop_heading }}</div>{% endif %}
         <div class="yb-shop-{{ uid }}">
-          {% for block in section.blocks %}{% if block.type == 'shop_link' %}
-            <a href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>
-              {% if block.settings.image != blank %}<img class="th" src="{{ block.settings.image | image_url: width: 160 }}" alt="" width="54" height="54">{% else %}<span class="th"></span>{% endif %}
-              <span class="nm">{{ block.settings.title }}</span>
-              {% if block.settings.badge != blank %}<span class="yb-badge-{{ uid }}">{{ block.settings.badge }}</span>{% endif %}
-            </a>
-          {% endif %}{% endfor %}
+          {% if main_menu.links.size > 0 %}
+            {% for link in main_menu.links %}
+              <a href="{{ link.url }}">
+                {% if link.object.featured_image != blank %}
+                  <img class="th" src="{{ link.object.featured_image | image_url: width: 160 }}" alt="" width="54" height="54">
+                {% elsif link.object.image != blank %}
+                  <img class="th" src="{{ link.object.image | image_url: width: 160 }}" alt="" width="54" height="54">
+                {% else %}
+                  <span class="th"></span>
+                {% endif %}
+                <span class="nm">{{ link.title }}</span>
+              </a>
+            {% endfor %}
+          {% endif %}
         </div>
       </div>
 
@@ -173,7 +166,6 @@
   function sizes(){ var a=ann?ann.offsetHeight:0,h=hdr?hdr.offsetHeight:0; root.style.setProperty('--yb-h',(a+h)+'px'); if(spacer) spacer.style.height=(overlay?a:a+h)+'px'; }
   sizes(); addEventListener('resize',sizes); setTimeout(sizes,300);
   if(overlay){ var os=function(){ top.classList.toggle('yb-solid',scrollY>=40); }; addEventListener('scroll',os,{passive:true}); os(); }
-  /* mega toggle */
   var trig=root.querySelector('[data-yb-trigger]'), msc=root.querySelector('[data-yb-mscrim]');
   function openM(o){ top.classList.toggle('yb-open',o); if(trig) trig.setAttribute('aria-expanded',o?'true':'false'); document.body.style.overflow=o?'hidden':''; }
   if(trig) trig.onclick=function(){ openM(!top.classList.contains('yb-open')); };
@@ -208,11 +200,13 @@
     { "type": "checkbox", "id": "show_search", "label": "Show search icon", "default": false },
     { "type": "checkbox", "id": "show_account", "label": "Show account icon", "default": true },
     { "type": "checkbox", "id": "show_cart", "label": "Show cart icon", "default": true },
-    { "type": "header", "content": "Mega menu — column headings" },
+    { "type": "header", "content": "Mega menu — Shop column" },
+    { "type": "link_list", "id": "main_menu", "label": "Shop menu (links from Content > Menus)", "default": "main-menu" },
     { "type": "text", "id": "shop_heading", "label": "Left column title", "default": "Shop" },
+    { "type": "color", "id": "badge_bg", "label": "Shop badge colour", "default": "#2E3D2A" },
+    { "type": "header", "content": "Mega menu — Learn column" },
     { "type": "text", "id": "learn_heading", "label": "Middle column title", "default": "Learn" },
     { "type": "range", "id": "learn_columns", "label": "Middle column — link columns", "min": 1, "max": 4, "step": 1, "default": 2 },
-    { "type": "color", "id": "badge_bg", "label": "Shop badge colour", "default": "#2E3D2A" },
     { "type": "header", "content": "Mega menu — featured column" },
     { "type": "checkbox", "id": "feature_enabled", "label": "Show featured column", "default": true },
     { "type": "text", "id": "feature_heading", "label": "Heading", "default": "Reviews" },
@@ -232,12 +226,6 @@
     { "type": "font_picker", "id": "heading_font", "label": "Logo / mega-menu font", "default": "assistant_n4" }
   ],
   "blocks": [
-    { "type": "shop_link", "name": "Shop link (with image)", "settings": [
-      { "type": "image_picker", "id": "image", "label": "Thumbnail" },
-      { "type": "text", "id": "title", "label": "Label", "default": "Whole-Food Treats" },
-      { "type": "url", "id": "link", "label": "Link" },
-      { "type": "text", "id": "badge", "label": "Badge (optional)" }
-    ] },
     { "type": "learn_link", "name": "Learn link (text)", "settings": [
       { "type": "text", "id": "title", "label": "Label", "default": "Why YumBud" },
       { "type": "url", "id": "link", "label": "Link" }
@@ -245,16 +233,9 @@
   ],
   "presets": [
     { "name": "Header", "blocks": [
-      { "type": "shop_link", "settings": { "title": "Whole-Food Treats", "badge": "Best Seller" } },
-      { "type": "shop_link", "settings": { "title": "Chew Rings" } },
-      { "type": "shop_link", "settings": { "title": "Biscuits" } },
-      { "type": "shop_link", "settings": { "title": "Crisps" } },
-      { "type": "shop_link", "settings": { "title": "Boosters" } },
       { "type": "learn_link", "settings": { "title": "Why YumBud" } },
       { "type": "learn_link", "settings": { "title": "Our Story" } },
       { "type": "learn_link", "settings": { "title": "Ingredients" } },
-      { "type": "learn_link", "settings": { "title": "Rewards" } },
-      { "type": "learn_link", "settings": { "title": "Stockists" } },
       { "type": "learn_link", "settings": { "title": "Reviews" } }
     ] }
   ]
