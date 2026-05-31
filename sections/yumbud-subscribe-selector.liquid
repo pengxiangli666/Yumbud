@@ -1,0 +1,180 @@
+{%- comment -%}
+  YumBud · Subscribe Selector
+  口味/规格 + 订阅周期选择器
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+
+<style>
+  #shopify-section-{{ uid }}{
+    --yb-bg:{{ s.bg_color }}; --yb-ink:{{ s.text_color }}; --yb-muted:{{ s.muted_color }};
+    --yb-accent:{{ s.accent_color }}; --yb-card:{{ s.card_color }};
+    --yb-line:{{ s.text_color }}1f;
+    --yb-serif:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};
+  }
+  .yb-ss-{{ uid }}{ background:var(--yb-bg); color:var(--yb-ink); padding:{{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+  .yb-ss-wrap-{{ uid }}{ max-width:1180px; margin:0 auto; padding:0 40px; }
+  .yb-ss-grid-{{ uid }}{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+  .yb-ss-img-{{ uid }}{ background:var(--yb-card); border-radius:8px; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .yb-ss-img-{{ uid }} img{ width:100%; height:100%; object-fit:cover; }
+  .yb-ss-eyebrow-{{ uid }}{ font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--yb-muted); margin-bottom:14px; }
+  .yb-ss-{{ uid }} h2{ font-family:var(--yb-serif); font-size:clamp(28px,3.6vw,42px); font-weight:500; line-height:1.1; margin-bottom:18px; }
+  .yb-ss-sub-{{ uid }}{ font-size:15px; color:var(--yb-muted); margin-bottom:30px; line-height:1.6; }
+  .yb-ss-label-{{ uid }}{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; font-weight:500; margin-bottom:12px; color:var(--yb-ink); }
+  .yb-ss-opts-{{ uid }}{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:26px; }
+  .yb-ss-opt-{{ uid }}{ padding:11px 20px; border:1px solid var(--yb-line); border-radius:30px; font-size:13px; background:var(--yb-bg); color:var(--yb-ink); cursor:pointer; transition:.2s; }
+  .yb-ss-opt-{{ uid }}.active{ background:var(--yb-ink); color:var(--yb-bg); border-color:var(--yb-ink); }
+  .yb-ss-freq-{{ uid }}{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:28px; }
+  .yb-ss-fbox-{{ uid }}{ border:1px solid var(--yb-line); border-radius:6px; padding:16px 14px; cursor:pointer; text-align:center; transition:.2s; background:var(--yb-bg); }
+  .yb-ss-fbox-{{ uid }}.active{ border-color:var(--yb-ink); border-width:2px; padding:15px 13px; }
+  .yb-ss-fbox-{{ uid }} .ttl{ font-size:14px; font-weight:500; margin-bottom:3px; }
+  .yb-ss-fbox-{{ uid }} .sub{ font-size:11px; color:var(--yb-muted); }
+  .yb-ss-fbox-{{ uid }} .save{ display:inline-block; margin-top:6px; font-size:10px; background:var(--yb-accent); color:#fff; padding:2px 8px; border-radius:12px; letter-spacing:.04em; }
+  .yb-ss-price-{{ uid }}{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+  .yb-ss-price-{{ uid }} .now{ font-family:var(--yb-serif); font-size:34px; font-weight:500; }
+  .yb-ss-price-{{ uid }} .was{ font-size:15px; color:var(--yb-muted); text-decoration:line-through; }
+  .yb-ss-btn-{{ uid }}{ display:block; width:100%; background:var(--yb-ink); color:var(--yb-bg); padding:16px; border:none; border-radius:30px; font-size:13px; letter-spacing:.16em; text-transform:uppercase; font-weight:500; cursor:pointer; }
+  .yb-ss-btn-{{ uid }}:hover{ opacity:.86; }
+  .yb-ss-note-{{ uid }}{ text-align:center; font-size:12px; color:var(--yb-muted); margin-top:12px; }
+  @media (max-width:880px){
+    .yb-ss-grid-{{ uid }}{ grid-template-columns:1fr; gap:32px; }
+    .yb-ss-wrap-{{ uid }}{ padding:0 24px; }
+  }
+</style>
+
+<section class="yb-ss-{{ uid }}">
+  <div class="yb-ss-wrap-{{ uid }}">
+    <div class="yb-ss-grid-{{ uid }}">
+      <div class="yb-ss-img-{{ uid }}">
+        {% if s.product_image != blank %}
+          <img src="{{ s.product_image | image_url: width: 800 }}" alt="">
+        {% else %}
+          <span style="font-size:80px;">📦</span>
+        {% endif %}
+      </div>
+      <div>
+        {% if s.eyebrow != blank %}<div class="yb-ss-eyebrow-{{ uid }}">{{ s.eyebrow }}</div>{% endif %}
+        {% if s.heading != blank %}<h2>{{ s.heading }}</h2>{% endif %}
+        {% if s.body != blank %}<div class="yb-ss-sub-{{ uid }}">{{ s.body }}</div>{% endif %}
+
+        {% if section.blocks.size > 0 %}
+          <div class="yb-ss-label-{{ uid }}">{{ s.flavor_label }}</div>
+          <div class="yb-ss-opts-{{ uid }}" data-yb-flavors>
+            {% for block in section.blocks %}
+              {% if block.type == 'flavor' %}
+                <button class="yb-ss-opt-{{ uid }} {% if forloop.first %}active{% endif %}" data-yb-flavor {{ block.shopify_attributes }}>{{ block.settings.name }}</button>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="yb-ss-label-{{ uid }}">{{ s.freq_label }}</div>
+        <div class="yb-ss-freq-{{ uid }}" data-yb-freqs>
+          <div class="yb-ss-fbox-{{ uid }}" data-yb-freq data-price="{{ s.price_4w }}">
+            <div class="ttl">{{ s.freq_1 }}</div>
+            <div class="sub">{{ s.freq_1_sub }}</div>
+            {% if s.freq_1_save != blank %}<div class="save">{{ s.freq_1_save }}</div>{% endif %}
+          </div>
+          <div class="yb-ss-fbox-{{ uid }} active" data-yb-freq data-price="{{ s.price_2w }}">
+            <div class="ttl">{{ s.freq_2 }}</div>
+            <div class="sub">{{ s.freq_2_sub }}</div>
+            {% if s.freq_2_save != blank %}<div class="save">{{ s.freq_2_save }}</div>{% endif %}
+          </div>
+          <div class="yb-ss-fbox-{{ uid }}" data-yb-freq data-price="{{ s.price_1w }}">
+            <div class="ttl">{{ s.freq_3 }}</div>
+            <div class="sub">{{ s.freq_3_sub }}</div>
+            {% if s.freq_3_save != blank %}<div class="save">{{ s.freq_3_save }}</div>{% endif %}
+          </div>
+        </div>
+
+        <div class="yb-ss-price-{{ uid }}">
+          <span class="now" data-yb-price>{{ s.price_2w }}</span>
+          {% if s.price_was != blank %}<span class="was">{{ s.price_was }}</span>{% endif %}
+        </div>
+
+        <a href="{{ s.button_link | default: '#' }}" class="yb-ss-btn-{{ uid }}">{{ s.button_label }}</a>
+        {% if s.note != blank %}<div class="yb-ss-note-{{ uid }}">{{ s.note }}</div>{% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root=document.getElementById('shopify-section-{{ uid }}');
+  if(!root) return;
+  root.querySelectorAll('[data-yb-flavor]').forEach(function(b){
+    b.onclick=function(){
+      root.querySelectorAll('[data-yb-flavor]').forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active');
+    };
+  });
+  var priceEl=root.querySelector('[data-yb-price]');
+  root.querySelectorAll('[data-yb-freq]').forEach(function(b){
+    b.onclick=function(){
+      root.querySelectorAll('[data-yb-freq]').forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active');
+      if(priceEl) priceEl.textContent=b.getAttribute('data-price');
+    };
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "YumBud · Subscribe Selector",
+  "tag": "section",
+  "class": "yumbud-subscribe-selector",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Subscribe & Save" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Real food, on autopilot." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Pick your dog's favourite, choose how often, and we'll handle the rest.</p>" },
+    { "type": "image_picker", "id": "product_image", "label": "Product image" },
+    { "type": "header", "content": "Flavor selector" },
+    { "type": "text", "id": "flavor_label", "label": "Label", "default": "Choose your flavor" },
+    { "type": "header", "content": "Frequency selector" },
+    { "type": "text", "id": "freq_label", "label": "Label", "default": "Delivery frequency" },
+    { "type": "text", "id": "freq_1", "label": "Option 1 title", "default": "Every 4 weeks" },
+    { "type": "text", "id": "freq_1_sub", "label": "Option 1 subtitle", "default": "Most flexible" },
+    { "type": "text", "id": "freq_1_save", "label": "Option 1 save badge", "default": "Save 10%" },
+    { "type": "text", "id": "price_4w", "label": "Option 1 price", "default": "$32" },
+    { "type": "text", "id": "freq_2", "label": "Option 2 title", "default": "Every 2 weeks" },
+    { "type": "text", "id": "freq_2_sub", "label": "Option 2 subtitle", "default": "Most popular" },
+    { "type": "text", "id": "freq_2_save", "label": "Option 2 save badge", "default": "Save 15%" },
+    { "type": "text", "id": "price_2w", "label": "Option 2 price", "default": "$30" },
+    { "type": "text", "id": "freq_3", "label": "Option 3 title", "default": "Weekly" },
+    { "type": "text", "id": "freq_3_sub", "label": "Option 3 subtitle", "default": "Best value" },
+    { "type": "text", "id": "freq_3_save", "label": "Option 3 save badge", "default": "Save 20%" },
+    { "type": "text", "id": "price_1w", "label": "Option 3 price", "default": "$28" },
+    { "type": "header", "content": "Price & CTA" },
+    { "type": "text", "id": "price_was", "label": "Crossed-out price (optional)", "default": "$36" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Start Subscription" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "note", "label": "Note below button", "default": "Free shipping · Skip or cancel anytime" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2F1EC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#8C8578" },
+    { "type": "color", "id": "accent_color", "label": "Save badge", "default": "#2E3D2A" },
+    { "type": "color", "id": "card_color", "label": "Image background", "default": "#E8E4DA" },
+    { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "assistant_n4" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    { "type": "flavor", "name": "Flavor option", "settings": [
+      { "type": "text", "id": "name", "label": "Flavor name", "default": "Beef" }
+    ] }
+  ],
+  "presets": [
+    { "name": "YumBud · Subscribe Selector", "blocks": [
+      { "type": "flavor", "settings": { "name": "Beef" } },
+      { "type": "flavor", "settings": { "name": "Chicken" } },
+      { "type": "flavor", "settings": { "name": "Lamb" } }
+    ] }
+  ]
+}
+{% endschema %}
