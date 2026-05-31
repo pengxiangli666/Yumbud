@@ -59,9 +59,9 @@
         "show_cart": true,
         "transparent_home": true,
         "show_dividers": true,
-        "bg_color": "#f3f2ee",
+        "bg_color": "#f2f1ec",
         "text_color": "#2b2420",
-        "transparent_text_color": "#9e0808",
+        "transparent_text_color": "#b6af74",
         "accent_color": "#535b72",
         "heading_font": "assistant_n4"
       }
