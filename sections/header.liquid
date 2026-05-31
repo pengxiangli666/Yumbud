@@ -1,27 +1,24 @@
 {%- comment -%}
   ============================================================
-  YumBud · Header  (Maev-style, custom header for Dawn / OS2.0)
-  Layout:  [ ☰ Shop & Learn ] ........ maev ........ [ Help | account | cart ]
-  - Hairline divider "grid" between cells (toggle).
-  - Dark announcement bar on top.
-  - Transparent over a full-bleed hero on the homepage, turns
-    solid on scroll. Fixed overlay (works without theme support).
-  - The ☰ "Shop & Learn" opens a left slide-in menu drawer
-    (uses your real Shopify menu, with sub-items).
-  - Separate light/dark logos so the wordmark stays legible white
-    over the hero and dark once the bar goes solid.
+  YumBud · Header + Mega Menu  (custom header for Dawn / OS2.0)
+  Maev-style bar:  [ ☰ Shop & Learn ] ... logo ... [ Help | account | cart ]
+  Clicking "Shop & Learn" drops a FULL-WIDTH mega menu:
+    • SHOP  — image + label links (optional badge)   ← shop_link blocks
+    • LEARN — two columns of text links               ← learn_link blocks
+    • Featured — a tinted review / promo column        ← section settings
+  While open the bar forces its solid colours and the trigger
+  becomes "✕ Close". Transparent over the homepage hero, solid on
+  scroll. Mobile: the mega menu becomes a full-screen stacked panel.
 
-  INSTALL ON DAWN (simplest): Edit code > open sections/header.liquid
-  > back up its contents elsewhere > replace ALL of it with this
-  file > Save. Then Customize > Header to set menu, logos, colours.
-  (Hide your theme's separate announcement bar — this has its own.)
+  INSTALL ON DAWN: Edit code > open sections/header.liquid > back up
+  its contents > replace ALL with this file > Save. Then Customize >
+  Header: add your SHOP links (with thumbnails) and LEARN links as
+  blocks, set logos & colours. Hide the theme's own announcement bar.
   ============================================================
 {%- endcomment -%}
 {%- assign s = section.settings -%}
 {%- assign uid = section.id -%}
-{%- assign menu = s.menu -%}
-{%- assign logo_light = s.logo_light | default: s.logo_dark -%}
-{%- assign logo_dark = s.logo_dark | default: s.logo_light -%}
+{%- assign logo = s.logo_light -%}
 {%- assign overlay = false -%}
 {%- if s.transparent_home and request.page_type == 'index' -%}{%- assign overlay = true -%}{%- endif -%}
 
@@ -29,85 +26,92 @@
   #shopify-section-{{ uid }}{
     --yb-bg:{{ s.bg_color }}; --yb-ink:{{ s.text_color }}; --yb-tcolor:{{ s.transparent_text_color }};
     --yb-accent:{{ s.accent_color }}; --yb-ann-bg:{{ s.ann_bg }}; --yb-ann-fg:{{ s.ann_text }};
+    --yb-feat-bg:{{ s.feature_bg }}; --yb-badge-bg:{{ s.badge_bg }};
+    --yb-muted:{{ s.text_color }}99;
     --yb-serif:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};
     --yb-ease:cubic-bezier(.22,.61,.36,1);
     --yb-line-solid:{{ s.text_color }}24; --yb-line-trans:{{ s.transparent_text_color }}3d;
   }
   .yb-top-{{ uid }}{ position:fixed; top:0; left:0; right:0; z-index:50; }
-  .yb-ann-{{ uid }}{ background:var(--yb-ann-bg); color:var(--yb-ann-fg); text-align:center;
-    font-size:11px; letter-spacing:.08em; padding:11px 16px; }
+  .yb-ann-{{ uid }}{ background:var(--yb-ann-bg); color:var(--yb-ann-fg); text-align:center; font-size:11px; letter-spacing:.08em; padding:11px 16px; }
   .yb-ann-{{ uid }} a{ color:inherit; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
   .yb-ann-{{ uid }} a:hover{ text-decoration:underline; text-underline-offset:3px; }
-  /* header bar */
-  .yb-hdr-{{ uid }}{ color:var(--yb-tcolor); background:transparent;
-    transition:background .45s var(--yb-ease),color .45s var(--yb-ease); }
+  .yb-hdr-{{ uid }}{ color:var(--yb-tcolor); background:transparent; transition:background .4s var(--yb-ease),color .4s var(--yb-ease); position:relative; z-index:2; }
   .yb-bar-{{ uid }}{ display:grid; grid-template-columns:1fr auto 1fr; align-items:stretch; height:64px; }
-  .yb-divided-{{ uid }} .yb-bar-{{ uid }}{ border-top:1px solid var(--yb-line-trans); border-bottom:1px solid var(--yb-line-trans); transition:border-color .45s var(--yb-ease); }
-  .yb-left-{{ uid }}{ display:flex; align-items:center; gap:13px; padding:0 28px; background:none; border:none;
-    color:inherit; cursor:pointer; font-family:inherit; font-size:13px; letter-spacing:.04em; justify-self:start; }
-  .yb-divided-{{ uid }} .yb-left-{{ uid }}{ border-right:1px solid var(--yb-line-trans); transition:border-color .45s var(--yb-ease); }
-  .yb-left-{{ uid }} svg{ width:20px; height:14px; stroke:currentColor; stroke-width:1.5; }
+  .yb-divided-{{ uid }} .yb-bar-{{ uid }}{ border-top:1px solid var(--yb-line-trans); border-bottom:1px solid var(--yb-line-trans); transition:border-color .4s var(--yb-ease); }
+  .yb-trig-{{ uid }}{ display:flex; align-items:center; gap:13px; padding:0 28px; background:none; border:none; color:inherit; cursor:pointer; font-family:inherit; font-size:13px; letter-spacing:.04em; justify-self:start; }
+  .yb-divided-{{ uid }} .yb-trig-{{ uid }}{ border-right:1px solid var(--yb-line-trans); transition:border-color .4s var(--yb-ease); }
+  .yb-trig-{{ uid }} svg{ width:20px; height:15px; stroke:currentColor; stroke-width:1.5; fill:none; }
+  .yb-trig-{{ uid }} .st{ display:flex; align-items:center; gap:13px; }
+  .yb-trig-{{ uid }} .yb-to{ display:none; }
   .yb-brand-{{ uid }}{ justify-self:center; align-self:center; display:flex; align-items:center; color:inherit; }
   .yb-brand-{{ uid }} img{ height:{{ s.logo_height }}px; width:auto; display:block; }
-  .yb-brand-txt-{{ uid }}{ font-family:var(--yb-serif); font-style:italic; font-size:30px; font-weight:500; letter-spacing:.01em; color:inherit; }
-  .yb-logo-dark-{{ uid }}{ display:none; }
+  .yb-brand-txt-{{ uid }}{ font-family:var(--yb-serif); font-style:italic; font-size:30px; font-weight:500; color:inherit; }
   .yb-right-{{ uid }}{ justify-self:end; display:flex; align-items:stretch; }
   .yb-cell-{{ uid }}{ display:flex; align-items:center; gap:9px; padding:0 24px; color:inherit; position:relative; transition:opacity .3s; font-size:13px; letter-spacing:.04em; }
   .yb-cell-{{ uid }}:hover{ opacity:.62; }
-  .yb-divided-{{ uid }} .yb-right-{{ uid }} .yb-cell-{{ uid }}{ border-left:1px solid var(--yb-line-trans); transition:border-color .45s var(--yb-ease); }
+  .yb-divided-{{ uid }} .yb-right-{{ uid }} .yb-cell-{{ uid }}{ border-left:1px solid var(--yb-line-trans); transition:border-color .4s var(--yb-ease); }
   .yb-ic-{{ uid }}{ width:19px; height:19px; stroke:currentColor; stroke-width:1.4; fill:none; }
-  .yb-count-{{ uid }}{ position:absolute; top:12px; right:14px; background:var(--yb-accent); color:#fff; font-size:9px; font-weight:600;
-    min-width:15px; height:15px; padding:0 3px; border-radius:9px; display:flex; align-items:center; justify-content:center; }
-  /* SOLID state */
-  .yb-top-{{ uid }}.yb-solid .yb-hdr-{{ uid }}{ background:var(--yb-bg); color:var(--yb-ink); }
-  .yb-top-{{ uid }}.yb-solid.yb-divided-{{ uid }} .yb-bar-{{ uid }},
-  .yb-top-{{ uid }}.yb-solid.yb-divided-{{ uid }} .yb-left-{{ uid }},
-  .yb-top-{{ uid }}.yb-solid.yb-divided-{{ uid }} .yb-right-{{ uid }} .yb-cell-{{ uid }}{ border-color:var(--yb-line-solid); }
-  .yb-top-{{ uid }}.yb-solid .yb-logo-light-{{ uid }}{ display:none; }
-  .yb-top-{{ uid }}.yb-solid .yb-logo-dark-{{ uid }}{ display:block; }
-  /* drawer */
-  .yb-scrim-{{ uid }}{ position:fixed; inset:0; background:rgba(33,29,24,.42); backdrop-filter:blur(3px); z-index:80; opacity:0; pointer-events:none; transition:.4s; }
-  .yb-scrim-{{ uid }}.open{ opacity:1; pointer-events:auto; }
-  .yb-drawer-{{ uid }}{ position:fixed; top:0; left:0; height:100%; width:380px; max-width:88vw; background:var(--yb-bg); color:var(--yb-ink);
-    z-index:81; transform:translateX(-100%); transition:.5s var(--yb-ease); padding:30px 34px; overflow-y:auto; box-shadow:30px 0 80px -40px rgba(0,0,0,.4); }
-  .yb-drawer-{{ uid }}.open{ transform:none; }
-  .yb-dhead-{{ uid }}{ display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
-  .yb-dhead-{{ uid }} span{ font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--yb-ink); opacity:.6; }
-  .yb-dx-{{ uid }}{ background:none; border:none; color:inherit; cursor:pointer; }
-  .yb-drawer-{{ uid }} a{ display:block; font-family:var(--yb-serif); font-size:30px; font-weight:500; color:var(--yb-ink); padding:12px 0; border-bottom:1px solid var(--yb-line-solid); }
-  .yb-drawer-{{ uid }} a.sub{ font-family:inherit; font-size:15px; padding:9px 0 9px 16px; opacity:.78; border-bottom:1px solid {{ s.text_color }}0d; }
-  @media (max-width:760px){
+  .yb-count-{{ uid }}{ position:absolute; top:12px; right:14px; background:var(--yb-accent); color:#fff; font-size:9px; font-weight:600; min-width:15px; height:15px; padding:0 3px; border-radius:9px; display:flex; align-items:center; justify-content:center; }
+  /* SOLID + OPEN states share light styling */
+  .yb-top-{{ uid }}.yb-solid .yb-hdr-{{ uid }},.yb-top-{{ uid }}.yb-open .yb-hdr-{{ uid }}{ background:var(--yb-bg); color:var(--yb-ink); }
+  .yb-top-{{ uid }}.yb-solid.yb-divided-{{ uid }} .yb-bar-{{ uid }},.yb-top-{{ uid }}.yb-open.yb-divided-{{ uid }} .yb-bar-{{ uid }},
+  .yb-top-{{ uid }}.yb-solid.yb-divided-{{ uid }} .yb-trig-{{ uid }},.yb-top-{{ uid }}.yb-open.yb-divided-{{ uid }} .yb-trig-{{ uid }},
+  .yb-top-{{ uid }}.yb-solid.yb-divided-{{ uid }} .yb-right-{{ uid }} .yb-cell-{{ uid }},.yb-top-{{ uid }}.yb-open.yb-divided-{{ uid }} .yb-right-{{ uid }} .yb-cell-{{ uid }}{ border-color:var(--yb-line-solid); }
+  .yb-top-{{ uid }}.yb-open .yb-trig-{{ uid }} .yb-tc{ display:none; }
+  .yb-top-{{ uid }}.yb-open .yb-trig-{{ uid }} .yb-to{ display:flex; }
+  /* mega menu */
+  .yb-mscrim-{{ uid }}{ position:fixed; inset:0; top:var(--yb-h,108px); background:rgba(33,29,24,.32); z-index:1; opacity:0; pointer-events:none; transition:.4s; }
+  .yb-top-{{ uid }}.yb-open .yb-mscrim-{{ uid }}{ opacity:1; pointer-events:auto; }
+  .yb-mega-{{ uid }}{ position:fixed; left:0; right:0; top:var(--yb-h,108px); z-index:2; background:var(--yb-bg); color:var(--yb-ink);
+    border-bottom:1px solid var(--yb-line-solid); box-shadow:0 42px 60px -42px rgba(43,36,32,.4);
+    opacity:0; transform:translateY(-12px); pointer-events:none; transition:.4s var(--yb-ease); }
+  .yb-top-{{ uid }}.yb-open .yb-mega-{{ uid }}{ opacity:1; transform:none; pointer-events:auto; }
+  .yb-mega-in-{{ uid }}{ display:grid; grid-template-columns:1.15fr 1.15fr 1fr; max-width:1600px; margin:0 auto; min-height:430px; }
+  .yb-mega-in-{{ uid }}.nofeat{ grid-template-columns:1.2fr 1fr; }
+  .yb-col-{{ uid }}{ padding:40px 48px; }
+  .yb-col-{{ uid }}+.yb-col-{{ uid }}{ border-left:1px solid var(--yb-line-solid); }
+  .yb-ct-{{ uid }}{ font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--yb-ink); opacity:.55; margin-bottom:24px; }
+  .yb-shop-{{ uid }} a{ display:flex; align-items:center; gap:18px; padding:11px 0; color:var(--yb-ink); }
+  .yb-shop-{{ uid }} a .th{ width:54px; height:54px; border-radius:6px; background:#ECEAE3; object-fit:cover; flex:none; display:block; }
+  .yb-shop-{{ uid }} a .nm{ font-size:18px; flex:1; }
+  .yb-shop-{{ uid }} a:hover .nm{ text-decoration:underline; text-underline-offset:3px; }
+  .yb-badge-{{ uid }}{ font-size:10px; letter-spacing:.04em; background:var(--yb-badge-bg); color:#fff; padding:5px 12px; border-radius:30px; white-space:nowrap; }
+  .yb-learn-{{ uid }}{ display:grid; grid-template-columns:repeat({{ s.learn_columns }},1fr); gap:6px 30px; align-content:start; }
+  .yb-learn-{{ uid }} a{ font-size:18px; color:var(--yb-ink); padding:11px 0; }
+  .yb-learn-{{ uid }} a:hover{ text-decoration:underline; text-underline-offset:3px; }
+  .yb-feat-{{ uid }}{ background:var(--yb-feat-bg); padding:40px 48px; border-left:1px solid var(--yb-line-solid); }
+  .yb-feat-{{ uid }} .stars{ color:var(--yb-ink); letter-spacing:3px; font-size:15px; margin:4px 0 18px; }
+  .yb-feat-{{ uid }} .q{ font-size:16px; line-height:1.62; color:var(--yb-ink); }
+  .yb-feat-{{ uid }} .meta{ display:flex; justify-content:space-between; margin-top:26px; font-size:13px; color:var(--yb-muted); }
+  @media (max-width:860px){
     .yb-bar-{{ uid }}{ grid-template-columns:auto 1fr auto; height:56px; }
-    .yb-left-{{ uid }}{ padding:0 18px; }
-    .yb-left-label-{{ uid }}{ display:none; }
-    .yb-cell-{{ uid }}{ padding:0 14px; }
-    .yb-cell-hidem-{{ uid }}{ display:none; }
-    .yb-count-{{ uid }}{ right:6px; }
+    .yb-trig-{{ uid }}{ padding:0 18px; } .yb-left-label-{{ uid }}{ display:none; }
+    .yb-cell-{{ uid }}{ padding:0 14px; } .yb-cell-hidem-{{ uid }}{ display:none; } .yb-count-{{ uid }}{ right:6px; }
+    .yb-mega-{{ uid }}{ bottom:0; height:calc(100% - var(--yb-h,100px)); overflow-y:auto; }
+    .yb-mega-in-{{ uid }},.yb-mega-in-{{ uid }}.nofeat{ grid-template-columns:1fr; min-height:0; }
+    .yb-col-{{ uid }}+.yb-col-{{ uid }},.yb-feat-{{ uid }}{ border-left:none; border-top:1px solid var(--yb-line-solid); }
+    .yb-col-{{ uid }},.yb-feat-{{ uid }}{ padding:28px 24px; }
   }
 </style>
 
 <div class="yb-top-{{ uid }} {% if s.show_dividers %}yb-divided-{{ uid }}{% endif %} {% unless overlay %}yb-solid{% endunless %}"
      data-yb-top data-overlay="{% if overlay %}1{% else %}0{% endif %}">
   {% if s.show_announcement and s.announcement_text != blank %}
-    <div class="yb-ann-{{ uid }}">
-      {% if s.announcement_link != blank %}<a href="{{ s.announcement_link }}">{{ s.announcement_text }} <span>&rarr;</span></a>{% else %}{{ s.announcement_text }}{% endif %}
-    </div>
+    <div class="yb-ann-{{ uid }}">{% if s.announcement_link != blank %}<a href="{{ s.announcement_link }}">{{ s.announcement_text }} <span>&rarr;</span></a>{% else %}{{ s.announcement_text }}{% endif %}</div>
   {% endif %}
 
   <header class="yb-hdr-{{ uid }}">
     <div class="yb-bar-{{ uid }}">
-      <button class="yb-left-{{ uid }}" data-yb-burger aria-label="Open menu">
-        <svg viewBox="0 0 24 16"><path d="M0 1h24M0 8h24M0 15h24"/></svg>
-        <span class="yb-left-label-{{ uid }}">{{ s.menu_label }}</span>
+      <button class="yb-trig-{{ uid }}" data-yb-trigger aria-label="Open menu" aria-expanded="false">
+        <span class="st yb-tc"><svg viewBox="0 0 24 16"><path d="M0 1h24M0 8h24M0 15h24"/></svg><span class="yb-left-label-{{ uid }}">{{ s.menu_label }}</span></span>
+        <span class="st yb-to"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg><span class="yb-left-label-{{ uid }}">{{ s.close_label }}</span></span>
       </button>
 
       <a class="yb-brand-{{ uid }}" href="{{ routes.root_url }}">
-        {% if logo_light != blank %}
-          <img class="yb-logo-light-{{ uid }}" src="{{ logo_light | image_url: width: 600 }}" alt="{{ shop.name | escape }}" width="{{ logo_light.width }}" height="{{ logo_light.height }}">
-          <img class="yb-logo-dark-{{ uid }}" src="{{ logo_dark | image_url: width: 600 }}" alt="{{ shop.name | escape }}" width="{{ logo_dark.width }}" height="{{ logo_dark.height }}">
-        {% else %}
-          <span class="yb-brand-txt-{{ uid }}">{{ shop.name }}</span>
-        {% endif %}
+        {% if logo != blank %}
+          <img src="{{ logo | image_url: width: 600 }}" alt="{{ shop.name | escape }}" width="{{ logo.width }}" height="{{ logo.height }}">
+        {% else %}<span class="yb-brand-txt-{{ uid }}">{{ shop.name }}</span>{% endif %}
       </a>
 
       <div class="yb-right-{{ uid }}">
@@ -118,23 +122,46 @@
       </div>
     </div>
   </header>
+
+  <div class="yb-mscrim-{{ uid }}" data-yb-mscrim></div>
+
+  <div class="yb-mega-{{ uid }}" data-yb-mega>
+    <div class="yb-mega-in-{{ uid }} {% unless s.feature_enabled %}nofeat{% endunless %}">
+      <div class="yb-col-{{ uid }}">
+        {% if s.shop_heading != blank %}<div class="yb-ct-{{ uid }}">{{ s.shop_heading }}</div>{% endif %}
+        <div class="yb-shop-{{ uid }}">
+          {% for block in section.blocks %}{% if block.type == 'shop_link' %}
+            <a href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>
+              {% if block.settings.image != blank %}<img class="th" src="{{ block.settings.image | image_url: width: 160 }}" alt="" width="54" height="54">{% else %}<span class="th"></span>{% endif %}
+              <span class="nm">{{ block.settings.title }}</span>
+              {% if block.settings.badge != blank %}<span class="yb-badge-{{ uid }}">{{ block.settings.badge }}</span>{% endif %}
+            </a>
+          {% endif %}{% endfor %}
+        </div>
+      </div>
+
+      <div class="yb-col-{{ uid }}">
+        {% if s.learn_heading != blank %}<div class="yb-ct-{{ uid }}">{{ s.learn_heading }}</div>{% endif %}
+        <div class="yb-learn-{{ uid }}">
+          {% for block in section.blocks %}{% if block.type == 'learn_link' %}
+            <a href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.title }}</a>
+          {% endif %}{% endfor %}
+        </div>
+      </div>
+
+      {% if s.feature_enabled %}
+        <div class="yb-feat-{{ uid }}">
+          {% if s.feature_heading != blank %}<div class="yb-ct-{{ uid }}">{{ s.feature_heading }}</div>{% endif %}
+          {% if s.feature_stars %}<div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>{% endif %}
+          {% if s.feature_text != blank %}<p class="q">{{ s.feature_text }}</p>{% endif %}
+          {% if s.feature_author != blank or s.feature_date != blank %}<div class="meta"><span>{{ s.feature_author }}</span><span>{{ s.feature_date }}</span></div>{% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
 </div>
 
-{%- comment -%} spacer reserves layout space (inline fallback, refined by JS) {%- endcomment -%}
 <div class="yb-spacer-{{ uid }}" data-yb-spacer style="height:{% if overlay %}44px{% else %}108px{% endif %}"></div>
-
-{%- comment -%} menu drawer {%- endcomment -%}
-<div class="yb-scrim-{{ uid }}" data-yb-scrim></div>
-<nav class="yb-drawer-{{ uid }}" data-yb-drawer aria-label="Menu">
-  <div class="yb-dhead-{{ uid }}">
-    <span>{{ s.menu_label }}</span>
-    <button class="yb-dx-{{ uid }}" data-yb-close aria-label="Close"><svg class="yb-ic-{{ uid }}" viewBox="0 0 24 24" style="width:24px;height:24px"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-  </div>
-  {% for link in menu.links %}
-    <a href="{{ link.url }}">{{ link.title }}</a>
-    {% for child in link.links %}<a class="sub" href="{{ child.url }}">{{ child.title }}</a>{% endfor %}
-  {% endfor %}
-</nav>
 
 <script>
 (function(){
@@ -143,23 +170,15 @@
   var top=root.querySelector('[data-yb-top]'), spacer=root.querySelector('[data-yb-spacer]');
   var ann=top.querySelector('.yb-ann-{{ uid }}'), hdr=top.querySelector('.yb-hdr-{{ uid }}');
   var overlay=top.getAttribute('data-overlay')==='1';
-  function sizes(){
-    var a=ann?ann.offsetHeight:0, h=hdr?hdr.offsetHeight:0;
-    root.style.setProperty('--yb-h',(a+h)+'px');
-    if(spacer) spacer.style.height=(overlay? a : a+h)+'px';
-  }
+  function sizes(){ var a=ann?ann.offsetHeight:0,h=hdr?hdr.offsetHeight:0; root.style.setProperty('--yb-h',(a+h)+'px'); if(spacer) spacer.style.height=(overlay?a:a+h)+'px'; }
   sizes(); addEventListener('resize',sizes); setTimeout(sizes,300);
-  if(overlay){
-    var os=function(){ var solid=scrollY>=40; top.classList.toggle('yb-solid',solid); };
-    addEventListener('scroll',os,{passive:true}); os();
-  }
-  /* drawer */
-  var scrim=root.querySelector('[data-yb-scrim]'), drawer=root.querySelector('[data-yb-drawer]');
-  var open=function(){ scrim.classList.add('open'); drawer.classList.add('open'); };
-  var close=function(){ scrim.classList.remove('open'); drawer.classList.remove('open'); };
-  var b=root.querySelector('[data-yb-burger]'); if(b) b.onclick=open;
-  var x=root.querySelector('[data-yb-close]'); if(x) x.onclick=close;
-  if(scrim) scrim.onclick=close;
+  if(overlay){ var os=function(){ top.classList.toggle('yb-solid',scrollY>=40); }; addEventListener('scroll',os,{passive:true}); os(); }
+  /* mega toggle */
+  var trig=root.querySelector('[data-yb-trigger]'), msc=root.querySelector('[data-yb-mscrim]');
+  function openM(o){ top.classList.toggle('yb-open',o); if(trig) trig.setAttribute('aria-expanded',o?'true':'false'); document.body.style.overflow=o?'hidden':''; }
+  if(trig) trig.onclick=function(){ openM(!top.classList.contains('yb-open')); };
+  if(msc) msc.onclick=function(){ openM(false); };
+  addEventListener('keydown',function(e){ if(e.key==='Escape') openM(false); });
 })();
 </script>
 
@@ -168,6 +187,7 @@
   "name": "Header",
   "tag": "section",
   "class": "yumbud-header-section",
+  "max_blocks": 24,
   "settings": [
     { "type": "header", "content": "Announcement bar" },
     { "type": "checkbox", "id": "show_announcement", "label": "Show announcement bar", "default": true },
@@ -175,29 +195,68 @@
     { "type": "url", "id": "announcement_link", "label": "Link" },
     { "type": "color", "id": "ann_bg", "label": "Background", "default": "#211D18" },
     { "type": "color", "id": "ann_text", "label": "Text colour", "default": "#EFE9E1" },
-    { "type": "header", "content": "Menu (opens from the left)" },
-    { "type": "text", "id": "menu_label", "label": "Trigger label", "default": "Shop & Learn" },
-    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "header", "content": "Menu trigger (left)" },
+    { "type": "text", "id": "menu_label", "label": "Open label", "default": "Shop & Learn" },
+    { "type": "text", "id": "close_label", "label": "Close label", "default": "Close" },
     { "type": "header", "content": "Logo" },
-    { "type": "image_picker", "id": "logo_light", "label": "Logo — over hero (use a light/white version)" },
-    { "type": "image_picker", "id": "logo_dark", "label": "Logo — solid bar (use a dark version)" },
+    { "type": "image_picker", "id": "logo_light", "label": "Logo" },
     { "type": "range", "id": "logo_height", "label": "Logo height", "min": 20, "max": 64, "step": 2, "unit": "px", "default": 34 },
-    { "type": "paragraph", "content": "Leave both logos empty to show your store name in italic serif (it adapts colour automatically)." },
+    { "type": "paragraph", "content": "Leave empty to show the store name as text instead." },
     { "type": "header", "content": "Right side" },
     { "type": "text", "id": "help_label", "label": "Text link label", "default": "Help Center" },
     { "type": "url", "id": "help_link", "label": "Text link" },
     { "type": "checkbox", "id": "show_search", "label": "Show search icon", "default": false },
     { "type": "checkbox", "id": "show_account", "label": "Show account icon", "default": true },
     { "type": "checkbox", "id": "show_cart", "label": "Show cart icon", "default": true },
+    { "type": "header", "content": "Mega menu — column headings" },
+    { "type": "text", "id": "shop_heading", "label": "Left column title", "default": "Shop" },
+    { "type": "text", "id": "learn_heading", "label": "Middle column title", "default": "Learn" },
+    { "type": "range", "id": "learn_columns", "label": "Middle column — link columns", "min": 1, "max": 2, "step": 1, "default": 2 },
+    { "type": "color", "id": "badge_bg", "label": "Shop badge colour", "default": "#2E3D2A" },
+    { "type": "header", "content": "Mega menu — featured column" },
+    { "type": "checkbox", "id": "feature_enabled", "label": "Show featured column", "default": true },
+    { "type": "text", "id": "feature_heading", "label": "Heading", "default": "Reviews" },
+    { "type": "checkbox", "id": "feature_stars", "label": "Show 5 stars", "default": true },
+    { "type": "textarea", "id": "feature_text", "label": "Quote / text", "default": "Treats can be such a hassle. My dog loses her mind for these and I love that I can actually read every ingredient." },
+    { "type": "text", "id": "feature_author", "label": "Author", "default": "Maria F." },
+    { "type": "text", "id": "feature_date", "label": "Date / detail", "default": "Verified buyer" },
+    { "type": "color", "id": "feature_bg", "label": "Featured background", "default": "#F6F1E4" },
     { "type": "header", "content": "Style" },
-    { "type": "checkbox", "id": "transparent_home", "label": "Transparent over homepage hero", "info": "Overlays the first section on the homepage and turns solid on scroll. Pair with a full-bleed image hero.", "default": true },
-    { "type": "checkbox", "id": "show_dividers", "label": "Show hairline divider grid", "default": true },
+    { "type": "checkbox", "id": "transparent_home", "label": "Transparent over homepage hero", "info": "Pair with a full-bleed image hero; turns solid on scroll.", "default": true },
+    { "type": "checkbox", "id": "show_dividers", "label": "Show hairline divider grid in bar", "default": true },
     { "type": "header", "content": "Colours" },
     { "type": "color", "id": "bg_color", "label": "Solid background", "default": "#F2F1EC" },
     { "type": "color", "id": "text_color", "label": "Solid text / icons", "default": "#2B2420" },
-    { "type": "color", "id": "transparent_text_color", "label": "Text over hero (transparent state)", "info": "White by default for a dark image hero; set dark for a light hero.", "default": "#FFFFFF" },
+    { "type": "color", "id": "transparent_text_color", "label": "Text over hero (transparent)", "info": "White over a dark hero; dark over a light hero.", "default": "#FFFFFF" },
     { "type": "color", "id": "accent_color", "label": "Cart count badge", "default": "#535B72" },
-    { "type": "font_picker", "id": "heading_font", "label": "Logo / menu font", "default": "assistant_n4" }
+    { "type": "font_picker", "id": "heading_font", "label": "Logo / mega-menu font", "default": "assistant_n4" }
+  ],
+  "blocks": [
+    { "type": "shop_link", "name": "Shop link (with image)", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Thumbnail" },
+      { "type": "text", "id": "title", "label": "Label", "default": "Whole-Food Treats" },
+      { "type": "url", "id": "link", "label": "Link" },
+      { "type": "text", "id": "badge", "label": "Badge (optional)" }
+    ] },
+    { "type": "learn_link", "name": "Learn link (text)", "settings": [
+      { "type": "text", "id": "title", "label": "Label", "default": "Why YumBud" },
+      { "type": "url", "id": "link", "label": "Link" }
+    ] }
+  ],
+  "presets": [
+    { "name": "Header", "blocks": [
+      { "type": "shop_link", "settings": { "title": "Whole-Food Treats", "badge": "Best Seller" } },
+      { "type": "shop_link", "settings": { "title": "Chew Rings" } },
+      { "type": "shop_link", "settings": { "title": "Biscuits" } },
+      { "type": "shop_link", "settings": { "title": "Crisps" } },
+      { "type": "shop_link", "settings": { "title": "Boosters" } },
+      { "type": "learn_link", "settings": { "title": "Why YumBud" } },
+      { "type": "learn_link", "settings": { "title": "Our Story" } },
+      { "type": "learn_link", "settings": { "title": "Ingredients" } },
+      { "type": "learn_link", "settings": { "title": "Rewards" } },
+      { "type": "learn_link", "settings": { "title": "Stockists" } },
+      { "type": "learn_link", "settings": { "title": "Reviews" } }
+    ] }
   ]
 }
 {% endschema %}
