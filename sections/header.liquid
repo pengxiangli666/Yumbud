@@ -1,6 +1,6 @@
 {%- comment -%}
   ============================================================
-  YumBud · Header + Mega Menu  (Main menu integrated)
+  YumBud · Header + Mega Menu  (Main menu + Learn menu integrated)
   ============================================================
 {%- endcomment -%}
 {%- assign s = section.settings -%}
@@ -9,6 +9,7 @@
 {%- assign overlay = false -%}
 {%- if s.transparent_home and request.page_type == 'index' -%}{%- assign overlay = true -%}{%- endif -%}
 {%- assign main_menu = linklists[s.main_menu] -%}
+{%- assign learn_menu = linklists[s.learn_menu] -%}
 
 <style>
   #shopify-section-{{ uid }}{
@@ -136,9 +137,11 @@
       <div class="yb-col-{{ uid }}">
         {% if s.learn_heading != blank %}<div class="yb-ct-{{ uid }}">{{ s.learn_heading }}</div>{% endif %}
         <div class="yb-learn-{{ uid }}">
-          {% for block in section.blocks %}{% if block.type == 'learn_link' %}
-            <a href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.title }}</a>
-          {% endif %}{% endfor %}
+          {% if learn_menu.links.size > 0 %}
+            {% for link in learn_menu.links %}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {% endfor %}
+          {% endif %}
         </div>
       </div>
 
@@ -179,7 +182,6 @@
   "name": "Header",
   "tag": "section",
   "class": "yumbud-header-section",
-  "max_blocks": 24,
   "settings": [
     { "type": "header", "content": "Announcement bar" },
     { "type": "checkbox", "id": "show_announcement", "label": "Show announcement bar", "default": true },
@@ -205,6 +207,7 @@
     { "type": "text", "id": "shop_heading", "label": "Left column title", "default": "Shop" },
     { "type": "color", "id": "badge_bg", "label": "Shop badge colour", "default": "#2E3D2A" },
     { "type": "header", "content": "Mega menu — Learn column" },
+    { "type": "link_list", "id": "learn_menu", "label": "Learn menu (links from Content > Menus)", "default": "learn" },
     { "type": "text", "id": "learn_heading", "label": "Middle column title", "default": "Learn" },
     { "type": "range", "id": "learn_columns", "label": "Middle column — link columns", "min": 1, "max": 4, "step": 1, "default": 2 },
     { "type": "header", "content": "Mega menu — featured column" },
@@ -225,19 +228,8 @@
     { "type": "color", "id": "accent_color", "label": "Cart count badge", "default": "#535B72" },
     { "type": "font_picker", "id": "heading_font", "label": "Logo / mega-menu font", "default": "assistant_n4" }
   ],
-  "blocks": [
-    { "type": "learn_link", "name": "Learn link (text)", "settings": [
-      { "type": "text", "id": "title", "label": "Label", "default": "Why YumBud" },
-      { "type": "url", "id": "link", "label": "Link" }
-    ] }
-  ],
   "presets": [
-    { "name": "Header", "blocks": [
-      { "type": "learn_link", "settings": { "title": "Why YumBud" } },
-      { "type": "learn_link", "settings": { "title": "Our Story" } },
-      { "type": "learn_link", "settings": { "title": "Ingredients" } },
-      { "type": "learn_link", "settings": { "title": "Reviews" } }
-    ] }
+    { "name": "Header" }
   ]
 }
 {% endschema %}
