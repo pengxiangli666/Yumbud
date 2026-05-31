@@ -11,45 +11,6 @@
   "type": "header",
   "name": "Header",
   "sections": {
-    "header_section": {
-      "type": "header",
-      "disabled": true,
-      "settings": {
-        "show_announcement": true,
-        "announcement_text": "First time trying YumBud? Get 15% off",
-        "announcement_link": "",
-        "ann_bg": "#66615b",
-        "ann_text": "#fffffc",
-        "menu_label": "Shop & Learn",
-        "close_label": "Close",
-        "logo_height": 36,
-        "help_label": "Help Center",
-        "help_link": "",
-        "show_search": true,
-        "show_account": true,
-        "show_cart": true,
-        "main_menu": "main-menu",
-        "shop_heading": "Shop",
-        "badge_bg": "#2e3d2a",
-        "learn_menu": "",
-        "learn_heading": "Learn",
-        "learn_columns": 2,
-        "feature_enabled": false,
-        "feature_heading": "Reviews",
-        "feature_stars": false,
-        "feature_text": "Treats can be such a hassle. My dog loses her mind for these and I love that I can actually read every ingredient.",
-        "feature_author": "Maria F.",
-        "feature_date": "Verified buyer",
-        "feature_bg": "#f6f1e4",
-        "transparent_home": true,
-        "show_dividers": true,
-        "bg_color": "#f2f1ec",
-        "text_color": "#000000",
-        "transparent_text_color": "#000000",
-        "accent_color": "#535b72",
-        "heading_font": "assistant_n4"
-      }
-    },
     "header_dhXMhK": {
       "type": "header",
       "settings": {
@@ -91,7 +52,6 @@
     }
   },
   "order": [
-    "header_section",
     "header_dhXMhK"
   ]
 }

@@ -48,18 +48,86 @@
         "stat2_label": "Artificial additives",
         "stat3_num": "4.9",
         "stat3_label": "Average rating",
-        "bg_color": "#F2F1EC",
-        "text_color": "#2B2420",
-        "muted_color": "#574F46",
-        "accent_color": "#535B72",
+        "bg_color": "#f2f1ec",
+        "text_color": "#2b2420",
+        "muted_color": "#574f46",
+        "accent_color": "#535b72",
         "heading_font": "assistant_n4",
         "padding_top": 88,
         "padding_bottom": 72
+      }
+    },
+    "yumbud_video_carousel_3dWJcX": {
+      "type": "yumbud-video-carousel",
+      "blocks": {
+        "video_card_Hg8cGa": {
+          "type": "video_card",
+          "settings": {
+            "external_mp4": "",
+            "name": "Bao",
+            "label": "Apple Chew Rings"
+          }
+        },
+        "video_card_jbFEU7": {
+          "type": "video_card",
+          "settings": {
+            "external_mp4": "",
+            "name": "Olive",
+            "label": "Arugula Crisps"
+          }
+        },
+        "video_card_yedLbJ": {
+          "type": "video_card",
+          "settings": {
+            "external_mp4": "",
+            "name": "Hazel",
+            "label": "Herb Biscuits"
+          }
+        },
+        "video_card_4XHqTp": {
+          "type": "video_card",
+          "settings": {
+            "external_mp4": "",
+            "name": "Miso",
+            "label": "Cucumber Crisps"
+          }
+        },
+        "video_card_FmDgbb": {
+          "type": "video_card",
+          "settings": {
+            "external_mp4": "",
+            "name": "Wren",
+            "label": "The whole pantry"
+          }
+        }
+      },
+      "block_order": [
+        "video_card_Hg8cGa",
+        "video_card_jbFEU7",
+        "video_card_yedLbJ",
+        "video_card_4XHqTp",
+        "video_card_FmDgbb"
+      ],
+      "name": "YumBud · Video Wall",
+      "settings": {
+        "eyebrow": "At the Table",
+        "heading": "Tails at the table.",
+        "hint_text": "Drag, scroll or use the arrows · Hover a card to play",
+        "show_arrows": true,
+        "card_width": 320,
+        "bg_color": "#ECEAE3",
+        "text_color": "#2B2420",
+        "muted_color": "#8C8578",
+        "card_color": "#FAF8F3",
+        "heading_font": "assistant_n4",
+        "padding_top": 96,
+        "padding_bottom": 96
       }
     }
   },
   "order": [
     "yumbud_pantry_TJ9rGB",
-    "yumbud_hero_mFrVEx"
+    "yumbud_hero_mFrVEx",
+    "yumbud_video_carousel_3dWJcX"
   ]
 }
