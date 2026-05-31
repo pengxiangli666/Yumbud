@@ -60,8 +60,8 @@
         "transparent_home": true,
         "show_dividers": true,
         "bg_color": "#f2f1ec",
-        "text_color": "#2b2420",
-        "transparent_text_color": "#b6af74",
+        "text_color": "#000000",
+        "transparent_text_color": "#000000",
         "accent_color": "#535b72",
         "heading_font": "assistant_n4"
       }
