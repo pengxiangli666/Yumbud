@@ -473,7 +473,7 @@
             "title": "Biscuits",
             "description": "Goat cheese, flaxseed and garden herbs, gently baked into a crisp little biscuit dogs come running for.",
             "link_label": "Shop Biscuits",
-            "link": ""
+            "link": "https://claude.ai/new"
           }
         },
         "range_card_bPmVw7": {
@@ -519,12 +519,84 @@
         "padding_top": 96,
         "padding_bottom": 96
       }
+    },
+    "yumbud_video_carousel_fTpY79": {
+      "type": "yumbud-video-carousel",
+      "blocks": {
+        "video_card_qFXGx9": {
+          "type": "video_card",
+          "settings": {
+            "poster": "shopify://shop_images/be_2.png",
+            "card_video": "shopify://files/videos/24088bf25ce799315f7f0d7fa68fc43a.mp4",
+            "external_mp4": "",
+            "name": "Bao",
+            "label": "Apple Chew Rings"
+          }
+        },
+        "video_card_iAfcpa": {
+          "type": "video_card",
+          "settings": {
+            "poster": "shopify://shop_images/1f4e137d-5932-47c5-ab03-2beafe27244c.png",
+            "card_video": "shopify://files/videos/24088bf25ce799315f7f0d7fa68fc43a.mp4",
+            "external_mp4": "",
+            "name": "Olive",
+            "label": "Arugula Crisps"
+          }
+        },
+        "video_card_L8WBfT": {
+          "type": "video_card",
+          "settings": {
+            "external_mp4": "",
+            "name": "Hazel",
+            "label": "Herb Biscuits"
+          }
+        },
+        "video_card_AVQHMV": {
+          "type": "video_card",
+          "settings": {
+            "external_mp4": "",
+            "name": "Miso",
+            "label": "Cucumber Crisps"
+          }
+        },
+        "video_card_AYfRzW": {
+          "type": "video_card",
+          "settings": {
+            "external_mp4": "",
+            "name": "Wren",
+            "label": "The whole pantry"
+          }
+        }
+      },
+      "block_order": [
+        "video_card_qFXGx9",
+        "video_card_iAfcpa",
+        "video_card_L8WBfT",
+        "video_card_AVQHMV",
+        "video_card_AYfRzW"
+      ],
+      "name": "YumBud · Video Wall",
+      "settings": {
+        "eyebrow": "At the Table",
+        "heading": "Tails at the table.",
+        "hint_text": "Drag, scroll or use the arrows · Hover a card to play",
+        "show_arrows": true,
+        "card_width": 320,
+        "bg_color": "#ECEAE3",
+        "text_color": "#2B2420",
+        "muted_color": "#8C8578",
+        "card_color": "#FAF8F3",
+        "heading_font": "assistant_n4",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
     "product_list_fa6P9H",
     "collection_list_aqf8J6",
-    "yumbud_build_bowl_ixfnec"
+    "yumbud_build_bowl_ixfnec",
+    "yumbud_video_carousel_fTpY79"
   ]
 }
