@@ -1,9 +1,224 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-     "sections": {
-       "main": {
-         "type": "main-page",
-         "settings": {}
-       }
-     },
-     "order": ["main"]
-   }
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "content_direction": "column",
+        "gap": 12,
+        "color_scheme": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "yumbud_subscribe_selector_R6im73": {
+      "type": "yumbud-subscribe-selector",
+      "blocks": {
+        "flavor_8PqfDY": {
+          "type": "flavor",
+          "settings": {
+            "name": "Beef"
+          }
+        },
+        "flavor_WYCY8F": {
+          "type": "flavor",
+          "settings": {
+            "name": "Chicken"
+          }
+        },
+        "flavor_PNiFh9": {
+          "type": "flavor",
+          "settings": {
+            "name": "Lamb"
+          }
+        }
+      },
+      "block_order": [
+        "flavor_8PqfDY",
+        "flavor_WYCY8F",
+        "flavor_PNiFh9"
+      ],
+      "name": "YumBud · Subscribe",
+      "settings": {
+        "eyebrow": "Subscribe & Save",
+        "heading": "Real food, on autopilot.",
+        "body": "<p>Pick your dog's favourite, choose how often, and we'll handle the rest.</p>",
+        "flavor_label": "Choose your flavor",
+        "freq_label": "Delivery frequency",
+        "freq_1": "Every 4 weeks",
+        "freq_1_sub": "Most flexible",
+        "freq_1_save": "Save 10%",
+        "price_4w": "$32",
+        "freq_2": "Every 2 weeks",
+        "freq_2_sub": "Most popular",
+        "freq_2_save": "Save 15%",
+        "price_2w": "$30",
+        "freq_3": "Weekly",
+        "freq_3_sub": "Best value",
+        "freq_3_save": "Save 20%",
+        "price_1w": "$28",
+        "price_was": "$36",
+        "button_label": "Start Subscription",
+        "button_link": "",
+        "note": "Free shipping · Skip or cancel anytime",
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#8C8578",
+        "accent_color": "#2E3D2A",
+        "card_color": "#E8E4DA",
+        "heading_font": "assistant_n4",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "yumbud_price_compare_Qh38xY": {
+      "type": "yumbud-price-compare",
+      "blocks": {
+        "left_feature_cJeqjy": {
+          "type": "left_feature",
+          "settings": {
+            "text": "Full price"
+          }
+        },
+        "left_feature_chkktb": {
+          "type": "left_feature",
+          "settings": {
+            "text": "Standard shipping"
+          }
+        },
+        "left_feature_CRdGBT": {
+          "type": "left_feature",
+          "settings": {
+            "text": "Order again manually"
+          }
+        },
+        "right_feature_37YeAr": {
+          "type": "right_feature",
+          "settings": {
+            "text": "20% off every order"
+          }
+        },
+        "right_feature_JiUBWx": {
+          "type": "right_feature",
+          "settings": {
+            "text": "Free shipping over $48"
+          }
+        },
+        "right_feature_GKUrDW": {
+          "type": "right_feature",
+          "settings": {
+            "text": "Skip, swap, or cancel anytime"
+          }
+        },
+        "right_feature_eCABBP": {
+          "type": "right_feature",
+          "settings": {
+            "text": "Member-only flavours"
+          }
+        }
+      },
+      "block_order": [
+        "left_feature_cJeqjy",
+        "left_feature_chkktb",
+        "left_feature_CRdGBT",
+        "right_feature_37YeAr",
+        "right_feature_JiUBWx",
+        "right_feature_GKUrDW",
+        "right_feature_eCABBP"
+      ],
+      "name": "YumBud · Price Compare",
+      "settings": {
+        "eyebrow": "Smart Pricing",
+        "heading": "Subscribe and save 20%",
+        "body": "<p>Same great food, lower price, delivered automatically.</p>",
+        "left_title": "One-time",
+        "left_price": "$36",
+        "left_per": "/ bag",
+        "left_desc": "Buy once, no commitment.",
+        "right_badge": "Best value",
+        "right_title": "Subscribe & Save",
+        "right_price": "$28",
+        "right_per": "/ bag",
+        "right_desc": "Save 20% on every delivery. Cancel anytime.",
+        "bg_color": "#FAF8F3",
+        "text_color": "#2B2420",
+        "muted_color": "#8C8578",
+        "accent_color": "#2E3D2A",
+        "card_color": "#EDEAE0",
+        "heading_font": "assistant_n4",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "yumbud_perks_eJUACh": {
+      "type": "yumbud-perks",
+      "blocks": {
+        "perk_4CQ64E": {
+          "type": "perk",
+          "settings": {
+            "icon": "truck",
+            "title": "Free shipping",
+            "text": "On every subscription order."
+          }
+        },
+        "perk_xxmJ3X": {
+          "type": "perk",
+          "settings": {
+            "icon": "calendar",
+            "title": "Skip or swap",
+            "text": "Adjust your delivery anytime."
+          }
+        },
+        "perk_BCgf7n": {
+          "type": "perk",
+          "settings": {
+            "icon": "star",
+            "title": "Save 20%",
+            "text": "Member pricing on every bag."
+          }
+        },
+        "perk_6Hiaei": {
+          "type": "perk",
+          "settings": {
+            "icon": "heart",
+            "title": "Cancel anytime",
+            "text": "No contracts, no fees."
+          }
+        }
+      },
+      "block_order": [
+        "perk_4CQ64E",
+        "perk_xxmJ3X",
+        "perk_BCgf7n",
+        "perk_6Hiaei"
+      ],
+      "name": "YumBud · Perks",
+      "settings": {
+        "eyebrow": "Why Subscribe",
+        "heading": "The perks.",
+        "columns": 4,
+        "bg_color": "#FAF8F3",
+        "text_color": "#2B2420",
+        "muted_color": "#8C8578",
+        "accent_color": "#535B72",
+        "heading_font": "assistant_n4",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "main",
+    "yumbud_subscribe_selector_R6im73",
+    "yumbud_price_compare_Qh38xY",
+    "yumbud_perks_eJUACh"
+  ]
+}
