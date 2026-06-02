@@ -11,6 +11,25 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
+    "yumbud_newsletter_C3ca9X": {
+      "type": "yumbud-newsletter",
+      "name": "YumBud · Newsletter",
+      "settings": {
+        "eyebrow": "Join the pantry list",
+        "heading": "A little more, now and then.",
+        "body": "New recipes, restocks and the occasional good-dog story. No noise.",
+        "placeholder": "Your email address",
+        "button_label": "Subscribe",
+        "success_text": "Thank you — you're on the list.",
+        "note": "We send rarely · Unsubscribe anytime",
+        "bg_color": "#faf8f3",
+        "text_color": "#000000",
+        "muted_color": "#A59E90",
+        "heading_font": "assistant_n4",
+        "padding_top": 4,
+        "padding_bottom": 104
+      }
+    },
     "footer_m9NzUG": {
       "type": "footer",
       "blocks": {
@@ -115,9 +134,9 @@
             "width": "fill",
             "custom_width": 100,
             "inherit_color_scheme": true,
+            "color_scheme": "",
             "heading": "",
             "heading_preset": "h3",
-            "color_scheme": "",
             "border_style": "all",
             "border_width": 1,
             "border_radius": 100,
@@ -139,6 +158,7 @@
         "group_H6VpwJ",
         "email_signup_crihX7"
       ],
+      "disabled": true,
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
@@ -205,6 +225,7 @@
     }
   },
   "order": [
+    "yumbud_newsletter_C3ca9X",
     "footer_m9NzUG",
     "footer_utilities_jLGE8U"
   ]

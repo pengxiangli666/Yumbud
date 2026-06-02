@@ -87,9 +87,9 @@
       "name": "YumBud · Marquee",
       "settings": {
         "speed": 34,
-        "bg_color": "#ECEAE3",
-        "text_color": "#574F46",
-        "accent_color": "#B8A88B"
+        "bg_color": "#eceae3",
+        "text_color": "#574f46",
+        "accent_color": "#b8a88b"
       }
     },
     "yumbud_build_bowl_ckM3rB": {
@@ -150,10 +150,10 @@
         "card_width": 440,
         "show_hint": true,
         "hint_text": "Hover to play",
-        "bg_color": "#F2F1EC",
-        "text_color": "#2B2420",
-        "muted_color": "#8C8578",
-        "accent_color": "#535B72",
+        "bg_color": "#f2f1ec",
+        "text_color": "#2b2420",
+        "muted_color": "#8c8578",
+        "accent_color": "#535b72",
         "heading_font": "assistant_n4",
         "padding_top": 96,
         "padding_bottom": 96
@@ -199,10 +199,10 @@
         "body": "<p>We started in Los Angeles with one rule: if we wouldn't put it on the counter, it doesn't go in the bag. No fillers, no rendered meals, no mystery.</p>",
         "image_caption": "REAL INGREDIENTS · MADE IN LOS ANGELES",
         "media_position": "left",
-        "bg_color": "#ECEAE3",
-        "text_color": "#2B2420",
-        "muted_color": "#8C8578",
-        "accent_color": "#535B72",
+        "bg_color": "#eceae3",
+        "text_color": "#2b2420",
+        "muted_color": "#8c8578",
+        "accent_color": "#535b72",
         "heading_font": "assistant_n4",
         "padding_top": 104,
         "padding_bottom": 104
@@ -252,10 +252,10 @@
       ],
       "name": "YumBud · Proof Strip",
       "settings": {
-        "bg_color": "#F2F1EC",
-        "text_color": "#2B2420",
-        "muted_color": "#8C8578",
-        "stars_color": "#B8A88B",
+        "bg_color": "#f2f1ec",
+        "text_color": "#2b2420",
+        "muted_color": "#8c8578",
+        "stars_color": "#b8a88b",
         "heading_font": "assistant_n4",
         "padding_top": 0,
         "padding_bottom": 40
@@ -277,9 +277,9 @@
         "stat2_label": "Facility, in California — start to finish",
         "external_mp4": "",
         "media_position": "right",
-        "bg_color": "#211D18",
-        "text_color": "#E9E3D8",
-        "muted_color": "#B7B0A2",
+        "bg_color": "#211d18",
+        "text_color": "#e9e3d8",
+        "muted_color": "#b7b0a2",
         "heading_font": "assistant_n4",
         "padding_top": 104,
         "padding_bottom": 104
@@ -380,30 +380,11 @@
         "show_stars": false,
         "quote": "“My vet asked what I'd changed in her diet. <em>It was only the treats.</em>”",
         "attribution": "Alex Lee. · A YumBud household, Los Angeles",
-        "bg_color": "#FAF8F3",
-        "text_color": "#2B2420",
-        "muted_color": "#8C8578",
-        "accent_color": "#535B72",
-        "stars_color": "#B8A88B",
-        "heading_font": "assistant_n4",
-        "padding_top": 104,
-        "padding_bottom": 104
-      }
-    },
-    "yumbud_newsletter_qm3pab": {
-      "type": "yumbud-newsletter",
-      "name": "YumBud · Newsletter",
-      "settings": {
-        "eyebrow": "Join the pantry list",
-        "heading": "A little more, now and then.",
-        "body": "New recipes, restocks and the occasional good-dog story. No noise.",
-        "placeholder": "Your email address",
-        "button_label": "Subscribe",
-        "success_text": "Thank you — you're on the list.",
-        "note": "We send rarely · Unsubscribe anytime",
-        "bg_color": "#211D18",
-        "text_color": "#F4EFE6",
-        "muted_color": "#A59E90",
+        "bg_color": "#faf8f3",
+        "text_color": "#2b2420",
+        "muted_color": "#8c8578",
+        "accent_color": "#535b72",
+        "stars_color": "#b8a88b",
         "heading_font": "assistant_n4",
         "padding_top": 104,
         "padding_bottom": 104
@@ -418,8 +399,7 @@
     "yumbud_proof_tNqk6R",
     "yumbud_hover_video_kFtNGX",
     "yumbud_pantry_TJ9rGB",
-    "yumbud_video_carousel_3dWJcX",
     "yumbud_quote_GedUWz",
-    "yumbud_newsletter_qm3pab"
+    "yumbud_video_carousel_3dWJcX"
   ]
 }
