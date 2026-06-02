@@ -9,27 +9,6 @@
  */
 {
   "sections": {
-    "yumbud_pantry_TJ9rGB": {
-      "type": "yumbud-pantry",
-      "name": "YumBud · Pantry Grid",
-      "settings": {
-        "eyebrow": "The Pantry",
-        "heading": "Four recipes. Real ingredients.",
-        "body": "Each batch is built on whole cuts and real produce, then gently dehydrated for a clean, savoury finish your dog can actually smell.",
-        "collection": "",
-        "product_limit": 4,
-        "columns": 4,
-        "show_desc": true,
-        "button_label": "Add +",
-        "bg_color": "#f2f1ec",
-        "text_color": "#2b2420",
-        "muted_color": "#8c8578",
-        "accent_color": "#535b72",
-        "heading_font": "assistant_n4",
-        "padding_top": 104,
-        "padding_bottom": 104
-      }
-    },
     "yumbud_hero_mFrVEx": {
       "type": "yumbud-hero",
       "name": "YumBud · Hero",
@@ -42,7 +21,7 @@
         "button2_label": "Our Story",
         "button2_link": "",
         "stamp_text": "· GENTLY DEHYDRATED · HUMAN GRADE · MADE IN CALIFORNIA",
-        "stat1_num": "5",
+        "stat1_num": "4",
         "stat1_label": "Whole ingredients",
         "stat2_num": "0",
         "stat2_label": "Artificial additives",
@@ -55,6 +34,276 @@
         "heading_font": "assistant_n4",
         "padding_top": 88,
         "padding_bottom": 72
+      }
+    },
+    "yumbud_marquee_pUDUBg": {
+      "type": "yumbud-marquee",
+      "blocks": {
+        "phrase_fK387n": {
+          "type": "phrase",
+          "settings": {
+            "text": "Human-grade"
+          }
+        },
+        "phrase_EiMk6Y": {
+          "type": "phrase",
+          "settings": {
+            "text": "No artificial additives"
+          }
+        },
+        "phrase_N7RC9q": {
+          "type": "phrase",
+          "settings": {
+            "text": "Gently dehydrated"
+          }
+        },
+        "phrase_rULLYi": {
+          "type": "phrase",
+          "settings": {
+            "text": "Single-origin protein"
+          }
+        },
+        "phrase_tRYaUb": {
+          "type": "phrase",
+          "settings": {
+            "text": "Made in California"
+          }
+        },
+        "phrase_WyFKqJ": {
+          "type": "phrase",
+          "settings": {
+            "text": "Vet-considered"
+          }
+        }
+      },
+      "block_order": [
+        "phrase_fK387n",
+        "phrase_EiMk6Y",
+        "phrase_N7RC9q",
+        "phrase_rULLYi",
+        "phrase_tRYaUb",
+        "phrase_WyFKqJ"
+      ],
+      "name": "YumBud · Marquee",
+      "settings": {
+        "speed": 34,
+        "bg_color": "#ECEAE3",
+        "text_color": "#574F46",
+        "accent_color": "#B8A88B"
+      }
+    },
+    "yumbud_build_bowl_ckM3rB": {
+      "type": "yumbud-build-bowl",
+      "blocks": {
+        "range_card_HkbcEx": {
+          "type": "range_card",
+          "settings": {
+            "external_mp4": "",
+            "title": "Chew Rings",
+            "description": "Chicken breast wrapped around fresh apple rings with calendula — three ingredients, gently dehydrated into a chewy, satisfying treat. High protein, low fat, no artificial additives.",
+            "link_label": "Shop Chew Rings",
+            "link": ""
+          }
+        },
+        "range_card_fwjaM7": {
+          "type": "range_card",
+          "settings": {
+            "external_mp4": "",
+            "title": "Biscuits",
+            "description": "Chicken breast, goat cheese, flaxseed and fresh mint — gently baked into a crisp, savory biscuit. Real ingredients, nothing artificial.",
+            "link_label": "Shop Biscuits",
+            "link": ""
+          }
+        },
+        "range_card_NjpyDT": {
+          "type": "range_card",
+          "settings": {
+            "external_mp4": "",
+            "title": "Chicken & Arugula Crisps",
+            "description": "Chicken breast slices topped with fresh arugula, gently dehydrated into light, crispy strips. High protein with a plant boost — no artificial additives.",
+            "link_label": "Shop Crisps",
+            "link": ""
+          }
+        },
+        "range_card_aTjqmP": {
+          "type": "range_card",
+          "settings": {
+            "external_mp4": "",
+            "title": "Cucumber Chicken Crisps",
+            "description": "Chicken breast wrapped with cucumber, gently dehydrated. Two ingredients, nothing else. 55% crude protein — clean, light, and simple.",
+            "link_label": "Shop Crisps",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "range_card_HkbcEx",
+        "range_card_fwjaM7",
+        "range_card_NjpyDT",
+        "range_card_aTjqmP"
+      ],
+      "name": "YumBud · Build the Bowl",
+      "settings": {
+        "eyebrow": "Our Range",
+        "heading": "Build their bowl with our range.",
+        "show_arrows": true,
+        "card_width": 440,
+        "show_hint": true,
+        "hint_text": "Hover to play",
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#8C8578",
+        "accent_color": "#535B72",
+        "heading_font": "assistant_n4",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "yumbud_ethos_pzbbQy": {
+      "type": "yumbud-ethos",
+      "blocks": {
+        "value_eFw8F8": {
+          "type": "value",
+          "settings": {
+            "icon": "heart",
+            "title": "Ingredients you can name",
+            "text": "Four or fewer per recipe — and you can pronounce all of them."
+          }
+        },
+        "value_XxnL69": {
+          "type": "value",
+          "settings": {
+            "icon": "check",
+            "title": "Gently dehydrated, never fried",
+            "text": "Low-and-slow drying keeps the nutrition in and the additives out."
+          }
+        },
+        "value_8pxpF9": {
+          "type": "value",
+          "settings": {
+            "icon": "no",
+            "title": "No colours, flavours or preservatives",
+            "text": "Ever. The only thing added is a little time."
+          }
+        }
+      },
+      "block_order": [
+        "value_eFw8F8",
+        "value_XxnL69",
+        "value_8pxpF9"
+      ],
+      "name": "YumBud · Ethos Split",
+      "settings": {
+        "eyebrow": "Why YumBud",
+        "heading": "Made the way you'd make it yourself.",
+        "body": "<p>We started in Los Angeles with one rule: if we wouldn't put it on the counter, it doesn't go in the bag. No fillers, no rendered meals, no mystery.</p>",
+        "image_caption": "REAL INGREDIENTS · MADE IN LOS ANGELES",
+        "media_position": "left",
+        "bg_color": "#ECEAE3",
+        "text_color": "#2B2420",
+        "muted_color": "#8C8578",
+        "accent_color": "#535B72",
+        "heading_font": "assistant_n4",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "yumbud_proof_tNqk6R": {
+      "type": "yumbud-proof",
+      "blocks": {
+        "stat_mgyRB4": {
+          "type": "stat",
+          "settings": {
+            "number": "100%",
+            "show_stars": false,
+            "label": "human-grade ingredients"
+          }
+        },
+        "stat_XingQP": {
+          "type": "stat",
+          "settings": {
+            "number": "12h",
+            "show_stars": false,
+            "label": "GENTLE-DRY TIME PER BATCH"
+          }
+        },
+        "stat_QTkbL4": {
+          "type": "stat",
+          "settings": {
+            "number": "0",
+            "show_stars": false,
+            "label": "artificial additives"
+          }
+        },
+        "stat_FCR8Lz": {
+          "type": "stat",
+          "settings": {
+            "number": "4.9",
+            "show_stars": true,
+            "label": "average rating · verified buyers"
+          }
+        }
+      },
+      "block_order": [
+        "stat_mgyRB4",
+        "stat_XingQP",
+        "stat_QTkbL4",
+        "stat_FCR8Lz"
+      ],
+      "name": "YumBud · Proof Strip",
+      "settings": {
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#8C8578",
+        "stars_color": "#B8A88B",
+        "heading_font": "assistant_n4",
+        "padding_top": 0,
+        "padding_bottom": 40
+      }
+    },
+    "yumbud_hover_video_kFtNGX": {
+      "type": "yumbud-hover-video",
+      "name": "YumBud · Hover Video",
+      "settings": {
+        "eyebrow": "In the Kitchen",
+        "heading": "From whole cuts to the final crisp.",
+        "body": "<p>Every batch is slow-dried over hours, not minutes.</p>",
+        "button_label": "See how it's made",
+        "button_link": "",
+        "badge_text": "Hover to play",
+        "stat1_number": "12h",
+        "stat1_label": "Average gentle-dry time per batch",
+        "stat2_number": "1",
+        "stat2_label": "Facility, in California — start to finish",
+        "external_mp4": "",
+        "media_position": "right",
+        "bg_color": "#211D18",
+        "text_color": "#E9E3D8",
+        "muted_color": "#B7B0A2",
+        "heading_font": "assistant_n4",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "yumbud_pantry_TJ9rGB": {
+      "type": "yumbud-pantry",
+      "name": "YumBud · Pantry Grid",
+      "settings": {
+        "eyebrow": "The Pantry",
+        "heading": "Four recipes. Real ingredients.",
+        "body": "Each batch starts with human-grade ingredients, gently dehydrated in our licensed Los Angeles facility. Nothing artificial, nothing hidden.",
+        "collection": "",
+        "product_limit": 4,
+        "columns": 4,
+        "show_desc": true,
+        "button_label": "Add +",
+        "bg_color": "#f2f1ec",
+        "text_color": "#2b2420",
+        "muted_color": "#8c8578",
+        "accent_color": "#535b72",
+        "heading_font": "assistant_n4",
+        "padding_top": 104,
+        "padding_bottom": 104
       }
     },
     "yumbud_video_carousel_3dWJcX": {
@@ -123,11 +372,54 @@
         "padding_top": 96,
         "padding_bottom": 96
       }
+    },
+    "yumbud_quote_GedUWz": {
+      "type": "yumbud-quote",
+      "name": "YumBud · Quote",
+      "settings": {
+        "show_stars": false,
+        "quote": "“My vet asked what I'd changed in her diet. <em>It was only the treats.</em>”",
+        "attribution": "Alex Lee. · A YumBud household, Los Angeles",
+        "bg_color": "#FAF8F3",
+        "text_color": "#2B2420",
+        "muted_color": "#8C8578",
+        "accent_color": "#535B72",
+        "stars_color": "#B8A88B",
+        "heading_font": "assistant_n4",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "yumbud_newsletter_qm3pab": {
+      "type": "yumbud-newsletter",
+      "name": "YumBud · Newsletter",
+      "settings": {
+        "eyebrow": "Join the pantry list",
+        "heading": "A little more, now and then.",
+        "body": "New recipes, restocks and the occasional good-dog story. No noise.",
+        "placeholder": "Your email address",
+        "button_label": "Subscribe",
+        "success_text": "Thank you — you're on the list.",
+        "note": "We send rarely · Unsubscribe anytime",
+        "bg_color": "#211D18",
+        "text_color": "#F4EFE6",
+        "muted_color": "#A59E90",
+        "heading_font": "assistant_n4",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
     }
   },
   "order": [
-    "yumbud_pantry_TJ9rGB",
     "yumbud_hero_mFrVEx",
-    "yumbud_video_carousel_3dWJcX"
+    "yumbud_marquee_pUDUBg",
+    "yumbud_build_bowl_ckM3rB",
+    "yumbud_ethos_pzbbQy",
+    "yumbud_proof_tNqk6R",
+    "yumbud_hover_video_kFtNGX",
+    "yumbud_pantry_TJ9rGB",
+    "yumbud_video_carousel_3dWJcX",
+    "yumbud_quote_GedUWz",
+    "yumbud_newsletter_qm3pab"
   ]
 }

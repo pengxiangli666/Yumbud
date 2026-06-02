@@ -15,9 +15,9 @@
       "type": "header",
       "settings": {
         "show_announcement": true,
-        "announcement_text": "First time trying YumBud? Get 15% off",
+        "announcement_text": "First time trying YumBud? Get 10% off",
         "announcement_link": "",
-        "ann_bg": "#66615b",
+        "ann_bg": "#5c3d2e",
         "ann_text": "#fffffc",
         "menu_label": "Shop & Learn",
         "close_label": "Close",
