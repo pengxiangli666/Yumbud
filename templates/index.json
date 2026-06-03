@@ -39,9 +39,9 @@
         "frame_width": 1,
         "frame_inset": 64,
         "frame_opacity": 100,
-        "min_height": 620,
-        "padding_top": 88,
-        "padding_bottom": 72
+        "min_height": 780,
+        "padding_top": 60,
+        "padding_bottom": 80
       }
     },
     "yumbud_marquee_pUDUBg": {
