@@ -45,7 +45,7 @@
         "show_dividers": true,
         "bg_color": "#f2f1ec",
         "text_color": "#000000",
-        "transparent_text_color": "#000000",
+        "transparent_text_color": "#ffffff",
         "accent_color": "#535b72",
         "heading_font": "assistant_n4"
       }
