@@ -72,10 +72,18 @@
     letter-spacing:.16em; text-transform:uppercase; font-weight:500;
     padding:15px 30px; border-radius:3px; transition:.4s var(--yb-ease); white-space:nowrap;
   }
-  .yb-btn-fill-{{ uid }}{ background:var(--yb-ink); color:var(--yb-cream); }
-  .yb-btn-fill-{{ uid }}:hover{ background:var(--yb-accent); }
-  .yb-btn-line-{{ uid }}{ border:1px solid var(--yb-line); color:var(--yb-ink); }
-  .yb-btn-line-{{ uid }}:hover{ background:var(--yb-ink); color:var(--yb-cream); border-color:var(--yb-ink); }
+  .yb-btn-fill-{{ uid }}{
+    background:{% if s.btn1_transparent %}transparent{% else %}{{ s.btn1_bg }}{% endif %};
+    color:{{ s.btn1_text }};
+    border:2px solid {{ s.btn1_border }};
+  }
+  .yb-btn-fill-{{ uid }}:hover{ opacity:0.8; }
+  .yb-btn-line-{{ uid }}{
+    background:{% if s.btn2_transparent %}transparent{% else %}{{ s.btn2_bg }}{% endif %};
+    color:{{ s.btn2_text }};
+    border:2px solid {{ s.btn2_border }};
+  }
+  .yb-btn-line-{{ uid }}:hover{ opacity:0.8; }
   .yb-h-meta-{{ uid }}{
     margin-top:46px; display:flex; gap:34px; align-items:center;
     {% if s.content_align == 'center' %}justify-content:center;{% endif %}
@@ -170,6 +178,16 @@
     { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Artificial additives" },
     { "type": "text", "id": "stat3_num", "label": "Stat 3 number", "default": "4.9" },
     { "type": "text", "id": "stat3_label", "label": "Stat 3 label", "default": "Average rating" },
+    { "type": "header", "content": "Primary button" },
+    { "type": "color", "id": "btn1_bg", "label": "Background color", "default": "#FFFFFF" },
+    { "type": "color", "id": "btn1_text", "label": "Text color", "default": "#2B2420" },
+    { "type": "color", "id": "btn1_border", "label": "Border color", "default": "#FFFFFF" },
+    { "type": "checkbox", "id": "btn1_transparent", "label": "Transparent background", "default": false },
+    { "type": "header", "content": "Secondary button" },
+    { "type": "color", "id": "btn2_bg", "label": "Background color", "default": "#FFFFFF" },
+    { "type": "color", "id": "btn2_text", "label": "Text color", "default": "#2B2420" },
+    { "type": "color", "id": "btn2_border", "label": "Border color", "default": "#FFFFFF" },
+    { "type": "checkbox", "id": "btn2_transparent", "label": "Transparent background", "default": true },
     { "type": "header", "content": "Colours & Typography" },
     { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
     { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#574F46" },
