@@ -296,28 +296,6 @@
         "padding_bottom": 104
       }
     },
-    "yumbud_pantry_TJ9rGB": {
-      "type": "yumbud-pantry",
-      "disabled": true,
-      "name": "YumBud · Pantry Grid",
-      "settings": {
-        "eyebrow": "The Pantry",
-        "heading": "Four recipes. Real ingredients.",
-        "body": "Each batch starts with human-grade ingredients, gently dehydrated in our licensed Los Angeles facility. Nothing artificial, nothing hidden.",
-        "collection": "",
-        "product_limit": 4,
-        "columns": 4,
-        "show_desc": true,
-        "button_label": "Add +",
-        "bg_color": "#f2f1ec",
-        "text_color": "#2b2420",
-        "muted_color": "#8c8578",
-        "accent_color": "#535b72",
-        "heading_font": "assistant_n4",
-        "padding_top": 104,
-        "padding_bottom": 104
-      }
-    },
     "yumbud_quote_GedUWz": {
       "type": "yumbud-quote",
       "name": "YumBud · Quote",
@@ -334,74 +312,6 @@
         "padding_top": 104,
         "padding_bottom": 104
       }
-    },
-    "yumbud_video_carousel_3dWJcX": {
-      "type": "yumbud-video-carousel",
-      "blocks": {
-        "video_card_Hg8cGa": {
-          "type": "video_card",
-          "settings": {
-            "external_mp4": "",
-            "name": "Bao",
-            "label": "Apple Chew Rings"
-          }
-        },
-        "video_card_jbFEU7": {
-          "type": "video_card",
-          "settings": {
-            "external_mp4": "",
-            "name": "Olive",
-            "label": "Arugula Crisps"
-          }
-        },
-        "video_card_yedLbJ": {
-          "type": "video_card",
-          "settings": {
-            "external_mp4": "",
-            "name": "Hazel",
-            "label": "Herb Biscuits"
-          }
-        },
-        "video_card_4XHqTp": {
-          "type": "video_card",
-          "settings": {
-            "external_mp4": "",
-            "name": "Miso",
-            "label": "Cucumber Crisps"
-          }
-        },
-        "video_card_FmDgbb": {
-          "type": "video_card",
-          "settings": {
-            "external_mp4": "",
-            "name": "Wren",
-            "label": "The whole pantry"
-          }
-        }
-      },
-      "block_order": [
-        "video_card_Hg8cGa",
-        "video_card_jbFEU7",
-        "video_card_yedLbJ",
-        "video_card_4XHqTp",
-        "video_card_FmDgbb"
-      ],
-      "disabled": true,
-      "name": "YumBud · Video Wall",
-      "settings": {
-        "eyebrow": "At the Table",
-        "heading": "Tails at the table.",
-        "hint_text": "Drag, scroll or use the arrows · Hover a card to play",
-        "show_arrows": true,
-        "card_width": 320,
-        "bg_color": "#eceae3",
-        "text_color": "#2b2420",
-        "muted_color": "#8c8578",
-        "card_color": "#faf8f3",
-        "heading_font": "assistant_n4",
-        "padding_top": 96,
-        "padding_bottom": 96
-      }
     }
   },
   "order": [
@@ -410,9 +320,7 @@
     "yumbud_build_bowl_ckM3rB",
     "yumbud_ethos_pzbbQy",
     "yumbud_proof_tNqk6R",
-    "yumbud_hover_video_kFtNGX",
-    "yumbud_pantry_TJ9rGB",
     "yumbud_quote_GedUWz",
-    "yumbud_video_carousel_3dWJcX"
+    "yumbud_hover_video_kFtNGX"
   ]
 }
