@@ -45,11 +45,11 @@
         "heading_font": "assistant_n4",
         "frame_color": "#ffffff",
         "frame_width": 1,
-        "frame_inset": 64,
+        "frame_inset": "62",
         "frame_opacity": 100,
         "min_height": 780,
-        "padding_top": 60,
-        "padding_bottom": 80
+        "padding_top": 64,
+        "padding_bottom": 84
       }
     },
     "yumbud_marquee_pUDUBg": {
