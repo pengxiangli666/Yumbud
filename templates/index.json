@@ -23,7 +23,7 @@
         "content_max_width": 500,
         "content_offset_left": "-40",
         "content_offset_right": "0",
-        "bg_image": "shopify://shop_images/ChatGPT_Image_2026_6_2_20_17_26.png",
+        "bg_image": "shopify://shop_images/012_2.jpg",
         "image_position": "center center",
         "overlay_color": "#000000",
         "overlay_opacity": 0,
@@ -272,6 +272,23 @@
         "padding_bottom": 40
       }
     },
+    "yumbud_quote_GedUWz": {
+      "type": "yumbud-quote",
+      "name": "YumBud · Quote",
+      "settings": {
+        "show_stars": false,
+        "quote": "“My vet asked what I'd changed in her diet. <em>It was only the treats.</em>”",
+        "attribution": "Alex Lee. · A YumBud household, Los Angeles",
+        "bg_color": "#faf8f3",
+        "text_color": "#2b2420",
+        "muted_color": "#8c8578",
+        "accent_color": "#535b72",
+        "stars_color": "#b8a88b",
+        "heading_font": "assistant_n4",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
     "yumbud_hover_video_kFtNGX": {
       "type": "yumbud-hover-video",
       "name": "YumBud · Hover Video",
@@ -291,23 +308,6 @@
         "bg_color": "#211d18",
         "text_color": "#e9e3d8",
         "muted_color": "#b7b0a2",
-        "heading_font": "assistant_n4",
-        "padding_top": 104,
-        "padding_bottom": 104
-      }
-    },
-    "yumbud_quote_GedUWz": {
-      "type": "yumbud-quote",
-      "name": "YumBud · Quote",
-      "settings": {
-        "show_stars": false,
-        "quote": "“My vet asked what I'd changed in her diet. <em>It was only the treats.</em>”",
-        "attribution": "Alex Lee. · A YumBud household, Los Angeles",
-        "bg_color": "#faf8f3",
-        "text_color": "#2b2420",
-        "muted_color": "#8c8578",
-        "accent_color": "#535b72",
-        "stars_color": "#b8a88b",
         "heading_font": "assistant_n4",
         "padding_top": 104,
         "padding_bottom": 104
