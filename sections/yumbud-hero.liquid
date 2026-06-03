@@ -29,7 +29,7 @@
     position:absolute; inset:0; z-index:0;
   }
   .yb-h-bg-{{ uid }} img{
-    width:100%; height:100%; object-fit:cover; object-position:{{ s.image_position }};
+    width:100%; height:100%; object-fit:cover; object-position:{{ s.image_x }}% {{ s.image_y }}%;
     display:block;
   }
   .yb-h-overlay-{{ uid }}{
@@ -155,13 +155,8 @@
     { "type": "text", "id": "content_offset_right", "label": "Offset from right (px) — type any number", "default": "0" },
     { "type": "header", "content": "Background image" },
     { "type": "image_picker", "id": "bg_image", "label": "Background image (min 2000px wide recommended)" },
-    { "type": "select", "id": "image_position", "label": "Image position", "options": [
-      { "value": "center center", "label": "Center" },
-      { "value": "top center", "label": "Top" },
-      { "value": "bottom center", "label": "Bottom" },
-      { "value": "left center", "label": "Left" },
-      { "value": "right center", "label": "Right" }
-    ], "default": "center center" },
+    { "type": "range", "id": "image_x", "label": "Image position X  ←  50 = center  →", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_y", "label": "Image position Y  ↑  50 = center  ↓", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
     { "type": "color", "id": "overlay_color", "label": "Overlay color", "default": "#000000" },
     { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 20 },
     { "type": "header", "content": "Stats" },
