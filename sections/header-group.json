@@ -19,6 +19,7 @@
         "announcement_link": "",
         "ann_bg": "#2b2420",
         "ann_text": "#fffffc",
+        "ann_font_size": 13,
         "menu_label": "Shop & Learn",
         "close_label": "Close",
         "logo_light": "shopify://shop_images/logo_07104035-a897-4451-a70e-0cb163479272.png",
@@ -43,9 +44,9 @@
         "feature_bg": "#f6f1e4",
         "transparent_home": true,
         "show_dividers": true,
-        "bg_color": "#2b2420",
+        "bg_color": "#574f46",
         "text_color": "#eceae3",
-        "transparent_text_color": "#000000",
+        "transparent_text_color": "#ffffff",
         "accent_color": "#535b72",
         "heading_font": "assistant_n4"
       }
