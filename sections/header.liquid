@@ -1,6 +1,6 @@
 {%- comment -%}
   ============================================================
-  YumBud · Header + Mega Menu  (Main menu + Learn menu integrated)
+  YumBud · Header + Mega Menu
   ============================================================
 {%- endcomment -%}
 {%- assign s = section.settings -%}
@@ -19,10 +19,10 @@
     --yb-muted:{{ s.text_color }}99;
     --yb-serif:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};
     --yb-ease:cubic-bezier(.22,.61,.36,1);
-    --yb-line-solid:{{ s.text_color }}24; --yb-line-trans:{{ s.transparent_text_color }}3d;
+    --yb-line-solid:{{ s.text_color }}24; --yb-line-trans:{{ s.transparent_text_color }}99;
   }
   .yb-top-{{ uid }}{ position:fixed; top:0; left:0; right:0; z-index:50; }
-  .yb-ann-{{ uid }}{ background:var(--yb-ann-bg); color:var(--yb-ann-fg); text-align:center; font-size:11px; letter-spacing:.08em; padding:11px 16px; }
+  .yb-ann-{{ uid }}{ background:var(--yb-ann-bg); color:var(--yb-ann-fg); text-align:center; font-size:{{ s.ann_font_size }}px; letter-spacing:.08em; padding:11px 16px; }
   .yb-ann-{{ uid }} a{ color:inherit; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
   .yb-ann-{{ uid }} a:hover{ text-decoration:underline; text-underline-offset:3px; }
   .yb-hdr-{{ uid }}{ color:var(--yb-tcolor); background:transparent; transition:background .4s var(--yb-ease),color .4s var(--yb-ease); position:relative; z-index:2; }
@@ -187,8 +187,9 @@
     { "type": "checkbox", "id": "show_announcement", "label": "Show announcement bar", "default": true },
     { "type": "text", "id": "announcement_text", "label": "Text", "default": "First time trying YumBud? Get 15% off" },
     { "type": "url", "id": "announcement_link", "label": "Link" },
-    { "type": "color", "id": "ann_bg", "label": "Background", "default": "#211D18" },
+    { "type": "color", "id": "ann_bg", "label": "Background", "default": "#5C3D2E" },
     { "type": "color", "id": "ann_text", "label": "Text colour", "default": "#EFE9E1" },
+    { "type": "range", "id": "ann_font_size", "label": "Font size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 11 },
     { "type": "header", "content": "Menu trigger (left)" },
     { "type": "text", "id": "menu_label", "label": "Open label", "default": "Shop & Learn" },
     { "type": "text", "id": "close_label", "label": "Close label", "default": "Close" },
