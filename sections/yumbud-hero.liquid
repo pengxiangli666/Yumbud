@@ -1,5 +1,5 @@
 {%- comment -%}
-  YumBud · Hero — full background image version 1
+  YumBud · Hero — full background image version
 {%- endcomment -%}
 {%- assign s = section.settings -%}
 {%- assign uid = section.id -%}
@@ -151,8 +151,8 @@
     { "type": "url", "id": "button2_link", "label": "Secondary button link" },
     { "type": "header", "content": "Content position" },
     { "type": "range", "id": "content_max_width", "label": "Content block width", "min": 200, "max": 900, "step": 10, "unit": "px", "default": 600 },
-    { "type": "range", "id": "content_offset_left", "label": "Offset from left", "min": 0, "max": 800, "step": 1, "unit": "px", "default": 0 },
-    { "type": "range", "id": "content_offset_right", "label": "Offset from right", "min": 0, "max": 800, "step": 1, "unit": "px", "default": 0 },
+    { "type": "text", "id": "content_offset_left", "label": "Offset from left (px) — type any number", "default": "0" },
+    { "type": "text", "id": "content_offset_right", "label": "Offset from right (px) — type any number", "default": "0" },
     { "type": "header", "content": "Background image" },
     { "type": "image_picker", "id": "bg_image", "label": "Background image (min 2000px wide recommended)" },
     { "type": "select", "id": "image_position", "label": "Image position", "options": [
