@@ -34,6 +34,7 @@
   .yb-bb-scroller-{{ uid }}::-webkit-scrollbar{ display:none; }
   .yb-bb-scroller-{{ uid }}.yb-drag{ cursor:grabbing; scroll-snap-type:none; }
   .yb-bb-card-{{ uid }}{ flex:none; width:var(--yb-cardw); max-width:88vw; scroll-snap-align:start; display:flex; flex-direction:column; }
+  .yb-bb-medialink-{{ uid }}{ display:block; text-decoration:none; color:inherit; }
   .yb-bb-media-{{ uid }}{ position:relative; aspect-ratio:4/5; border-radius:3px; overflow:hidden; background:#15120f;
     box-shadow:0 40px 70px -52px rgba(43,36,32,.6); cursor:pointer; }
   .yb-bb-media-{{ uid }} img,.yb-bb-media-{{ uid }} video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
@@ -79,31 +80,34 @@
 
     <div class="yb-bb-scroller-{{ uid }}" data-yb-scroller>
       {% for block in section.blocks %}
+        {%- assign card_href = block.settings.link | default: '#' -%}
         <div class="yb-bb-card-{{ uid }}" {{ block.shopify_attributes }}>
-          <div class="yb-bb-media-{{ uid }}" data-yb-hoverv>
-            {% if block.settings.poster != blank %}
-              <img class="yb-bb-poster-{{ uid }}" src="{{ block.settings.poster | image_url: width: 900 }}" alt="{{ block.settings.poster.alt | escape }}" loading="lazy" width="{{ block.settings.poster.width }}" height="{{ block.settings.poster.height }}">
-            {% else %}
-              <img class="yb-bb-poster-{{ uid }}" src="{{ 'lifestyle-1.png' | placeholder_svg_tag }}" alt="">
-            {% endif %}
+          <a class="yb-bb-medialink-{{ uid }}" href="{{ card_href }}" data-yb-cardlink>
+            <div class="yb-bb-media-{{ uid }}" data-yb-hoverv>
+              {% if block.settings.poster != blank %}
+                <img class="yb-bb-poster-{{ uid }}" src="{{ block.settings.poster | image_url: width: 900 }}" alt="{{ block.settings.poster.alt | escape }}" loading="lazy" width="{{ block.settings.poster.width }}" height="{{ block.settings.poster.height }}">
+              {% else %}
+                <img class="yb-bb-poster-{{ uid }}" src="{{ 'lifestyle-1.png' | placeholder_svg_tag }}" alt="">
+              {% endif %}
 
-            {%- comment -%} source priority: native video > external mp4 {%- endcomment -%}
-            {% if block.settings.card_video != blank %}
-              <video muted loop playsinline preload="none" {% if block.settings.poster != blank %}poster="{{ block.settings.poster | image_url: width: 900 }}"{% endif %}>
-                {% for src in block.settings.card_video.sources %}<source src="{{ src.url }}" type="{{ src.mime_type }}">{% endfor %}
-              </video>
-            {% elsif block.settings.external_mp4 != blank %}
-              <video muted loop playsinline preload="none" {% if block.settings.poster != blank %}poster="{{ block.settings.poster | image_url: width: 900 }}"{% endif %}>
-                <source src="{{ block.settings.external_mp4 }}" type="video/mp4">
-              </video>
-            {% endif %}
+              {%- comment -%} source priority: native video > external mp4 {%- endcomment -%}
+              {% if block.settings.card_video != blank %}
+                <video muted loop playsinline preload="none" {% if block.settings.poster != blank %}poster="{{ block.settings.poster | image_url: width: 900 }}"{% endif %}>
+                  {% for src in block.settings.card_video.sources %}<source src="{{ src.url }}" type="{{ src.mime_type }}">{% endfor %}
+                </video>
+              {% elsif block.settings.external_mp4 != blank %}
+                <video muted loop playsinline preload="none" {% if block.settings.poster != blank %}poster="{{ block.settings.poster | image_url: width: 900 }}"{% endif %}>
+                  <source src="{{ block.settings.external_mp4 }}" type="video/mp4">
+                </video>
+              {% endif %}
 
-            {% if s.show_hint %}<div class="yb-bb-hint-{{ uid }}"><i></i> {{ s.hint_text }}</div>{% endif %}
-          </div>
+              {% if s.show_hint %}<div class="yb-bb-hint-{{ uid }}"><i></i> {{ s.hint_text }}</div>{% endif %}
+            </div>
+          </a>
 
           {% if block.settings.title != blank %}<h3 class="yb-bb-title-{{ uid }}">{{ block.settings.title }}</h3>{% endif %}
           {% if block.settings.description != blank %}<p class="yb-bb-desc-{{ uid }}">{{ block.settings.description }}</p>{% endif %}
-          {% if block.settings.link_label != blank %}<a class="yb-bb-link-{{ uid }}" href="{{ block.settings.link | default: '#' }}">{{ block.settings.link_label }} &rarr;</a>{% endif %}
+          {% if block.settings.link_label != blank %}<a class="yb-bb-link-{{ uid }}" href="{{ card_href }}">{{ block.settings.link_label }} &rarr;</a>{% endif %}
         </div>
       {% endfor %}
     </div>
@@ -122,7 +126,10 @@
     function stop(){ box.classList.remove('playing'); v.pause(); try{v.currentTime=0;}catch(e){} }
     box.addEventListener('mouseenter',play);
     box.addEventListener('mouseleave',stop);
-    box.addEventListener('click',function(){ box.classList.contains('playing')?stop():play(); });
+    // click on media box toggles video; navigation is handled by the <a> wrapper
+    box.addEventListener('click',function(e){
+      if(box.classList.contains('playing')){ e.preventDefault(); stop(); } 
+    });
   });
 
   var scroller=root.querySelector('[data-yb-scroller]');
@@ -139,14 +146,16 @@
   scroller.addEventListener('scroll',arrowState,{passive:true});
   addEventListener('resize',arrowState); arrowState();
 
+  // drag to scroll — suppress link navigation when user is dragging
   var down=false,sx=0,sl=0,moved=0;
   scroller.addEventListener('pointerdown',function(e){ down=true;moved=0;sx=e.clientX;sl=scroller.scrollLeft;scroller.classList.add('yb-drag'); });
   scroller.addEventListener('pointermove',function(e){ if(!down)return; var d=e.clientX-sx;moved=Math.abs(d);scroller.scrollLeft=sl-d; });
   var up=function(){ down=false;scroller.classList.remove('yb-drag'); };
   scroller.addEventListener('pointerup',up);
   scroller.addEventListener('pointerleave',up);
-  scroller.querySelectorAll('[data-yb-hoverv]').forEach(function(m){
-    m.addEventListener('click',function(e){ if(moved>6){ e.stopImmediatePropagation(); e.preventDefault(); } },true);
+  // block navigation if user dragged more than 6px
+  root.querySelectorAll('[data-yb-cardlink]').forEach(function(a){
+    a.addEventListener('click',function(e){ if(moved>6){ e.preventDefault(); e.stopImmediatePropagation(); } });
   });
 })();
 </script>
