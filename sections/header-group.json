@@ -43,9 +43,9 @@
         "feature_bg": "#f6f1e4",
         "transparent_home": true,
         "show_dividers": true,
-        "bg_color": "#f2f1ec",
-        "text_color": "#000000",
-        "transparent_text_color": "#ffffff",
+        "bg_color": "#574f46",
+        "text_color": "#eceae3",
+        "transparent_text_color": "#000000",
         "accent_color": "#535b72",
         "heading_font": "assistant_n4"
       }
