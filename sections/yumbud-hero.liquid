@@ -42,9 +42,9 @@
     width:100%;
   }
   .yb-h-inner-{{ uid }}{
-    max-width:600px;
-    {% if s.content_align == 'center' %}margin:0 auto; text-align:center;{% endif %}
-    {% if s.content_align == 'right' %}margin-left:auto; text-align:right;{% endif %}
+    max-width:{{ s.content_max_width }}px;
+    margin-left:{{ s.content_offset_left }}px;
+    margin-right:{{ s.content_offset_right }}px;
   }
   .yb-h-eyebrow-{{ uid }}{
     font-size:11px; letter-spacing:.28em; text-transform:uppercase;
@@ -59,13 +59,9 @@
   .yb-h-sub-{{ uid }}{
     font-size:17px; color:var(--yb-muted); max-width:430px;
     margin-bottom:38px; font-weight:300; line-height:1.6;
-    {% if s.content_align == 'center' %}margin-left:auto; margin-right:auto;{% endif %}
-    {% if s.content_align == 'right' %}margin-left:auto;{% endif %}
   }
   .yb-h-cta-{{ uid }}{
     display:flex; gap:14px; flex-wrap:wrap;
-    {% if s.content_align == 'center' %}justify-content:center;{% endif %}
-    {% if s.content_align == 'right' %}justify-content:flex-end;{% endif %}
   }
   .yb-btn-{{ uid }}{
     display:inline-flex; align-items:center; gap:.6em; font-size:12px;
@@ -86,8 +82,6 @@
   .yb-btn-line-{{ uid }}:hover{ opacity:0.8; }
   .yb-h-meta-{{ uid }}{
     margin-top:46px; display:flex; gap:34px; align-items:center;
-    {% if s.content_align == 'center' %}justify-content:center;{% endif %}
-    {% if s.content_align == 'right' %}justify-content:flex-end;{% endif %}
   }
   .yb-h-meta-{{ uid }} .m b{
     display:block; font-family:var(--yb-serif); font-size:30px;
@@ -99,7 +93,7 @@
   .yb-h-meta-{{ uid }} .vr{ width:1px; height:42px; background:var(--yb-line); }
   @media (max-width:880px){
     .yb-h-{{ uid }} .wrapx{ padding:0 24px; }
-    .yb-h-inner-{{ uid }}{ max-width:100%; }
+    .yb-h-inner-{{ uid }}{ max-width:100%; margin-left:0; margin-right:0; }
   }
 </style>
 
@@ -155,11 +149,10 @@
     { "type": "url", "id": "button1_link", "label": "Primary button link" },
     { "type": "text", "id": "button2_label", "label": "Secondary button label", "default": "Our Story" },
     { "type": "url", "id": "button2_link", "label": "Secondary button link" },
-    { "type": "select", "id": "content_align", "label": "Content alignment", "options": [
-      { "value": "left", "label": "Left" },
-      { "value": "center", "label": "Center" },
-      { "value": "right", "label": "Right" }
-    ], "default": "left" },
+    { "type": "header", "content": "Content position" },
+    { "type": "range", "id": "content_max_width", "label": "Content block width", "min": 200, "max": 900, "step": 10, "unit": "px", "default": 600 },
+    { "type": "range", "id": "content_offset_left", "label": "Offset from left", "min": 0, "max": 800, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "content_offset_right", "label": "Offset from right", "min": 0, "max": 800, "step": 1, "unit": "px", "default": 0 },
     { "type": "header", "content": "Background image" },
     { "type": "image_picker", "id": "bg_image", "label": "Background image (min 2000px wide recommended)" },
     { "type": "select", "id": "image_position", "label": "Image position", "options": [
