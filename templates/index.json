@@ -114,7 +114,7 @@
             "title": "Chew Rings",
             "description": "Chicken breast wrapped around fresh apple rings with calendula — three ingredients, gently dehydrated into a chewy, satisfying treat. High protein, low fat, no artificial additives.",
             "link_label": "Shop Chew Rings",
-            "link": ""
+            "link": "shopify://products/chicken-wrapped-apple-chew-rings"
           }
         },
         "range_card_fwjaM7": {
@@ -124,7 +124,7 @@
             "title": "Biscuits",
             "description": "Chicken breast, goat cheese, flaxseed and fresh mint — gently baked into a crisp, savory biscuit. Real ingredients, nothing artificial.",
             "link_label": "Shop Biscuits",
-            "link": ""
+            "link": "shopify://products/chicken-herb-biscuits"
           }
         },
         "range_card_NjpyDT": {
@@ -134,7 +134,7 @@
             "title": "Chicken & Arugula Crisps",
             "description": "Chicken breast slices topped with fresh arugula, gently dehydrated into light, crispy strips. High protein with a plant boost — no artificial additives.",
             "link_label": "Shop Crisps",
-            "link": ""
+            "link": "shopify://products/chicken-arugula-crisps"
           }
         },
         "range_card_aTjqmP": {
@@ -144,7 +144,7 @@
             "title": "Cucumber Chicken Crisps",
             "description": "Chicken breast wrapped with cucumber, gently dehydrated. Two ingredients, nothing else. 55% crude protein — clean, light, and simple.",
             "link_label": "Shop Crisps",
-            "link": ""
+            "link": "shopify://products/cucumber-chicken-crisps"
           }
         }
       },
