@@ -35,6 +35,10 @@
         "muted_color": "#574f46",
         "accent_color": "#535b72",
         "heading_font": "assistant_n4",
+        "frame_color": "#ffffff",
+        "frame_width": 1,
+        "frame_inset": 64,
+        "frame_opacity": 100,
         "min_height": 620,
         "padding_top": 88,
         "padding_bottom": 72
