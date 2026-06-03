@@ -22,8 +22,8 @@
         "button2_link": "",
         "image": "shopify://shop_images/65030622dff59d07224a44cc9a72f9d6.jpg",
         "stamp_text": "· GENTLY DEHYDRATED · HUMAN GRADE · MADE IN CALIFORNIA",
-        "stat1_num": "",
-        "stat1_label": "",
+        "stat1_num": "10/10",
+        "stat1_label": "Tails Wagging",
         "stat2_num": "",
         "stat2_label": "",
         "stat3_num": "100%",
@@ -64,12 +64,6 @@
             "text": "Single-origin protein"
           }
         },
-        "phrase_tRYaUb": {
-          "type": "phrase",
-          "settings": {
-            "text": "Made in California"
-          }
-        },
         "phrase_WyFKqJ": {
           "type": "phrase",
           "settings": {
@@ -82,7 +76,6 @@
         "phrase_EiMk6Y",
         "phrase_N7RC9q",
         "phrase_rULLYi",
-        "phrase_tRYaUb",
         "phrase_WyFKqJ"
       ],
       "name": "YumBud · Marquee",
