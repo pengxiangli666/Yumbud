@@ -11,10 +11,10 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
-    "footer_HDUh77": {
+    "footer_YbcXDD": {
       "type": "footer",
       "blocks": {
-        "group_V7Mqeg": {
+        "group_qMnPAe": {
           "type": "group",
           "settings": {
             "content_direction": "column",
@@ -53,7 +53,7 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "text_kjBMhw": {
+            "text_fgNGdD": {
               "type": "text",
               "settings": {
                 "text": "<h2>Join our email list</h2>",
@@ -78,7 +78,7 @@
               },
               "blocks": {}
             },
-            "text_rmVbE9": {
+            "text_PpFPmF": {
               "type": "text",
               "settings": {
                 "text": "<p>Get exclusive deals and early access to new products.</p>",
@@ -105,11 +105,11 @@
             }
           },
           "block_order": [
-            "text_kjBMhw",
-            "text_rmVbE9"
+            "text_fgNGdD",
+            "text_PpFPmF"
           ]
         },
-        "email_signup_9dmdHR": {
+        "email_signup_dTWTne": {
           "type": "email-signup",
           "settings": {
             "width": "fill",
@@ -136,8 +136,8 @@
         }
       },
       "block_order": [
-        "group_V7Mqeg",
-        "email_signup_9dmdHR"
+        "group_qMnPAe",
+        "email_signup_dTWTne"
       ],
       "name": "t:names.footer",
       "settings": {
@@ -146,164 +146,6 @@
         "color_scheme": "scheme-1",
         "padding-block-start": 36,
         "padding-block-end": 36
-      }
-    },
-    "yumbud_newsletter_C3ca9X": {
-      "type": "yumbud-newsletter",
-      "disabled": true,
-      "name": "YumBud · Newsletter",
-      "settings": {
-        "eyebrow": "Join the pantry list",
-        "heading": "A little more, now and then.",
-        "body": "New recipes, restocks and the occasional good-dog story. No noise.",
-        "placeholder": "Your email address",
-        "button_label": "Subscribe",
-        "success_text": "Thank you — you're on the list.",
-        "note": "We send rarely · Unsubscribe anytime",
-        "bg_color": "#faf8f3",
-        "text_color": "#000000",
-        "muted_color": "#a59e90",
-        "heading_font": "assistant_n4",
-        "padding_top": 4,
-        "padding_bottom": 52
-      }
-    },
-    "footer_m9NzUG": {
-      "type": "footer",
-      "blocks": {
-        "group_H6VpwJ": {
-          "type": "group",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 6,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "text_LWt8Pz": {
-              "type": "text",
-              "settings": {
-                "text": "<h2>Join our email list</h2>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_f9CFLH": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Get exclusive deals and early access to new products.</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_LWt8Pz",
-            "text_f9CFLH"
-          ]
-        },
-        "email_signup_crihX7": {
-          "type": "email-signup",
-          "settings": {
-            "width": "fill",
-            "custom_width": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "heading": "",
-            "heading_preset": "h3",
-            "border_style": "all",
-            "border_width": 1,
-            "border_radius": 100,
-            "input_type_preset": "paragraph",
-            "style_class": "button-unstyled",
-            "display_type": "arrow",
-            "label": "Sign up",
-            "integrated_button": true,
-            "button_type_preset": "paragraph",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "group_H6VpwJ",
-        "email_signup_crihX7"
-      ],
-      "disabled": true,
-      "name": "t:names.footer",
-      "settings": {
-        "section_width": "page-width",
-        "gap": 20,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 30,
-        "padding-block-end": 30
       }
     },
     "footer_utilities_jLGE8U": {
@@ -363,9 +205,7 @@
     }
   },
   "order": [
-    "footer_HDUh77",
-    "yumbud_newsletter_C3ca9X",
-    "footer_m9NzUG",
+    "footer_YbcXDD",
     "footer_utilities_jLGE8U"
   ]
 }
