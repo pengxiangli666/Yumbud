@@ -297,7 +297,7 @@
           "settings": {
             "heading": "What's inside",
             "body": "<p>Whole foods you'd recognise — apples, garden herbs, leafy greens, and a little real chicken. Gently made so the good stuff stays good. Nothing you can't pronounce.</p>",
-            "image": "shopify://shop_images/fresh-vegetables-flatlay.jpg",
+            "image": "shopify://shop_images/Gemini_Generated_Image_e6csge6csge6csge.png",
             "image_position": "left"
           }
         },
@@ -352,12 +352,12 @@
         "soldout_label": "Sold out",
         "trust_text": "<p>Free shipping over $49. Cancel anytime.</p>",
         "compliance_note": "Intended for intermittent or supplementary feeding, alongside a complete and balanced diet. Always provide fresh water.",
-        "bg_color": "#F2F1EC",
-        "text_color": "#2B2420",
-        "muted_color": "#574F46",
-        "accent_color": "#535B72",
-        "card_color": "#ECEAE3",
-        "soft_color": "#ECEAE3",
+        "bg_color": "#f2f1ec",
+        "text_color": "#2b2420",
+        "muted_color": "#574f46",
+        "accent_color": "#535b72",
+        "card_color": "#eceae3",
+        "soft_color": "#eceae3",
         "heading_font": "assistant_n4",
         "padding_top": 56,
         "padding_bottom": 88
