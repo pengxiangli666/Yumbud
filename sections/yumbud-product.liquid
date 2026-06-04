@@ -1,0 +1,495 @@
+{%- comment -%}
+  ============================================================
+  YumBud · Product  (custom main-product PDP section, OS 2.0)
+  Combines:
+    • Maev — media gallery + sticky buy box with variant "chips",
+      Subscribe & Save vs one-time toggle, quantity, add-to-cart,
+      rating + badges + trust line
+    • K9 — clean premium content below: benefit highlights,
+      "what's inside", how-to-serve, accordion; + a supplementary-
+      feeding compliance note
+  The gallery, variants, price and add-to-cart are wired to the
+  REAL product. Everything else is editable in the Customizer.
+
+  HOW TO USE: this is a *main product* section. Customize a product
+  page > replace (or add) the product section with "YumBud · Product",
+  or push to sections/ via GitHub and assign it in your product
+  template. Real "Subscribe & Save" needs a subscriptions app
+  (Shopify Subscriptions / Recharge) that creates selling plans;
+  the toggle shows automatically when the product has selling plans.
+
+  NOTE ON CLAIMS: treats/boosters are not a complete diet — keep
+  benefit text about ingredients & everyday vitality, not medical
+  outcomes. Defaults follow that. Price formatting assumes USD.
+  ============================================================
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+{%- assign cur = s.currency_symbol -%}
+{%- assign v0 = product.selected_or_first_available_variant -%}
+
+<style>
+  #shopify-section-{{ uid }}{
+    --bg:{{ s.bg_color }}; --ink:{{ s.text_color }}; --muted:{{ s.muted_color }};
+    --accent:{{ s.accent_color }}; --line:{{ s.text_color }}1f; --card:{{ s.card_color }}; --soft:{{ s.soft_color }};
+    --serif:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  #shopify-section-{{ uid }} .yb-pdp{ background:var(--bg); color:var(--ink); padding:{{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+  #shopify-section-{{ uid }} *{ box-sizing:border-box; }
+  #shopify-section-{{ uid }} img{ display:block; max-width:100%; }
+  #shopify-section-{{ uid }} a{ color:inherit; text-decoration:none; }
+  #shopify-section-{{ uid }} .yb-h em{ font-style:italic; color:var(--accent); }
+  #shopify-section-{{ uid }} .yb-in{ max-width:1240px; margin:0 auto; padding:0 clamp(20px,5vw,56px); }
+
+  /* top: gallery + buy box */
+  #shopify-section-{{ uid }} .yb-top{ display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(28px,5vw,72px); align-items:start; }
+  #shopify-section-{{ uid }} .yb-gallery{ position:sticky; top:100px; }
+  #shopify-section-{{ uid }} .yb-main-media{ border-radius:6px; overflow:hidden; background:var(--card); aspect-ratio:1/1; }
+  #shopify-section-{{ uid }} .yb-main-media img{ width:100%; height:100%; object-fit:cover; }
+  #shopify-section-{{ uid }} .yb-thumbs{ display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
+  #shopify-section-{{ uid }} .yb-thumb{ width:66px; height:66px; border-radius:4px; overflow:hidden; border:1px solid var(--line); background:var(--card); cursor:pointer; padding:0; }
+  #shopify-section-{{ uid }} .yb-thumb.active{ border-color:var(--accent); }
+  #shopify-section-{{ uid }} .yb-thumb img{ width:100%; height:100%; object-fit:cover; }
+
+  /* buy box */
+  #shopify-section-{{ uid }} .yb-buy{ display:block; }
+  #shopify-section-{{ uid }} .yb-badges{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
+  #shopify-section-{{ uid }} .yb-badge{ font-size:10px; letter-spacing:.06em; text-transform:uppercase; background:var(--soft); color:var(--ink); padding:6px 12px; border-radius:30px; }
+  #shopify-section-{{ uid }} .yb-title{ font-family:var(--serif); font-weight:500; line-height:1.06; font-size:clamp(28px,3.6vw,44px); margin:0 0 10px; }
+  #shopify-section-{{ uid }} .yb-rating{ display:flex; align-items:center; gap:8px; font-size:13px; color:var(--muted); margin-bottom:14px; }
+  #shopify-section-{{ uid }} .yb-stars{ color:var(--accent); letter-spacing:2px; }
+  #shopify-section-{{ uid }} .yb-tagline{ font-size:17px; line-height:1.6; color:var(--muted); margin-bottom:22px; }
+  #shopify-section-{{ uid }} .yb-ptype{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px; }
+  #shopify-section-{{ uid }} .yb-ptype label{ border:1px solid var(--line); border-radius:5px; padding:14px 16px; cursor:pointer; font-size:14px; display:flex; flex-direction:column; gap:3px; transition:border-color .2s,background .2s; }
+  #shopify-section-{{ uid }} .yb-ptype label .sub{ font-size:12px; color:var(--muted); }
+  #shopify-section-{{ uid }} .yb-ptype input{ position:absolute; opacity:0; }
+  #shopify-section-{{ uid }} .yb-ptype label:has(input:checked){ border-color:var(--accent); background:var(--soft); }
+  #shopify-section-{{ uid }} .yb-price{ font-size:26px; font-family:var(--serif); margin-bottom:4px; }
+  #shopify-section-{{ uid }} .yb-price s{ color:var(--muted); font-size:18px; margin-left:8px; }
+  #shopify-section-{{ uid }} .yb-perday{ font-size:13px; color:var(--muted); margin-bottom:22px; }
+  #shopify-section-{{ uid }} .yb-opt{ margin-bottom:18px; }
+  #shopify-section-{{ uid }} .yb-opt-name{ font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); margin-bottom:9px; }
+  #shopify-section-{{ uid }} .yb-opt-vals{ display:flex; gap:9px; flex-wrap:wrap; }
+  #shopify-section-{{ uid }} .yb-chip{ position:relative; cursor:pointer; }
+  #shopify-section-{{ uid }} .yb-chip input{ position:absolute; opacity:0; inset:0; }
+  #shopify-section-{{ uid }} .yb-chip span{ display:inline-block; border:1px solid var(--line); border-radius:30px; padding:9px 18px; font-size:14px; transition:border-color .2s,background .2s,color .2s; }
+  #shopify-section-{{ uid }} .yb-chip input:checked+span{ border-color:var(--accent); background:var(--accent); color:#fff; }
+  #shopify-section-{{ uid }} .yb-plans{ display:flex; gap:9px; flex-wrap:wrap; margin:-6px 0 18px; }
+  #shopify-section-{{ uid }} .yb-qty-row{ display:flex; gap:12px; align-items:stretch; margin-bottom:14px; }
+  #shopify-section-{{ uid }} .yb-qty{ display:flex; align-items:center; border:1px solid var(--line); border-radius:5px; }
+  #shopify-section-{{ uid }} .yb-qty button{ width:42px; background:none; border:none; font-size:18px; cursor:pointer; color:var(--ink); }
+  #shopify-section-{{ uid }} .yb-qty input{ width:44px; text-align:center; border:none; background:none; font-size:15px; -moz-appearance:textfield; }
+  #shopify-section-{{ uid }} .yb-qty input::-webkit-outer-spin-button,#shopify-section-{{ uid }} .yb-qty input::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
+  #shopify-section-{{ uid }} .yb-atc{ flex:1; background:var(--ink); color:var(--bg); border:none; border-radius:5px; padding:16px; font-size:15px; letter-spacing:.03em; cursor:pointer; transition:opacity .2s; font-family:inherit; }
+  #shopify-section-{{ uid }} .yb-atc:hover{ opacity:.88; }
+  #shopify-section-{{ uid }} .yb-atc[disabled]{ opacity:.4; cursor:not-allowed; }
+  #shopify-section-{{ uid }} .yb-trust{ font-size:13px; line-height:1.6; color:var(--muted); margin-top:14px; }
+  #shopify-section-{{ uid }} .yb-compliance{ font-size:12px; line-height:1.55; color:var(--muted); margin-top:14px; padding-top:14px; border-top:1px solid var(--line); }
+
+  /* content blocks below */
+  #shopify-section-{{ uid }} .yb-content{ display:flex; flex-direction:column; gap:clamp(48px,7vw,96px); margin-top:clamp(56px,8vw,112px); }
+  #shopify-section-{{ uid }} .yb-sec-h{ font-family:var(--serif); font-weight:500; line-height:1.1; font-size:clamp(24px,3vw,38px); margin:0 0 20px; }
+  #shopify-section-{{ uid }} .yb-rte{ font-size:16px; line-height:1.7; color:var(--muted); }
+  #shopify-section-{{ uid }} .yb-rte p{ margin:0 0 1em; } #shopify-section-{{ uid }} .yb-rte p:last-child{ margin-bottom:0; }
+  #shopify-section-{{ uid }} .yb-hl-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(18px,2.4vw,32px); }
+  #shopify-section-{{ uid }} .yb-hl{ text-align:center; }
+  #shopify-section-{{ uid }} .yb-hl svg{ width:34px; height:34px; stroke:var(--accent); stroke-width:1.4; fill:none; margin:0 auto 14px; }
+  #shopify-section-{{ uid }} .yb-hl .lab{ font-family:var(--serif); font-size:19px; margin-bottom:5px; }
+  #shopify-section-{{ uid }} .yb-hl .txt{ font-size:14px; line-height:1.55; color:var(--muted); }
+  #shopify-section-{{ uid }} .yb-split{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4vw,56px); align-items:center; }
+  #shopify-section-{{ uid }} .yb-split.img-right .yb-split-media{ order:2; }
+  #shopify-section-{{ uid }} .yb-split-media img{ width:100%; border-radius:6px; aspect-ratio:4/3; object-fit:cover; background:var(--card); }
+  #shopify-section-{{ uid }} .yb-faq-item{ border-bottom:1px solid var(--line); }
+  #shopify-section-{{ uid }} .yb-faq-item:first-child{ border-top:1px solid var(--line); }
+  #shopify-section-{{ uid }} .yb-faq-item summary{ list-style:none; cursor:pointer; padding:20px 40px 20px 0; position:relative; font-size:17px; font-family:var(--serif); }
+  #shopify-section-{{ uid }} .yb-faq-item summary::-webkit-details-marker{ display:none; }
+  #shopify-section-{{ uid }} .yb-faq-item summary::after{ content:"+"; position:absolute; right:4px; top:50%; transform:translateY(-50%); font-size:20px; color:var(--muted); }
+  #shopify-section-{{ uid }} .yb-faq-item[open] summary::after{ content:"\2212"; }
+  #shopify-section-{{ uid }} .yb-faq-a{ padding:0 0 22px; font-size:14px; line-height:1.7; color:var(--muted); max-width:70ch; }
+
+  @media (max-width:860px){
+    #shopify-section-{{ uid }} .yb-top{ grid-template-columns:1fr; gap:28px; }
+    #shopify-section-{{ uid }} .yb-gallery{ position:static; }
+    #shopify-section-{{ uid }} .yb-hl-grid{ grid-template-columns:1fr 1fr; gap:28px; }
+    #shopify-section-{{ uid }} .yb-split{ grid-template-columns:1fr; gap:22px; }
+    #shopify-section-{{ uid }} .yb-split.img-right .yb-split-media{ order:0; }
+  }
+</style>
+
+<div class="yb-pdp">
+  <div class="yb-in">
+  {% if product != blank %}
+
+    <div class="yb-top">
+      <!-- GALLERY -->
+      <div class="yb-gallery">
+        <div class="yb-main-media">
+          {% if product.featured_media %}<img data-yb-main src="{{ product.featured_media | image_url: width: 1400 }}" alt="{{ product.title | escape }}" width="1400" height="1400">{% endif %}
+        </div>
+        {% if product.media.size > 1 %}
+          <div class="yb-thumbs">
+            {% for media in product.media %}
+              <button type="button" class="yb-thumb {% if media.position == product.featured_media.position %}active{% endif %}" data-yb-thumb data-pos="{{ media.position }}" data-full="{{ media | image_url: width: 1400 }}" aria-label="View image {{ forloop.index }}"><img src="{{ media | image_url: width: 200 }}" alt="" width="66" height="66" loading="lazy"></button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- BUY BOX -->
+      {% form 'product', product, class: 'yb-buy', data-yb-form: '' %}
+        <input type="hidden" name="id" value="{{ v0.id }}" data-yb-vid>
+        <input type="hidden" name="selling_plan" value="" data-yb-plan disabled>
+
+        {% if s.show_badges %}
+          {% assign badges = s.badge_text | split: ',' %}
+          {% if s.badge_source == 'tags' %}{% assign badges = product.tags %}{% endif %}
+          {% if badges.size > 0 %}
+            <div class="yb-badges">{% for b in badges limit: 3 %}<span class="yb-badge">{{ b | strip }}</span>{% endfor %}</div>
+          {% endif %}
+        {% endif %}
+
+        <h1 class="yb-title">{{ product.title }}</h1>
+
+        {% if s.show_rating %}
+          <div class="yb-rating"><span class="yb-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <span>{{ s.rating_value }}</span> <span>· {{ s.rating_count }} reviews</span></div>
+        {% endif %}
+
+        {% if s.use_excerpt and product.description != blank %}
+          <div class="yb-tagline">{{ product.description | strip_html | truncatewords: 34 }}</div>
+        {% elsif s.tagline != blank %}
+          <div class="yb-tagline">{{ s.tagline }}</div>
+        {% endif %}
+
+        {% if s.show_purchase_toggle and product.selling_plan_groups != empty %}
+          <div class="yb-ptype">
+            <label><input type="radio" name="yb-ptype" value="onetime" checked data-yb-ptype><span>{{ s.onetime_label }}</span><span class="sub" data-yb-otprice>{{ v0.price | money }}</span></label>
+            <label><input type="radio" name="yb-ptype" value="sub" data-yb-ptype><span>{{ s.subscribe_label }}</span><span class="sub">{{ s.subscribe_sub }}</span></label>
+          </div>
+          <div class="yb-plans" data-yb-plans hidden>
+            {% for group in product.selling_plan_groups %}{% for plan in group.selling_plans %}
+              <label class="yb-chip"><input type="radio" name="yb-plan-radio" value="{{ plan.id }}" {% if forloop.first %}checked{% endif %} data-yb-planradio><span>{{ plan.name }}</span></label>
+            {% endfor %}{% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="yb-price"><span data-yb-price>{{ v0.price | money }}</span>{% if v0.compare_at_price > v0.price %}<s data-yb-compare>{{ v0.compare_at_price | money }}</s>{% endif %}</div>
+        {% if s.show_perday and s.perday_text != blank %}<div class="yb-perday" data-yb-perday>{{ s.perday_text }}</div>{% endif %}
+
+        {% unless product.has_only_default_variant %}
+          {% for option in product.options_with_values %}
+            <div class="yb-opt" data-yb-opt data-index="{{ forloop.index0 }}">
+              <div class="yb-opt-name">{{ option.name }}</div>
+              <div class="yb-opt-vals">
+                {% for value in option.values %}
+                  <label class="yb-chip"><input type="radio" name="yb-opt-{{ option.position }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %} data-yb-optinput><span>{{ value }}</span></label>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        {% endunless %}
+
+        <div class="yb-qty-row">
+          <div class="yb-qty">
+            <button type="button" data-yb-minus aria-label="Decrease">&minus;</button>
+            <input type="number" name="quantity" value="1" min="1" data-yb-qty aria-label="Quantity">
+            <button type="button" data-yb-plus aria-label="Increase">+</button>
+          </div>
+          <button type="submit" name="add" class="yb-atc" data-yb-atc {% unless v0.available %}disabled{% endunless %}>{% if v0.available %}{{ s.atc_label }}{% else %}{{ s.soldout_label }}{% endif %}</button>
+        </div>
+
+        {% if s.trust_text != blank %}<div class="yb-trust">{{ s.trust_text }}</div>{% endif %}
+        {% if s.compliance_note != blank %}<div class="yb-compliance">{{ s.compliance_note }}</div>{% endif %}
+      {% endform %}
+    </div>
+
+    <!-- CONTENT BLOCKS -->
+    {% if section.blocks.size > 0 %}
+      <div class="yb-content">
+        {% for block in section.blocks %}
+          {% case block.type %}
+
+          {% when 'highlights' %}
+            <section {{ block.shopify_attributes }}>
+              {% if block.settings.heading != blank %}<h2 class="yb-sec-h">{{ block.settings.heading }}</h2>{% endif %}
+              <div class="yb-hl-grid">
+                {% for i in (1..4) %}
+                  {%- assign lk = 'item_' | append: i | append: '_label' -%}
+                  {%- assign tk = 'item_' | append: i | append: '_text' -%}
+                  {%- assign ik = 'item_' | append: i | append: '_icon' -%}
+                  {% if block.settings[lk] != blank %}
+                    <div class="yb-hl">
+                      {% assign ic = block.settings[ik] %}
+                      {% case ic %}
+                        {% when 'leaf' %}<svg viewBox="0 0 24 24"><path d="M4 20c0-9 7-16 16-16 0 9-7 16-16 16Z"/><path d="M4 20C8 14 13 11 18 9"/></svg>
+                        {% when 'heart' %}<svg viewBox="0 0 24 24"><path d="M12 21S4 14.5 4 8.8A4.3 4.3 0 0 1 12 6a4.3 4.3 0 0 1 8 2.8C20 14.5 12 21 12 21Z"/></svg>
+                        {% when 'paw' %}<svg viewBox="0 0 24 24"><circle cx="6" cy="10" r="2"/><circle cx="10" cy="6" r="2"/><circle cx="14" cy="6" r="2"/><circle cx="18" cy="10" r="2"/><path d="M8 17a4 4 0 0 1 8 0c0 2-2 3-4 3s-4-1-4-3Z"/></svg>
+                        {% when 'bowl' %}<svg viewBox="0 0 24 24"><path d="M3 11h18a9 9 0 0 1-18 0Z"/><path d="M12 11c0-3 2-5 4-5"/></svg>
+                        {% when 'shield' %}<svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3Z"/></svg>
+                        {% when 'no' %}<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg>
+                        {% else %}<svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                      {% endcase %}
+                      <div class="lab">{{ block.settings[lk] }}</div>
+                      {% if block.settings[tk] != blank %}<div class="txt">{{ block.settings[tk] }}</div>{% endif %}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </section>
+
+          {% when 'ingredients' %}
+            <section class="yb-split {% if block.settings.image_position == 'right' %}img-right{% endif %}" {{ block.shopify_attributes }}>
+              {% if block.settings.image != blank %}<div class="yb-split-media"><img src="{{ block.settings.image | image_url: width: 1200 }}" alt="" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy"></div>{% endif %}
+              <div>
+                {% if block.settings.heading != blank %}<h2 class="yb-sec-h">{{ block.settings.heading }}</h2>{% endif %}
+                {% if block.settings.body != blank %}<div class="yb-rte">{{ block.settings.body }}</div>{% endif %}
+              </div>
+            </section>
+
+          {% when 'feeding' %}
+            <section {{ block.shopify_attributes }}>
+              {% if block.settings.heading != blank %}<h2 class="yb-sec-h">{{ block.settings.heading }}</h2>{% endif %}
+              {% if block.settings.body != blank %}<div class="yb-rte">{{ block.settings.body }}</div>{% endif %}
+            </section>
+
+          {% when 'text' %}
+            <section {{ block.shopify_attributes }}>
+              {% if block.settings.heading != blank %}<h2 class="yb-sec-h">{{ block.settings.heading }}</h2>{% endif %}
+              {% if block.settings.body != blank %}<div class="yb-rte">{{ block.settings.body }}</div>{% endif %}
+            </section>
+
+          {% when 'accordion' %}
+            <section {{ block.shopify_attributes }}>
+              {% if block.settings.heading != blank %}<h2 class="yb-sec-h">{{ block.settings.heading }}</h2>{% endif %}
+              <div>
+                {% for q in (1..5) %}
+                  {%- assign qk = 'q_' | append: q -%}
+                  {%- assign ak = 'a_' | append: q -%}
+                  {% if block.settings[qk] != blank %}
+                    <details class="yb-faq-item"><summary>{{ block.settings[qk] }}</summary><div class="yb-faq-a">{{ block.settings[ak] }}</div></details>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </section>
+
+          {% endcase %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  {% else %}
+    <p style="padding:60px 0;color:var(--muted)">This is a product section — open it on a product page to see the live product, gallery, and add-to-cart.</p>
+  {% endif %}
+  </div>
+</div>
+
+{% if product != blank %}
+<script type="application/json" data-yb-variants-{{ uid }}>
+[{% for v in product.variants %}{"id":{{ v.id }},"available":{{ v.available }},"price":{{ v.price }},"compare":{{ v.compare_at_price | default: 0 }},"options":{{ v.options | json }},"media":{% if v.featured_media %}{{ v.featured_media.position }}{% else %}null{% endif %},"plans":{ {% for a in v.selling_plan_allocations %}"{{ a.selling_plan.id }}":{{ a.per_delivery_price }}{% unless forloop.last %},{% endunless %}{% endfor %} }}{% unless forloop.last %},{% endunless %}{% endfor %}]
+</script>
+<script type="application/json" data-yb-media-{{ uid }}>
+{ {% for media in product.media %}"{{ media.position }}":"{{ media | image_url: width: 1400 }}"{% unless forloop.last %},{% endunless %}{% endfor %} }
+</script>
+<script>
+(function(){
+  var root=document.getElementById('shopify-section-{{ uid }}'); if(!root) return;
+  var cur={{ cur | json }};
+  function money(c){ return cur + (c/100).toFixed(2); }
+  var variants=[], mediaMap={};
+  try{ variants=JSON.parse(root.querySelector('[data-yb-variants-{{ uid }}]').textContent); }catch(e){}
+  try{ mediaMap=JSON.parse(root.querySelector('[data-yb-media-{{ uid }}]').textContent); }catch(e){}
+
+  var vid=root.querySelector('[data-yb-vid]'),
+      planInput=root.querySelector('[data-yb-plan]'),
+      priceEl=root.querySelector('[data-yb-price]'),
+      compareEl=root.querySelector('[data-yb-compare]'),
+      otPriceEl=root.querySelector('[data-yb-otprice]'),
+      atc=root.querySelector('[data-yb-atc]'),
+      mainImg=root.querySelector('[data-yb-main]'),
+      plansWrap=root.querySelector('[data-yb-plans]');
+
+  function selectedOptions(){
+    var opts=[];
+    root.querySelectorAll('[data-yb-opt]').forEach(function(group){
+      var idx=parseInt(group.getAttribute('data-index'),10);
+      var checked=group.querySelector('input:checked');
+      opts[idx]=checked?checked.value:null;
+    });
+    return opts;
+  }
+  function matchVariant(){
+    var groups=root.querySelectorAll('[data-yb-opt]');
+    if(!groups.length) return variants[0];
+    var sel=selectedOptions();
+    return variants.find(function(v){ return v.options.length===sel.length && v.options.every(function(o,i){ return o===sel[i]; }); });
+  }
+  function currentPlanId(){
+    var sub=root.querySelector('[data-yb-ptype][value="sub"]');
+    if(sub && sub.checked){ var pr=root.querySelector('[data-yb-planradio]:checked'); return pr?pr.value:null; }
+    return null;
+  }
+  function render(){
+    var v=matchVariant();
+    if(!v){ if(atc){ atc.disabled=true; atc.textContent={{ s.soldout_label | json }}; } return; }
+    if(vid) vid.value=v.id;
+    // image
+    if(mainImg && v.media && mediaMap[v.media]){ mainImg.src=mediaMap[v.media];
+      root.querySelectorAll('[data-yb-thumb]').forEach(function(t){ t.classList.toggle('active', t.getAttribute('data-pos')==String(v.media)); });
+    }
+    // one-time base price label
+    if(otPriceEl) otPriceEl.textContent=money(v.price);
+    // plan?
+    var planId=currentPlanId(), shown=v.price;
+    if(planId && v.plans && v.plans[planId]!=null){ shown=v.plans[planId]; }
+    if(priceEl) priceEl.textContent=money(shown);
+    if(compareEl){ if(v.compare>v.price){ compareEl.textContent=money(v.compare); compareEl.style.display=''; } else { compareEl.style.display='none'; } }
+    // plan input
+    if(planInput){ if(planId){ planInput.value=planId; planInput.disabled=false; } else { planInput.value=''; planInput.disabled=true; } }
+    // availability
+    if(atc){ atc.disabled=!v.available; atc.textContent=v.available?{{ s.atc_label | json }}:{{ s.soldout_label | json }}; }
+  }
+
+  root.querySelectorAll('[data-yb-optinput]').forEach(function(i){ i.addEventListener('change',render); });
+  root.querySelectorAll('[data-yb-ptype]').forEach(function(i){ i.addEventListener('change',function(){
+    if(plansWrap) plansWrap.hidden=!(this.value==='sub');
+    render();
+  }); });
+  root.querySelectorAll('[data-yb-planradio]').forEach(function(i){ i.addEventListener('change',render); });
+
+  // thumbnails
+  root.querySelectorAll('[data-yb-thumb]').forEach(function(t){ t.addEventListener('click',function(){
+    if(mainImg) mainImg.src=this.getAttribute('data-full');
+    root.querySelectorAll('[data-yb-thumb]').forEach(function(x){ x.classList.remove('active'); });
+    this.classList.add('active');
+  }); });
+
+  // quantity
+  var qty=root.querySelector('[data-yb-qty]');
+  var minus=root.querySelector('[data-yb-minus]'), plus=root.querySelector('[data-yb-plus]');
+  if(minus) minus.addEventListener('click',function(){ var n=Math.max(1,(parseInt(qty.value,10)||1)-1); qty.value=n; });
+  if(plus) plus.addEventListener('click',function(){ qty.value=(parseInt(qty.value,10)||1)+1; });
+
+  render();
+})();
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "YumBud · Product",
+  "tag": "section",
+  "class": "yumbud-product-section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "header", "content": "Buy box" },
+    { "type": "checkbox", "id": "show_badges", "label": "Show badges", "default": true },
+    { "type": "select", "id": "badge_source", "label": "Badges from", "options": [ { "value": "custom", "label": "Custom text" }, { "value": "tags", "label": "Product tags" } ], "default": "custom" },
+    { "type": "text", "id": "badge_text", "label": "Custom badges (comma-separated)", "default": "Best Seller, Vet-formulated" },
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating", "default": true },
+    { "type": "text", "id": "rating_value", "label": "Rating value", "default": "4.9" },
+    { "type": "text", "id": "rating_count", "label": "Rating count", "default": "1,200" },
+    { "type": "checkbox", "id": "use_excerpt", "label": "Use product description as tagline", "default": false },
+    { "type": "text", "id": "tagline", "label": "Tagline (if not using description)", "default": "Real, whole-food treats — superfoods you can name, made for the ones who love us back." },
+    { "type": "header", "content": "Subscribe & Save" },
+    { "type": "checkbox", "id": "show_purchase_toggle", "label": "Show one-time / subscribe toggle", "info": "Only appears if the product has selling plans (needs a subscriptions app).", "default": true },
+    { "type": "text", "id": "onetime_label", "label": "One-time label", "default": "One-time" },
+    { "type": "text", "id": "subscribe_label", "label": "Subscribe label", "default": "Subscribe & Save" },
+    { "type": "text", "id": "subscribe_sub", "label": "Subscribe sub-label", "default": "Save & skip anytime" },
+    { "type": "header", "content": "Price" },
+    { "type": "text", "id": "currency_symbol", "label": "Currency symbol (for JS price updates)", "default": "$" },
+    { "type": "checkbox", "id": "show_perday", "label": "Show per-unit/per-day line", "default": false },
+    { "type": "text", "id": "perday_text", "label": "Per-day text", "default": "" },
+    { "type": "header", "content": "Buttons & notes" },
+    { "type": "text", "id": "atc_label", "label": "Add-to-cart label", "default": "Add to cart" },
+    { "type": "text", "id": "soldout_label", "label": "Sold-out label", "default": "Sold out" },
+    { "type": "richtext", "id": "trust_text", "label": "Trust line", "default": "<p>Free shipping over $49. Cancel anytime.</p>" },
+    { "type": "text", "id": "compliance_note", "label": "Feeding/compliance note", "default": "Intended for intermittent or supplementary feeding, alongside a complete and balanced diet. Always provide fresh water." },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2F1EC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#574F46" },
+    { "type": "color", "id": "accent_color", "label": "Accent (selected chips, ✓)", "default": "#535B72" },
+    { "type": "color", "id": "card_color", "label": "Image placeholder", "default": "#ECEAE3" },
+    { "type": "color", "id": "soft_color", "label": "Soft / badge background", "default": "#ECEAE3" },
+    { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "assistant_n4" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "highlights",
+      "name": "Benefit highlights",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Why dogs love it" },
+        { "type": "select", "id": "item_1_icon", "label": "Icon 1", "options": [ { "value": "leaf", "label": "Leaf" }, { "value": "heart", "label": "Heart" }, { "value": "paw", "label": "Paw" }, { "value": "bowl", "label": "Bowl" }, { "value": "shield", "label": "Shield" }, { "value": "no", "label": "No / cross" }, { "value": "check", "label": "Check" } ], "default": "leaf" },
+        { "type": "text", "id": "item_1_label", "label": "Item 1 label", "default": "Whole-food" },
+        { "type": "text", "id": "item_1_text", "label": "Item 1 text", "default": "Real produce & protein you can name." },
+        { "type": "select", "id": "item_2_icon", "label": "Icon 2", "options": [ { "value": "leaf", "label": "Leaf" }, { "value": "heart", "label": "Heart" }, { "value": "paw", "label": "Paw" }, { "value": "bowl", "label": "Bowl" }, { "value": "shield", "label": "Shield" }, { "value": "no", "label": "No / cross" }, { "value": "check", "label": "Check" } ], "default": "no" },
+        { "type": "text", "id": "item_2_label", "label": "Item 2 label", "default": "No nasties" },
+        { "type": "text", "id": "item_2_text", "label": "Item 2 text", "default": "No fillers, dyes or mystery powders." },
+        { "type": "select", "id": "item_3_icon", "label": "Icon 3", "options": [ { "value": "leaf", "label": "Leaf" }, { "value": "heart", "label": "Heart" }, { "value": "paw", "label": "Paw" }, { "value": "bowl", "label": "Bowl" }, { "value": "shield", "label": "Shield" }, { "value": "no", "label": "No / cross" }, { "value": "check", "label": "Check" } ], "default": "shield" },
+        { "type": "text", "id": "item_3_label", "label": "Item 3 label", "default": "Vet-formulated" },
+        { "type": "text", "id": "item_3_text", "label": "Item 3 text", "default": "Balanced by vets & pet nutritionists." },
+        { "type": "select", "id": "item_4_icon", "label": "Icon 4", "options": [ { "value": "leaf", "label": "Leaf" }, { "value": "heart", "label": "Heart" }, { "value": "paw", "label": "Paw" }, { "value": "bowl", "label": "Bowl" }, { "value": "shield", "label": "Shield" }, { "value": "no", "label": "No / cross" }, { "value": "check", "label": "Check" } ], "default": "bowl" },
+        { "type": "text", "id": "item_4_label", "label": "Item 4 label", "default": "Made in LA" },
+        { "type": "text", "id": "item_4_text", "label": "Item 4 text", "default": "Small-batch, food-grade facility." }
+      ]
+    },
+    {
+      "type": "ingredients",
+      "name": "What's inside",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "What's inside" },
+        { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Whole foods you'd recognise — apples, garden herbs, leafy greens, and a little real chicken. Gently made so the good stuff stays good. Nothing you can't pronounce.</p>" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "select", "id": "image_position", "label": "Image position", "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ], "default": "left" }
+      ]
+    },
+    {
+      "type": "feeding",
+      "name": "How to serve",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "How to serve" },
+        { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Feed as a treat, or crumble over your dog's regular food for a tasty boost. Start small and adjust to your dog's size. Keep treats to a small part of their daily intake, alongside a complete, balanced diet.</p>" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text block",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Our promise" },
+        { "type": "richtext", "id": "body", "label": "Body", "default": "<p>If we wouldn't eat it, we don't make it. Every good dog deserves the good stuff.</p>" }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "FAQ / details",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Good to know" },
+        { "type": "text", "id": "q_1", "label": "Q1", "default": "Are these a complete meal?" },
+        { "type": "richtext", "id": "a_1", "label": "A1", "default": "<p>No — these are treats, meant to complement a complete, balanced diet. Keep them to a small part of your dog's daily intake.</p>" },
+        { "type": "text", "id": "q_2", "label": "Q2", "default": "What's the ingredient list?" },
+        { "type": "richtext", "id": "a_2", "label": "A2", "default": "<p>Whole foods you'd recognise — see “What's inside.” No fillers, dyes, or mystery powders.</p>" },
+        { "type": "text", "id": "q_3", "label": "Q3", "default": "How should I store them?" },
+        { "type": "richtext", "id": "a_3", "label": "A3", "default": "<p>Keep the bag sealed in a cool, dry place. [→ set your real storage instructions]</p>" },
+        { "type": "text", "id": "q_4", "label": "Q4" },
+        { "type": "richtext", "id": "a_4", "label": "A4" },
+        { "type": "text", "id": "q_5", "label": "Q5" },
+        { "type": "richtext", "id": "a_5", "label": "A5" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "YumBud · Product",
+      "blocks": [
+        { "type": "highlights" },
+        { "type": "ingredients" },
+        { "type": "feeding" },
+        { "type": "accordion" }
+      ]
+    }
+  ]
+}
+{% endschema %}
