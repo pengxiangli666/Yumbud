@@ -296,7 +296,7 @@
           "settings": {
             "heading": "What's inside",
             "body": "<p>Whole foods you'd recognise — apples, garden herbs, leafy greens, and a little real chicken.</p>",
-            "image": "shopify://shop_images/img2.wallspic.com-fowl-livestock-chicken-galliformes-rooster-6000x4000.jpg",
+            "image": "shopify://shop_images/IMG_0903.jpg",
             "image_position": "left"
           }
         },
@@ -332,11 +332,11 @@
       ],
       "name": "YumBud · Product Content",
       "settings": {
-        "bg_color": "#F2F1EC",
-        "text_color": "#2B2420",
-        "muted_color": "#574F46",
-        "accent_color": "#535B72",
-        "card_color": "#ECEAE3",
+        "bg_color": "#f2f1ec",
+        "text_color": "#2b2420",
+        "muted_color": "#574f46",
+        "accent_color": "#535b72",
+        "card_color": "#eceae3",
         "heading_font": "assistant_n4",
         "padding_top": 56,
         "padding_bottom": 88
