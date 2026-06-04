@@ -11,34 +11,6 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
-    "yumbud_legal_bar_jmnnrD": {
-      "type": "yumbud-legal-bar",
-      "name": "YumBud · Legal Bar",
-      "settings": {
-        "link1_label": "Privacy Policy",
-        "link1_url": "",
-        "link2_label": "Terms and Conditions",
-        "link2_url": "",
-        "link3_label": "Shipping and Return Policy",
-        "link3_url": "",
-        "link4_label": "Accessibility",
-        "link4_url": "",
-        "link5_label": "Privacy Preferences",
-        "link5_url": "",
-        "link6_label": "Do not sell or share my personal information",
-        "link6_url": "",
-        "link7_label": "CPRA Privacy Policy/Notice of Collection",
-        "link7_url": "",
-        "link8_label": "",
-        "link8_url": "",
-        "bg_color": "#f2f1ec",
-        "text_color": "#000000",
-        "line_color": "#FFFFFF",
-        "font_size": 13,
-        "padding_y": 14,
-        "gap": 32
-      }
-    },
     "section_RfGjqi": {
       "type": "section",
       "blocks": {
@@ -260,23 +232,6 @@
     "footer_utilities_jLGE8U": {
       "type": "footer-utilities",
       "blocks": {
-        "footer_copyright_jweRK8": {
-          "type": "footer-copyright",
-          "settings": {
-            "show_powered_by": true,
-            "font_size": "0.75rem",
-            "case": "none"
-          },
-          "blocks": {}
-        },
-        "footer_policy_list_VCdnpa": {
-          "type": "footer-policy-list",
-          "settings": {
-            "font_size": "0.75rem",
-            "case": "none"
-          },
-          "blocks": {}
-        },
         "social_links_Ew63Kq": {
           "type": "social-links",
           "settings": {
@@ -298,8 +253,6 @@
         }
       },
       "block_order": [
-        "footer_copyright_jweRK8",
-        "footer_policy_list_VCdnpa",
         "social_links_Ew63Kq"
       ],
       "name": "t:names.utilities",
@@ -311,12 +264,40 @@
         "padding-block-start": 20,
         "padding-block-end": 48
       }
+    },
+    "yumbud_legal_bar_jmnnrD": {
+      "type": "yumbud-legal-bar",
+      "name": "YumBud · Legal Bar",
+      "settings": {
+        "link1_label": "Privacy Policy",
+        "link1_url": "",
+        "link2_label": "Terms and Conditions",
+        "link2_url": "",
+        "link3_label": "Shipping and Return Policy",
+        "link3_url": "",
+        "link4_label": "Accessibility",
+        "link4_url": "",
+        "link5_label": "Privacy Preferences",
+        "link5_url": "",
+        "link6_label": "Do not sell or share my personal information",
+        "link6_url": "",
+        "link7_label": "CPRA Privacy Policy/Notice of Collection",
+        "link7_url": "",
+        "link8_label": "",
+        "link8_url": "",
+        "bg_color": "#f2f1ec",
+        "text_color": "#000000",
+        "line_color": "#ffffff",
+        "font_size": 10,
+        "padding_y": 8,
+        "gap": 12
+      }
     }
   },
   "order": [
     "section_RfGjqi",
     "footer_YbcXDD",
-    "yumbud_legal_bar_jmnnrD",
-    "footer_utilities_jLGE8U"
+    "footer_utilities_jLGE8U",
+    "yumbud_legal_bar_jmnnrD"
   ]
 }
