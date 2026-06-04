@@ -1,5 +1,5 @@
 {%- comment -%}
-  YumBud · Subscribe Selector (multi-select, linked to products)
+  YumBud · Subscribe Selector (multi-select, linked to Appstle selling plans)
 {%- endcomment -%}
 {%- assign s = section.settings -%}
 {%- assign uid = section.id -%}
@@ -122,20 +122,20 @@
 
         <div class="yb-ss-label-{{ uid }}"><span>{{ s.freq_label }}</span></div>
         <div class="yb-ss-freq-{{ uid }}" data-yb-freqs>
-          <div class="yb-ss-fbox-{{ uid }}" data-yb-freq data-discount="{{ s.freq_1_discount }}">
-            <div class="ttl">{{ s.freq_1 }}</div>
-            <div class="sub">{{ s.freq_1_sub }}</div>
-            {% if s.freq_1_save != blank %}<div class="save">{{ s.freq_1_save }}</div>{% endif %}
+          <div class="yb-ss-fbox-{{ uid }} active" data-yb-freq data-discount="15" data-selling-plan="8934654243">
+            <div class="ttl">Every 2 weeks</div>
+            <div class="sub">Most popular</div>
+            <div class="save">Save 15%</div>
           </div>
-          <div class="yb-ss-fbox-{{ uid }} active" data-yb-freq data-discount="{{ s.freq_2_discount }}">
-            <div class="ttl">{{ s.freq_2 }}</div>
-            <div class="sub">{{ s.freq_2_sub }}</div>
-            {% if s.freq_2_save != blank %}<div class="save">{{ s.freq_2_save }}</div>{% endif %}
+          <div class="yb-ss-fbox-{{ uid }}" data-yb-freq data-discount="10" data-selling-plan="8934392099">
+            <div class="ttl">Monthly</div>
+            <div class="sub">Most flexible</div>
+            <div class="save">Save 10%</div>
           </div>
-          <div class="yb-ss-fbox-{{ uid }}" data-yb-freq data-discount="{{ s.freq_3_discount }}">
-            <div class="ttl">{{ s.freq_3 }}</div>
-            <div class="sub">{{ s.freq_3_sub }}</div>
-            {% if s.freq_3_save != blank %}<div class="save">{{ s.freq_3_save }}</div>{% endif %}
+          <div class="yb-ss-fbox-{{ uid }}" data-yb-freq data-discount="8" data-selling-plan="8934621475">
+            <div class="ttl">Every 2 months</div>
+            <div class="sub">Best value</div>
+            <div class="save">Save 8%</div>
           </div>
         </div>
 
@@ -173,9 +173,16 @@
   var pctEl=root.querySelector('[data-yb-disc-pct]');
   var btn=root.querySelector('[data-yb-cta]');
 
+  function getActive(){
+    return root.querySelector('[data-yb-freq].active');
+  }
   function getDiscount(){
-    var a=root.querySelector('[data-yb-freq].active');
+    var a=getActive();
     return a ? parseFloat(a.getAttribute('data-discount')||'0') : 0;
+  }
+  function getSellingPlan(){
+    var a=getActive();
+    return a ? a.getAttribute('data-selling-plan') : null;
   }
 
   function recalc(){
@@ -195,7 +202,7 @@
     if(discEl) discEl.textContent=discount.toFixed(2);
     if(totEl) totEl.textContent=total.toFixed(2);
     if(pctEl) pctEl.textContent=Math.round(pct);
-    if(btn) { btn.style.opacity = subtotal>0 ? '1' : '.4'; btn.style.pointerEvents = subtotal>0 ? 'auto' : 'none'; }
+    if(btn){ btn.style.opacity=subtotal>0?'1':'.4'; btn.style.pointerEvents=subtotal>0?'auto':'none'; }
   }
 
   rows.forEach(function(r){
@@ -208,7 +215,7 @@
 
   freqs.forEach(function(b){
     b.onclick=function(){
-      freqs.forEach(function(x){x.classList.remove('active');});
+      freqs.forEach(function(x){ x.classList.remove('active'); });
       b.classList.add('active');
       recalc();
     };
@@ -217,18 +224,33 @@
   if(btn){
     btn.onclick=function(){
       var items=[];
+      var sellingPlanId=getSellingPlan();
       rows.forEach(function(r){
         var nEl=r.querySelector('[data-yb-n]'); if(!nEl) return;
         var n=parseInt(nEl.textContent)||0;
         var id=r.getAttribute('data-variant-id');
-        if(n>0 && id) items.push({id:id, quantity:n});
+        if(n>0 && id){
+          var item={ id:parseInt(id), quantity:n };
+          if(sellingPlanId) item.selling_plan=parseInt(sellingPlanId);
+          items.push(item);
+        }
       });
       if(items.length===0) return;
+      btn.textContent='Adding...';
+      btn.style.opacity='.6';
       fetch('/cart/add.js',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({items:items})
-      }).then(function(){ window.location.href='/cart'; });
+      })
+      .then(function(r){ return r.json(); })
+      .then(function(){
+        window.location.href='/cart';
+      })
+      .catch(function(){
+        btn.textContent={{ s.button_label | json }};
+        btn.style.opacity='1';
+      });
     };
   }
 
@@ -253,18 +275,6 @@
     { "type": "text", "id": "flavor_hint", "label": "Hint", "default": "Mix and match" },
     { "type": "header", "content": "Frequency selector" },
     { "type": "text", "id": "freq_label", "label": "Label", "default": "Delivery frequency" },
-    { "type": "text", "id": "freq_1", "label": "Option 1 title", "default": "Every 4 weeks" },
-    { "type": "text", "id": "freq_1_sub", "label": "Option 1 subtitle", "default": "Most flexible" },
-    { "type": "text", "id": "freq_1_save", "label": "Option 1 save badge", "default": "Save 10%" },
-    { "type": "range", "id": "freq_1_discount", "label": "Option 1 discount %", "min": 0, "max": 50, "step": 1, "default": 10 },
-    { "type": "text", "id": "freq_2", "label": "Option 2 title", "default": "Every 2 weeks" },
-    { "type": "text", "id": "freq_2_sub", "label": "Option 2 subtitle", "default": "Most popular" },
-    { "type": "text", "id": "freq_2_save", "label": "Option 2 save badge", "default": "Save 15%" },
-    { "type": "range", "id": "freq_2_discount", "label": "Option 2 discount %", "min": 0, "max": 50, "step": 1, "default": 15 },
-    { "type": "text", "id": "freq_3", "label": "Option 3 title", "default": "Weekly" },
-    { "type": "text", "id": "freq_3_sub", "label": "Option 3 subtitle", "default": "Best value" },
-    { "type": "text", "id": "freq_3_save", "label": "Option 3 save badge", "default": "Save 20%" },
-    { "type": "range", "id": "freq_3_discount", "label": "Option 3 discount %", "min": 0, "max": 50, "step": 1, "default": 20 },
     { "type": "header", "content": "Summary labels" },
     { "type": "text", "id": "subtotal_label", "label": "Subtotal label", "default": "Subtotal" },
     { "type": "text", "id": "discount_label", "label": "Discount label", "default": "Subscriber discount" },
