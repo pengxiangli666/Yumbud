@@ -11,6 +11,34 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
+    "yumbud_legal_bar_jmnnrD": {
+      "type": "yumbud-legal-bar",
+      "name": "YumBud · Legal Bar",
+      "settings": {
+        "link1_label": "Privacy Policy",
+        "link1_url": "",
+        "link2_label": "Terms and Conditions",
+        "link2_url": "",
+        "link3_label": "Shipping and Return Policy",
+        "link3_url": "",
+        "link4_label": "Accessibility",
+        "link4_url": "",
+        "link5_label": "Privacy Preferences",
+        "link5_url": "",
+        "link6_label": "Do not sell or share my personal information",
+        "link6_url": "",
+        "link7_label": "CPRA Privacy Policy/Notice of Collection",
+        "link7_url": "",
+        "link8_label": "",
+        "link8_url": "",
+        "bg_color": "#f2f1ec",
+        "text_color": "#000000",
+        "line_color": "#FFFFFF",
+        "font_size": 13,
+        "padding_y": 14,
+        "gap": 32
+      }
+    },
     "section_RfGjqi": {
       "type": "section",
       "blocks": {
@@ -255,7 +283,7 @@
             "facebook_url": "https://www.facebook.com/",
             "instagram_url": "https://www.instagram.com/yumbud_organic/",
             "youtube_url": "",
-            "tiktok_url": "https://www.tiktok.com/@yumbud_organic?_r=1&_t=ZP-96uyaWo2yjv",
+            "tiktok_url": "",
             "twitter_url": "",
             "threads_url": "",
             "linkedin_url": "",
@@ -288,6 +316,7 @@
   "order": [
     "section_RfGjqi",
     "footer_YbcXDD",
+    "yumbud_legal_bar_jmnnrD",
     "footer_utilities_jLGE8U"
   ]
 }
