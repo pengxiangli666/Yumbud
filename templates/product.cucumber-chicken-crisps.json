@@ -465,6 +465,35 @@
             "tip_4_text": ""
           }
         },
+        "nutrition_wAhCCe": {
+          "type": "nutrition",
+          "settings": {
+            "heading": "Guaranteed Analysis",
+            "subheading": "",
+            "nutr_1_label": "Crude Protein (min)",
+            "nutr_1_value": "54%",
+            "nutr_1_pct": 54,
+            "nutr_2_label": "Crude Fat (min)",
+            "nutr_2_value": "6%",
+            "nutr_2_pct": 6,
+            "nutr_3_label": "Crude Fiber (max)",
+            "nutr_3_value": "2%",
+            "nutr_3_pct": 2,
+            "nutr_4_label": "Moisture (max)",
+            "nutr_4_value": "10%",
+            "nutr_4_pct": 10,
+            "nutr_5_label": "",
+            "nutr_5_value": "",
+            "nutr_5_pct": 0,
+            "nutr_6_label": "",
+            "nutr_6_value": "",
+            "nutr_6_pct": 0,
+            "calorie_title": "Calorie Content (Calculated)",
+            "calorie_val": "3,600 kcal/kg",
+            "calorie_sub": "100 kcal/oz (calculated)",
+            "note": ""
+          }
+        },
         "accordion_GDAKnq": {
           "type": "accordion",
           "settings": {
@@ -486,6 +515,7 @@
         "ingredients_grid_p4wL8N",
         "highlights_kJMQRW",
         "storage_EzPXgg",
+        "nutrition_wAhCCe",
         "accordion_GDAKnq"
       ],
       "name": "YumBud · Product Content",
