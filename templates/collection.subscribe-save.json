@@ -226,7 +226,7 @@
       ],
       "name": "YumBud · Subscribe",
       "settings": {
-        "eyebrow": "Subscribe & Plan",
+        "eyebrow": "Subscription & Plan",
         "heading": "Build your box.",
         "body": "<p>Pick any combination of flavors. Add as many bags as you want.</p>",
         "flavor_label": "Choose your flavors",
