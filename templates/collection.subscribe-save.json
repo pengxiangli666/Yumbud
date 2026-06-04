@@ -143,10 +143,18 @@
     "yumbud_subscribe_selector_YXANfy": {
       "type": "yumbud-subscribe-selector",
       "blocks": {
+        "flavor_RFbD47": {
+          "type": "flavor",
+          "settings": {
+            "product": "cucumber-chicken-crisps",
+            "name_override": "",
+            "desc_override": ""
+          }
+        },
         "flavor_wLJPEn": {
           "type": "flavor",
           "settings": {
-            "product": "",
+            "product": "chicken-arugula-crisps",
             "name_override": "",
             "desc_override": ""
           }
@@ -154,7 +162,7 @@
         "flavor_d9kiRi": {
           "type": "flavor",
           "settings": {
-            "product": "",
+            "product": "chicken-herb-biscuits",
             "name_override": "",
             "desc_override": ""
           }
@@ -162,13 +170,14 @@
         "flavor_gw3VT4": {
           "type": "flavor",
           "settings": {
-            "product": "",
+            "product": "chicken-wrapped-apple-chew-rings",
             "name_override": "",
             "desc_override": ""
           }
         }
       },
       "block_order": [
+        "flavor_RFbD47",
         "flavor_wLJPEn",
         "flavor_d9kiRi",
         "flavor_gw3VT4"
@@ -198,11 +207,11 @@
         "total_label": "Total",
         "button_label": "Start Subscription",
         "note": "Free shipping · Skip or cancel anytime",
-        "bg_color": "#F2F1EC",
-        "text_color": "#2B2420",
-        "muted_color": "#8C8578",
-        "accent_color": "#2E3D2A",
-        "card_color": "#E8E4DA",
+        "bg_color": "#f2f1ec",
+        "text_color": "#2b2420",
+        "muted_color": "#8c8578",
+        "accent_color": "#2e3d2a",
+        "card_color": "#e8e4da",
         "heading_font": "assistant_n4",
         "padding_top": 80,
         "padding_bottom": 80
@@ -277,11 +286,11 @@
         "right_price": "$28",
         "right_per": "/ bag",
         "right_desc": "Save 20% on every delivery. Cancel anytime.",
-        "bg_color": "#FAF8F3",
-        "text_color": "#2B2420",
-        "muted_color": "#8C8578",
-        "accent_color": "#2E3D2A",
-        "card_color": "#EDEAE0",
+        "bg_color": "#faf8f3",
+        "text_color": "#2b2420",
+        "muted_color": "#8c8578",
+        "accent_color": "#2e3d2a",
+        "card_color": "#edeae0",
         "heading_font": "assistant_n4",
         "padding_top": 80,
         "padding_bottom": 80
@@ -334,10 +343,10 @@
         "eyebrow": "Why Subscribe",
         "heading": "The perks.",
         "columns": 4,
-        "bg_color": "#FAF8F3",
-        "text_color": "#2B2420",
-        "muted_color": "#8C8578",
-        "accent_color": "#535B72",
+        "bg_color": "#faf8f3",
+        "text_color": "#2b2420",
+        "muted_color": "#8c8578",
+        "accent_color": "#535b72",
         "heading_font": "assistant_n4",
         "padding_top": 72,
         "padding_bottom": 72
