@@ -220,6 +220,7 @@
         "group_qMnPAe",
         "email_signup_dTWTne"
       ],
+      "disabled": true,
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
@@ -254,7 +255,7 @@
           "settings": {
             "facebook_url": "https://www.facebook.com/",
             "instagram_url": "https://www.instagram.com/yumbud_organic/",
-            "youtube_url": "https://www.youtube.com/",
+            "youtube_url": "",
             "tiktok_url": "",
             "twitter_url": "",
             "threads_url": "",
