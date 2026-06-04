@@ -87,33 +87,17 @@
             "padding-inline-end": 0
           },
           "blocks": {}
-        },
-        "button_yVGY4G": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "Shop now",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
         }
       },
       "block_order": [
         "text_WRL99Q",
         "text_EyPxk7",
-        "text_73Njmp",
-        "button_yVGY4G"
+        "text_73Njmp"
       ],
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/ChatGPT_Image_202663_18_11_01.png",
+        "image_1": "shopify://shop_images/ChatGPT_Image_Jun_4_2026_09_20_30_AM.png",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": false,
@@ -132,15 +116,71 @@
         "section_width": "page-width",
         "section_height": "large",
         "section_height_custom": 50,
-        "color_scheme": "scheme-5",
+        "color_scheme": "scheme-f92de95c-338a-430b-93da-eab0d35f4b03",
         "toggle_overlay": false,
-        "overlay_color": "#00000026",
+        "overlay_color": "#f7eeee",
         "overlay_style": "gradient",
         "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
-        "padding-block-start": 40,
+        "padding-block-start": 59,
         "padding-block-end": 40
+      }
+    },
+    "yumbud_marquee_eDbGMJ": {
+      "type": "yumbud-marquee",
+      "blocks": {
+        "phrase_j8q8cJ": {
+          "type": "phrase",
+          "settings": {
+            "text": "Human-grade"
+          }
+        },
+        "phrase_b4rA7Q": {
+          "type": "phrase",
+          "settings": {
+            "text": "No artificial additives"
+          }
+        },
+        "phrase_nwi697": {
+          "type": "phrase",
+          "settings": {
+            "text": "Gently dehydrated"
+          }
+        },
+        "phrase_g3xf68": {
+          "type": "phrase",
+          "settings": {
+            "text": "Single-origin protein"
+          }
+        },
+        "phrase_ma4Eza": {
+          "type": "phrase",
+          "settings": {
+            "text": "Made in California"
+          }
+        },
+        "phrase_4Fd7dL": {
+          "type": "phrase",
+          "settings": {
+            "text": "Vet-considered"
+          }
+        }
+      },
+      "block_order": [
+        "phrase_j8q8cJ",
+        "phrase_b4rA7Q",
+        "phrase_nwi697",
+        "phrase_g3xf68",
+        "phrase_ma4Eza",
+        "phrase_4Fd7dL"
+      ],
+      "name": "YumBud · Marquee",
+      "settings": {
+        "speed": 34,
+        "bg_color": "#ECEAE3",
+        "text_color": "#574F46",
+        "accent_color": "#B8A88B"
       }
     },
     "main": {
@@ -271,62 +311,6 @@
         "color_scheme": "scheme-1",
         "padding-block-start": 0,
         "padding-block-end": 32
-      }
-    },
-    "yumbud_marquee_eDbGMJ": {
-      "type": "yumbud-marquee",
-      "blocks": {
-        "phrase_j8q8cJ": {
-          "type": "phrase",
-          "settings": {
-            "text": "Human-grade"
-          }
-        },
-        "phrase_b4rA7Q": {
-          "type": "phrase",
-          "settings": {
-            "text": "No artificial additives"
-          }
-        },
-        "phrase_nwi697": {
-          "type": "phrase",
-          "settings": {
-            "text": "Gently dehydrated"
-          }
-        },
-        "phrase_g3xf68": {
-          "type": "phrase",
-          "settings": {
-            "text": "Single-origin protein"
-          }
-        },
-        "phrase_ma4Eza": {
-          "type": "phrase",
-          "settings": {
-            "text": "Made in California"
-          }
-        },
-        "phrase_4Fd7dL": {
-          "type": "phrase",
-          "settings": {
-            "text": "Vet-considered"
-          }
-        }
-      },
-      "block_order": [
-        "phrase_j8q8cJ",
-        "phrase_b4rA7Q",
-        "phrase_nwi697",
-        "phrase_g3xf68",
-        "phrase_ma4Eza",
-        "phrase_4Fd7dL"
-      ],
-      "name": "YumBud · Marquee",
-      "settings": {
-        "speed": 34,
-        "bg_color": "#ECEAE3",
-        "text_color": "#574F46",
-        "accent_color": "#B8A88B"
       }
     }
   },
