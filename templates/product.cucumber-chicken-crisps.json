@@ -414,6 +414,24 @@
     "yumbud_product_Q88Gy6": {
       "type": "yumbud-product",
       "blocks": {
+        "ingredients_grid_p4wL8N": {
+          "type": "ingredients_grid",
+          "settings": {
+            "heading": "Ingredient quality that makes a difference",
+            "subheading": "Human-grade proteins, fruits, vegetables, and herbs. That's it.",
+            "viewall_label": "View All",
+            "viewall_link": "",
+            "ing_1_image": "shopify://shop_images/IMG_0903.jpg",
+            "ing_1_name": "Chicken",
+            "ing_2_name": "Arugula",
+            "ing_3_name": "Cucumber",
+            "ing_4_name": "Calendula",
+            "ing_5_name": "",
+            "ing_6_name": "",
+            "ing_7_name": "",
+            "ing_8_name": ""
+          }
+        },
         "highlights_kJMQRW": {
           "type": "highlights",
           "settings": {
@@ -432,28 +450,19 @@
             "item_4_text": "Small-batch, food-grade facility."
           }
         },
-        "ingredients_grid_p4wL8N": {
-          "type": "ingredients_grid",
+        "storage_EzPXgg": {
+          "type": "storage",
           "settings": {
-            "heading": "Ingredient quality that makes a difference",
-            "subheading": "Human-grade proteins, fruits, vegetables, and herbs. That's it.",
-            "viewall_label": "View All",
-            "viewall_link": "",
-            "ing_1_name": "Chicken",
-            "ing_2_name": "Arugula",
-            "ing_3_name": "Cucumber",
-            "ing_4_name": "Calendula",
-            "ing_5_name": "",
-            "ing_6_name": "",
-            "ing_7_name": "",
-            "ing_8_name": ""
-          }
-        },
-        "feeding_fzjU8V": {
-          "type": "feeding",
-          "settings": {
-            "heading": "How to serve",
-            "body": "<p>Feed as a treat, or crumble over your dog's regular food for a tasty boost.</p>"
+            "heading": "How to store",
+            "body": "<p>Keep your YumBud treats fresh with these simple tips.</p>",
+            "tip_1_icon": "🌡️",
+            "tip_1_text": "Store in a cool, dry place away from direct sunlight.",
+            "tip_2_icon": "🔒",
+            "tip_2_text": "Keep the bag sealed tightly after each use.",
+            "tip_3_icon": "📅",
+            "tip_3_text": "Best used within 3 months of opening.",
+            "tip_4_icon": "",
+            "tip_4_text": ""
           }
         },
         "accordion_GDAKnq": {
@@ -474,17 +483,17 @@
         }
       },
       "block_order": [
-        "highlights_kJMQRW",
         "ingredients_grid_p4wL8N",
-        "feeding_fzjU8V",
+        "highlights_kJMQRW",
+        "storage_EzPXgg",
         "accordion_GDAKnq"
       ],
       "name": "YumBud · Product Content",
       "settings": {
         "card_width": 260,
-        "label_bg": "rgba(0,0,0,0.55)",
+        "label_bg": "#454540",
         "label_text_color": "#FFFFFF",
-        "label_font_size": 12,
+        "label_font_size": 14,
         "bg_color": "#F2F1EC",
         "text_color": "#2B2420",
         "muted_color": "#574F46",
