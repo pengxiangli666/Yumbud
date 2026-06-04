@@ -55,55 +55,6 @@
         "padding_bottom": 84
       }
     },
-    "yumbud_marquee_pUDUBg": {
-      "type": "yumbud-marquee",
-      "blocks": {
-        "phrase_fK387n": {
-          "type": "phrase",
-          "settings": {
-            "text": "Human-grade"
-          }
-        },
-        "phrase_EiMk6Y": {
-          "type": "phrase",
-          "settings": {
-            "text": "No artificial additives"
-          }
-        },
-        "phrase_N7RC9q": {
-          "type": "phrase",
-          "settings": {
-            "text": "Gently dehydrated"
-          }
-        },
-        "phrase_rULLYi": {
-          "type": "phrase",
-          "settings": {
-            "text": "Single-origin protein"
-          }
-        },
-        "phrase_WyFKqJ": {
-          "type": "phrase",
-          "settings": {
-            "text": "Vet-considered"
-          }
-        }
-      },
-      "block_order": [
-        "phrase_fK387n",
-        "phrase_EiMk6Y",
-        "phrase_N7RC9q",
-        "phrase_rULLYi",
-        "phrase_WyFKqJ"
-      ],
-      "name": "YumBud · Marquee",
-      "settings": {
-        "speed": 34,
-        "bg_color": "#eceae3",
-        "text_color": "#574f46",
-        "accent_color": "#b8a88b"
-      }
-    },
     "yumbud_build_bowl_ckM3rB": {
       "type": "yumbud-build-bowl",
       "blocks": {
@@ -442,7 +393,6 @@
   },
   "order": [
     "yumbud_hero_mFrVEx",
-    "yumbud_marquee_pUDUBg",
     "yumbud_build_bowl_ckM3rB",
     "yumbud_ethos_pzbbQy",
     "yumbud_proof_tNqk6R",
