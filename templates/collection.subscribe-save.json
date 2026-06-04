@@ -140,18 +140,10 @@
         "padding-block-end": 32
       }
     },
-    "yumbud_subscribe_selector_YXANfy": {
+    "yumbud_subscribe_selector_N8cgpF": {
       "type": "yumbud-subscribe-selector",
       "blocks": {
-        "flavor_RFbD47": {
-          "type": "flavor",
-          "settings": {
-            "product": "cucumber-chicken-crisps",
-            "name_override": "",
-            "desc_override": ""
-          }
-        },
-        "flavor_wLJPEn": {
+        "flavor_9bLWqR": {
           "type": "flavor",
           "settings": {
             "product": "chicken-arugula-crisps",
@@ -159,7 +151,7 @@
             "desc_override": ""
           }
         },
-        "flavor_d9kiRi": {
+        "flavor_xrbFz4": {
           "type": "flavor",
           "settings": {
             "product": "chicken-herb-biscuits",
@@ -167,20 +159,28 @@
             "desc_override": ""
           }
         },
-        "flavor_gw3VT4": {
+        "flavor_frgYtG": {
           "type": "flavor",
           "settings": {
             "product": "chicken-wrapped-apple-chew-rings",
             "name_override": "",
             "desc_override": ""
           }
+        },
+        "flavor_VDJQA3": {
+          "type": "flavor",
+          "settings": {
+            "product": "cucumber-chicken-crisps",
+            "name_override": "",
+            "desc_override": ""
+          }
         }
       },
       "block_order": [
-        "flavor_RFbD47",
-        "flavor_wLJPEn",
-        "flavor_d9kiRi",
-        "flavor_gw3VT4"
+        "flavor_9bLWqR",
+        "flavor_xrbFz4",
+        "flavor_frgYtG",
+        "flavor_VDJQA3"
       ],
       "name": "YumBud · Subscribe",
       "settings": {
@@ -190,28 +190,16 @@
         "flavor_label": "Choose your flavors",
         "flavor_hint": "Mix and match",
         "freq_label": "Delivery frequency",
-        "freq_1": "Every 4 weeks",
-        "freq_1_sub": "Most flexible",
-        "freq_1_save": "Save 10%",
-        "freq_1_discount": 10,
-        "freq_2": "Every 2 weeks",
-        "freq_2_sub": "Most popular",
-        "freq_2_save": "Save 15%",
-        "freq_2_discount": 15,
-        "freq_3": "Weekly",
-        "freq_3_sub": "Best value",
-        "freq_3_save": "Save 20%",
-        "freq_3_discount": 20,
         "subtotal_label": "Subtotal",
         "discount_label": "Subscriber discount",
         "total_label": "Total",
         "button_label": "Start Subscription",
         "note": "Free shipping · Skip or cancel anytime",
-        "bg_color": "#f2f1ec",
-        "text_color": "#2b2420",
-        "muted_color": "#8c8578",
-        "accent_color": "#2e3d2a",
-        "card_color": "#e8e4da",
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#8C8578",
+        "accent_color": "#2E3D2A",
+        "card_color": "#E8E4DA",
         "heading_font": "assistant_n4",
         "padding_top": 80,
         "padding_bottom": 80
@@ -435,13 +423,13 @@
         "cta_heading": "Every good dog deserves the <em>good stuff.</em>",
         "cta_button_label": "Shop now",
         "cta_button_link": "",
-        "cta_bg": "#211D18",
-        "cta_fg": "#F2F1EC",
-        "bg_color": "#F2F1EC",
-        "text_color": "#2B2420",
-        "muted_color": "#574F46",
-        "accent_color": "#535B72",
-        "card_color": "#ECEAE3",
+        "cta_bg": "#211d18",
+        "cta_fg": "#f2f1ec",
+        "bg_color": "#f2f1ec",
+        "text_color": "#2b2420",
+        "muted_color": "#574f46",
+        "accent_color": "#535b72",
+        "card_color": "#eceae3",
         "heading_font": "assistant_n4",
         "padding_top": 72,
         "padding_bottom": 88
@@ -450,7 +438,7 @@
   },
   "order": [
     "main",
-    "yumbud_subscribe_selector_YXANfy",
+    "yumbud_subscribe_selector_N8cgpF",
     "yumbud_price_compare_fkWFhR",
     "yumbud_perks_xiq48Q",
     "yumbud_why_cmjHBK"
