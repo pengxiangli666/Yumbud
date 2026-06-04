@@ -270,10 +270,10 @@
         "padding-block-end": 0
       }
     },
-    "yumbud_product_Lzj9qh": {
+    "yumbud_product_NPYkAh": {
       "type": "yumbud-product",
       "blocks": {
-        "highlights_NrAhdB": {
+        "highlights_9QU4TW": {
           "type": "highlights",
           "settings": {
             "heading": "Why dogs love it",
@@ -291,23 +291,32 @@
             "item_4_text": "Small-batch, food-grade facility."
           }
         },
-        "ingredients_3Tf3L7": {
-          "type": "ingredients",
+        "ingredients_grid_kj7VJp": {
+          "type": "ingredients_grid",
           "settings": {
-            "heading": "What's inside",
-            "body": "<p>Whole foods you'd recognise — apples, garden herbs, leafy greens, and a little real chicken.</p>",
-            "image": "shopify://shop_images/IMG_0903.jpg",
-            "image_position": "left"
+            "heading": "Ingredient quality that makes a difference",
+            "subheading": "Human-grade proteins, fruits, vegetables, and herbs. That's it.",
+            "viewall_label": "View All",
+            "viewall_link": "",
+            "ing_1_image": "shopify://shop_images/IMG_0903.jpg",
+            "ing_1_name": "Chicken",
+            "ing_2_name": "Arugula",
+            "ing_3_name": "Cucumber",
+            "ing_4_name": "Calendula",
+            "ing_5_name": "",
+            "ing_6_name": "",
+            "ing_7_name": "",
+            "ing_8_name": ""
           }
         },
-        "feeding_pH7YhX": {
+        "feeding_8h4aAL": {
           "type": "feeding",
           "settings": {
             "heading": "How to serve",
             "body": "<p>Feed as a treat, or crumble over your dog's regular food for a tasty boost.</p>"
           }
         },
-        "accordion_76jyYj": {
+        "accordion_GRyFcD": {
           "type": "accordion",
           "settings": {
             "heading": "Good to know",
@@ -325,18 +334,19 @@
         }
       },
       "block_order": [
-        "highlights_NrAhdB",
-        "ingredients_3Tf3L7",
-        "feeding_pH7YhX",
-        "accordion_76jyYj"
+        "highlights_9QU4TW",
+        "ingredients_grid_kj7VJp",
+        "feeding_8h4aAL",
+        "accordion_GRyFcD"
       ],
       "name": "YumBud · Product Content",
       "settings": {
-        "bg_color": "#f2f1ec",
-        "text_color": "#2b2420",
-        "muted_color": "#574f46",
-        "accent_color": "#535b72",
-        "card_color": "#eceae3",
+        "card_width": 260,
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#574F46",
+        "accent_color": "#535B72",
+        "card_color": "#ECEAE3",
         "heading_font": "assistant_n4",
         "padding_top": 56,
         "padding_bottom": 88
@@ -486,7 +496,7 @@
   },
   "order": [
     "main",
-    "yumbud_product_Lzj9qh",
+    "yumbud_product_NPYkAh",
     "product_recommendations_qggXJq"
   ]
 }
