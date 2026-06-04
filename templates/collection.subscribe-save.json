@@ -140,6 +140,119 @@
         "padding-block-end": 32
       }
     },
+    "yumbud_subscribe_selector_ygMfJB": {
+      "type": "yumbud-subscribe-selector",
+      "blocks": {
+        "flavor_8zXRnr": {
+          "type": "flavor",
+          "settings": {
+            "product": "chicken-arugula-crisps",
+            "name_override": "",
+            "desc_override": ""
+          }
+        },
+        "flavor_JAqzbH": {
+          "type": "flavor",
+          "settings": {
+            "product": "chicken-herb-biscuits",
+            "name_override": "",
+            "desc_override": ""
+          }
+        },
+        "flavor_36rLUh": {
+          "type": "flavor",
+          "settings": {
+            "product": "chicken-wrapped-apple-chew-rings",
+            "name_override": "",
+            "desc_override": ""
+          }
+        },
+        "flavor_YQpHw9": {
+          "type": "flavor",
+          "settings": {
+            "product": "cucumber-chicken-crisps",
+            "name_override": "",
+            "desc_override": ""
+          }
+        },
+        "left_feature_jdN3VK": {
+          "type": "left_feature",
+          "settings": {
+            "text": "Full price $17.99/bag"
+          }
+        },
+        "left_feature_Mzeab9": {
+          "type": "left_feature",
+          "settings": {
+            "text": "Standard shipping"
+          }
+        },
+        "left_feature_AHUpgy": {
+          "type": "left_feature",
+          "settings": {
+            "text": "Order again manually"
+          }
+        },
+        "right_feature_DDRwaG": {
+          "type": "right_feature",
+          "settings": {
+            "text": "Discount on every delivery"
+          }
+        },
+        "right_feature_bDa6jp": {
+          "type": "right_feature",
+          "settings": {
+            "text": "Same-day delivery"
+          }
+        },
+        "right_feature_LE8kKf": {
+          "type": "right_feature",
+          "settings": {
+            "text": "Skip, swap, or cancel anytime"
+          }
+        }
+      },
+      "block_order": [
+        "flavor_8zXRnr",
+        "flavor_JAqzbH",
+        "flavor_36rLUh",
+        "flavor_YQpHw9",
+        "left_feature_jdN3VK",
+        "left_feature_Mzeab9",
+        "left_feature_AHUpgy",
+        "right_feature_DDRwaG",
+        "right_feature_bDa6jp",
+        "right_feature_LE8kKf"
+      ],
+      "name": "YumBud · Subscribe",
+      "settings": {
+        "eyebrow": "Subscribe & Save",
+        "heading": "Build your box.",
+        "body": "<p>Pick any combination of flavors. Add as many bags as you want.</p>",
+        "flavor_label": "Choose your flavors",
+        "flavor_hint": "Mix and match",
+        "freq_label": "Delivery frequency",
+        "show_compare": true,
+        "compare_label": "Why subscribe?",
+        "base_price": "17.99",
+        "left_title": "One-time",
+        "left_desc": "Buy once, no commitment.",
+        "right_title": "Subscribe & Save",
+        "subtotal_label": "Subtotal",
+        "discount_label": "Subscriber discount",
+        "total_label": "Total",
+        "button_label": "Start Subscription",
+        "note": "Free shipping · Skip or cancel anytime",
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#8C8578",
+        "accent_color": "#2E3D2A",
+        "card_color": "#E8E4DA",
+        "heading_font": "assistant_n4",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
     "yumbud_perks_xiq48Q": {
       "type": "yumbud-perks",
       "blocks": {
@@ -294,6 +407,7 @@
   },
   "order": [
     "main",
+    "yumbud_subscribe_selector_ygMfJB",
     "yumbud_perks_xiq48Q",
     "yumbud_why_cmjHBK"
   ]
