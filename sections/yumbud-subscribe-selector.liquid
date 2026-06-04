@@ -237,7 +237,7 @@
     if(ctagEl) ctagEl.textContent = 'Save ' + pct + '%';
     var planId = getSellingPlan();
     var label = planId && freqData[planId] ? freqData[planId].label : '';
-    if(subDescEl) subDescEl.textContent = 'Save ' + pct + '% on every ' + label.toLowerCase() + ' delivery. Cancel anytime.';
+    if(subDescEl) subDescEl.textContent = 'Save ' + pct + '% — delivered ' + label.toLowerCase() + '. Cancel anytime.';
   }
 
   function recalc(){
