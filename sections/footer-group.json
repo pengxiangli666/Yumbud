@@ -202,10 +202,92 @@
         "padding-block-start": 20,
         "padding-block-end": 48
       }
+    },
+    "section_RfGjqi": {
+      "type": "section",
+      "blocks": {
+        "text_4m4gEE": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Made with care and unconditionally loved by our customers, this signature bestseller exceeds all expectations.</p>",
+            "width": "fit-content",
+            "max_width": "narrow",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "logo_z8GXqi": {
+          "type": "logo",
+          "settings": {
+            "inverse": false,
+            "font": "subheading",
+            "unit": "percent",
+            "percent_width": 72,
+            "pixel_height": 272,
+            "custom_mobile_size": true,
+            "unit_mobile": "percent",
+            "percent_width_mobile": 10,
+            "pixel_height_mobile": 120,
+            "padding-block-start": 28,
+            "padding-block-end": 14,
+            "padding-inline-start": 8,
+            "padding-inline-end": 61
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_4m4gEE",
+        "logo_z8GXqi"
+      ],
+      "name": "t:names.large_logo",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "space-between",
+        "gap": 16,
+        "section_width": "page-width",
+        "section_height": "medium",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-2",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 40,
+        "padding-block-end": 40
+      }
     }
   },
   "order": [
     "footer_YbcXDD",
-    "footer_utilities_jLGE8U"
+    "footer_utilities_jLGE8U",
+    "section_RfGjqi"
   ]
 }
