@@ -1,0 +1,348 @@
+{%- comment -%}
+  YumBud · Coming Soon
+  Full-screen coming soon section with background image,
+  animated reveal, email capture and countdown timer.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
+
+  #shopify-section-{{ uid }}{
+    --yb-ink:{{ s.text_color }};
+    --yb-muted:{{ s.muted_color }};
+    --yb-accent:{{ s.accent_color }};
+    --yb-cream:#FAF8F3;
+    --yb-overlay:{{ s.overlay_opacity | divided_by: 100.0 }};
+    --yb-ease:cubic-bezier(.22,.61,.36,1);
+  }
+
+  .yb-cs-{{ uid }}{
+    position:relative; overflow:hidden;
+    min-height:100vh;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    color:var(--yb-ink);
+    background:#1A1710;
+  }
+
+  /* Background */
+  .yb-cs-bg-{{ uid }}{
+    position:absolute; inset:0; z-index:0;
+  }
+  .yb-cs-bg-{{ uid }} img{
+    width:100%; height:100%; object-fit:cover;
+    object-position:{{ s.image_x }}% {{ s.image_y }}%;
+    display:block;
+  }
+  .yb-cs-overlay-{{ uid }}{
+    position:absolute; inset:0; z-index:1;
+    background:{{ s.overlay_color }};
+    opacity:var(--yb-overlay);
+  }
+
+  /* Frame */
+  .yb-cs-{{ uid }}::after{
+    content:""; pointer-events:none;
+    position:absolute; inset:16px; z-index:10;
+    border:1px solid rgba(255,255,255,0.25);
+  }
+
+  /* Content */
+  .yb-cs-inner-{{ uid }}{
+    position:relative; z-index:2;
+    text-align:center;
+    padding:80px 40px;
+    max-width:760px;
+    width:100%;
+  }
+
+  /* Logo / eyebrow */
+  .yb-cs-eyebrow-{{ uid }}{
+    font-family:'Inter', sans-serif;
+    font-size:10px; letter-spacing:.32em; text-transform:uppercase;
+    color:rgba(255,255,255,0.55); font-weight:500;
+    margin-bottom:52px;
+    opacity:0; animation:yb-fadeup .8s var(--yb-ease) .2s forwards;
+  }
+
+  /* Heading */
+  .yb-cs-{{ uid }} h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300; line-height:1.02;
+    letter-spacing:-.02em;
+    font-size:clamp(52px,8vw,108px);
+    color:#FAF8F3;
+    margin-bottom:0;
+    opacity:0; animation:yb-fadeup .9s var(--yb-ease) .4s forwards;
+  }
+  .yb-cs-{{ uid }} h1 em{
+    font-style:italic;
+    color:{{ s.accent_color }};
+  }
+
+  /* Divider line */
+  .yb-cs-rule-{{ uid }}{
+    width:48px; height:1px;
+    background:rgba(255,255,255,0.3);
+    margin:38px auto;
+    opacity:0; animation:yb-fadeup .8s var(--yb-ease) .6s forwards;
+  }
+
+  /* Body */
+  .yb-cs-body-{{ uid }}{
+    font-family:'Inter', sans-serif;
+    font-size:15px; color:rgba(255,255,255,0.6);
+    font-weight:300; line-height:1.7;
+    max-width:420px; margin:0 auto 48px;
+    opacity:0; animation:yb-fadeup .8s var(--yb-ease) .7s forwards;
+  }
+
+  /* Countdown */
+  .yb-cs-countdown-{{ uid }}{
+    display:flex; gap:0; align-items:flex-start; justify-content:center;
+    margin-bottom:52px;
+    opacity:0; animation:yb-fadeup .8s var(--yb-ease) .8s forwards;
+  }
+  .yb-cs-countdown-{{ uid }} .unit{
+    text-align:center; padding:0 22px;
+    position:relative;
+  }
+  .yb-cs-countdown-{{ uid }} .unit + .unit::before{
+    content:":";
+    position:absolute; left:-2px; top:4px;
+    font-family:'Cormorant Garamond', serif;
+    font-size:36px; font-weight:300;
+    color:rgba(255,255,255,0.25);
+  }
+  .yb-cs-countdown-{{ uid }} .num{
+    display:block;
+    font-family:'Cormorant Garamond', serif;
+    font-size:clamp(42px,5vw,64px);
+    font-weight:300; line-height:1;
+    color:#FAF8F3;
+    min-width:64px;
+  }
+  .yb-cs-countdown-{{ uid }} .lbl{
+    display:block;
+    font-family:'Inter', sans-serif;
+    font-size:9px; letter-spacing:.22em; text-transform:uppercase;
+    color:rgba(255,255,255,0.4); margin-top:8px;
+  }
+
+  /* Email form */
+  .yb-cs-form-{{ uid }}{
+    display:flex; gap:0; max-width:420px; margin:0 auto 32px;
+    opacity:0; animation:yb-fadeup .8s var(--yb-ease) .9s forwards;
+  }
+  .yb-cs-form-{{ uid }} input{
+    flex:1; background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.2);
+    border-right:none;
+    color:#FAF8F3; font-family:'Inter', sans-serif;
+    font-size:13px; font-weight:300;
+    padding:14px 20px;
+    outline:none; border-radius:2px 0 0 2px;
+    transition:.3s;
+  }
+  .yb-cs-form-{{ uid }} input::placeholder{ color:rgba(255,255,255,0.35); }
+  .yb-cs-form-{{ uid }} input:focus{
+    background:rgba(255,255,255,0.12);
+    border-color:rgba(255,255,255,0.4);
+  }
+  .yb-cs-form-{{ uid }} button{
+    background:{{ s.accent_color }};
+    color:#FAF8F3;
+    border:1px solid {{ s.accent_color }};
+    font-family:'Inter', sans-serif;
+    font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+    font-weight:500; padding:14px 24px;
+    cursor:pointer; border-radius:0 2px 2px 0;
+    transition:.3s var(--yb-ease); white-space:nowrap;
+  }
+  .yb-cs-form-{{ uid }} button:hover{ opacity:0.8; }
+
+  .yb-cs-thanks-{{ uid }}{
+    display:none;
+    font-family:'Inter', sans-serif;
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:rgba(255,255,255,0.5);
+    margin-bottom:32px;
+  }
+
+  /* Social */
+  .yb-cs-social-{{ uid }}{
+    display:flex; gap:24px; justify-content:center; align-items:center;
+    opacity:0; animation:yb-fadeup .8s var(--yb-ease) 1s forwards;
+  }
+  .yb-cs-social-{{ uid }} a{
+    font-family:'Inter', sans-serif;
+    font-size:9px; letter-spacing:.22em; text-transform:uppercase;
+    color:rgba(255,255,255,0.35);
+    text-decoration:none; transition:.3s;
+  }
+  .yb-cs-social-{{ uid }} a:hover{ color:rgba(255,255,255,0.7); }
+  .yb-cs-social-{{ uid }} .dot{
+    width:3px; height:3px; border-radius:50%;
+    background:rgba(255,255,255,0.2);
+  }
+
+  /* Bottom brand line */
+  .yb-cs-brand-{{ uid }}{
+    position:absolute; bottom:32px; left:0; right:0;
+    z-index:2; text-align:center;
+    font-family:'Inter', sans-serif;
+    font-size:9px; letter-spacing:.28em; text-transform:uppercase;
+    color:rgba(255,255,255,0.25);
+    opacity:0; animation:yb-fadeup .8s var(--yb-ease) 1.1s forwards;
+  }
+
+  /* Animations */
+  @keyframes yb-fadeup{
+    from{ opacity:0; transform:translateY(18px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  @media (max-width:600px){
+    .yb-cs-inner-{{ uid }}{ padding:60px 24px; }
+    .yb-cs-form-{{ uid }}{ flex-direction:column; }
+    .yb-cs-form-{{ uid }} input{ border-right:1px solid rgba(255,255,255,0.2); border-bottom:none; border-radius:2px 2px 0 0; }
+    .yb-cs-form-{{ uid }} button{ border-radius:0 0 2px 2px; }
+    .yb-cs-countdown-{{ uid }} .unit{ padding:0 14px; }
+  }
+</style>
+
+<section class="yb-cs-{{ uid }}">
+  <div class="yb-cs-bg-{{ uid }}">
+    {% if s.bg_image != blank %}
+      <img src="{{ s.bg_image | image_url: width: 3840 }}"
+        srcset="{{ s.bg_image | image_url: width: 750 }} 750w,
+                {{ s.bg_image | image_url: width: 1440 }} 1440w,
+                {{ s.bg_image | image_url: width: 1920 }} 1920w,
+                {{ s.bg_image | image_url: width: 3840 }} 3840w"
+        sizes="100vw"
+        alt="{{ s.bg_image.alt | escape }}"
+        loading="eager">
+    {% else %}
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#1A1710 0%,#2B2420 100%);"></div>
+    {% endif %}
+  </div>
+  <div class="yb-cs-overlay-{{ uid }}"></div>
+
+  <div class="yb-cs-inner-{{ uid }}">
+    {% if s.eyebrow != blank %}
+      <div class="yb-cs-eyebrow-{{ uid }}">{{ s.eyebrow }}</div>
+    {% endif %}
+
+    {% if s.heading != blank %}
+      <h1>{{ s.heading }}</h1>
+    {% endif %}
+
+    <div class="yb-cs-rule-{{ uid }}"></div>
+
+    {% if s.body != blank %}
+      <div class="yb-cs-body-{{ uid }}">{{ s.body }}</div>
+    {% endif %}
+
+    {% if s.show_countdown and s.launch_date != blank %}
+      <div class="yb-cs-countdown-{{ uid }}" id="yb-countdown-{{ uid }}">
+        <div class="unit"><span class="num" id="yb-days-{{ uid }}">00</span><span class="lbl">Days</span></div>
+        <div class="unit"><span class="num" id="yb-hrs-{{ uid }}">00</span><span class="lbl">Hours</span></div>
+        <div class="unit"><span class="num" id="yb-min-{{ uid }}">00</span><span class="lbl">Minutes</span></div>
+        <div class="unit"><span class="num" id="yb-sec-{{ uid }}">00</span><span class="lbl">Seconds</span></div>
+      </div>
+    {% endif %}
+
+    {% if s.show_email %}
+      <form class="yb-cs-form-{{ uid }}" id="yb-form-{{ uid }}" onsubmit="ybSubmit{{ uid }}(event)">
+        <input type="email" placeholder="{{ s.email_placeholder | default: 'Your email address' }}" required>
+        <button type="submit">{{ s.email_button | default: 'Notify Me' }}</button>
+      </form>
+      <div class="yb-cs-thanks-{{ uid }}" id="yb-thanks-{{ uid }}">{{ s.thanks_text | default: "You're on the list — we'll be in touch." }}</div>
+    {% endif %}
+
+    <div class="yb-cs-social-{{ uid }}">
+      {% if s.instagram_url != blank %}<a href="{{ s.instagram_url }}" target="_blank" rel="noopener">Instagram</a>{% endif %}
+      {% if s.instagram_url != blank and s.tiktok_url != blank %}<div class="dot"></div>{% endif %}
+      {% if s.tiktok_url != blank %}<a href="{{ s.tiktok_url }}" target="_blank" rel="noopener">TikTok</a>{% endif %}
+      {% if s.website_url != blank %}
+        {% if s.instagram_url != blank or s.tiktok_url != blank %}<div class="dot"></div>{% endif %}
+        <a href="{{ s.website_url }}">{{ s.website_label | default: 'Visit Site' }}</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="yb-cs-brand-{{ uid }}">{{ s.brand_line | default: 'YumBud · Human-Grade Dog Treats · Los Angeles' }}</div>
+</section>
+
+<script>
+(function(){
+  {% if s.show_countdown and s.launch_date != blank %}
+  var target = new Date("{{ s.launch_date }}T00:00:00").getTime();
+  function tick(){
+    var now = Date.now(), diff = target - now;
+    if(diff <= 0){ diff = 0; }
+    var d = Math.floor(diff/86400000);
+    var h = Math.floor((diff%86400000)/3600000);
+    var m = Math.floor((diff%3600000)/60000);
+    var sec = Math.floor((diff%60000)/1000);
+    function pad(n){ return n < 10 ? '0'+n : ''+n; }
+    var el = document.getElementById('yb-days-{{ uid }}'); if(el) el.textContent = pad(d);
+    el = document.getElementById('yb-hrs-{{ uid }}'); if(el) el.textContent = pad(h);
+    el = document.getElementById('yb-min-{{ uid }}'); if(el) el.textContent = pad(m);
+    el = document.getElementById('yb-sec-{{ uid }}'); if(el) el.textContent = pad(sec);
+  }
+  tick(); setInterval(tick, 1000);
+  {% endif %}
+
+  {% if s.show_email %}
+  window['ybSubmit{{ uid }}'] = function(e){
+    e.preventDefault();
+    var form = document.getElementById('yb-form-{{ uid }}');
+    var thanks = document.getElementById('yb-thanks-{{ uid }}');
+    if(form) form.style.display = 'none';
+    if(thanks) thanks.style.display = 'block';
+  };
+  {% endif %}
+})();
+</script>
+
+{% schema %}
+{
+  "name": "YumBud · Coming Soon",
+  "tag": "section",
+  "class": "yumbud-coming-soon-section",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "Something good is coming" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "info": "Wrap a word in <em> for italic accent.", "default": "Worth the <em>wait.</em>" },
+    { "type": "textarea", "id": "body", "label": "Body text", "default": "Human-grade dog treats, made in Los Angeles. Real ingredients, nothing artificial. Launching soon." },
+    { "type": "text", "id": "brand_line", "label": "Bottom brand line", "default": "YumBud · Human-Grade Dog Treats · Los Angeles" },
+    { "type": "header", "content": "Countdown Timer" },
+    { "type": "checkbox", "id": "show_countdown", "label": "Show countdown", "default": true },
+    { "type": "text", "id": "launch_date", "label": "Launch date (YYYY-MM-DD)", "default": "2025-09-01", "info": "Format: 2025-09-01" },
+    { "type": "header", "content": "Email Capture" },
+    { "type": "checkbox", "id": "show_email", "label": "Show email form", "default": true },
+    { "type": "text", "id": "email_placeholder", "label": "Input placeholder", "default": "Your email address" },
+    { "type": "text", "id": "email_button", "label": "Button label", "default": "Notify Me" },
+    { "type": "text", "id": "thanks_text", "label": "Success message", "default": "You're on the list — we'll be in touch." },
+    { "type": "header", "content": "Social Links" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram URL" },
+    { "type": "url", "id": "tiktok_url", "label": "TikTok URL" },
+    { "type": "url", "id": "website_url", "label": "Extra link URL" },
+    { "type": "text", "id": "website_label", "label": "Extra link label", "default": "Visit Site" },
+    { "type": "header", "content": "Background Image" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image" },
+    { "type": "range", "id": "image_x", "label": "Image position X  ←  50 = center  →", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_y", "label": "Image position Y  ↑  50 = center  ↓", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "color", "id": "overlay_color", "label": "Overlay color", "default": "#1A1710" },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 95, "step": 5, "unit": "%", "default": 55 },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#FAF8F3" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#A89F96" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#C4956A" }
+  ],
+  "presets": [ { "name": "YumBud · Coming Soon" } ]
+}
+{% endschema %}
