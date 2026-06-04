@@ -1,0 +1,88 @@
+{%- comment -%}
+  YumBud · Legal Bar
+  Bottom legal links bar with top and bottom border lines.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+
+<style>
+  #shopify-section-{{ uid }}{
+    background:{{ s.bg_color }};
+  }
+  .yb-legal-{{ uid }}{
+    border-top:1px solid {{ s.line_color }};
+    border-bottom:1px solid {{ s.line_color }};
+    padding:{{ s.padding_y }}px 40px;
+  }
+  .yb-legal-inner-{{ uid }}{
+    display:flex; flex-wrap:wrap; gap:{{ s.gap }}px;
+    align-items:center;
+  }
+  .yb-legal-{{ uid }} a{
+    font-size:{{ s.font_size }}px;
+    color:{{ s.text_color }};
+    text-decoration:none;
+    white-space:nowrap;
+    transition:opacity .25s;
+  }
+  .yb-legal-{{ uid }} a:hover{ opacity:0.65; }
+  @media (max-width:600px){
+    .yb-legal-{{ uid }}{ padding:16px 24px; }
+    .yb-legal-inner-{{ uid }}{ gap:12px; }
+  }
+</style>
+
+<div class="yb-legal-{{ uid }}">
+  <div class="yb-legal-inner-{{ uid }}">
+    {% if s.link1_label != blank %}<a href="{{ s.link1_url | default: '#' }}">{{ s.link1_label }}</a>{% endif %}
+    {% if s.link2_label != blank %}<a href="{{ s.link2_url | default: '#' }}">{{ s.link2_label }}</a>{% endif %}
+    {% if s.link3_label != blank %}<a href="{{ s.link3_url | default: '#' }}">{{ s.link3_label }}</a>{% endif %}
+    {% if s.link4_label != blank %}<a href="{{ s.link4_url | default: '#' }}">{{ s.link4_label }}</a>{% endif %}
+    {% if s.link5_label != blank %}<a href="{{ s.link5_url | default: '#' }}">{{ s.link5_label }}</a>{% endif %}
+    {% if s.link6_label != blank %}<a href="{{ s.link6_url | default: '#' }}">{{ s.link6_label }}</a>{% endif %}
+    {% if s.link7_label != blank %}<a href="{{ s.link7_url | default: '#' }}">{{ s.link7_label }}</a>{% endif %}
+    {% if s.link8_label != blank %}<a href="{{ s.link8_url | default: '#' }}">{{ s.link8_label }}</a>{% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "YumBud · Legal Bar",
+  "tag": "section",
+  "class": "yumbud-legal-bar-section",
+  "settings": [
+    { "type": "header", "content": "Link 1" },
+    { "type": "text", "id": "link1_label", "label": "Label", "default": "Privacy Policy" },
+    { "type": "url", "id": "link1_url", "label": "URL" },
+    { "type": "header", "content": "Link 2" },
+    { "type": "text", "id": "link2_label", "label": "Label", "default": "Terms and Conditions" },
+    { "type": "url", "id": "link2_url", "label": "URL" },
+    { "type": "header", "content": "Link 3" },
+    { "type": "text", "id": "link3_label", "label": "Label", "default": "Shipping and Return Policy" },
+    { "type": "url", "id": "link3_url", "label": "URL" },
+    { "type": "header", "content": "Link 4" },
+    { "type": "text", "id": "link4_label", "label": "Label", "default": "Accessibility" },
+    { "type": "url", "id": "link4_url", "label": "URL" },
+    { "type": "header", "content": "Link 5" },
+    { "type": "text", "id": "link5_label", "label": "Label", "default": "Privacy Preferences" },
+    { "type": "url", "id": "link5_url", "label": "URL" },
+    { "type": "header", "content": "Link 6" },
+    { "type": "text", "id": "link6_label", "label": "Label", "default": "Do not sell or share my personal information" },
+    { "type": "url", "id": "link6_url", "label": "URL" },
+    { "type": "header", "content": "Link 7" },
+    { "type": "text", "id": "link7_label", "label": "Label", "default": "CPRA Privacy Policy/Notice of Collection" },
+    { "type": "url", "id": "link7_url", "label": "URL" },
+    { "type": "header", "content": "Link 8 (optional)" },
+    { "type": "text", "id": "link8_label", "label": "Label" },
+    { "type": "url", "id": "link8_url", "label": "URL" },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#1A3A2A" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#FFFFFF" },
+    { "type": "color", "id": "line_color", "label": "Border line color", "default": "#FFFFFF" },
+    { "type": "range", "id": "font_size", "label": "Font size", "min": 10, "max": 16, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "padding_y", "label": "Top / bottom padding", "min": 8, "max": 40, "step": 2, "unit": "px", "default": 14 },
+    { "type": "range", "id": "gap", "label": "Gap between links", "min": 12, "max": 60, "step": 4, "unit": "px", "default": 32 }
+  ],
+  "presets": [ { "name": "YumBud · Legal Bar" } ]
+}
+{% endschema %}
