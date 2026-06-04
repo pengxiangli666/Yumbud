@@ -243,11 +243,11 @@
         "total_label": "Total",
         "button_label": "Start Subscription",
         "note": "Free shipping · Skip or cancel anytime",
-        "bg_color": "#F2F1EC",
-        "text_color": "#2B2420",
-        "muted_color": "#8C8578",
-        "accent_color": "#2E3D2A",
-        "card_color": "#E8E4DA",
+        "bg_color": "#f2f1ec",
+        "text_color": "#2b2420",
+        "muted_color": "#8c8578",
+        "accent_color": "#2e3d2a",
+        "card_color": "#e8e4da",
         "heading_font": "assistant_n4",
         "padding_top": 80,
         "padding_bottom": 80
@@ -315,28 +315,28 @@
         "pillar_xGkNYH": {
           "type": "pillar",
           "settings": {
-            "heading": "Ingredients you can <em>name.</em>",
+            "heading": "Tailor the Taste",
             "body": "<p>Crisp apples, garden herbs, leafy greens, real chicken — whole foods you'd recognise in your own kitchen. No fillers, no dyes, no mystery powders.</p>"
           }
         },
         "pillar_n8C36J": {
           "type": "pillar",
           "settings": {
-            "heading": "Superfoods that <em>do more.</em>",
+            "heading": "Set Your Pace",
             "body": "<p>We don't just leave the bad stuff out — we put good stuff in. Fresh herbs and vegetables, the kind of nutrient-rich greens that help your dog feel their freshest: brighter, lighter, ready for the next walk.</p>"
           }
         },
         "pillar_YQF76f": {
           "type": "pillar",
           "settings": {
-            "heading": "Formulated by vets, <em>made to standard.</em>",
+            "heading": "Simple Checkout",
             "body": "<p>Every recipe is carefully balanced by veterinarians and pet nutritionists, then made in a registered, compliant facility — so what's simple on the label is serious behind it.</p>"
           }
         },
         "pillar_t3g7Ua": {
           "type": "pillar",
           "settings": {
-            "heading": "Food we'd <em>eat ourselves.</em>",
+            "heading": "Pure Joy, Delivered",
             "body": "<p>That's our one rule. If it wouldn't pass our own kitchen, it doesn't go in the bag.</p>"
           }
         },
@@ -390,7 +390,7 @@
         "spotlight_heading": "Real food you can <em>name.</em>",
         "spotlight_text": "Whole ingredients you'd recognise in your own kitchen — nothing you can't.",
         "cta_heading": "Every good dog deserves the <em>good stuff.</em>",
-        "cta_button_label": "Shop now",
+        "cta_button_label": "",
         "cta_button_link": "",
         "cta_bg": "#211d18",
         "cta_fg": "#f2f1ec",
