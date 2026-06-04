@@ -11,6 +11,25 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
+    "custom_footer_nav_4nycAn": {
+      "type": "custom-footer-nav",
+      "name": "Custom Footer Nav",
+      "settings": {
+        "bg_color": "#F2F1EC",
+        "text_color": "#2D362E",
+        "title_1": "SHOP",
+        "menu_1": "",
+        "title_2": "LEARN",
+        "menu_2": "",
+        "title_3": "HELP",
+        "menu_3": "",
+        "title_4": "MORE",
+        "menu_4": "",
+        "contact_title": "CONTACT",
+        "contact_btn_text": "Go to the Help Center",
+        "contact_link": ""
+      }
+    },
     "section_RfGjqi": {
       "type": "section",
       "blocks": {
@@ -306,6 +325,7 @@
     }
   },
   "order": [
+    "custom_footer_nav_4nycAn",
     "section_RfGjqi",
     "footer_YbcXDD",
     "footer_utilities_jLGE8U",
