@@ -232,6 +232,16 @@
     "footer_utilities_jLGE8U": {
       "type": "footer-utilities",
       "blocks": {
+        "footer_copyright_w6df7W": {
+          "type": "footer-copyright",
+          "name": "t:names.copyright",
+          "settings": {
+            "show_powered_by": true,
+            "font_size": "0.75rem",
+            "case": "none"
+          },
+          "blocks": {}
+        },
         "social_links_Ew63Kq": {
           "type": "social-links",
           "settings": {
@@ -253,6 +263,7 @@
         }
       },
       "block_order": [
+        "footer_copyright_w6df7W",
         "social_links_Ew63Kq"
       ],
       "name": "t:names.utilities",
