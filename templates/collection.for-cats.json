@@ -148,8 +148,8 @@
         "heading": "Worth the <em>wait.</em>",
         "body": "Human-grade dog treats, made in Los Angeles. Real ingredients, nothing artificial. Launching soon.",
         "brand_line": "YumBud · Human-Grade Dog Treats · Los Angeles",
-        "show_countdown": true,
-        "launch_date": "2025-09-01",
+        "show_countdown": false,
+        "launch_date": "20950-1-1",
         "show_email": true,
         "email_placeholder": "Your email address",
         "email_button": "Notify Me",
@@ -160,11 +160,11 @@
         "website_label": "Visit Site",
         "image_x": 50,
         "image_y": 50,
-        "overlay_color": "#1A1710",
+        "overlay_color": "#1a1710",
         "overlay_opacity": 55,
-        "text_color": "#FAF8F3",
-        "muted_color": "#A89F96",
-        "accent_color": "#C4956A"
+        "text_color": "#faf8f3",
+        "muted_color": "#a89f96",
+        "accent_color": "#c4956a"
       }
     }
   },
