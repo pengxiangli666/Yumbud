@@ -1,5 +1,5 @@
 {%- comment -%}
-  YumBud · Product Content v22
+  YumBud · Product Content v2
   Adds ingredients_grid block (horizontal scroll cards) to replace split layout.
 {%- endcomment -%}
 {%- assign s = section.settings -%}
@@ -54,16 +54,27 @@
 
   /* nutrition */
   #shopify-section-{{ uid }} .yb-nutr{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4vw,56px); align-items:start; }
-  #shopify-section-{{ uid }} .yb-nutr-table{ border-top:2px solid var(--ink); }
-  #shopify-section-{{ uid }} .yb-nutr-row{ display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); gap:12px; }
-  #shopify-section-{{ uid }} .yb-nutr-row .nr-label{ font-size:13px; color:var(--muted); }
-  #shopify-section-{{ uid }} .yb-nutr-row .nr-val{ font-size:13px; font-weight:500; white-space:nowrap; }
-  #shopify-section-{{ uid }} .yb-nutr-bar-wrap{ flex:1; height:4px; background:var(--line); border-radius:2px; max-width:120px; }
-  #shopify-section-{{ uid }} .yb-nutr-bar{ height:100%; border-radius:2px; background:var(--accent); }
-  #shopify-section-{{ uid }} .yb-nutr-calorie{ margin-top:22px; padding:18px 20px; background:var(--card); border-radius:6px; }
-  #shopify-section-{{ uid }} .yb-nutr-calorie .cal-title{ font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
-  #shopify-section-{{ uid }} .yb-nutr-calorie .cal-val{ font-family:var(--serif); font-size:28px; font-weight:500; line-height:1; margin-bottom:4px; }
+  #shopify-section-{{ uid }} .yb-nutr-table{ margin-top:8px; display:flex; flex-direction:column; gap:18px; }
+  #shopify-section-{{ uid }} .yb-nutr-row{ display:flex; flex-direction:column; gap:8px; }
+  #shopify-section-{{ uid }} .yb-nutr-row .nr-top{ display:flex; justify-content:space-between; align-items:baseline; }
+  #shopify-section-{{ uid }} .yb-nutr-row .nr-label{ font-size:14px; color:var(--ink); font-weight:400; }
+  #shopify-section-{{ uid }} .yb-nutr-row .nr-val{ font-size:14px; font-weight:600; color:var(--ink); }
+  #shopify-section-{{ uid }} .yb-nutr-bar-wrap{ height:10px; background:{{ s.bar_track_color | default: '#E5E1D7' }}; border-radius:30px; overflow:hidden; }
+  #shopify-section-{{ uid }} .yb-nutr-bar{ height:100%; border-radius:30px; transition:width .8s cubic-bezier(.22,.61,.36,1); }
+  #shopify-section-{{ uid }} .yb-nutr-bar.c1{ background:#5C6B4A; }
+  #shopify-section-{{ uid }} .yb-nutr-bar.c2{ background:#A07040; }
+  #shopify-section-{{ uid }} .yb-nutr-bar.c3{ background:#8C9E7A; }
+  #shopify-section-{{ uid }} .yb-nutr-bar.c4{ background:#B89A60; }
+  #shopify-section-{{ uid }} .yb-nutr-bar.c5{ background:#6B7F5A; }
+  #shopify-section-{{ uid }} .yb-nutr-bar.c6{ background:#9E8060; }
+  #shopify-section-{{ uid }} .yb-nutr-calorie{ padding:24px 28px; background:var(--card); border-radius:12px; margin-bottom:16px; }
+  #shopify-section-{{ uid }} .yb-nutr-calorie .cal-title{ font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+  #shopify-section-{{ uid }} .yb-nutr-calorie .cal-val{ font-family:var(--serif); font-size:36px; font-weight:500; line-height:1; margin-bottom:4px; color:var(--ink); }
   #shopify-section-{{ uid }} .yb-nutr-calorie .cal-sub{ font-size:12px; color:var(--muted); }
+  #shopify-section-{{ uid }} .yb-nutr-badge-box{ padding:20px 24px; background:var(--ink); border-radius:12px; display:flex; align-items:flex-start; gap:14px; }
+  #shopify-section-{{ uid }} .yb-nutr-badge-box svg{ width:32px; height:32px; flex:none; stroke:#FAF8F3; stroke-width:1.4; fill:none; margin-top:2px; }
+  #shopify-section-{{ uid }} .yb-nutr-badge-box .bb-title{ font-size:15px; font-weight:500; color:#FAF8F3; margin-bottom:4px; }
+  #shopify-section-{{ uid }} .yb-nutr-badge-box .bb-sub{ font-size:12px; color:rgba(250,248,243,0.6); line-height:1.5; }
 
   @media (max-width:860px){
     #shopify-section-{{ uid }} .yb-storage{ grid-template-columns:1fr; }
@@ -202,6 +213,7 @@
             </section>
 
           {% when 'nutrition' %}
+            {%- assign bar_colors = 'c1,c2,c3,c4,c5,c6' | split: ',' -%}
             <section {{ block.shopify_attributes }}>
               <div class="yb-nutr">
                 <div>
@@ -212,15 +224,24 @@
                       {%- assign lk = 'nutr_' | append: i | append: '_label' -%}
                       {%- assign vk = 'nutr_' | append: i | append: '_value' -%}
                       {%- assign pk = 'nutr_' | append: i | append: '_pct' -%}
+                      {%- assign ci = forloop.index0 -%}
+                      {%- assign color_class = bar_colors[ci] -%}
                       {% if block.settings[lk] != blank %}
                         <div class="yb-nutr-row">
-                          <span class="nr-label">{{ block.settings[lk] }}</span>
-                          <div class="yb-nutr-bar-wrap"><div class="yb-nutr-bar" style="width:{{ block.settings[pk] | default: 50 }}%"></div></div>
-                          <span class="nr-val">{{ block.settings[vk] }}</span>
+                          <div class="nr-top">
+                            <span class="nr-label">{{ block.settings[lk] }}</span>
+                            <span class="nr-val">{{ block.settings[vk] }}</span>
+                          </div>
+                          <div class="yb-nutr-bar-wrap">
+                            <div class="yb-nutr-bar {{ color_class }}" style="width:{{ block.settings[pk] | default: 50 }}%"></div>
+                          </div>
                         </div>
                       {% endif %}
                     {% endfor %}
                   </div>
+                  {% if block.settings.note != blank %}
+                    <div class="yb-rte" style="margin-top:18px; font-size:12px;">{{ block.settings.note }}</div>
+                  {% endif %}
                 </div>
                 <div>
                   {% if block.settings.calorie_title != blank %}
@@ -230,9 +251,13 @@
                       <div class="cal-sub">{{ block.settings.calorie_sub }}</div>
                     </div>
                   {% endif %}
-                  {% if block.settings.note != blank %}
-                    <div class="yb-rte" style="margin-top:18px; font-size:12px;">{{ block.settings.note }}</div>
-                  {% endif %}
+                  <div class="yb-nutr-badge-box">
+                    <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg>
+                    <div>
+                      <div class="bb-title">{{ block.settings.badge_title | default: 'Clean. Simple. Honest.' }}</div>
+                      <div class="bb-sub">{{ block.settings.badge_sub | default: 'Real ingredients with guaranteed nutrition you can trust.' }}</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -426,7 +451,10 @@ document.querySelectorAll('[data-yb-ig-scroller]').forEach(function(el){
         { "type": "text", "id": "calorie_title", "label": "Title", "default": "Calorie Content (Calculated)" },
         { "type": "text", "id": "calorie_val", "label": "Value", "default": "3,600 kcal/kg" },
         { "type": "text", "id": "calorie_sub", "label": "Sub-value", "default": "100 kcal/oz (calculated)" },
-        { "type": "richtext", "id": "note", "label": "Footnote" }
+        { "type": "richtext", "id": "note", "label": "Footnote" },
+        { "type": "header", "content": "Badge" },
+        { "type": "text", "id": "badge_title", "label": "Badge title", "default": "Clean. Simple. Honest." },
+        { "type": "text", "id": "badge_sub", "label": "Badge subtitle", "default": "Real ingredients with guaranteed nutrition you can trust." }
       ]
     },
     {
