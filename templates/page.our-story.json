@@ -85,31 +85,9 @@
             "quote": "If we wouldn't eat it, why were we asking him to?",
             "body": "<p>Hermès had been turning his nose up at dinner for a week. We flipped the bag over, read the label, and couldn't recognize half of what was on it.</p><p>So we started experimenting at home with real food already in our own pantry — crisp apples, fresh garden herbs, leafy arugula, a little real chicken. Not just leaving the bad stuff out, but putting good things in.</p><p>But love alone wasn't enough. To make every bite safe and properly balanced, we brought in the experts. Today every YumBud recipe is formulated by veterinarians and pet nutritionists, and made in a registered, food-grade facility — held to the same standard we'd hold our own food to.</p><p>Because the bond between a person and their dog was never a transaction. It's family.</p>",
             "attribution": "— The YumBud family, Los Angeles",
-            "image": "shopify://shop_images/siamese-cat-laying-in-white-bedding.jpg",
             "image_position": "left",
             "button_label": "",
             "button_link": ""
-          }
-        },
-        "credentials_mepU9k": {
-          "type": "credentials",
-          "settings": {
-            "nav_label": "Our Credentials",
-            "heading": "Simple ingredients, <em>serious</em> standards.",
-            "intro": "<p>Every YumBud recipe is formulated and balanced with a licensed veterinarian and a pet nutritionist — then made in a registered, food-grade facility. The ingredients stay simple. The standards behind them don't.</p>",
-            "image": "shopify://shop_images/Screenshot_2026-06-03_at_6.25.54_PM.png",
-            "badge_1": "Vet formulated",
-            "badge_2": "Food-grade facility",
-            "item_1_title": "Vet-formulated",
-            "item_1_text": "Every recipe is reviewed and balanced by a licensed veterinarian.",
-            "item_2_title": "Nutritionist-balanced",
-            "item_2_text": "Built with a qualified pet nutritionist for complete, balanced nutrition — not guesswork.",
-            "item_3_title": "Made to food-grade standards",
-            "item_3_text": "Produced in a registered, compliant facility — held to the same standard we'd hold our own food to.",
-            "item_4_title": "Whole-food ingredients",
-            "item_4_text": "Real apples, garden herbs, leafy greens and chicken — superfoods you can name, nothing you can't.",
-            "item_5_title": "",
-            "item_5_text": ""
           }
         },
         "chapter_XBHDQN": {
@@ -131,7 +109,6 @@
       "block_order": [
         "chapter_aHAMct",
         "chapter_mLUVGX",
-        "credentials_mepU9k",
         "chapter_XBHDQN"
       ],
       "name": "YumBud · About",
