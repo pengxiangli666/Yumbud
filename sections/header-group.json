@@ -32,7 +32,7 @@
         "main_menu": "main-menu",
         "shop_heading": "Shop",
         "badge_bg": "#f5f0e8",
-        "learn_menu": "",
+        "learn_menu": "learn",
         "learn_heading": "Learn",
         "learn_columns": 2,
         "feature_enabled": false,
