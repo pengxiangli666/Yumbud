@@ -281,7 +281,7 @@
       "name": "YumBud · Legal Bar",
       "settings": {
         "link1_label": "Privacy Policy",
-        "link1_url": "",
+        "link1_url": "shopify://policies/privacy-policy",
         "link2_label": "Terms and Conditions",
         "link2_url": "",
         "link3_label": "Shipping and Return Policy",
