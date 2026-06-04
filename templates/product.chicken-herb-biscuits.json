@@ -271,6 +271,98 @@
         "padding-block-end": 0
       }
     },
+    "yumbud_product_VExjMC": {
+      "type": "yumbud-product",
+      "blocks": {
+        "highlights_PRDqqB": {
+          "type": "highlights",
+          "settings": {
+            "heading": "Why dogs love it",
+            "item_1_icon": "leaf",
+            "item_1_label": "Whole-food",
+            "item_1_text": "Real produce & protein you can name.",
+            "item_2_icon": "no",
+            "item_2_label": "No nasties",
+            "item_2_text": "No fillers, dyes or mystery powders.",
+            "item_3_icon": "shield",
+            "item_3_label": "Vet-formulated",
+            "item_3_text": "Balanced by vets & pet nutritionists.",
+            "item_4_icon": "bowl",
+            "item_4_label": "Made in LA",
+            "item_4_text": "Small-batch, food-grade facility."
+          }
+        },
+        "ingredients_Hkrig6": {
+          "type": "ingredients",
+          "settings": {
+            "heading": "What's inside",
+            "body": "<p>Whole foods you'd recognise — apples, garden herbs, leafy greens, and a little real chicken. Gently made so the good stuff stays good. Nothing you can't pronounce.</p>",
+            "image": "shopify://shop_images/img2.wallspic.com-fowl-livestock-chicken-galliformes-rooster-6000x4000.jpg",
+            "image_position": "left"
+          }
+        },
+        "feeding_CAjzbR": {
+          "type": "feeding",
+          "settings": {
+            "heading": "How to serve",
+            "body": "<p>Feed as a treat, or crumble over your dog's regular food for a tasty boost. Start small and adjust to your dog's size. Keep treats to a small part of their daily intake, alongside a complete, balanced diet.</p>"
+          }
+        },
+        "accordion_zfFeTq": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Good to know",
+            "q_1": "Are these a complete meal?",
+            "a_1": "<p>No — these are treats, meant to complement a complete, balanced diet. Keep them to a small part of your dog's daily intake.</p>",
+            "q_2": "What's the ingredient list?",
+            "a_2": "<p>Whole foods you'd recognise — see “What's inside.” No fillers, dyes, or mystery powders.</p>",
+            "q_3": "How should I store them?",
+            "a_3": "<p>Keep the bag sealed in a cool, dry place. [→ set your real storage instructions]</p>",
+            "q_4": "",
+            "a_4": "",
+            "q_5": "",
+            "a_5": ""
+          }
+        }
+      },
+      "block_order": [
+        "highlights_PRDqqB",
+        "ingredients_Hkrig6",
+        "feeding_CAjzbR",
+        "accordion_zfFeTq"
+      ],
+      "name": "YumBud · Product",
+      "settings": {
+        "show_badges": true,
+        "badge_source": "custom",
+        "badge_text": "Best Seller, Vet-formulated",
+        "show_rating": true,
+        "rating_value": "4.9",
+        "rating_count": "1,200",
+        "use_excerpt": false,
+        "tagline": "Real, whole-food treats — superfoods you can name, made for the ones who love us back.",
+        "show_purchase_toggle": true,
+        "onetime_label": "One-time",
+        "subscribe_label": "Subscribe & Save",
+        "subscribe_sub": "Save & skip anytime",
+        "currency_symbol": "$",
+        "show_perday": false,
+        "perday_text": "",
+        "atc_label": "Add to cart",
+        "soldout_label": "Sold out",
+        "trust_text": "<p>Free shipping over $49. Cancel anytime.</p>",
+        "compliance_note": "Intended for intermittent or supplementary feeding, alongside a complete and balanced diet. Always provide fresh water.",
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#574F46",
+        "accent_color": "#535B72",
+        "card_color": "#ECEAE3",
+        "soft_color": "#ECEAE3",
+        "heading_font": "assistant_n4",
+        "padding_top": 56,
+        "padding_bottom": 88
+      }
+    },
     "product_recommendations_qggXJq": {
       "type": "product-recommendations",
       "blocks": {
@@ -410,97 +502,6 @@
         "color_scheme": "scheme-1",
         "padding-block-start": 48,
         "padding-block-end": 48
-      }
-    },
-    "yumbud_product_VExjMC": {
-      "type": "yumbud-product",
-      "blocks": {
-        "highlights_PRDqqB": {
-          "type": "highlights",
-          "settings": {
-            "heading": "Why dogs love it",
-            "item_1_icon": "leaf",
-            "item_1_label": "Whole-food",
-            "item_1_text": "Real produce & protein you can name.",
-            "item_2_icon": "no",
-            "item_2_label": "No nasties",
-            "item_2_text": "No fillers, dyes or mystery powders.",
-            "item_3_icon": "shield",
-            "item_3_label": "Vet-formulated",
-            "item_3_text": "Balanced by vets & pet nutritionists.",
-            "item_4_icon": "bowl",
-            "item_4_label": "Made in LA",
-            "item_4_text": "Small-batch, food-grade facility."
-          }
-        },
-        "ingredients_Hkrig6": {
-          "type": "ingredients",
-          "settings": {
-            "heading": "What's inside",
-            "body": "<p>Whole foods you'd recognise — apples, garden herbs, leafy greens, and a little real chicken. Gently made so the good stuff stays good. Nothing you can't pronounce.</p>",
-            "image_position": "left"
-          }
-        },
-        "feeding_CAjzbR": {
-          "type": "feeding",
-          "settings": {
-            "heading": "How to serve",
-            "body": "<p>Feed as a treat, or crumble over your dog's regular food for a tasty boost. Start small and adjust to your dog's size. Keep treats to a small part of their daily intake, alongside a complete, balanced diet.</p>"
-          }
-        },
-        "accordion_zfFeTq": {
-          "type": "accordion",
-          "settings": {
-            "heading": "Good to know",
-            "q_1": "Are these a complete meal?",
-            "a_1": "<p>No — these are treats, meant to complement a complete, balanced diet. Keep them to a small part of your dog's daily intake.</p>",
-            "q_2": "What's the ingredient list?",
-            "a_2": "<p>Whole foods you'd recognise — see “What's inside.” No fillers, dyes, or mystery powders.</p>",
-            "q_3": "How should I store them?",
-            "a_3": "<p>Keep the bag sealed in a cool, dry place. [→ set your real storage instructions]</p>",
-            "q_4": "",
-            "a_4": "",
-            "q_5": "",
-            "a_5": ""
-          }
-        }
-      },
-      "block_order": [
-        "highlights_PRDqqB",
-        "ingredients_Hkrig6",
-        "feeding_CAjzbR",
-        "accordion_zfFeTq"
-      ],
-      "name": "YumBud · Product",
-      "settings": {
-        "show_badges": true,
-        "badge_source": "custom",
-        "badge_text": "Best Seller, Vet-formulated",
-        "show_rating": true,
-        "rating_value": "4.9",
-        "rating_count": "1,200",
-        "use_excerpt": false,
-        "tagline": "Real, whole-food treats — superfoods you can name, made for the ones who love us back.",
-        "show_purchase_toggle": true,
-        "onetime_label": "One-time",
-        "subscribe_label": "Subscribe & Save",
-        "subscribe_sub": "Save & skip anytime",
-        "currency_symbol": "$",
-        "show_perday": false,
-        "perday_text": "",
-        "atc_label": "Add to cart",
-        "soldout_label": "Sold out",
-        "trust_text": "<p>Free shipping over $49. Cancel anytime.</p>",
-        "compliance_note": "Intended for intermittent or supplementary feeding, alongside a complete and balanced diet. Always provide fresh water.",
-        "bg_color": "#F2F1EC",
-        "text_color": "#2B2420",
-        "muted_color": "#574F46",
-        "accent_color": "#535B72",
-        "card_color": "#ECEAE3",
-        "soft_color": "#ECEAE3",
-        "heading_font": "assistant_n4",
-        "padding_top": 56,
-        "padding_bottom": 88
       }
     }
   },
