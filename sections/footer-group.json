@@ -11,25 +11,6 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
-    "custom_footer_nav_4nycAn": {
-      "type": "custom-footer-nav",
-      "name": "Custom Footer Nav",
-      "settings": {
-        "bg_color": "#F2F1EC",
-        "text_color": "#2D362E",
-        "title_1": "SHOP",
-        "menu_1": "",
-        "title_2": "LEARN",
-        "menu_2": "",
-        "title_3": "HELP",
-        "menu_3": "",
-        "title_4": "MORE",
-        "menu_4": "",
-        "contact_title": "CONTACT",
-        "contact_btn_text": "Go to the Help Center",
-        "contact_link": ""
-      }
-    },
     "section_RfGjqi": {
       "type": "section",
       "blocks": {
@@ -248,6 +229,25 @@
         "padding-block-end": 36
       }
     },
+    "custom_footer_nav_4nycAn": {
+      "type": "custom-footer-nav",
+      "name": "Custom Footer Nav",
+      "settings": {
+        "bg_color": "#F2F1EC",
+        "text_color": "#2D362E",
+        "title_1": "SHOP",
+        "menu_1": "",
+        "title_2": "LEARN",
+        "menu_2": "",
+        "title_3": "HELP",
+        "menu_3": "",
+        "title_4": "MORE",
+        "menu_4": "",
+        "contact_title": "CONTACT",
+        "contact_btn_text": "Go to the Help Center",
+        "contact_link": ""
+      }
+    },
     "footer_utilities_jLGE8U": {
       "type": "footer-utilities",
       "blocks": {
@@ -325,9 +325,9 @@
     }
   },
   "order": [
-    "custom_footer_nav_4nycAn",
     "section_RfGjqi",
     "footer_YbcXDD",
+    "custom_footer_nav_4nycAn",
     "footer_utilities_jLGE8U",
     "yumbud_legal_bar_jmnnrD"
   ]
