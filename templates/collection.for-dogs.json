@@ -117,12 +117,12 @@
         "section_height": "large",
         "section_height_custom": 50,
         "color_scheme": "scheme-f92de95c-338a-430b-93da-eab0d35f4b03",
-        "toggle_overlay": false,
-        "overlay_color": "#f7eeee",
+        "toggle_overlay": true,
+        "overlay_color": "#1a1710",
         "overlay_style": "gradient",
         "gradient_direction": "to top",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
+        "blurred_reflection": true,
+        "reflection_opacity": 52,
         "padding-block-start": 59,
         "padding-block-end": 40
       }
@@ -178,9 +178,9 @@
       "name": "YumBud · Marquee",
       "settings": {
         "speed": 34,
-        "bg_color": "#ECEAE3",
-        "text_color": "#574F46",
-        "accent_color": "#B8A88B"
+        "bg_color": "#eceae3",
+        "text_color": "#574f46",
+        "accent_color": "#b8a88b"
       }
     },
     "main": {
