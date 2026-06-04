@@ -1,5 +1,6 @@
 {%- comment -%}
-  YumBud · Subscribe Selector (multi-select, linked to Appstle selling plans)
+  YumBud · Subscribe Selector + Price Compare (integrated)
+  Price compare card updates dynamically when frequency changes.
 {%- endcomment -%}
 {%- assign s = section.settings -%}
 {%- assign uid = section.id -%}
@@ -22,6 +23,7 @@
   .yb-ss-label-{{ uid }}{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; font-weight:500; margin-bottom:12px; color:var(--yb-ink); display:flex; justify-content:space-between; align-items:center; }
   .yb-ss-label-{{ uid }} .hint{ font-size:11px; letter-spacing:.06em; text-transform:none; color:var(--yb-muted); font-weight:400; }
 
+  /* Flavors */
   .yb-ss-flavors-{{ uid }}{ display:flex; flex-direction:column; gap:8px; margin-bottom:26px; }
   .yb-ss-fl-{{ uid }}{ display:flex; align-items:center; gap:14px; padding:14px 18px; border:1px solid var(--yb-line); border-radius:10px; background:var(--yb-bg); cursor:pointer; transition:.2s; }
   .yb-ss-fl-{{ uid }}.active{ border-color:var(--yb-ink); border-width:2px; padding:13px 17px; background:var(--yb-card); }
@@ -35,6 +37,7 @@
   .yb-ss-fl-{{ uid }} .qty button:disabled{ opacity:.35; cursor:not-allowed; }
   .yb-ss-fl-{{ uid }} .qty .n{ min-width:20px; text-align:center; font-size:14px; font-weight:500; }
 
+  /* Frequency */
   .yb-ss-freq-{{ uid }}{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:28px; }
   .yb-ss-fbox-{{ uid }}{ border:1px solid var(--yb-line); border-radius:6px; padding:16px 14px; cursor:pointer; text-align:center; transition:.2s; background:var(--yb-bg); }
   .yb-ss-fbox-{{ uid }}.active{ border-color:var(--yb-ink); border-width:2px; padding:15px 13px; }
@@ -42,6 +45,20 @@
   .yb-ss-fbox-{{ uid }} .sub{ font-size:11px; color:var(--yb-muted); }
   .yb-ss-fbox-{{ uid }} .save{ display:inline-block; margin-top:6px; font-size:10px; background:var(--yb-accent); color:#fff; padding:2px 8px; border-radius:12px; letter-spacing:.04em; }
 
+  /* Price Compare */
+  .yb-ss-compare-{{ uid }}{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:28px; }
+  .yb-ss-ccard-{{ uid }}{ border-radius:10px; padding:22px 20px; position:relative; background:var(--yb-card); }
+  .yb-ss-ccard-{{ uid }}.featured{ background:var(--yb-ink); color:var(--yb-bg); }
+  .yb-ss-ccard-{{ uid }} .ctag{ position:absolute; top:14px; right:14px; background:var(--yb-accent); color:#fff; padding:3px 10px; border-radius:20px; font-size:9px; letter-spacing:.12em; text-transform:uppercase; }
+  .yb-ss-ccard-{{ uid }} .cnm{ font-size:10px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:12px; opacity:.65; }
+  .yb-ss-ccard-{{ uid }} .cpr{ font-family:var(--yb-serif); font-size:34px; font-weight:500; line-height:1; margin-bottom:4px; }
+  .yb-ss-ccard-{{ uid }} .cper{ font-size:12px; opacity:.55; }
+  .yb-ss-ccard-{{ uid }} .cdesc{ font-size:12px; opacity:.7; margin-top:8px; line-height:1.4; }
+  .yb-ss-cfeats-{{ uid }}{ list-style:none; padding:0; margin:14px 0 0; }
+  .yb-ss-cfeats-{{ uid }} li{ padding:7px 0; font-size:12px; border-bottom:1px solid currentColor; opacity:.8; display:flex; align-items:center; gap:8px; }
+  .yb-ss-cfeats-{{ uid }} li:last-child{ border-bottom:none; }
+
+  /* Summary */
   .yb-ss-summary-{{ uid }}{ padding:18px 0 22px; border-top:1px solid var(--yb-line); border-bottom:1px solid var(--yb-line); margin-bottom:22px; }
   .yb-ss-row-{{ uid }}{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px; font-size:14px; }
   .yb-ss-row-{{ uid }} .lbl{ color:var(--yb-muted); }
@@ -91,14 +108,9 @@
                   {%- assign price_value = product.price | divided_by: 100.0 -%}
                   {%- assign display_image = block.settings.image_override | default: product.featured_image -%}
                   {%- assign variant_id = product.selected_or_first_available_variant.id -%}
-
                   <div class="yb-ss-fl-{{ uid }}" data-yb-flavor data-price="{{ price_value }}" data-variant-id="{{ variant_id }}" {{ block.shopify_attributes }}>
                     <div class="th">
-                      {% if display_image != blank %}
-                        <img src="{{ display_image | image_url: width: 120 }}" alt="">
-                      {% else %}
-                        <span style="font-size:22px;">🍖</span>
-                      {% endif %}
+                      {% if display_image != blank %}<img src="{{ display_image | image_url: width: 120 }}" alt="">{% else %}<span style="font-size:22px;">🍖</span>{% endif %}
                     </div>
                     <div class="info">
                       <div class="nm">{{ display_name }}</div>
@@ -139,6 +151,36 @@
           </div>
         </div>
 
+        <!-- Price Compare (dynamic) -->
+        {% if s.show_compare %}
+        <div class="yb-ss-label-{{ uid }}"><span>{{ s.compare_label | default: 'Why subscribe?' }}</span></div>
+        <div class="yb-ss-compare-{{ uid }}">
+          <div class="yb-ss-ccard-{{ uid }}">
+            <div class="cnm">{{ s.left_title | default: 'One-time' }}</div>
+            <div class="cpr">${{ s.base_price | default: '17.99' }}</div>
+            <div class="cper">/ bag</div>
+            <div class="cdesc">{{ s.left_desc | default: 'Buy once, no commitment.' }}</div>
+            <ul class="yb-ss-cfeats-{{ uid }}">
+              {% for block in section.blocks %}{% if block.type == 'left_feature' %}
+                <li><span>○</span>{{ block.settings.text }}</li>
+              {% endif %}{% endfor %}
+            </ul>
+          </div>
+          <div class="yb-ss-ccard-{{ uid }} featured">
+            <span class="ctag" data-yb-ctag>Save 15%</span>
+            <div class="cnm">{{ s.right_title | default: 'Subscribe & Save' }}</div>
+            <div class="cpr" data-yb-sub-price>$15.29</div>
+            <div class="cper">/ bag</div>
+            <div class="cdesc" data-yb-sub-desc>Save 15% on every delivery. Cancel anytime.</div>
+            <ul class="yb-ss-cfeats-{{ uid }}">
+              {% for block in section.blocks %}{% if block.type == 'right_feature' %}
+                <li><span>✓</span>{{ block.settings.text }}</li>
+              {% endif %}{% endfor %}
+            </ul>
+          </div>
+        </div>
+        {% endif %}
+
         <div class="yb-ss-summary-{{ uid }}">
           <div class="yb-ss-row-{{ uid }}">
             <span class="lbl">{{ s.subtotal_label }}</span>
@@ -172,17 +214,30 @@
   var totEl=root.querySelector('[data-yb-total]');
   var pctEl=root.querySelector('[data-yb-disc-pct]');
   var btn=root.querySelector('[data-yb-cta]');
+  var subPriceEl=root.querySelector('[data-yb-sub-price]');
+  var subDescEl=root.querySelector('[data-yb-sub-desc]');
+  var ctagEl=root.querySelector('[data-yb-ctag]');
 
-  function getActive(){
-    return root.querySelector('[data-yb-freq].active');
-  }
-  function getDiscount(){
-    var a=getActive();
-    return a ? parseFloat(a.getAttribute('data-discount')||'0') : 0;
-  }
-  function getSellingPlan(){
-    var a=getActive();
-    return a ? a.getAttribute('data-selling-plan') : null;
+  var BASE_PRICE = {{ s.base_price | default: 17.99 }};
+
+  var freqData = {
+    '8934654243': { discount: 15, label: 'Every 2 weeks' },
+    '8934392099': { discount: 10, label: 'Monthly' },
+    '8934621475': { discount: 8,  label: 'Every 2 months' }
+  };
+
+  function getActive(){ return root.querySelector('[data-yb-freq].active'); }
+  function getDiscount(){ var a=getActive(); return a?parseFloat(a.getAttribute('data-discount')||'0'):0; }
+  function getSellingPlan(){ var a=getActive(); return a?a.getAttribute('data-selling-plan'):null; }
+
+  function updateCompare(){
+    var pct = getDiscount();
+    var subPrice = BASE_PRICE * (1 - pct/100);
+    if(subPriceEl) subPriceEl.textContent = '$' + subPrice.toFixed(2);
+    if(ctagEl) ctagEl.textContent = 'Save ' + pct + '%';
+    var planId = getSellingPlan();
+    var label = planId && freqData[planId] ? freqData[planId].label : '';
+    if(subDescEl) subDescEl.textContent = 'Save ' + pct + '% on every ' + label.toLowerCase() + ' delivery. Cancel anytime.';
   }
 
   function recalc(){
@@ -203,6 +258,7 @@
     if(totEl) totEl.textContent=total.toFixed(2);
     if(pctEl) pctEl.textContent=Math.round(pct);
     if(btn){ btn.style.opacity=subtotal>0?'1':'.4'; btn.style.pointerEvents=subtotal>0?'auto':'none'; }
+    updateCompare();
   }
 
   rows.forEach(function(r){
@@ -244,9 +300,7 @@
         body:JSON.stringify({items:items})
       })
       .then(function(r){ return r.json(); })
-      .then(function(){
-        window.location.href='/cart';
-      })
+      .then(function(){ window.location.href='/cart'; })
       .catch(function(){
         btn.textContent={{ s.button_label | json }};
         btn.style.opacity='1';
@@ -263,7 +317,7 @@
   "name": "YumBud · Subscribe",
   "tag": "section",
   "class": "yumbud-subscribe-selector",
-  "max_blocks": 8,
+  "max_blocks": 16,
   "settings": [
     { "type": "header", "content": "Content" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Subscribe & Save" },
@@ -275,6 +329,13 @@
     { "type": "text", "id": "flavor_hint", "label": "Hint", "default": "Mix and match" },
     { "type": "header", "content": "Frequency selector" },
     { "type": "text", "id": "freq_label", "label": "Label", "default": "Delivery frequency" },
+    { "type": "header", "content": "Price Compare" },
+    { "type": "checkbox", "id": "show_compare", "label": "Show price compare", "default": true },
+    { "type": "text", "id": "compare_label", "label": "Compare section label", "default": "Why subscribe?" },
+    { "type": "text", "id": "base_price", "label": "Base price per bag (one-time)", "default": "17.99", "info": "Used to calculate subscribe price dynamically" },
+    { "type": "text", "id": "left_title", "label": "Left card title", "default": "One-time" },
+    { "type": "text", "id": "left_desc", "label": "Left card description", "default": "Buy once, no commitment." },
+    { "type": "text", "id": "right_title", "label": "Right card title", "default": "Subscribe & Save" },
     { "type": "header", "content": "Summary labels" },
     { "type": "text", "id": "subtotal_label", "label": "Subtotal label", "default": "Subtotal" },
     { "type": "text", "id": "discount_label", "label": "Discount label", "default": "Subscriber discount" },
@@ -297,15 +358,28 @@
     { "type": "flavor", "name": "Flavor (product)", "settings": [
       { "type": "product", "id": "product", "label": "Product" },
       { "type": "text", "id": "name_override", "label": "Display name (optional)", "info": "Leave empty to use product title" },
-      { "type": "text", "id": "desc_override", "label": "Description (optional)", "info": "Leave empty to use product metafield custom.short_desc" },
-      { "type": "image_picker", "id": "image_override", "label": "Thumbnail (optional)", "info": "Leave empty to use product image" }
+      { "type": "text", "id": "desc_override", "label": "Description (optional)", "info": "Leave empty to use product metafield" },
+      { "type": "image_picker", "id": "image_override", "label": "Thumbnail (optional)" }
+    ] },
+    { "type": "left_feature", "name": "One-time feature", "settings": [
+      { "type": "text", "id": "text", "label": "Text", "default": "Full price" }
+    ] },
+    { "type": "right_feature", "name": "Subscribe feature", "settings": [
+      { "type": "text", "id": "text", "label": "Text", "default": "Discount on every order" }
     ] }
   ],
   "presets": [
     { "name": "YumBud · Subscribe", "blocks": [
       { "type": "flavor" },
       { "type": "flavor" },
-      { "type": "flavor" }
+      { "type": "flavor" },
+      { "type": "flavor" },
+      { "type": "left_feature", "settings": { "text": "Full price $17.99/bag" } },
+      { "type": "left_feature", "settings": { "text": "Standard shipping" } },
+      { "type": "left_feature", "settings": { "text": "Order again manually" } },
+      { "type": "right_feature", "settings": { "text": "Discount on every delivery" } },
+      { "type": "right_feature", "settings": { "text": "Same-day delivery" } },
+      { "type": "right_feature", "settings": { "text": "Skip, swap, or cancel anytime" } }
     ] }
   ]
 }
