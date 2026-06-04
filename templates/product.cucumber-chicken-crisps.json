@@ -475,10 +475,10 @@
             "nutr_1_pct": 54,
             "nutr_2_label": "Crude Fat (min)",
             "nutr_2_value": "6%",
-            "nutr_2_pct": 6,
+            "nutr_2_pct": 26,
             "nutr_3_label": "Crude Fiber (max)",
             "nutr_3_value": "2%",
-            "nutr_3_pct": 2,
+            "nutr_3_pct": 10,
             "nutr_4_label": "Moisture (max)",
             "nutr_4_value": "10%",
             "nutr_4_pct": 10,
@@ -491,7 +491,9 @@
             "calorie_title": "Calorie Content (Calculated)",
             "calorie_val": "3,600 kcal/kg",
             "calorie_sub": "100 kcal/oz (calculated)",
-            "note": ""
+            "note": "",
+            "badge_title": "Clean. Simple. Honest.",
+            "badge_sub": "Real ingredients with guaranteed nutrition you can trust."
           }
         },
         "accordion_GDAKnq": {
@@ -522,13 +524,13 @@
       "settings": {
         "card_width": 260,
         "label_bg": "#454540",
-        "label_text_color": "#FFFFFF",
+        "label_text_color": "#ffffff",
         "label_font_size": 14,
-        "bg_color": "#F2F1EC",
-        "text_color": "#2B2420",
-        "muted_color": "#574F46",
-        "accent_color": "#535B72",
-        "card_color": "#ECEAE3",
+        "bg_color": "#f2f1ec",
+        "text_color": "#2b2420",
+        "muted_color": "#574f46",
+        "accent_color": "#535b72",
+        "card_color": "#eceae3",
         "heading_font": "assistant_n4",
         "padding_top": 56,
         "padding_bottom": 88
