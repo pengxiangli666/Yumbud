@@ -1,0 +1,230 @@
+{%- comment -%}
+  ============================================================
+  YumBud · Why YumBud  (editorial "why" page section, OS 2.0)
+  Layout:
+    • Centered statement hero (eyebrow + headline + lead + CTA),
+      optional wide image strip
+    • Value pillars — big numbered rows, image auto-alternating
+      left/right ("pillar" blocks)
+    • Ingredient spotlight — a card grid of real ingredients
+      ("ingredient" blocks)
+    • Closing CTA band (dark)
+  All copy AND photos are editable in the Customizer.
+  Italicise a word in any heading to tint it with the accent colour.
+
+  HOW TO USE: Customize > create/open a Page (e.g. "Why YumBud") and
+  Add section > "YumBud · Why", or push to sections/ via GitHub.
+  ============================================================
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+
+<style>
+  #shopify-section-{{ uid }}{
+    --bg:{{ s.bg_color }}; --ink:{{ s.text_color }}; --muted:{{ s.muted_color }};
+    --accent:{{ s.accent_color }}; --line:{{ s.text_color }}1f; --card:{{ s.card_color }};
+    --cta-bg:{{ s.cta_bg }}; --cta-fg:{{ s.cta_fg }};
+    --serif:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  #shopify-section-{{ uid }} .yb-why{ background:var(--bg); color:var(--ink); padding:{{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+  #shopify-section-{{ uid }} *{ box-sizing:border-box; }
+  #shopify-section-{{ uid }} img{ display:block; max-width:100%; }
+  #shopify-section-{{ uid }} a{ color:inherit; text-decoration:none; }
+  #shopify-section-{{ uid }} .yb-in{ max-width:1180px; margin:0 auto; padding:0 clamp(20px,5vw,56px); }
+  #shopify-section-{{ uid }} .yb-h em{ font-style:italic; color:var(--accent); }
+
+  /* hero */
+  #shopify-section-{{ uid }} .yb-hero{ text-align:center; max-width:860px; margin:0 auto; padding:clamp(24px,5vw,64px) 0 clamp(36px,5vw,72px); }
+  #shopify-section-{{ uid }} .yb-eyebrow{ font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; }
+  #shopify-section-{{ uid }} .yb-hero h1{ font-family:var(--serif); font-weight:500; line-height:1.06; font-size:clamp(34px,5.4vw,68px); margin:0 0 24px; }
+  #shopify-section-{{ uid }} .yb-lead{ font-size:clamp(16px,1.7vw,20px); line-height:1.65; color:var(--muted); max-width:60ch; margin:0 auto; }
+  #shopify-section-{{ uid }} .yb-btn{ display:inline-flex; align-items:center; gap:9px; border:1px solid var(--ink); padding:14px 30px; border-radius:2px; font-size:13px; letter-spacing:.04em; transition:background .25s,color .25s; }
+  #shopify-section-{{ uid }} .yb-btn:hover{ background:var(--ink); color:var(--bg); }
+  #shopify-section-{{ uid }} .yb-hero .yb-btn{ margin-top:30px; }
+  #shopify-section-{{ uid }} .yb-hero-img{ margin:clamp(32px,5vw,64px) 0 0; }
+  #shopify-section-{{ uid }} .yb-hero-img img{ width:100%; border-radius:4px; aspect-ratio:21/9; object-fit:cover; background:var(--card); }
+
+  /* pillars */
+  #shopify-section-{{ uid }} .yb-pillars{ display:flex; flex-direction:column; gap:clamp(56px,8vw,112px); margin-top:clamp(56px,8vw,112px); }
+  #shopify-section-{{ uid }} .yb-pillar{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,72px); align-items:center; }
+  #shopify-section-{{ uid }} .yb-pillar.imgright .yb-p-media{ order:2; }
+  #shopify-section-{{ uid }} .yb-p-media img{ width:100%; border-radius:4px; aspect-ratio:4/3; object-fit:cover; background:var(--card); }
+  #shopify-section-{{ uid }} .yb-p-media.ph{ width:100%; aspect-ratio:4/3; border-radius:4px; background:var(--card); }
+  #shopify-section-{{ uid }} .yb-p-num{ font-family:var(--serif); font-size:clamp(38px,4.6vw,64px); line-height:1; color:var(--accent); opacity:.32; margin-bottom:16px; }
+  #shopify-section-{{ uid }} .yb-p-h{ font-family:var(--serif); font-weight:500; line-height:1.1; font-size:clamp(25px,3.1vw,40px); margin:0 0 18px; }
+  #shopify-section-{{ uid }} .yb-p-body{ font-size:17px; line-height:1.72; color:var(--muted); }
+  #shopify-section-{{ uid }} .yb-p-body p{ margin:0 0 1em; } #shopify-section-{{ uid }} .yb-p-body p:last-child{ margin-bottom:0; }
+
+  /* ingredient spotlight */
+  #shopify-section-{{ uid }} .yb-spot{ margin-top:clamp(72px,10vw,140px); text-align:center; }
+  #shopify-section-{{ uid }} .yb-spot h2{ font-family:var(--serif); font-weight:500; line-height:1.1; font-size:clamp(26px,3.4vw,44px); margin:0 0 16px; }
+  #shopify-section-{{ uid }} .yb-spot-text{ font-size:16px; line-height:1.65; color:var(--muted); max-width:54ch; margin:0 auto 48px; }
+  #shopify-section-{{ uid }} .yb-spot-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(16px,2vw,28px); text-align:left; }
+  #shopify-section-{{ uid }} .yb-ing img,
+  #shopify-section-{{ uid }} .yb-ing .ph{ width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; background:var(--card); display:block; }
+  #shopify-section-{{ uid }} .yb-ing .nm{ font-family:var(--serif); font-size:20px; margin:14px 0 4px; }
+  #shopify-section-{{ uid }} .yb-ing .note{ font-size:13px; color:var(--muted); line-height:1.5; }
+
+  /* closing CTA */
+  #shopify-section-{{ uid }} .yb-cta{ margin-top:clamp(72px,10vw,140px); }
+  #shopify-section-{{ uid }} .yb-cta-box{ background:var(--cta-bg); color:var(--cta-fg); text-align:center; border-radius:6px; padding:clamp(52px,9vw,116px) clamp(24px,5vw,56px); }
+  #shopify-section-{{ uid }} .yb-cta-box h2{ font-family:var(--serif); font-weight:500; line-height:1.08; font-size:clamp(28px,4.2vw,54px); margin:0 0 28px; }
+  #shopify-section-{{ uid }} .yb-cta-box .yb-btn{ border-color:var(--cta-fg); color:var(--cta-fg); }
+  #shopify-section-{{ uid }} .yb-cta-box .yb-btn:hover{ background:var(--cta-fg); color:var(--cta-bg); }
+
+  @media (max-width:900px){
+    #shopify-section-{{ uid }} .yb-pillar{ grid-template-columns:1fr; gap:22px; }
+    #shopify-section-{{ uid }} .yb-pillar.imgright .yb-p-media{ order:0; }
+    #shopify-section-{{ uid }} .yb-spot-grid{ grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:520px){
+    #shopify-section-{{ uid }} .yb-spot-grid{ grid-template-columns:1fr 1fr; }
+  }
+</style>
+
+<div class="yb-why">
+  <div class="yb-in">
+
+    <header class="yb-hero">
+      {% if s.eyebrow != blank %}<div class="yb-eyebrow">{{ s.eyebrow }}</div>{% endif %}
+      {% if s.heading != blank %}<h1 class="yb-h">{{ s.heading }}</h1>{% endif %}
+      {% if s.subtext != blank %}<div class="yb-lead">{{ s.subtext }}</div>{% endif %}
+      {% if s.button_label != blank %}<a class="yb-btn" href="{{ s.button_link | default: '#' }}">{{ s.button_label }} <span>&rarr;</span></a>{% endif %}
+    </header>
+
+    {% if s.hero_image != blank %}
+      <div class="yb-hero-img"><img src="{{ s.hero_image | image_url: width: 2200 }}" alt="" width="{{ s.hero_image.width }}" height="{{ s.hero_image.height }}" loading="lazy"></div>
+    {% endif %}
+
+    {%- assign pillar_count = 0 -%}
+    {%- for b in section.blocks -%}{%- if b.type == 'pillar' -%}{%- assign pillar_count = pillar_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+    {% if pillar_count > 0 %}
+      <div class="yb-pillars">
+        {%- assign pidx = 0 -%}
+        {% for b in section.blocks %}
+          {% if b.type == 'pillar' %}
+            {%- assign pidx = pidx | plus: 1 -%}
+            {%- assign mod = pidx | modulo: 2 -%}
+            <section class="yb-pillar {% if mod == 0 %}imgright{% else %}imgleft{% endif %}" {{ b.shopify_attributes }}>
+              {% if b.settings.image != blank %}
+                <div class="yb-p-media"><img src="{{ b.settings.image | image_url: width: 1200 }}" alt="" width="{{ b.settings.image.width }}" height="{{ b.settings.image.height }}" loading="lazy"></div>
+              {% else %}
+                <div class="yb-p-media ph"></div>
+              {% endif %}
+              <div class="yb-p-text">
+                <div class="yb-p-num">{% if pidx < 10 %}0{% endif %}{{ pidx }}</div>
+                {% if b.settings.heading != blank %}<h2 class="yb-p-h yb-h">{{ b.settings.heading }}</h2>{% endif %}
+                {% if b.settings.body != blank %}<div class="yb-p-body">{{ b.settings.body }}</div>{% endif %}
+              </div>
+            </section>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {%- assign ing_count = 0 -%}
+    {%- for b in section.blocks -%}{%- if b.type == 'ingredient' -%}{%- assign ing_count = ing_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+    {% if ing_count > 0 %}
+      <section class="yb-spot">
+        {% if s.spotlight_eyebrow != blank %}<div class="yb-eyebrow">{{ s.spotlight_eyebrow }}</div>{% endif %}
+        {% if s.spotlight_heading != blank %}<h2 class="yb-h">{{ s.spotlight_heading }}</h2>{% endif %}
+        {% if s.spotlight_text != blank %}<p class="yb-spot-text">{{ s.spotlight_text }}</p>{% endif %}
+        <div class="yb-spot-grid">
+          {% for b in section.blocks %}
+            {% if b.type == 'ingredient' %}
+              <div class="yb-ing" {{ b.shopify_attributes }}>
+                {% if b.settings.image != blank %}<img src="{{ b.settings.image | image_url: width: 600 }}" alt="{{ b.settings.name | escape }}" width="{{ b.settings.image.width }}" height="{{ b.settings.image.height }}" loading="lazy">{% else %}<span class="ph"></span>{% endif %}
+                {% if b.settings.name != blank %}<div class="nm">{{ b.settings.name }}</div>{% endif %}
+                {% if b.settings.note != blank %}<div class="note">{{ b.settings.note }}</div>{% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+
+    {% if s.cta_heading != blank %}
+      <section class="yb-cta">
+        <div class="yb-cta-box">
+          <h2 class="yb-h">{{ s.cta_heading }}</h2>
+          {% if s.cta_button_label != blank %}<a class="yb-btn" href="{{ s.cta_button_link | default: '#' }}">{{ s.cta_button_label }} <span>&rarr;</span></a>{% endif %}
+        </div>
+      </section>
+    {% endif %}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "YumBud · Why",
+  "tag": "section",
+  "class": "yumbud-why-section",
+  "max_blocks": 16,
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why YumBud" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "info": "Italicise a word to tint it with the accent colour.", "default": "Good treats shouldn't need a <em>chemistry degree</em> to understand." },
+    { "type": "richtext", "id": "subtext", "label": "Lead paragraph", "default": "<p>Most treats hide behind long ingredient lists and words you'd have to Google. We went the other way — real, whole-food ingredients you can name, balanced by vets, made for the ones who love us back.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the pantry" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "image_picker", "id": "hero_image", "label": "Wide image under hero (optional)" },
+    { "type": "header", "content": "Ingredient spotlight" },
+    { "type": "text", "id": "spotlight_eyebrow", "label": "Eyebrow", "default": "What's inside" },
+    { "type": "inline_richtext", "id": "spotlight_heading", "label": "Heading", "default": "Real food you can <em>name.</em>" },
+    { "type": "text", "id": "spotlight_text", "label": "Text (optional)", "default": "Whole ingredients you'd recognise in your own kitchen — nothing you can't." },
+    { "type": "header", "content": "Closing call-to-action" },
+    { "type": "inline_richtext", "id": "cta_heading", "label": "Heading", "default": "Every good dog deserves the <em>good stuff.</em>" },
+    { "type": "text", "id": "cta_button_label", "label": "Button label", "default": "Shop now" },
+    { "type": "url", "id": "cta_button_link", "label": "Button link" },
+    { "type": "color", "id": "cta_bg", "label": "CTA background", "default": "#211D18" },
+    { "type": "color", "id": "cta_fg", "label": "CTA text", "default": "#F2F1EC" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2F1EC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#574F46" },
+    { "type": "color", "id": "accent_color", "label": "Accent (italic words)", "default": "#535B72" },
+    { "type": "color", "id": "card_color", "label": "Image placeholder", "default": "#ECEAE3" },
+    { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "assistant_n4" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Reason (pillar)",
+      "settings": [
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Heading <em>here.</em>" },
+        { "type": "richtext", "id": "body", "label": "Body" },
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    },
+    {
+      "type": "ingredient",
+      "name": "Ingredient card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Apple" },
+        { "type": "text", "id": "note", "label": "Note", "default": "Crunch + natural sweetness" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "YumBud · Why",
+      "blocks": [
+        { "type": "pillar", "settings": { "heading": "Ingredients you can <em>name.</em>", "body": "<p>Crisp apples, garden herbs, leafy greens, real chicken — whole foods you'd recognise in your own kitchen. No fillers, no dyes, no mystery powders.</p>" } },
+        { "type": "pillar", "settings": { "heading": "Superfoods that <em>do more.</em>", "body": "<p>We don't just leave the bad stuff out — we put good stuff in. Fresh herbs and vegetables, the kind of nutrient-rich greens that help your dog feel their freshest: brighter, lighter, ready for the next walk.</p>" } },
+        { "type": "pillar", "settings": { "heading": "Formulated by vets, <em>made to standard.</em>", "body": "<p>Every recipe is carefully balanced by veterinarians and pet nutritionists, then made in a registered, compliant facility — so what's simple on the label is serious behind it.</p>" } },
+        { "type": "pillar", "settings": { "heading": "Food we'd <em>eat ourselves.</em>", "body": "<p>That's our one rule. If it wouldn't pass our own kitchen, it doesn't go in the bag.</p>" } },
+        { "type": "ingredient", "settings": { "name": "Apple", "note": "Crunch + natural sweetness" } },
+        { "type": "ingredient", "settings": { "name": "Garden herbs", "note": "Fresh, aromatic, real" } },
+        { "type": "ingredient", "settings": { "name": "Arugula", "note": "Leafy greens, peppery bite" } },
+        { "type": "ingredient", "settings": { "name": "Chicken", "note": "Real, lean protein" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

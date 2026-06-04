@@ -1,0 +1,368 @@
+{%- comment -%}
+  YumBud · Free Toy Selector
+  Shows free toy slots based on subscribe-save products in cart.
+  Every 3 subscribe-save items = 1 free toy slot.
+  Toy products are loaded dynamically via Shopify Product API.
+  Add toy blocks in the editor — no hardcoded products.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+
+<style>
+  #shopify-section-{{ uid }}{
+    --yb-bg:{{ s.bg_color }};
+    --yb-ink:{{ s.text_color }};
+    --yb-muted:{{ s.muted_color }};
+    --yb-accent:{{ s.accent_color }};
+    --yb-border:{{ s.border_color }};
+    --yb-ease:cubic-bezier(.22,.61,.36,1);
+  }
+
+  .yb-ft-{{ uid }}{
+    background:var(--yb-bg);
+    padding:{{ s.padding_top }}px 0 {{ s.padding_bottom }}px;
+    display:none; /* hidden by default, shown by JS */
+  }
+  .yb-ft-{{ uid }}.visible{ display:block; }
+
+  .yb-ft-wrap-{{ uid }}{
+    max-width:900px; margin:0 auto; padding:0 40px;
+  }
+
+  /* Header */
+  .yb-ft-head-{{ uid }}{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:20px;
+  }
+  .yb-ft-label-{{ uid }}{
+    font-size:11px; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--yb-muted); font-weight:500;
+  }
+  .yb-ft-progress-{{ uid }}{
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--yb-accent); font-weight:500;
+  }
+
+  /* Slots container */
+  .yb-ft-slots-{{ uid }}{
+    display:flex; flex-direction:column; gap:12px;
+  }
+
+  /* Single slot */
+  .yb-ft-slot-{{ uid }}{
+    border:1px solid var(--yb-border);
+    border-radius:3px; padding:16px 20px;
+    background:#fff;
+  }
+  .yb-ft-slot-title-{{ uid }}{
+    font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--yb-muted); margin-bottom:14px; font-weight:500;
+  }
+
+  /* Toy options grid */
+  .yb-ft-options-{{ uid }}{
+    display:flex; flex-wrap:wrap; gap:10px;
+  }
+  .yb-ft-option-{{ uid }}{
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    cursor:pointer; padding:10px 14px;
+    border:1.5px solid var(--yb-border);
+    border-radius:3px; transition:.25s var(--yb-ease);
+    min-width:90px; text-align:center;
+    background:#fff;
+  }
+  .yb-ft-option-{{ uid }}:hover{
+    border-color:var(--yb-accent);
+  }
+  .yb-ft-option-{{ uid }}.selected{
+    border-color:var(--yb-accent);
+    background:{{ s.accent_color }}0f;
+  }
+  .yb-ft-option-{{ uid }} img{
+    width:56px; height:56px; object-fit:cover; border-radius:2px;
+    background:#f5f3ef;
+  }
+  .yb-ft-option-name-{{ uid }}{
+    font-size:11px; color:var(--yb-ink); font-weight:400; line-height:1.3;
+  }
+  .yb-ft-option-free-{{ uid }}{
+    font-size:10px; color:var(--yb-accent); font-weight:500;
+    letter-spacing:.08em; text-transform:uppercase;
+  }
+
+  /* Add button */
+  .yb-ft-addbtn-{{ uid }}{
+    margin-top:14px;
+    display:inline-flex; align-items:center; gap:.5em;
+    font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    font-weight:500; padding:12px 24px; border-radius:3px;
+    background:var(--yb-accent); color:#fff; border:none;
+    cursor:pointer; transition:.3s var(--yb-ease);
+  }
+  .yb-ft-addbtn-{{ uid }}:hover{ opacity:.8; }
+  .yb-ft-addbtn-{{ uid }}:disabled{ opacity:.4; cursor:not-allowed; }
+  .yb-ft-addbtn-{{ uid }}.added{
+    background:#5a7a5a;
+  }
+
+  /* Locked slot */
+  .yb-ft-slot-{{ uid }}.locked{
+    opacity:.45; pointer-events:none;
+  }
+
+  @media (max-width:600px){
+    .yb-ft-wrap-{{ uid }}{ padding:0 24px; }
+    .yb-ft-options-{{ uid }}{ gap:8px; }
+    .yb-ft-option-{{ uid }}{ min-width:76px; padding:8px 10px; }
+    .yb-ft-option-{{ uid }} img{ width:44px; height:44px; }
+  }
+</style>
+
+<div class="yb-ft-{{ uid }}" id="yb-ft-{{ uid }}">
+  <div class="yb-ft-wrap-{{ uid }}">
+    <div class="yb-ft-head-{{ uid }}">
+      <div class="yb-ft-label-{{ uid }}">{{ s.section_label | default: 'Free Toy — Every 3 Bags' }}</div>
+      <div class="yb-ft-progress-{{ uid }}" id="yb-ft-progress-{{ uid }}"></div>
+    </div>
+    <div class="yb-ft-slots-{{ uid }}" id="yb-ft-slots-{{ uid }}"></div>
+  </div>
+</div>
+
+{%- comment -%} Pass toy data to JS via JSON in a hidden script tag {%- endcomment -%}
+<script type="application/json" id="yb-ft-toys-{{ uid }}">
+[
+  {% for block in section.blocks %}
+    {
+      "handle": {{ block.settings.toy_handle | json }},
+      "name": {{ block.settings.toy_name | json }},
+      "image": {{ block.settings.toy_image | image_url: width: 200 | json }}
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
+</script>
+
+<script>
+(function(){
+  var uid = {{ uid | json }};
+  var BAGS_PER_TOY = {{ s.bags_per_toy | default: 3 }};
+  var SUB_COLLECTION = {{ s.subscribe_collection | default: 'subscribe-save' | json }};
+
+  var section = document.getElementById('yb-ft-' + uid);
+  var slotsContainer = document.getElementById('yb-ft-slots-' + uid);
+  var progressEl = document.getElementById('yb-ft-progress-' + uid);
+
+  // Load toy data from JSON tag
+  var toysRaw = [];
+  try {
+    var toysJson = document.getElementById('yb-ft-toys-' + uid);
+    if(toysJson) toysRaw = JSON.parse(toysJson.textContent);
+  } catch(e){}
+
+  // Filter out empty toy blocks
+  var toys = toysRaw.filter(function(t){ return t.handle && t.handle.trim() !== ''; });
+
+  if(toys.length === 0) return; // no toys configured
+
+  // State: selected variant per slot
+  var selections = {}; // slot index -> {handle, variantId, name}
+  var variantCache = {}; // handle -> variantId
+
+  // Fetch variant ID for a handle
+  function getVariantId(handle, cb){
+    if(variantCache[handle]){ cb(variantCache[handle]); return; }
+    fetch('/products/' + handle + '.js')
+      .then(function(r){ return r.json(); })
+      .then(function(p){
+        var vid = p.variants && p.variants[0] ? p.variants[0].id : null;
+        if(vid) variantCache[handle] = vid;
+        cb(vid);
+      })
+      .catch(function(){ cb(null); });
+  }
+
+  // Get subscribe-save product quantity from cart
+  function getSubQty(cb){
+    fetch('/cart.js')
+      .then(function(r){ return r.json(); })
+      .then(function(cart){
+        var items = cart.items || [];
+        // We need to check each item's collections via product endpoint
+        var total = 0;
+        var pending = items.length;
+        if(pending === 0){ cb(0); return; }
+        items.forEach(function(item){
+          fetch('/products/' + item.handle + '.js')
+            .then(function(r){ return r.json(); })
+            .then(function(p){
+              // Check if product has subscribe collection tag or type
+              // We use product type or tags — check if handle matches subscribe products
+              // Since we can't check collections directly from product.js,
+              // we use a tag "subscribe-save" that you add to your subscription products
+              var tags = (p.tags || []).map(function(t){ return t.toLowerCase().trim(); });
+              var isSubscribe = tags.indexOf(SUB_COLLECTION) !== -1;
+              if(isSubscribe) total += item.quantity;
+              pending--;
+              if(pending === 0) cb(total);
+            })
+            .catch(function(){
+              pending--;
+              if(pending === 0) cb(total);
+            });
+        }); 
+      })
+      .catch(function(){ cb(0); });
+  }
+
+  // Render slots
+  function renderSlots(freeSlots){
+    slotsContainer.innerHTML = '';
+    selections = {};
+
+    for(var i = 0; i < freeSlots; i++){
+      (function(slotIdx){
+        var slot = document.createElement('div');
+        slot.className = 'yb-ft-slot-' + uid;
+        slot.id = 'yb-ft-slot-' + uid + '-' + slotIdx;
+
+        var title = document.createElement('div');
+        title.className = 'yb-ft-slot-title-' + uid;
+        title.textContent = 'Free Toy #' + (slotIdx + 1);
+        slot.appendChild(title);
+
+        var optionsDiv = document.createElement('div');
+        optionsDiv.className = 'yb-ft-options-' + uid;
+
+        toys.forEach(function(toy){
+          var opt = document.createElement('div');
+          opt.className = 'yb-ft-option-' + uid;
+          opt.dataset.handle = toy.handle;
+
+          var img = document.createElement('img');
+          img.src = toy.image || 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56"%3E%3Crect fill="%23f0ede8" width="56" height="56"/%3E%3C/svg%3E';
+          img.alt = toy.name || toy.handle;
+          opt.appendChild(img);
+
+          var name = document.createElement('div');
+          name.className = 'yb-ft-option-name-' + uid;
+          name.textContent = toy.name || toy.handle;
+          opt.appendChild(name);
+
+          var free = document.createElement('div');
+          free.className = 'yb-ft-option-free-' + uid;
+          free.textContent = 'Free';
+          opt.appendChild(free);
+
+          opt.addEventListener('click', function(){
+            // Deselect others in this slot
+            optionsDiv.querySelectorAll('.yb-ft-option-' + uid).forEach(function(o){
+              o.classList.remove('selected');
+            });
+            opt.classList.add('selected');
+            selections[slotIdx] = toy.handle;
+            addBtn.disabled = false;
+          });
+
+          optionsDiv.appendChild(opt);
+        });
+
+        slot.appendChild(optionsDiv);
+
+        var addBtn = document.createElement('button');
+        addBtn.className = 'yb-ft-addbtn-' + uid;
+        addBtn.textContent = 'Add to Cart';
+        addBtn.disabled = true;
+        addBtn.addEventListener('click', function(){
+          var handle = selections[slotIdx];
+          if(!handle) return;
+          addBtn.disabled = true;
+          addBtn.textContent = 'Adding…';
+          getVariantId(handle, function(vid){
+            if(!vid){ addBtn.textContent = 'Error'; return; }
+            fetch('/cart/add.js', {
+              method:'POST',
+              headers:{'Content-Type':'application/json'},
+              body: JSON.stringify({ items:[{ id: vid, quantity: 1, properties:{ _free_toy: 'true' } }] })
+            })
+            .then(function(r){ return r.json(); })
+            .then(function(){
+              addBtn.textContent = '✓ Added!';
+              addBtn.classList.add('added');
+              // Lock this slot
+              slot.classList.add('locked');
+              // Refresh cart count if theme supports it
+              document.dispatchEvent(new CustomEvent('cart:refresh'));
+            })
+            .catch(function(){
+              addBtn.disabled = false;
+              addBtn.textContent = 'Try Again';
+            });
+          });
+        });
+
+        slot.appendChild(addBtn);
+        slotsContainer.appendChild(slot);
+      })(i);
+    }
+  }
+
+  // Main update function
+  function update(){
+    getSubQty(function(qty){
+      var freeSlots = Math.floor(qty / BAGS_PER_TOY);
+      if(freeSlots > 0){
+        section.classList.add('visible');
+        progressEl.textContent = qty + ' bag' + (qty !== 1 ? 's' : '') + ' → ' + freeSlots + ' free toy' + (freeSlots !== 1 ? 's' : '');
+        renderSlots(freeSlots);
+      } else {
+        section.classList.remove('visible');
+      }
+    });
+  }
+
+  // Run on load
+  update();
+
+  // Re-run when cart changes (listen to common theme events)
+  document.addEventListener('cart:updated', update);
+  document.addEventListener('cart:change', update);
+
+  // Also poll every 3 seconds as fallback for custom cart sections
+  setInterval(update, 3000);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "YumBud · Free Toy Selector",
+  "tag": "section",
+  "class": "yumbud-free-toy-section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "header", "content": "Rules" },
+    { "type": "range", "id": "bags_per_toy", "label": "Bags needed per free toy", "min": 1, "max": 10, "step": 1, "default": 3 },
+    { "type": "text", "id": "subscribe_collection", "label": "Subscribe collection tag", "default": "subscribe-save", "info": "Add this tag to all your subscription products in Shopify Products editor." },
+    { "type": "text", "id": "section_label", "label": "Section label", "default": "Free Toy — Every 3 Bags" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FAF8F3" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#8C8578" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#535B72" },
+    { "type": "color", "id": "border_color", "label": "Border", "default": "#E5E1D7" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 32 }
+  ],
+  "blocks": [
+    {
+      "type": "toy",
+      "name": "Toy option",
+      "settings": [
+        { "type": "text", "id": "toy_handle", "label": "Product handle", "info": "e.g. toy1 — found in product URL" },
+        { "type": "text", "id": "toy_name", "label": "Display name", "default": "Mystery Toy" },
+        { "type": "image_picker", "id": "toy_image", "label": "Toy image" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "YumBud · Free Toy Selector" } ]
+}
+{% endschema %}
