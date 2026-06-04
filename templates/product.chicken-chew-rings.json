@@ -297,6 +297,7 @@
           "settings": {
             "heading": "What's inside",
             "body": "<p>Whole foods you'd recognise — apples, garden herbs, leafy greens, and a little real chicken. Gently made so the good stuff stays good. Nothing you can't pronounce.</p>",
+            "image": "shopify://shop_images/content.png",
             "image_position": "left"
           }
         },
