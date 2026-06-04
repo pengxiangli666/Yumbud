@@ -29,9 +29,105 @@
         "padding-block-start": 40,
         "padding-block-end": 80
       }
+    },
+    "yumbud_why_7rbGNA": {
+      "type": "yumbud-why",
+      "blocks": {
+        "pillar_9rm4wH": {
+          "type": "pillar",
+          "settings": {
+            "heading": "Ingredients you can <em>name.</em>",
+            "body": "<p>Crisp apples, garden herbs, leafy greens, real chicken — whole foods you'd recognise in your own kitchen. No fillers, no dyes, no mystery powders.</p>"
+          }
+        },
+        "pillar_tR7tgF": {
+          "type": "pillar",
+          "settings": {
+            "heading": "Superfoods that <em>do more.</em>",
+            "body": "<p>We don't just leave the bad stuff out — we put good stuff in. Fresh herbs and vegetables, the kind of nutrient-rich greens that help your dog feel their freshest: brighter, lighter, ready for the next walk.</p>"
+          }
+        },
+        "pillar_RiYeFK": {
+          "type": "pillar",
+          "settings": {
+            "heading": "Formulated by vets, <em>made to standard.</em>",
+            "body": "<p>Every recipe is carefully balanced by veterinarians and pet nutritionists, then made in a registered, compliant facility — so what's simple on the label is serious behind it.</p>"
+          }
+        },
+        "pillar_BcUDGk": {
+          "type": "pillar",
+          "settings": {
+            "heading": "Food we'd <em>eat ourselves.</em>",
+            "body": "<p>That's our one rule. If it wouldn't pass our own kitchen, it doesn't go in the bag.</p>"
+          }
+        },
+        "ingredient_cWedFq": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Apple",
+            "note": "Crunch + natural sweetness"
+          }
+        },
+        "ingredient_D3m638": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Garden herbs",
+            "note": "Fresh, aromatic, real"
+          }
+        },
+        "ingredient_XzVibz": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Arugula",
+            "note": "Leafy greens, peppery bite"
+          }
+        },
+        "ingredient_LFAcRY": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Chicken",
+            "note": "Real, lean protein"
+          }
+        }
+      },
+      "block_order": [
+        "pillar_9rm4wH",
+        "pillar_tR7tgF",
+        "pillar_RiYeFK",
+        "pillar_BcUDGk",
+        "ingredient_cWedFq",
+        "ingredient_D3m638",
+        "ingredient_XzVibz",
+        "ingredient_LFAcRY"
+      ],
+      "name": "YumBud · Why",
+      "settings": {
+        "eyebrow": "Why YumBud",
+        "heading": "Good treats shouldn't need a <em>chemistry degree</em> to understand.",
+        "subtext": "<p>Most treats hide behind long ingredient lists and words you'd have to Google. We went the other way — real, whole-food ingredients you can name, balanced by vets, made for the ones who love us back.</p>",
+        "button_label": "Shop",
+        "button_link": "",
+        "spotlight_eyebrow": "What's inside",
+        "spotlight_heading": "Real food you can <em>name.</em>",
+        "spotlight_text": "Whole ingredients you'd recognise in your own kitchen — nothing you can't.",
+        "cta_heading": "Every good dog deserves the <em>good stuff.</em>",
+        "cta_button_label": "Shop now",
+        "cta_button_link": "",
+        "cta_bg": "#211D18",
+        "cta_fg": "#F2F1EC",
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#574F46",
+        "accent_color": "#535B72",
+        "card_color": "#ECEAE3",
+        "heading_font": "assistant_n4",
+        "padding_top": 72,
+        "padding_bottom": 88
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "yumbud_why_7rbGNA"
   ]
 }
