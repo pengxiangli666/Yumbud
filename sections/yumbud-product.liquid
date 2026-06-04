@@ -1,8 +1,6 @@
 {%- comment -%}
-  YumBud · Product Content
-  Content blocks below the buy box: highlights, ingredients,
-  feeding guide, text, accordion. Place this section below
-  "YumBud · Product Top" with any other sections in between.
+  YumBud · Product Content v2
+  Adds ingredients_grid block (horizontal scroll cards) to replace split layout.
 {%- endcomment -%}
 {%- assign s = section.settings -%}
 {%- assign uid = section.id -%}
@@ -20,7 +18,8 @@
   #shopify-section-{{ uid }} .yb-content{ display:flex; flex-direction:column; gap:clamp(48px,7vw,96px); }
   #shopify-section-{{ uid }} .yb-sec-h{ font-family:var(--serif); font-weight:500; line-height:1.1; font-size:clamp(24px,3vw,38px); margin:0 0 20px; }
   #shopify-section-{{ uid }} .yb-rte{ font-size:16px; line-height:1.7; color:var(--muted); }
-  #shopify-section-{{ uid }} .yb-rte p{ margin:0 0 1em; } #shopify-section-{{ uid }} .yb-rte p:last-child{ margin-bottom:0; }
+  #shopify-section-{{ uid }} .yb-rte p{ margin:0 0 1em; }
+  #shopify-section-{{ uid }} .yb-rte p:last-child{ margin-bottom:0; }
 
   /* highlights */
   #shopify-section-{{ uid }} .yb-hl-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(18px,2.4vw,32px); }
@@ -29,7 +28,23 @@
   #shopify-section-{{ uid }} .yb-hl .lab{ font-family:var(--serif); font-size:19px; margin-bottom:5px; }
   #shopify-section-{{ uid }} .yb-hl .txt{ font-size:14px; line-height:1.55; color:var(--muted); }
 
-  /* split */
+  /* ingredients grid */
+  #shopify-section-{{ uid }} .yb-ig-header{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:28px; }
+  #shopify-section-{{ uid }} .yb-ig-header-left{ max-width:420px; }
+  #shopify-section-{{ uid }} .yb-ig-header-left h2{ margin-bottom:10px; }
+  #shopify-section-{{ uid }} .yb-ig-header-left p{ font-size:15px; color:var(--muted); line-height:1.6; margin:0; }
+  #shopify-section-{{ uid }} .yb-ig-viewall{ font-size:13px; color:var(--ink); text-decoration:underline; text-underline-offset:3px; white-space:nowrap; }
+  #shopify-section-{{ uid }} .yb-ig-scroller{ display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; padding-bottom:4px; cursor:grab; }
+  #shopify-section-{{ uid }} .yb-ig-scroller::-webkit-scrollbar{ display:none; }
+  #shopify-section-{{ uid }} .yb-ig-scroller.dragging{ cursor:grabbing; scroll-snap-type:none; }
+  #shopify-section-{{ uid }} .yb-ig-card{ flex:none; width:{{ s.card_width }}px; scroll-snap-align:start; position:relative; border-radius:4px; overflow:hidden; background:var(--card); aspect-ratio:3/4; }
+  #shopify-section-{{ uid }} .yb-ig-card img{ width:100%; height:100%; object-fit:cover; transition:transform .5s cubic-bezier(.22,.61,.36,1); }
+  #shopify-section-{{ uid }} .yb-ig-card:hover img{ transform:scale(1.04); }
+  #shopify-section-{{ uid }} .yb-ig-label{ position:absolute; bottom:0; left:0; right:0; padding:12px 16px; background:linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%); display:flex; justify-content:space-between; align-items:center; }
+  #shopify-section-{{ uid }} .yb-ig-label span{ font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#fff; font-weight:500; }
+  #shopify-section-{{ uid }} .yb-ig-plus{ width:28px; height:28px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-size:16px; flex:none; }
+
+  /* split (legacy ingredients block) */
   #shopify-section-{{ uid }} .yb-split{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4vw,56px); align-items:center; }
   #shopify-section-{{ uid }} .yb-split.img-right .yb-split-media{ order:2; }
   #shopify-section-{{ uid }} .yb-split-media img{ width:100%; border-radius:6px; aspect-ratio:4/3; object-fit:cover; background:var(--card); }
@@ -47,6 +62,8 @@
     #shopify-section-{{ uid }} .yb-hl-grid{ grid-template-columns:1fr 1fr; gap:28px; }
     #shopify-section-{{ uid }} .yb-split{ grid-template-columns:1fr; gap:22px; }
     #shopify-section-{{ uid }} .yb-split.img-right .yb-split-media{ order:0; }
+    #shopify-section-{{ uid }} .yb-ig-header{ flex-direction:column; align-items:flex-start; gap:10px; }
+    #shopify-section-{{ uid }} .yb-ig-card{ width:220px; }
   }
 </style>
 
@@ -79,6 +96,36 @@
                       {% endcase %}
                       <div class="lab">{{ block.settings[lk] }}</div>
                       {% if block.settings[tk] != blank %}<div class="txt">{{ block.settings[tk] }}</div>{% endif %}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </section>
+
+          {% when 'ingredients_grid' %}
+            <section {{ block.shopify_attributes }}>
+              <div class="yb-ig-header">
+                <div class="yb-ig-header-left">
+                  {% if block.settings.heading != blank %}<h2 class="yb-sec-h">{{ block.settings.heading }}</h2>{% endif %}
+                  {% if block.settings.subheading != blank %}<p>{{ block.settings.subheading }}</p>{% endif %}
+                </div>
+                {% if block.settings.viewall_label != blank and block.settings.viewall_link != blank %}
+                  <a class="yb-ig-viewall" href="{{ block.settings.viewall_link }}">{{ block.settings.viewall_label }}</a>
+                {% endif %}
+              </div>
+              <div class="yb-ig-scroller" data-yb-ig-scroller>
+                {% for i in (1..8) %}
+                  {%- assign imgk = 'ing_' | append: i | append: '_image' -%}
+                  {%- assign namek = 'ing_' | append: i | append: '_name' -%}
+                  {% if block.settings[imgk] != blank %}
+                    <div class="yb-ig-card">
+                      <img src="{{ block.settings[imgk] | image_url: width: 800 }}" alt="{{ block.settings[namek] | escape }}" loading="lazy">
+                      {% if block.settings[namek] != blank %}
+                        <div class="yb-ig-label">
+                          <span>{{ block.settings[namek] }}</span>
+                          <div class="yb-ig-plus">+</div>
+                        </div>
+                      {% endif %}
                     </div>
                   {% endif %}
                 {% endfor %}
@@ -127,6 +174,17 @@
   </div>
 </div>
 
+<script>
+document.querySelectorAll('[data-yb-ig-scroller]').forEach(function(el){
+  var down=false, sx=0, sl=0, moved=0;
+  el.addEventListener('pointerdown',function(e){ down=true; moved=0; sx=e.clientX; sl=el.scrollLeft; el.classList.add('dragging'); });
+  el.addEventListener('pointermove',function(e){ if(!down) return; var d=e.clientX-sx; moved=Math.abs(d); el.scrollLeft=sl-d; });
+  var up=function(){ down=false; el.classList.remove('dragging'); };
+  el.addEventListener('pointerup',up);
+  el.addEventListener('pointerleave',up);
+});
+</script>
+
 {% schema %}
 {
   "name": "YumBud · Product Content",
@@ -134,12 +192,13 @@
   "class": "yumbud-product-content-section",
   "max_blocks": 12,
   "settings": [
+    { "type": "range", "id": "card_width", "label": "Ingredient card width", "min": 180, "max": 360, "step": 10, "unit": "px", "default": 260 },
     { "type": "header", "content": "Colours" },
     { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2F1EC" },
     { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
     { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#574F46" },
-    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#535B72" },
-    { "type": "color", "id": "card_color", "label": "Image placeholder", "default": "#ECEAE3" },
+    { "type": "color", "id": "accent_color", "label": "Accent / + button", "default": "#535B72" },
+    { "type": "color", "id": "card_color", "label": "Card background", "default": "#ECEAE3" },
     { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "assistant_n4" },
     { "type": "header", "content": "Spacing" },
     { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 },
@@ -166,8 +225,42 @@
       ]
     },
     {
+      "type": "ingredients_grid",
+      "name": "Ingredients grid",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Ingredient quality that makes a difference" },
+        { "type": "text", "id": "subheading", "label": "Subheading", "default": "Human-grade proteins, fruits, vegetables, and herbs. That's it." },
+        { "type": "text", "id": "viewall_label", "label": "View all link label", "default": "View All" },
+        { "type": "url", "id": "viewall_link", "label": "View all link URL" },
+        { "type": "header", "content": "Ingredient 1" },
+        { "type": "image_picker", "id": "ing_1_image", "label": "Image" },
+        { "type": "text", "id": "ing_1_name", "label": "Name", "default": "Chicken" },
+        { "type": "header", "content": "Ingredient 2" },
+        { "type": "image_picker", "id": "ing_2_image", "label": "Image" },
+        { "type": "text", "id": "ing_2_name", "label": "Name", "default": "Arugula" },
+        { "type": "header", "content": "Ingredient 3" },
+        { "type": "image_picker", "id": "ing_3_image", "label": "Image" },
+        { "type": "text", "id": "ing_3_name", "label": "Name", "default": "Cucumber" },
+        { "type": "header", "content": "Ingredient 4" },
+        { "type": "image_picker", "id": "ing_4_image", "label": "Image" },
+        { "type": "text", "id": "ing_4_name", "label": "Name", "default": "Calendula" },
+        { "type": "header", "content": "Ingredient 5" },
+        { "type": "image_picker", "id": "ing_5_image", "label": "Image" },
+        { "type": "text", "id": "ing_5_name", "label": "Name" },
+        { "type": "header", "content": "Ingredient 6" },
+        { "type": "image_picker", "id": "ing_6_image", "label": "Image" },
+        { "type": "text", "id": "ing_6_name", "label": "Name" },
+        { "type": "header", "content": "Ingredient 7" },
+        { "type": "image_picker", "id": "ing_7_image", "label": "Image" },
+        { "type": "text", "id": "ing_7_name", "label": "Name" },
+        { "type": "header", "content": "Ingredient 8" },
+        { "type": "image_picker", "id": "ing_8_image", "label": "Image" },
+        { "type": "text", "id": "ing_8_name", "label": "Name" }
+      ]
+    },
+    {
       "type": "ingredients",
-      "name": "What's inside",
+      "name": "What's inside (split)",
       "settings": [
         { "type": "text", "id": "heading", "label": "Heading", "default": "What's inside" },
         { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Whole foods you'd recognise — apples, garden herbs, leafy greens, and a little real chicken.</p>" },
@@ -214,7 +307,7 @@
       "name": "YumBud · Product Content",
       "blocks": [
         { "type": "highlights" },
-        { "type": "ingredients" },
+        { "type": "ingredients_grid" },
         { "type": "feeding" },
         { "type": "accordion" }
       ]
