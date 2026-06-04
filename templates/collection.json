@@ -158,6 +158,7 @@
         "tiktok_url": "",
         "website_url": "",
         "website_label": "Visit Site",
+        "bg_image": "shopify://shop_images/siamese-cat-laying-in-white-bedding.jpg",
         "image_x": 50,
         "image_y": 50,
         "overlay_color": "#1A1710",
