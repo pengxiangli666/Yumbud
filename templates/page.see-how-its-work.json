@@ -63,7 +63,7 @@
         "stat_4AfWbm": {
           "type": "stat",
           "settings": {
-            "value": "12h",
+            "value": "12 Hour",
             "label": "Average gentle-dry time per batch"
           }
         },
