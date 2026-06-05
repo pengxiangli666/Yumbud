@@ -149,7 +149,7 @@
   window.ybPopClose = function(id){
     var el = document.getElementById('yb-popup-overlay-' + id);
     if(el) el.classList.remove('open');
-    setCookie('yb_popup_' + id, 30);
+    setCookie('yb_popup_' + id, 1);
   };
 
   document.getElementById('yb-popup-overlay-' + uid).addEventListener('click', function(e){
