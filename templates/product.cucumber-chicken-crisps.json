@@ -385,7 +385,7 @@
         "card_width": 260,
         "card_radius": 4,
         "card_border_color": "#fefefe",
-        "card_border_width": 2,
+        "card_border_width": 0,
         "label_bg": "#454540",
         "label_text_color": "#ffffff",
         "label_font_size": 14,
