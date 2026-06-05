@@ -24,7 +24,7 @@
         "close_label": "Close",
         "logo_light": "shopify://shop_images/logo_07104035-a897-4451-a70e-0cb163479272.png",
         "logo_height": 56,
-        "help_label": "Help Center",
+        "help_label": "",
         "help_link": "",
         "show_search": true,
         "show_account": true,
