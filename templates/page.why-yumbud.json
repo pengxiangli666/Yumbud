@@ -37,33 +37,38 @@
           "type": "pillar",
           "settings": {
             "heading": "Ingredients you can <em>name.</em>",
-            "body": "<p>Crisp apples, garden herbs, leafy greens, real chicken — whole foods you'd recognise in your own kitchen. No fillers, no dyes, no mystery powders.</p>"
+            "body": "<p>Crisp apples, garden herbs, leafy greens, real chicken — whole foods you'd recognise in your own kitchen. No fillers, no dyes, no mystery powders.</p>",
+            "image": "shopify://shop_images/ChatGPT_Image_202665_15_15_52_daa07769-4510-4917-b9d0-70e6fbf8580a.jpg"
           }
         },
         "pillar_tR7tgF": {
           "type": "pillar",
           "settings": {
             "heading": "Superfoods that <em>do more.</em>",
-            "body": "<p>We don't just leave the bad stuff out — we put good stuff in. Fresh herbs and vegetables, the kind of nutrient-rich greens that help your dog feel their freshest: brighter, lighter, ready for the next walk.</p>"
+            "body": "<p>We don't just leave the bad stuff out — we put good stuff in. Fresh herbs and vegetables, the kind of nutrient-rich greens that help your dog feel their freshest: brighter, lighter, ready for the next walk.</p>",
+            "image": "shopify://shop_images/1043eadb-3849-4800-81f6-9aa21a4dc756_9f1fb3c0-c04d-4ca0-93d7-595f436dcb5a.png"
           }
         },
         "pillar_RiYeFK": {
           "type": "pillar",
           "settings": {
             "heading": "Formulated by vets, <em>made to standard.</em>",
-            "body": "<p>Every recipe is carefully balanced by veterinarians and pet nutritionists, then made in a registered, compliant facility — so what's simple on the label is serious behind it.</p>"
+            "body": "<p>Every recipe is carefully balanced by veterinarians and pet nutritionists, then made in a registered, compliant facility — so what's simple on the label is serious behind it.</p>",
+            "image": "shopify://shop_images/ChatGPT_Image_202665_15_27_22.jpg"
           }
         },
         "pillar_BcUDGk": {
           "type": "pillar",
           "settings": {
             "heading": "Food we'd <em>eat ourselves.</em>",
-            "body": "<p>That's our one rule. If it wouldn't pass our own kitchen, it doesn't go in the bag.</p>"
+            "body": "<p>That's our one rule. If it wouldn't pass our own kitchen, it doesn't go in the bag.</p>",
+            "image": "shopify://shop_images/ChatGPT_Image_202665_15_43_22.png"
           }
         },
         "ingredient_cWedFq": {
           "type": "ingredient",
           "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_202664_18_10_21-removebg-preview_1.png",
             "name": "Apple",
             "note": "Crunch + natural sweetness"
           }
@@ -71,6 +76,7 @@
         "ingredient_D3m638": {
           "type": "ingredient",
           "settings": {
+            "image": "shopify://shop_images/removebg-preview_1_aabdd8ec-a5c8-4859-9c71-de6572fa75d1.png",
             "name": "Garden herbs",
             "note": "Fresh, aromatic, real"
           }
@@ -78,6 +84,7 @@
         "ingredient_XzVibz": {
           "type": "ingredient",
           "settings": {
+            "image": "shopify://shop_images/IMG_0922-removebg-preview.png",
             "name": "Arugula",
             "note": "Leafy greens, peppery bite"
           }
@@ -85,6 +92,7 @@
         "ingredient_LFAcRY": {
           "type": "ingredient",
           "settings": {
+            "image": "shopify://shop_images/IMG_0926_e8832114-2d06-438d-91cd-87cfe9cc9c3a.jpg",
             "name": "Chicken",
             "note": "Real, lean protein"
           }
@@ -106,12 +114,12 @@
         "heading": "Good treats shouldn't need a <em>chemistry degree</em> to understand.",
         "subtext": "<p>Most treats hide behind long ingredient lists and words you'd have to Google. We went the other way — real, whole-food ingredients you can name, balanced by vets, made for the ones who love us back.</p>",
         "button_label": "Shop",
-        "button_link": "",
+        "button_link": "shopify://collections/for-dogs",
         "spotlight_eyebrow": "What's inside",
         "spotlight_heading": "Real food you can <em>name.</em>",
         "spotlight_text": "Whole ingredients you'd recognise in your own kitchen — nothing you can't.",
         "cta_heading": "Every good dog deserves the <em>good stuff.</em>",
-        "cta_button_label": "Shop now",
+        "cta_button_label": "",
         "cta_button_link": "",
         "cta_bg": "#211d18",
         "cta_fg": "#f2f1ec",
