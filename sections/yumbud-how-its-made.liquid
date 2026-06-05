@@ -1,0 +1,220 @@
+{%- comment -%}
+  ============================================================
+  YumBud · How It's Made  (process-story section, OS 2.0)
+  Lays out the "See how it's made" story:
+    • Hero — eyebrow / headline / sub / lead + a stat row
+    • Process — numbered "step" blocks. A step WITH an image renders
+      as an alternating image+text band; a step WITHOUT an image
+      renders as a clean big-number editorial row. Mix freely.
+    • Standards finale + CTA button + small-print feeding note
+  Background defaults to #F2F1EC. Everything editable in Customizer.
+
+  Pair it with a page: create a page (e.g. "How it's made"), assign a
+  template that uses this section (or add the section to your page
+  template), then point the "SEE HOW IT'S MADE" button at that page.
+  Claims kept to ingredients / craft / care — no medical claims.
+  ============================================================
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+
+<style>
+  #shopify-section-{{ uid }}{
+    --bg:{{ s.bg_color }}; --ink:{{ s.text_color }}; --muted:{{ s.muted_color }};
+    --accent:{{ s.accent_color }}; --card:{{ s.card_color }}; --line:{{ s.text_color }}1f;
+    --serif:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};
+  }
+  #shopify-section-{{ uid }} .hm{ background:var(--bg); color:var(--ink); padding:{{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+  #shopify-section-{{ uid }} *{ box-sizing:border-box; }
+  #shopify-section-{{ uid }} img{ display:block; max-width:100%; }
+  #shopify-section-{{ uid }} .in{ max-width:1080px; margin:0 auto; padding:0 clamp(20px,5vw,56px); }
+  #shopify-section-{{ uid }} .eyebrow{ font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; }
+  #shopify-section-{{ uid }} .rte{ font-size:17px; line-height:1.75; color:var(--muted); }
+  #shopify-section-{{ uid }} .rte p{ margin:0 0 1em; } #shopify-section-{{ uid }} .rte p:last-child{ margin-bottom:0; }
+
+  /* hero */
+  #shopify-section-{{ uid }} .hero{ max-width:760px; }
+  #shopify-section-{{ uid }} .hero h2{ font-family:var(--serif); font-weight:500; line-height:1.04; font-size:clamp(38px,6vw,66px); margin:0 0 18px; letter-spacing:-.01em; }
+  #shopify-section-{{ uid }} .hero .sub{ font-family:var(--serif); font-style:italic; font-size:clamp(20px,2.6vw,27px); color:var(--accent); margin:0 0 26px; }
+  #shopify-section-{{ uid }} .hero .lead{ font-size:clamp(17px,1.6vw,19px); line-height:1.7; color:var(--muted); max-width:62ch; }
+
+  /* stats */
+  #shopify-section-{{ uid }} .stats{ display:flex; flex-wrap:wrap; gap:clamp(32px,5vw,72px); margin-top:clamp(40px,5vw,64px); padding-top:clamp(28px,3vw,40px); border-top:1px solid var(--line); }
+  #shopify-section-{{ uid }} .stat .v{ font-family:var(--serif); font-size:clamp(34px,4vw,48px); line-height:1; margin-bottom:10px; }
+  #shopify-section-{{ uid }} .stat .l{ font-size:14px; line-height:1.5; color:var(--muted); max-width:22ch; }
+
+  /* process */
+  #shopify-section-{{ uid }} .process{ margin-top:clamp(64px,9vw,120px); }
+  #shopify-section-{{ uid }} .process-head{ max-width:680px; margin-bottom:clamp(40px,5vw,64px); }
+  #shopify-section-{{ uid }} .process-head h3{ font-family:var(--serif); font-weight:500; font-size:clamp(26px,3.4vw,40px); line-height:1.1; margin:0; }
+  #shopify-section-{{ uid }} .steps{ display:flex; flex-direction:column; gap:clamp(48px,7vw,96px); }
+
+  #shopify-section-{{ uid }} .step-num{ font-family:var(--serif); font-size:clamp(40px,5vw,64px); line-height:1; color:var(--accent); opacity:.45; display:block; margin-bottom:14px; }
+  #shopify-section-{{ uid }} .step-title{ font-family:var(--serif); font-weight:500; font-size:clamp(23px,2.8vw,32px); line-height:1.15; margin:0 0 14px; }
+
+  /* step with image — alternating band */
+  #shopify-section-{{ uid }} .step.media{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4.5vw,64px); align-items:center; }
+  #shopify-section-{{ uid }} .step.media.right .step-media{ order:2; }
+  #shopify-section-{{ uid }} .step-media img{ width:100%; border-radius:6px; aspect-ratio:4/3; object-fit:cover; background:var(--card); }
+
+  /* step without image — editorial numbered row */
+  #shopify-section-{{ uid }} .step.plain{ display:grid; grid-template-columns:minmax(200px,.85fr) 2fr; gap:clamp(28px,4vw,56px); align-items:start; padding-top:clamp(28px,3vw,40px); border-top:1px solid var(--line); }
+  #shopify-section-{{ uid }} .step.plain .step-num{ margin-bottom:12px; }
+  #shopify-section-{{ uid }} .step.plain .step-title{ margin-bottom:0; }
+
+  /* standards + closing */
+  #shopify-section-{{ uid }} .finale{ margin-top:clamp(64px,9vw,120px); padding-top:clamp(40px,5vw,64px); border-top:1px solid var(--line); text-align:center; }
+  #shopify-section-{{ uid }} .finale h3{ font-family:var(--serif); font-weight:500; font-size:clamp(24px,3.2vw,38px); line-height:1.12; margin:0 0 18px; }
+  #shopify-section-{{ uid }} .finale .body{ font-size:17px; line-height:1.75; color:var(--muted); max-width:60ch; margin:0 auto; }
+  #shopify-section-{{ uid }} .finale .closing{ font-family:var(--serif); font-size:clamp(20px,2.4vw,26px); line-height:1.4; margin:clamp(34px,4vw,48px) auto 0; max-width:30ch; }
+  #shopify-section-{{ uid }} .cta{ display:inline-flex; align-items:center; gap:12px; margin-top:32px; border:1px solid var(--ink); padding:16px 30px; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink); text-decoration:none; transition:background .25s,color .25s; }
+  #shopify-section-{{ uid }} .cta:hover{ background:var(--ink); color:var(--bg); }
+  #shopify-section-{{ uid }} .smallprint{ margin-top:clamp(40px,5vw,56px); font-size:12px; line-height:1.6; color:var(--muted); text-align:center; max-width:60ch; margin-left:auto; margin-right:auto; }
+
+  @media (max-width:800px){
+    #shopify-section-{{ uid }} .step.media{ grid-template-columns:1fr; gap:20px; }
+    #shopify-section-{{ uid }} .step.media.right .step-media{ order:0; }
+    #shopify-section-{{ uid }} .step.plain{ grid-template-columns:1fr; gap:6px; }
+  }
+</style>
+
+<div class="hm">
+  <div class="in">
+
+    <!-- HERO -->
+    <div class="hero">
+      {% if s.eyebrow != blank %}<div class="eyebrow">{{ s.eyebrow }}</div>{% endif %}
+      {% if s.heading != blank %}<h2>{{ s.heading }}</h2>{% endif %}
+      {% if s.subheading != blank %}<p class="sub">{{ s.subheading }}</p>{% endif %}
+      {% if s.lead != blank %}<div class="lead">{{ s.lead }}</div>{% endif %}
+    </div>
+
+    {% assign stat_blocks = section.blocks | where: 'type', 'stat' %}
+    {% if stat_blocks.size > 0 %}
+      <div class="stats">
+        {% for block in stat_blocks %}
+          <div class="stat" {{ block.shopify_attributes }}>
+            <div class="v">{{ block.settings.value }}</div>
+            <div class="l">{{ block.settings.label }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- PROCESS -->
+    {% assign step_blocks = section.blocks | where: 'type', 'step' %}
+    {% if step_blocks.size > 0 %}
+      <div class="process">
+        {% if s.process_heading != blank %}
+          <div class="process-head"><h3>{{ s.process_heading }}</h3></div>
+        {% endif %}
+        <div class="steps">
+          {% for block in step_blocks %}
+            {% if block.settings.image != blank %}
+              <div class="step media {% cycle 'mediapos': 'left','right' %}" {{ block.shopify_attributes }}>
+                <div class="step-media"><img src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.title | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy"></div>
+                <div class="step-text">
+                  {% if block.settings.number != blank %}<span class="step-num">{{ block.settings.number }}</span>{% endif %}
+                  {% if block.settings.title != blank %}<h4 class="step-title">{{ block.settings.title }}</h4>{% endif %}
+                  {% if block.settings.body != blank %}<div class="rte">{{ block.settings.body }}</div>{% endif %}
+                </div>
+              </div>
+            {% else %}
+              <div class="step plain" {{ block.shopify_attributes }}>
+                <div class="step-head">
+                  {% if block.settings.number != blank %}<span class="step-num">{{ block.settings.number }}</span>{% endif %}
+                  {% if block.settings.title != blank %}<h4 class="step-title">{{ block.settings.title }}</h4>{% endif %}
+                </div>
+                {% if block.settings.body != blank %}<div class="rte">{{ block.settings.body }}</div>{% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- FINALE -->
+    {% if s.standards_heading != blank or s.standards_body != blank or s.closing_text != blank or s.cta_label != blank %}
+      <div class="finale">
+        {% if s.standards_heading != blank %}<h3>{{ s.standards_heading }}</h3>{% endif %}
+        {% if s.standards_body != blank %}<div class="body">{{ s.standards_body }}</div>{% endif %}
+        {% if s.closing_text != blank %}<div class="closing">{{ s.closing_text }}</div>{% endif %}
+        {% if s.cta_label != blank %}<a class="cta" href="{{ s.cta_link | default: '#' }}">{{ s.cta_label }} <span>&rarr;</span></a>{% endif %}
+      </div>
+    {% endif %}
+
+    {% if s.compliance_note != blank %}<div class="smallprint">{{ s.compliance_note }}</div>{% endif %}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "YumBud · How It's Made",
+  "tag": "section",
+  "class": "yumbud-how-section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "In the kitchen" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "From whole cuts to the final crisp." },
+    { "type": "text", "id": "subheading", "label": "Subheading (italic)", "default": "Every batch is slow-dried over hours, not minutes." },
+    { "type": "richtext", "id": "lead", "label": "Lead paragraph", "default": "<p>Good treats aren't manufactured — they're made. Slowly, in small batches, from food you'd recognise on your own cutting board. Here's exactly how a YumBud treat goes from whole ingredient to the piece your dog hears hit the bowl.</p>" },
+    { "type": "header", "content": "Process" },
+    { "type": "text", "id": "process_heading", "label": "Process heading (optional)", "default": "How it's made" },
+    { "type": "header", "content": "Standards finale" },
+    { "type": "text", "id": "standards_heading", "label": "Heading", "default": "Our standards, start to finish" },
+    { "type": "richtext", "id": "standards_body", "label": "Body", "default": "<p>Every YumBud recipe is developed with veterinarians and pet nutritionists, and made in a single registered, food-grade facility in California — start to finish, under one roof. That's how the quality stays in our own hands, batch after batch.</p>" },
+    { "type": "text", "id": "closing_text", "label": "Closing line", "default": "Real food, made with care, devoured in seconds." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop the treats" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "header", "content": "Small print" },
+    { "type": "text", "id": "compliance_note", "label": "Feeding note", "default": "YumBud treats are intended for intermittent or supplementary feeding, alongside a complete and balanced diet." },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2F1EC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#574F46" },
+    { "type": "color", "id": "accent_color", "label": "Accent (numbers, italic sub)", "default": "#535B72" },
+    { "type": "color", "id": "card_color", "label": "Image placeholder", "default": "#ECEAE3" },
+    { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "assistant_n4" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "12h" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Average gentle-dry time per batch" }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Process step",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "01" },
+        { "type": "text", "id": "title", "label": "Title", "default": "It starts with real food" },
+        { "type": "richtext", "id": "body", "label": "Body", "default": "<p>We begin with whole ingredients — never powders, fillers, or by-products. Real cuts of chicken, crisp apples, fresh cucumber, garden herbs, and leafy greens. Single-origin protein and produce we'd happily eat ourselves. If we can't name it, it doesn't make the batch.</p>" },
+        { "type": "image_picker", "id": "image", "label": "Image (optional)", "info": "Add a photo and the step becomes an image band (sides alternate automatically). Leave empty for a clean numbered row." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "YumBud · How It's Made",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "12h", "label": "Average gentle-dry time per batch" } },
+        { "type": "stat", "settings": { "value": "1", "label": "Facility in California — start to finish" } },
+        { "type": "stat", "settings": { "value": "0", "label": "Artificial colours, flavours, or preservatives" } },
+        { "type": "step", "settings": { "number": "01", "title": "It starts with real food", "body": "<p>We begin with whole ingredients — never powders, fillers, or by-products. Real cuts of chicken, crisp apples, fresh cucumber, garden herbs, and leafy greens. Single-origin protein and produce we'd happily eat ourselves. If we can't name it, it doesn't make the batch.</p>" } },
+        { "type": "step", "settings": { "number": "02", "title": "Prepped by hand", "body": "<p>Every cut is trimmed and every piece sliced by hand in our California kitchen. Nothing is ground into an unrecognisable paste or reshaped into something it isn't. What goes in looks like what it is — because it is.</p>" } },
+        { "type": "step", "settings": { "number": "03", "title": "Slow-dried — hours, not minutes", "body": "<p>This is where patience does the work. Instead of blasting ingredients with high heat, we dry each batch low and slow — around twelve hours — in temperature-controlled ovens. Gentle drying concentrates real flavour and gives every treat its signature crisp, while keeping it close to the whole food it started as. No frying, no shortcuts, no rush.</p>" } },
+        { "type": "step", "settings": { "number": "04", "title": "Cooled, rested, inspected", "body": "<p>Once dried, each batch is cooled, rested, and checked by hand before it moves on — colour, texture, the snap. Small batches mean we actually look at what we make. If a batch isn't right, it doesn't leave the kitchen.</p>" } },
+        { "type": "step", "settings": { "number": "05", "title": "Sealed at peak freshness", "body": "<p>We pack promptly to lock in freshness and crunch — simple, honest packaging, with nothing sprayed on after the fact. No artificial preservatives, colours, or flavours. Just the treat, exactly as it came out of the oven.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
