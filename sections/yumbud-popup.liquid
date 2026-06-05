@@ -1,0 +1,230 @@
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+
+<style>
+  #yb-popup-overlay-{{ uid }}{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45);
+    z-index:9999; align-items:center; justify-content:center; padding:20px;
+  }
+  #yb-popup-overlay-{{ uid }}.open{ display:flex; }
+  #yb-popup-{{ uid }}{
+    background:#FAF8F3; max-width:820px; width:100%; border-radius:4px;
+    display:grid; grid-template-columns:1fr 1fr; overflow:hidden;
+    position:relative; max-height:90vh;
+  }
+  #yb-popup-{{ uid }} .yb-pop-img{
+    position:relative; overflow:hidden; min-height:360px;
+  }
+  #yb-popup-{{ uid }} .yb-pop-img img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  #yb-popup-{{ uid }} .yb-pop-body{
+    padding:clamp(32px,5vw,56px) clamp(24px,4vw,48px);
+    display:flex; flex-direction:column; justify-content:center; gap:0;
+  }
+  #yb-popup-{{ uid }} .yb-pop-eyebrow{
+    font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    color:#A0714F; margin-bottom:14px;
+  }
+  #yb-popup-{{ uid }} .yb-pop-h{
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:clamp(26px,3vw,36px); font-weight:400; font-style:italic;
+    line-height:1.15; color:#2B2420; margin:0 0 12px;
+  }
+  #yb-popup-{{ uid }} .yb-pop-sub{
+    font-size:14px; line-height:1.6; color:#574F46; margin:0 0 28px;
+  }
+  #yb-popup-{{ uid }} .yb-pop-form{
+    display:flex; flex-direction:column; gap:10px;
+  }
+  #yb-popup-{{ uid }} .yb-pop-input{
+    width:100%; padding:13px 16px; border:1px solid #D8D3CB;
+    background:#fff; font-size:14px; color:#2B2420;
+    border-radius:2px; outline:none; font-family:inherit;
+  }
+  #yb-popup-{{ uid }} .yb-pop-input:focus{ border-color:#A0714F; }
+  #yb-popup-{{ uid }} .yb-pop-input::placeholder{ color:#A09080; }
+  #yb-popup-{{ uid }} .yb-pop-btn{
+    width:100%; padding:14px 20px;
+    background:#2B2420; color:#FAF8F3;
+    border:none; font-size:14px; letter-spacing:.06em;
+    cursor:pointer; border-radius:2px; font-family:inherit;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    transition:background .2s;
+  }
+  #yb-popup-{{ uid }} .yb-pop-btn:hover{ background:#A0714F; }
+  #yb-popup-{{ uid }} .yb-pop-btn:disabled{ opacity:0.6; cursor:not-allowed; }
+  #yb-popup-{{ uid }} .yb-pop-note{
+    font-size:11px; color:#A09080; margin-top:6px; text-align:center;
+  }
+  #yb-popup-{{ uid }} .yb-pop-close{
+    position:absolute; top:14px; right:16px;
+    background:none; border:none; font-size:22px; cursor:pointer;
+    color:#574F46; line-height:1; z-index:2; padding:4px;
+  }
+  #yb-popup-{{ uid }} .yb-pop-success{
+    display:none; text-align:center; padding:20px 0;
+  }
+  #yb-popup-{{ uid }} .yb-pop-success .succ-icon{
+    font-size:36px; margin-bottom:12px;
+  }
+  #yb-popup-{{ uid }} .yb-pop-success .succ-h{
+    font-family:Georgia, serif; font-size:22px; font-style:italic;
+    color:#2B2420; margin-bottom:8px;
+  }
+  #yb-popup-{{ uid }} .yb-pop-success .succ-code{
+    display:inline-block; padding:10px 20px;
+    border:1.5px dashed #A0714F; color:#A0714F;
+    font-size:18px; font-weight:600; letter-spacing:.12em;
+    margin:12px 0; border-radius:2px;
+  }
+  #yb-popup-{{ uid }} .yb-pop-success .succ-sub{
+    font-size:13px; color:#574F46; line-height:1.6;
+  }
+  #yb-popup-{{ uid }} .yb-pop-error{
+    font-size:12px; color:#c0392b; margin-top:4px; display:none;
+  }
+  @media(max-width:600px){
+    #yb-popup-{{ uid }}{ grid-template-columns:1fr; }
+    #yb-popup-{{ uid }} .yb-pop-img{ min-height:200px; max-height:220px; }
+  }
+</style>
+
+<div id="yb-popup-overlay-{{ uid }}">
+  <div id="yb-popup-{{ uid }}">
+    <button class="yb-pop-close" aria-label="Close" onclick="ybPopClose('{{ uid }}')">&#x2715;</button>
+
+    {% if s.image != blank %}
+      <div class="yb-pop-img">
+        <img src="{{ s.image | image_url: width: 800 }}" alt="" loading="lazy">
+      </div>
+    {% endif %}
+
+    <div class="yb-pop-body">
+      {% if s.eyebrow != blank %}<div class="yb-pop-eyebrow">{{ s.eyebrow }}</div>{% endif %}
+      <h2 class="yb-pop-h">{{ s.heading | default: 'Unlock 15% Off' }}</h2>
+      <p class="yb-pop-sub">{{ s.subheading | default: 'Join our email list and save 15% on your first order.' }}</p>
+
+      <div class="yb-pop-form" id="yb-pop-form-{{ uid }}">
+        <input class="yb-pop-input" type="email" id="yb-pop-email-{{ uid }}" placeholder="{{ s.placeholder | default: 'Email address' }}" autocomplete="email">
+        <div class="yb-pop-error" id="yb-pop-err-{{ uid }}">Please enter a valid email address.</div>
+        <button class="yb-pop-btn" id="yb-pop-submit-{{ uid }}" onclick="ybPopSubmit('{{ uid }}', '{{ s.klaviyo_list_id }}', '{{ s.klaviyo_api_key }}', '{{ s.discount_code }}')">
+          {{ s.btn_label | default: 'Continue' }} &rarr;
+        </button>
+        <p class="yb-pop-note">{{ s.fine_print | default: 'Offer valid for new subscribers only.' }}</p>
+      </div>
+
+      <div class="yb-pop-success" id="yb-pop-success-{{ uid }}">
+        <div class="succ-icon">🐾</div>
+        <div class="succ-h">{{ s.success_heading | default: 'Welcome to YumBud!' }}</div>
+        <div class="succ-code" id="yb-pop-code-{{ uid }}">{{ s.discount_code | default: 'WELCOME15' }}</div>
+        <div class="succ-sub">{{ s.success_sub | default: 'Your discount code is on its way to your inbox. Use it at checkout!' }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var uid = '{{ uid }}';
+  var delay = {{ s.delay_seconds | default: 3 }} * 1000;
+  var cookieKey = 'yb_popup_' + uid;
+
+  function getCookie(name){
+    var m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return m ? m.pop() : '';
+  }
+  function setCookie(name, days){
+    var d = new Date(); d.setTime(d.getTime() + days*24*60*60*1000);
+    document.cookie = name + '=1; expires=' + d.toUTCString() + '; path=/';
+  }
+
+  if(!getCookie(cookieKey)){
+    setTimeout(function(){
+      var el = document.getElementById('yb-popup-overlay-' + uid);
+      if(el) el.classList.add('open');
+    }, delay);
+  }
+
+  window.ybPopClose = function(id){
+    var el = document.getElementById('yb-popup-overlay-' + id);
+    if(el) el.classList.remove('open');
+    setCookie('yb_popup_' + id, 30);
+  };
+
+  document.getElementById('yb-popup-overlay-' + uid).addEventListener('click', function(e){
+    if(e.target === this) ybPopClose(uid);
+  });
+
+  window.ybPopSubmit = function(id, listId, apiKey, discountCode){
+    var emailEl = document.getElementById('yb-pop-email-' + id);
+    var errEl = document.getElementById('yb-pop-err-' + id);
+    var btnEl = document.getElementById('yb-pop-submit-' + id);
+    var email = emailEl.value.trim();
+
+    if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      errEl.style.display = 'block';
+      return;
+    }
+    errEl.style.display = 'none';
+    btnEl.disabled = true;
+    btnEl.textContent = 'Subscribing...';
+
+    fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + apiKey, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'revision': '2023-12-15' },
+      body: JSON.stringify({
+        data: {
+          type: 'subscription',
+          attributes: {
+            list_id: listId,
+            email: email,
+            custom_source: 'YumBud Popup'
+          }
+        }
+      })
+    })
+    .then(function(res){
+      document.getElementById('yb-pop-form-' + id).style.display = 'none';
+      document.getElementById('yb-pop-success-' + id).style.display = 'block';
+      setCookie('yb_popup_' + id, 365);
+    })
+    .catch(function(){
+      document.getElementById('yb-pop-form-' + id).style.display = 'none';
+      document.getElementById('yb-pop-success-' + id).style.display = 'block';
+      setCookie('yb_popup_' + id, 365);
+    });
+  };
+})();
+</script>
+
+{% schema %}
+{
+  "name": "YumBud · Email Popup",
+  "tag": "div",
+  "class": "yumbud-popup-section",
+  "limit": 1,
+  "settings": [
+    { "type": "header", "content": "Klaviyo" },
+    { "type": "text", "id": "klaviyo_api_key", "label": "Klaviyo Public API Key", "default": "SAjmCj" },
+    { "type": "text", "id": "klaviyo_list_id", "label": "Klaviyo List ID", "default": "WbLnFD" },
+    { "type": "header", "content": "Content" },
+    { "type": "image_picker", "id": "image", "label": "Left image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "For new subscribers" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Unlock 15% Off" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Join our email list and save 15% on your first order." },
+    { "type": "text", "id": "placeholder", "label": "Email placeholder", "default": "Email address" },
+    { "type": "text", "id": "btn_label", "label": "Button label", "default": "Continue" },
+    { "type": "text", "id": "fine_print", "label": "Fine print", "default": "Offer valid for new subscribers only." },
+    { "type": "header", "content": "Discount code" },
+    { "type": "text", "id": "discount_code", "label": "Discount code to display", "default": "WELCOME15", "info": "Create this code in Shopify Admin → Discounts first. Klaviyo Welcome Flow will also email it." },
+    { "type": "text", "id": "success_heading", "label": "Success heading", "default": "Welcome to YumBud!" },
+    { "type": "text", "id": "success_sub", "label": "Success message", "default": "Your discount code is on its way to your inbox. Use it at checkout!" },
+    { "type": "header", "content": "Behaviour" },
+    { "type": "range", "id": "delay_seconds", "label": "Delay before showing (seconds)", "min": 0, "max": 30, "step": 1, "default": 3 }
+  ],
+  "presets": [
+    { "name": "YumBud · Email Popup" }
+  ]
+}
+{% endschema %}
