@@ -270,6 +270,131 @@
         "padding-block-end": 0
       }
     },
+    "yumbud_product_Q88Gy6": {
+      "type": "yumbud-product",
+      "blocks": {
+        "ingredients_grid_p4wL8N": {
+          "type": "ingredients_grid",
+          "settings": {
+            "heading": "Ingredient quality that makes a difference",
+            "subheading": "Human-grade proteins, fruits, vegetables, and herbs. That's it.",
+            "viewall_label": "View All",
+            "viewall_link": "",
+            "ing_1_image": "shopify://shop_images/IMG_0903.jpg",
+            "ing_1_name": "Chicken",
+            "ing_2_name": "Arugula",
+            "ing_3_name": "Cucumber",
+            "ing_4_name": "Calendula",
+            "ing_5_name": "",
+            "ing_6_name": "",
+            "ing_7_name": "",
+            "ing_8_name": ""
+          }
+        },
+        "highlights_kJMQRW": {
+          "type": "highlights",
+          "settings": {
+            "heading": "Why dogs love it",
+            "item_1_icon": "leaf",
+            "item_1_label": "Whole-food",
+            "item_1_text": "Real produce & protein you can name.",
+            "item_2_icon": "no",
+            "item_2_label": "No nasties",
+            "item_2_text": "No fillers, dyes or mystery powders.",
+            "item_3_icon": "shield",
+            "item_3_label": "Vet-formulated",
+            "item_3_text": "Balanced by vets & pet nutritionists.",
+            "item_4_icon": "bowl",
+            "item_4_label": "Made in LA",
+            "item_4_text": "Small-batch, food-grade facility."
+          }
+        },
+        "storage_EzPXgg": {
+          "type": "storage",
+          "settings": {
+            "heading": "How to store",
+            "body": "<p>Keep your YumBud treats fresh with these simple tips.</p>",
+            "tip_1_icon": "🌡️",
+            "tip_1_text": "Store in a cool, dry place away from direct sunlight.",
+            "tip_2_icon": "🔒",
+            "tip_2_text": "Keep the bag sealed tightly after each use.",
+            "tip_3_icon": "📅",
+            "tip_3_text": "Best used within 3 months of opening.",
+            "tip_4_icon": "",
+            "tip_4_text": ""
+          }
+        },
+        "nutrition_wAhCCe": {
+          "type": "nutrition",
+          "settings": {
+            "heading": "Guaranteed Analysis",
+            "subheading": "",
+            "nutr_1_label": "Crude Protein (min)",
+            "nutr_1_value": "54%",
+            "nutr_1_pct": 54,
+            "nutr_2_label": "Crude Fat (min)",
+            "nutr_2_value": "6%",
+            "nutr_2_pct": 6,
+            "nutr_3_label": "Crude Fiber (max)",
+            "nutr_3_value": "2%",
+            "nutr_3_pct": 2,
+            "nutr_4_label": "Moisture (max)",
+            "nutr_4_value": "10%",
+            "nutr_4_pct": 10,
+            "nutr_5_label": "",
+            "nutr_5_value": "",
+            "nutr_5_pct": 0,
+            "nutr_6_label": "",
+            "nutr_6_value": "",
+            "nutr_6_pct": 0,
+            "calorie_title": "Calorie Content (Calculated)",
+            "calorie_val": "3,600 kcal/kg",
+            "calorie_sub": "100 kcal/oz (calculated)",
+            "note": "",
+            "badge_title": "Clean. Simple. Honest.",
+            "badge_sub": "Real ingredients with guaranteed nutrition you can trust."
+          }
+        },
+        "accordion_GDAKnq": {
+          "type": "accordion",
+          "settings": {
+            "heading": "GOOD TO KNOW",
+            "q_1": "What exactly makes your treats \"whole-food\"?",
+            "a_1": "<p>Unlike traditional treats filled with \"mystery meats\" and synthetic binders, our treats are made from real, recognizable ingredients in their most natural state. We believe if you can't find the ingredient in a kitchen or a garden, it doesn't belong in your dog's bowl.</p>",
+            "q_2": "Are there any hidden preservatives or artificial additives?",
+            "a_2": "<p>Absolutely none. No BHA, no BHT, no artificial colors, and no chemical preservatives. We use natural preservation methods and high-quality sourcing to ensure freshness without the chemistry lab.</p>",
+            "q_3": "Who formulated these recipes?",
+            "a_3": "<p>Every single recipe is balanced by veterinary nutritionists. We combine clinical science with nature's best ingredients to ensure that every treat is not just delicious, but biologically appropriate for your dog.</p>",
+            "q_4": "My dog has specific allergies. Are your treats safe?",
+            "a_4": "<p>We prioritize transparency so you can make the best choice. Every ingredient is clearly listed on our packaging and website. If you're unsure, we recommend checking our \"Ingredients Spotlight\" or chatting with our team to find the safest match for your pup.</p>",
+            "q_5": "Can puppies eat these treats?",
+            "a_5": "<p>Most of our whole-food treats are puppy-friendly! However, some formulas are specifically tailored for adult dogs. Please refer to the \"Life Stage\" label on each product or contact us for a recommendation based on your puppy's age and breed.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "ingredients_grid_p4wL8N",
+        "highlights_kJMQRW",
+        "storage_EzPXgg",
+        "nutrition_wAhCCe",
+        "accordion_GDAKnq"
+      ],
+      "name": "YumBud · Product Content",
+      "settings": {
+        "card_width": 260,
+        "label_bg": "#454540",
+        "label_text_color": "#ffffff",
+        "label_font_size": 14,
+        "bg_color": "#f2f1ec",
+        "text_color": "#2b2420",
+        "muted_color": "#574f46",
+        "accent_color": "#535b72",
+        "card_color": "#eceae3",
+        "heading_font": "assistant_n4",
+        "padding_top": 56,
+        "padding_bottom": 88
+      }
+    },
     "product_recommendations_qggXJq": {
       "type": "product-recommendations",
       "blocks": {
@@ -410,134 +535,11 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
-    },
-    "yumbud_product_Q88Gy6": {
-      "type": "yumbud-product",
-      "blocks": {
-        "ingredients_grid_p4wL8N": {
-          "type": "ingredients_grid",
-          "settings": {
-            "heading": "Ingredient quality that makes a difference",
-            "subheading": "Human-grade proteins, fruits, vegetables, and herbs. That's it.",
-            "viewall_label": "View All",
-            "viewall_link": "",
-            "ing_1_image": "shopify://shop_images/IMG_0903.jpg",
-            "ing_1_name": "Chicken",
-            "ing_2_name": "Arugula",
-            "ing_3_name": "Cucumber",
-            "ing_4_name": "Calendula",
-            "ing_5_name": "",
-            "ing_6_name": "",
-            "ing_7_name": "",
-            "ing_8_name": ""
-          }
-        },
-        "highlights_kJMQRW": {
-          "type": "highlights",
-          "settings": {
-            "heading": "Why dogs love it",
-            "item_1_icon": "leaf",
-            "item_1_label": "Whole-food",
-            "item_1_text": "Real produce & protein you can name.",
-            "item_2_icon": "no",
-            "item_2_label": "No nasties",
-            "item_2_text": "No fillers, dyes or mystery powders.",
-            "item_3_icon": "shield",
-            "item_3_label": "Vet-formulated",
-            "item_3_text": "Balanced by vets & pet nutritionists.",
-            "item_4_icon": "bowl",
-            "item_4_label": "Made in LA",
-            "item_4_text": "Small-batch, food-grade facility."
-          }
-        },
-        "storage_EzPXgg": {
-          "type": "storage",
-          "settings": {
-            "heading": "How to store",
-            "body": "<p>Keep your YumBud treats fresh with these simple tips.</p>",
-            "tip_1_icon": "🌡️",
-            "tip_1_text": "Store in a cool, dry place away from direct sunlight.",
-            "tip_2_icon": "🔒",
-            "tip_2_text": "Keep the bag sealed tightly after each use.",
-            "tip_3_icon": "📅",
-            "tip_3_text": "Best used within 3 months of opening.",
-            "tip_4_icon": "",
-            "tip_4_text": ""
-          }
-        },
-        "nutrition_wAhCCe": {
-          "type": "nutrition",
-          "settings": {
-            "heading": "Guaranteed Analysis",
-            "subheading": "",
-            "nutr_1_label": "Crude Protein (min)",
-            "nutr_1_value": "54%",
-            "nutr_1_pct": 54,
-            "nutr_2_label": "Crude Fat (min)",
-            "nutr_2_value": "6%",
-            "nutr_2_pct": 6,
-            "nutr_3_label": "Crude Fiber (max)",
-            "nutr_3_value": "2%",
-            "nutr_3_pct": 2,
-            "nutr_4_label": "Moisture (max)",
-            "nutr_4_value": "10%",
-            "nutr_4_pct": 10,
-            "nutr_5_label": "",
-            "nutr_5_value": "",
-            "nutr_5_pct": 0,
-            "nutr_6_label": "",
-            "nutr_6_value": "",
-            "nutr_6_pct": 0,
-            "calorie_title": "Calorie Content (Calculated)",
-            "calorie_val": "3,600 kcal/kg",
-            "calorie_sub": "100 kcal/oz (calculated)",
-            "note": ""
-          }
-        },
-        "accordion_GDAKnq": {
-          "type": "accordion",
-          "settings": {
-            "heading": "GOOD TO KNOW",
-            "q_1": "What exactly makes your treats \"whole-food\"?",
-            "a_1": "<p>Unlike traditional treats filled with \"mystery meats\" and synthetic binders, our treats are made from real, recognizable ingredients in their most natural state. We believe if you can't find the ingredient in a kitchen or a garden, it doesn't belong in your dog's bowl.</p>",
-            "q_2": "Are there any hidden preservatives or artificial additives?",
-            "a_2": "<p>Absolutely none. No BHA, no BHT, no artificial colors, and no chemical preservatives. We use natural preservation methods and high-quality sourcing to ensure freshness without the chemistry lab.</p>",
-            "q_3": "Who formulated these recipes?",
-            "a_3": "<p>Every single recipe is balanced by veterinary nutritionists. We combine clinical science with nature's best ingredients to ensure that every treat is not just delicious, but biologically appropriate for your dog.</p>",
-            "q_4": "My dog has specific allergies. Are your treats safe?",
-            "a_4": "<p>We prioritize transparency so you can make the best choice. Every ingredient is clearly listed on our packaging and website. If you're unsure, we recommend checking our \"Ingredients Spotlight\" or chatting with our team to find the safest match for your pup.</p>",
-            "q_5": "Can puppies eat these treats?",
-            "a_5": "<p>Most of our whole-food treats are puppy-friendly! However, some formulas are specifically tailored for adult dogs. Please refer to the \"Life Stage\" label on each product or contact us for a recommendation based on your puppy's age and breed.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "ingredients_grid_p4wL8N",
-        "highlights_kJMQRW",
-        "storage_EzPXgg",
-        "nutrition_wAhCCe",
-        "accordion_GDAKnq"
-      ],
-      "name": "YumBud · Product Content",
-      "settings": {
-        "card_width": 260,
-        "label_bg": "#454540",
-        "label_text_color": "#ffffff",
-        "label_font_size": 14,
-        "bg_color": "#f2f1ec",
-        "text_color": "#2b2420",
-        "muted_color": "#574f46",
-        "accent_color": "#535b72",
-        "card_color": "#eceae3",
-        "heading_font": "assistant_n4",
-        "padding_top": 56,
-        "padding_bottom": 88
-      }
     }
   },
   "order": [
     "main",
-    "product_recommendations_qggXJq",
-    "yumbud_product_Q88Gy6"
+    "yumbud_product_Q88Gy6",
+    "product_recommendations_qggXJq"
   ]
 }
