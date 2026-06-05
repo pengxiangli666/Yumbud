@@ -405,7 +405,7 @@
         "placeholder": "Email address",
         "btn_label": "Continue",
         "fine_print": "Offer valid for new subscribers only.",
-        "discount_code": "WELCOME15",
+        "discount_code": "WELCOME10",
         "success_heading": "Welcome to YumBud!",
         "success_sub": "Your discount code is on its way to your inbox. Use it at checkout!",
         "delay_seconds": 3
