@@ -371,6 +371,22 @@
             "q_5": "",
             "a_5": ""
           }
+        },
+        "accordion_KEfLqD": {
+          "type": "accordion",
+          "settings": {
+            "heading": "GOOD TO KNOW",
+            "q_1": "What exactly makes your treats \"whole-food\"?",
+            "a_1": "<p>Unlike traditional treats filled with \"mystery meats\" and synthetic binders, our treats are made from real, recognizable ingredients in their most natural state. We believe if you can't find the ingredient in a kitchen or a garden, it doesn't belong in your dog's bowl.</p>",
+            "q_2": "Are there any hidden preservatives or artificial additives?",
+            "a_2": "<p>Absolutely none. No BHA, no BHT, no artificial colors, and no chemical preservatives. We use natural preservation methods and high-quality sourcing to ensure freshness without the chemistry lab.</p>",
+            "q_3": "Who formulated these recipes?",
+            "a_3": "<p>Every single recipe is balanced by veterinary nutritionists. We combine clinical science with nature's best ingredients to ensure that every treat is not just delicious, but biologically appropriate for your dog.</p>",
+            "q_4": "My dog has specific allergies. Are your treats safe?",
+            "a_4": "<p>We prioritize transparency so you can make the best choice. Every ingredient is clearly listed on our packaging and website. If you're unsure, we recommend checking our \"Ingredients Spotlight\" or chatting with our team to find the safest match for your pup.</p>",
+            "q_5": "Can puppies eat these treats?",
+            "a_5": "<p>Most of our whole-food treats are puppy-friendly! However, some formulas are specifically tailored for adult dogs. Please refer to the \"Life Stage\" label on each product or contact us for a recommendation based on your puppy's age and breed.</p>"
+          }
         }
       },
       "block_order": [
@@ -378,7 +394,8 @@
         "highlights_aQrpAy",
         "nutrition_QDUPJK",
         "storage_QNkLPU",
-        "accordion_8PNELk"
+        "accordion_8PNELk",
+        "accordion_KEfLqD"
       ],
       "name": "YumBud · Product Content",
       "settings": {
