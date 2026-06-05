@@ -391,6 +391,25 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "yumbud_popup_6P7N6n": {
+      "type": "yumbud-popup",
+      "name": "YumBud · Email Popup",
+      "settings": {
+        "klaviyo_api_key": "SAjmCj",
+        "klaviyo_list_id": "WbLnFD",
+        "image": "shopify://shop_images/Weixin_Image_20260603183537_613_70.jpg",
+        "eyebrow": "For new subscribers",
+        "heading": "Unlock 15% Off",
+        "subheading": "Join our email list and save 15% on your first order.",
+        "placeholder": "Email address",
+        "btn_label": "Continue",
+        "fine_print": "Offer valid for new subscribers only.",
+        "discount_code": "WELCOME15",
+        "success_heading": "Welcome to YumBud!",
+        "success_sub": "Your discount code is on its way to your inbox. Use it at checkout!",
+        "delay_seconds": 3
+      }
     }
   },
   "order": [
@@ -401,6 +420,7 @@
     "yumbud_quote_GedUWz",
     "yumbud_hover_video_kFtNGX",
     "1780530838d8a82149",
-    "1780529927c7d6e5bd"
+    "1780529927c7d6e5bd",
+    "yumbud_popup_6P7N6n"
   ]
 }
