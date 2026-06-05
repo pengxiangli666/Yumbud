@@ -346,10 +346,13 @@
           "settings": {
             "heading": "How to store",
             "body": "<p>Keep your YumBud treats fresh with these simple tips.</p>",
+            "tip_1_image": "shopify://shop_images/icon1_sun_house_1.svg",
             "tip_1_icon": "",
             "tip_1_text": "Store in a cool, dry place away from direct sunlight.",
+            "tip_2_image": "shopify://shop_images/icon2_zipbag.svg",
             "tip_2_icon": "",
             "tip_2_text": "Keep the bag sealed tightly after each use.",
+            "tip_3_image": "shopify://shop_images/icon3_calendar.svg",
             "tip_3_icon": "",
             "tip_3_text": "Best used within 3 months of opening.",
             "tip_4_icon": "",
