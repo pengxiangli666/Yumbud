@@ -164,7 +164,7 @@
         "image_caption": "",
         "media_position": "left",
         "bg_color": "#f2f1ec",
-        "text_color": "#2b2420",
+        "text_color": "#333333",
         "muted_color": "#8c8578",
         "accent_color": "#535b72",
         "heading_font": "assistant_n4",
