@@ -19,7 +19,7 @@
         "button1_label": "Join the Pack",
         "button1_link": "shopify://pages/subscribe-save",
         "button2_label": "Yumbud Story",
-        "button2_link": "",
+        "button2_link": "shopify://pages/our-story",
         "content_max_width": 500,
         "content_offset_left": "-40",
         "content_offset_right": "0",
