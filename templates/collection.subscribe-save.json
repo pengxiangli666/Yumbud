@@ -403,12 +403,52 @@
         "padding_top": 72,
         "padding_bottom": 88
       }
+    },
+    "yumbud_product_MJUWAQ": {
+      "type": "yumbud-product",
+      "blocks": {
+        "accordion_R6qLWT": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Good to know",
+            "q_1": "Are these a complete meal?",
+            "a_1": "<p>No — these are treats, meant to complement a complete, balanced diet.</p>",
+            "q_2": "What's the ingredient list?",
+            "a_2": "<p>Whole foods you would recognise — see What's inside.</p>",
+            "q_3": "How should I store them?",
+            "a_3": "",
+            "q_4": "",
+            "a_4": "",
+            "q_5": "",
+            "a_5": ""
+          }
+        }
+      },
+      "block_order": [
+        "accordion_R6qLWT"
+      ],
+      "name": "YumBud · Product Content",
+      "settings": {
+        "card_width": 260,
+        "label_bg": "rgba(0,0,0,0.55)",
+        "label_text_color": "#FFFFFF",
+        "label_font_size": 12,
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#574F46",
+        "accent_color": "#535B72",
+        "card_color": "#ECEAE3",
+        "heading_font": "assistant_n4",
+        "padding_top": 56,
+        "padding_bottom": 88
+      }
     }
   },
   "order": [
     "main",
     "yumbud_subscribe_selector_ygMfJB",
     "yumbud_perks_xiq48Q",
-    "yumbud_why_cmjHBK"
+    "yumbud_why_cmjHBK",
+    "yumbud_product_MJUWAQ"
   ]
 }

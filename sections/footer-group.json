@@ -11,6 +11,45 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
+    "yumbud_product_piTXD4": {
+      "type": "yumbud-product",
+      "blocks": {
+        "accordion_4g78PV": {
+          "type": "accordion",
+          "settings": {
+            "heading": "GOOD TO KNOW",
+            "q_1": "Can I change my delivery frequency or pause my subscription?",
+            "a_1": "<p>Of course. Your pup's needs change, and so should your plan. You can switch your frequency (monthly, quarterly, etc.), skip a month, or pause your subscription entirely through your account dashboard with just two clicks.</p>",
+            "q_2": "Is there a long-term commitment for the subscription?",
+            "a_2": "<p>No strings attached. We believe in the quality of our treats, so we offer total flexibility. You can cancel your subscription at any time—no hidden fees, no complicated phone calls.</p>",
+            "q_3": "What happens if I have too many treats left before the next delivery?",
+            "a_3": "",
+            "q_4": "",
+            "a_4": "",
+            "q_5": "",
+            "a_5": ""
+          }
+        }
+      },
+      "block_order": [
+        "accordion_4g78PV"
+      ],
+      "name": "YumBud · Product Content",
+      "settings": {
+        "card_width": 260,
+        "label_bg": "rgba(0,0,0,0.55)",
+        "label_text_color": "#FFFFFF",
+        "label_font_size": 12,
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#574F46",
+        "accent_color": "#535B72",
+        "card_color": "#ECEAE3",
+        "heading_font": "assistant_n4",
+        "padding_top": 56,
+        "padding_bottom": 88
+      }
+    },
     "section_RfGjqi": {
       "type": "section",
       "blocks": {
@@ -325,6 +364,7 @@
     }
   },
   "order": [
+    "yumbud_product_piTXD4",
     "section_RfGjqi",
     "footer_YbcXDD",
     "custom_footer_nav_4nycAn",
