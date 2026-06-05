@@ -134,6 +134,7 @@
       ],
       "name": "YumBud · About",
       "settings": {
+        "banner_image": "shopify://shop_images/IMG_0968.jpg",
         "banner_heading": "The way treats should be.",
         "banner_subheading": "",
         "banner_height": 60,
