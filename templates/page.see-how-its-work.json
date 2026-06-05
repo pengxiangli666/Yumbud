@@ -56,9 +56,108 @@
         "padding-block-start": 40,
         "padding-block-end": 80
       }
+    },
+    "yumbud_how_its_made_Jx94wV": {
+      "type": "yumbud-how-its-made",
+      "blocks": {
+        "stat_4AfWbm": {
+          "type": "stat",
+          "settings": {
+            "value": "12h",
+            "label": "Average gentle-dry time per batch"
+          }
+        },
+        "stat_4GxkHB": {
+          "type": "stat",
+          "settings": {
+            "value": "1",
+            "label": "Facility in California — start to finish"
+          }
+        },
+        "stat_jVQAUP": {
+          "type": "stat",
+          "settings": {
+            "value": "0",
+            "label": "Artificial colours, flavours, or preservatives"
+          }
+        },
+        "step_93qNXD": {
+          "type": "step",
+          "settings": {
+            "number": "01",
+            "title": "It starts with real food",
+            "body": "<p>We begin with whole ingredients — never powders, fillers, or by-products. Real cuts of chicken, crisp apples, fresh cucumber, garden herbs, and leafy greens. Single-origin protein and produce we'd happily eat ourselves. If we can't name it, it doesn't make the batch.</p>"
+          }
+        },
+        "step_6YCxat": {
+          "type": "step",
+          "settings": {
+            "number": "02",
+            "title": "Prepped by hand",
+            "body": "<p>Every cut is trimmed and every piece sliced by hand in our California kitchen. Nothing is ground into an unrecognisable paste or reshaped into something it isn't. What goes in looks like what it is — because it is.</p>"
+          }
+        },
+        "step_dEc4bR": {
+          "type": "step",
+          "settings": {
+            "number": "03",
+            "title": "Slow-dried — hours, not minutes",
+            "body": "<p>This is where patience does the work. Instead of blasting ingredients with high heat, we dry each batch low and slow — around twelve hours — in temperature-controlled ovens. Gentle drying concentrates real flavour and gives every treat its signature crisp, while keeping it close to the whole food it started as. No frying, no shortcuts, no rush.</p>"
+          }
+        },
+        "step_9LxPU9": {
+          "type": "step",
+          "settings": {
+            "number": "04",
+            "title": "Cooled, rested, inspected",
+            "body": "<p>Once dried, each batch is cooled, rested, and checked by hand before it moves on — colour, texture, the snap. Small batches mean we actually look at what we make. If a batch isn't right, it doesn't leave the kitchen.</p>"
+          }
+        },
+        "step_CtX7ip": {
+          "type": "step",
+          "settings": {
+            "number": "05",
+            "title": "Sealed at peak freshness",
+            "body": "<p>We pack promptly to lock in freshness and crunch — simple, honest packaging, with nothing sprayed on after the fact. No artificial preservatives, colours, or flavours. Just the treat, exactly as it came out of the oven.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "stat_4AfWbm",
+        "stat_4GxkHB",
+        "stat_jVQAUP",
+        "step_93qNXD",
+        "step_6YCxat",
+        "step_dEc4bR",
+        "step_9LxPU9",
+        "step_CtX7ip"
+      ],
+      "name": "YumBud · How It's Made",
+      "settings": {
+        "eyebrow": "In the kitchen",
+        "heading": "From whole cuts to the final crisp.",
+        "subheading": "Every batch is slow-dried over hours, not minutes.",
+        "lead": "<p>Good treats aren't manufactured — they're made. Slowly, in small batches, from food you'd recognise on your own cutting board. Here's exactly how a YumBud treat goes from whole ingredient to the piece your dog hears hit the bowl.</p>",
+        "process_heading": "How it's made",
+        "standards_heading": "Our standards, start to finish",
+        "standards_body": "<p>Every YumBud recipe is developed with veterinarians and pet nutritionists, and made in a single registered, food-grade facility in California — start to finish, under one roof. That's how the quality stays in our own hands, batch after batch.</p>",
+        "closing_text": "Real food, made with care, devoured in seconds.",
+        "cta_label": "Shop the treats",
+        "cta_link": "",
+        "compliance_note": "YumBud treats are intended for intermittent or supplementary feeding, alongside a complete and balanced diet.",
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#574F46",
+        "accent_color": "#535B72",
+        "card_color": "#ECEAE3",
+        "heading_font": "assistant_n4",
+        "padding_top": 88,
+        "padding_bottom": 96
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "yumbud_how_its_made_Jx94wV"
   ]
 }
