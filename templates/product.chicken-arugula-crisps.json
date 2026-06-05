@@ -273,6 +273,23 @@
     "yumbud_product_JpPUCJ": {
       "type": "yumbud-product",
       "blocks": {
+        "ingredients_grid_htbfzh": {
+          "type": "ingredients_grid",
+          "settings": {
+            "heading": "Ingredient quality that makes a difference",
+            "subheading": "Human-grade proteins, fruits, vegetables, and herbs. That's it.",
+            "viewall_label": "View All",
+            "viewall_link": "",
+            "ing_1_name": "Chicken",
+            "ing_2_name": "Arugula",
+            "ing_3_name": "Cucumber",
+            "ing_4_name": "Calendula",
+            "ing_5_name": "",
+            "ing_6_name": "",
+            "ing_7_name": "",
+            "ing_8_name": ""
+          }
+        },
         "highlights_b3tmmc": {
           "type": "highlights",
           "settings": {
@@ -291,20 +308,50 @@
             "item_4_text": "Small-batch, food-grade facility."
           }
         },
-        "ingredients_KUjtwm": {
-          "type": "ingredients",
+        "nutrition_KbqtLb": {
+          "type": "nutrition",
           "settings": {
-            "heading": "What's inside",
-            "body": "<p>Whole foods you'd recognise — apples, garden herbs, leafy greens, and a little real chicken.</p>",
-            "image": "shopify://shop_images/23.png",
-            "image_position": "left"
+            "heading": "Guaranteed Analysis",
+            "subheading": "",
+            "nutr_1_label": "Crude Protein (min)",
+            "nutr_1_value": "54%",
+            "nutr_1_pct": 54,
+            "nutr_2_label": "Crude Fat (min)",
+            "nutr_2_value": "6%",
+            "nutr_2_pct": 6,
+            "nutr_3_label": "Crude Fiber (max)",
+            "nutr_3_value": "2%",
+            "nutr_3_pct": 2,
+            "nutr_4_label": "Moisture (max)",
+            "nutr_4_value": "10%",
+            "nutr_4_pct": 10,
+            "nutr_5_label": "",
+            "nutr_5_value": "",
+            "nutr_5_pct": 0,
+            "nutr_6_label": "",
+            "nutr_6_value": "",
+            "nutr_6_pct": 0,
+            "calorie_title": "Calorie Content (Calculated)",
+            "calorie_val": "3,600 kcal/kg",
+            "calorie_sub": "100 kcal/oz (calculated)",
+            "note": "",
+            "badge_title": "Clean. Simple. Honest.",
+            "badge_sub": "Real ingredients with guaranteed nutrition you can trust."
           }
         },
-        "feeding_3nnJVa": {
-          "type": "feeding",
+        "storage_AmUwYr": {
+          "type": "storage",
           "settings": {
-            "heading": "How to serve",
-            "body": "<p>Feed as a treat, or crumble over your dog's regular food for a tasty boost.</p>"
+            "heading": "How to store",
+            "body": "<p>Keep your YumBud treats fresh with these simple tips.</p>",
+            "tip_1_icon": "🌡️",
+            "tip_1_text": "Store in a cool, dry place away from direct sunlight.",
+            "tip_2_icon": "🔒",
+            "tip_2_text": "Keep the bag sealed tightly after each use.",
+            "tip_3_icon": "📅",
+            "tip_3_text": "Best used within 3 months of opening.",
+            "tip_4_icon": "",
+            "tip_4_text": ""
           }
         },
         "accordion_9HKWjb": {
@@ -325,18 +372,23 @@
         }
       },
       "block_order": [
+        "ingredients_grid_htbfzh",
         "highlights_b3tmmc",
-        "ingredients_KUjtwm",
-        "feeding_3nnJVa",
+        "nutrition_KbqtLb",
+        "storage_AmUwYr",
         "accordion_9HKWjb"
       ],
       "name": "YumBud · Product Content",
       "settings": {
-        "bg_color": "#F2F1EC",
-        "text_color": "#2B2420",
-        "muted_color": "#574F46",
-        "accent_color": "#535B72",
-        "card_color": "#ECEAE3",
+        "card_width": 260,
+        "label_bg": "#0000008c",
+        "label_text_color": "#ffffff",
+        "label_font_size": 12,
+        "bg_color": "#f2f1ec",
+        "text_color": "#2b2420",
+        "muted_color": "#574f46",
+        "accent_color": "#535b72",
+        "card_color": "#eceae3",
         "heading_font": "assistant_n4",
         "padding_top": 56,
         "padding_bottom": 88
