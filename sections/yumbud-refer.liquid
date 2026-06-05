@@ -1,0 +1,220 @@
+{%- comment -%}
+  ============================================================
+  YumBud · Refer a Friend  (referral page section, OS 2.0)
+  Branded front-end modeled on Maev's /account/refer:
+    • Hero — eyebrow / headline / sub + a give/get reward strip
+    • Share box — referral link field + Copy button + share buttons
+      (email / SMS / X / Facebook / WhatsApp)
+    • "How it works" steps
+    • Terms / fine print
+
+  IMPORTANT — what this is and isn't:
+  This is the *page*. The referral ENGINE (a UNIQUE link per customer,
+  tracking who referred whom, and issuing rewards automatically) CANNOT
+  be built in Liquid — it needs a referral app (Smile.io, ReferralCandy,
+  etc.). Two ways to make the link real:
+    1) Connect a referral app and let its block/snippet inject the
+       customer's unique link (best — links are per-customer + tracked).
+    2) Set a single static link in "Referral link" below (shareable, but
+       no per-customer tracking or auto-reward without an app).
+  Without an app the Copy/Share buttons still work — they just share one
+  static URL for everyone.
+
+  USE: create a page (e.g. /pages/refer) and add this section, OR add it
+  to the customers/account template area. Point the footer "Rewards/
+  Refer" link here.
+  ============================================================
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+{%- assign reflink = s.referral_link | default: shop.url -%}
+
+<style>
+  #shopify-section-{{ uid }}{
+    --bg:{{ s.bg_color }}; --ink:{{ s.text_color }}; --muted:{{ s.muted_color }};
+    --accent:{{ s.accent_color }}; --card:{{ s.card_color }}; --line:{{ s.text_color }}1f;
+    --serif:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};
+  }
+  #shopify-section-{{ uid }} .rf{ background:var(--bg); color:var(--ink); padding:{{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+  #shopify-section-{{ uid }} *{ box-sizing:border-box; }
+  #shopify-section-{{ uid }} .in{ max-width:720px; margin:0 auto; padding:0 clamp(20px,5vw,40px); text-align:center; }
+  #shopify-section-{{ uid }} .eyebrow{ font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:18px; }
+  #shopify-section-{{ uid }} h2{ font-family:var(--serif); font-weight:500; line-height:1.04; font-size:clamp(34px,5.5vw,58px); margin:0 0 16px; letter-spacing:-.01em; }
+  #shopify-section-{{ uid }} .sub{ font-size:clamp(16px,1.7vw,19px); line-height:1.65; color:var(--muted); max-width:48ch; margin:0 auto; }
+
+  /* give/get strip */
+  #shopify-section-{{ uid }} .reward{ display:flex; justify-content:center; gap:0; margin:clamp(32px,4vw,48px) auto 0; max-width:460px; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  #shopify-section-{{ uid }} .reward div{ flex:1; padding:22px 16px; }
+  #shopify-section-{{ uid }} .reward div+div{ border-left:1px solid var(--line); }
+  #shopify-section-{{ uid }} .reward .amt{ font-family:var(--serif); font-size:clamp(26px,3.2vw,36px); line-height:1; margin-bottom:6px; }
+  #shopify-section-{{ uid }} .reward .cap{ font-size:12px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
+
+  /* share box */
+  #shopify-section-{{ uid }} .share{ margin:clamp(34px,4vw,48px) auto 0; }
+  #shopify-section-{{ uid }} .linkrow{ display:flex; gap:10px; max-width:520px; margin:0 auto; }
+  #shopify-section-{{ uid }} .linkrow input{ flex:1; border:1px solid var(--line); border-radius:6px; padding:15px 16px; font-size:14px; color:var(--ink); background:var(--card); font-family:inherit; min-width:0; }
+  #shopify-section-{{ uid }} .copy{ background:var(--ink); color:var(--bg); border:none; border-radius:6px; padding:0 24px; font-size:14px; letter-spacing:.02em; cursor:pointer; white-space:nowrap; font-family:inherit; transition:opacity .2s; }
+  #shopify-section-{{ uid }} .copy:hover{ opacity:.88; }
+  #shopify-section-{{ uid }} .copy.done{ background:var(--accent); }
+  #shopify-section-{{ uid }} .sharebtns{ display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin-top:16px; }
+  #shopify-section-{{ uid }} .sharebtns a{ display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border:1px solid var(--line); border-radius:50%; color:var(--ink); text-decoration:none; transition:background .2s,color .2s; }
+  #shopify-section-{{ uid }} .sharebtns a:hover{ background:var(--ink); color:var(--bg); }
+  #shopify-section-{{ uid }} .sharebtns svg{ width:18px; height:18px; fill:currentColor; }
+
+  /* how it works */
+  #shopify-section-{{ uid }} .how{ margin-top:clamp(56px,8vw,96px); }
+  #shopify-section-{{ uid }} .how h3{ font-family:var(--serif); font-weight:500; font-size:clamp(22px,2.8vw,30px); margin:0 0 clamp(28px,4vw,44px); }
+  #shopify-section-{{ uid }} .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(20px,3vw,36px); text-align:center; }
+  #shopify-section-{{ uid }} .step .n{ width:38px; height:38px; border-radius:50%; border:1px solid var(--accent); color:var(--accent); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:18px; margin:0 auto 16px; }
+  #shopify-section-{{ uid }} .step .t{ font-family:var(--serif); font-size:20px; margin-bottom:8px; }
+  #shopify-section-{{ uid }} .step .b{ font-size:14px; line-height:1.6; color:var(--muted); }
+
+  #shopify-section-{{ uid }} .terms{ margin-top:clamp(48px,6vw,72px); font-size:12px; line-height:1.6; color:var(--muted); max-width:60ch; margin-left:auto; margin-right:auto; }
+  #shopify-section-{{ uid }} .terms a{ color:var(--accent); }
+
+  @media (max-width:640px){
+    #shopify-section-{{ uid }} .steps{ grid-template-columns:1fr; gap:32px; }
+    #shopify-section-{{ uid }} .linkrow{ flex-direction:column; }
+    #shopify-section-{{ uid }} .copy{ padding:14px; }
+  }
+</style>
+
+<div class="rf">
+  <div class="in">
+
+    {% if s.eyebrow != blank %}<div class="eyebrow">{{ s.eyebrow }}</div>{% endif %}
+    {% if s.heading != blank %}<h2>{{ s.heading }}</h2>{% endif %}
+    {% if s.subheading != blank %}<p class="sub">{{ s.subheading }}</p>{% endif %}
+
+    {% if s.give_amount != blank or s.get_amount != blank %}
+      <div class="reward">
+        {% if s.give_amount != blank %}<div><div class="amt">{{ s.give_amount }}</div><div class="cap">{{ s.give_caption }}</div></div>{% endif %}
+        {% if s.get_amount != blank %}<div><div class="amt">{{ s.get_amount }}</div><div class="cap">{{ s.get_caption }}</div></div>{% endif %}
+      </div>
+    {% endif %}
+
+    <div class="share">
+      <div class="linkrow">
+        <input id="rf-link-{{ uid }}" type="text" readonly value="{{ reflink }}" aria-label="Your referral link">
+        <button class="copy" type="button" data-rf-copy="rf-link-{{ uid }}" data-label="{{ s.copy_label }}">{{ s.copy_label }}</button>
+      </div>
+      {% if s.show_share_buttons %}
+        <div class="sharebtns" data-rf-link="{{ reflink | url_encode }}" data-rf-msg="{{ s.share_message | url_encode }}">
+          <a data-rf-share="email" href="#" aria-label="Share by email"><svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1.4 2 7.6 5.3L19.6 7H4.4Z"/></svg></a>
+          <a data-rf-share="sms" href="#" aria-label="Share by SMS"><svg viewBox="0 0 24 24"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 1-2Z"/></svg></a>
+          <a data-rf-share="whatsapp" href="#" aria-label="Share on WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.8-.6-3-1.3-5-4.4-5.1-4.6-.2-.2-1.3-1.7-1.3-3.2s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l.8-1c.2-.3.4-.2.6-.1l2 .9c.3.2.5.3.6.4.1.2.1.7-.1 1.4Z"/></svg></a>
+          <a data-rf-share="x" href="#" aria-label="Share on X"><svg viewBox="0 0 24 24"><path d="M17.5 3h3l-6.6 7.5L21.7 21h-6l-4.7-6.1L5.6 21h-3l7-8L2.3 3h6.1l4.2 5.6L17.5 3Zm-1 16h1.6L7.6 4.7H5.9L16.5 19Z"/></svg></a>
+          <a data-rf-share="facebook" href="#" aria-label="Share on Facebook"><svg viewBox="0 0 24 24"><path d="M14 8.5h2.2V5.4c-.4 0-1.6-.1-3-.1-3 0-5 1.8-5 5.1V13H5.4v3.2H8.2V24h3.4v-7.8h2.8l.4-3.2h-3.2v-2c0-1 .3-1.5 1.4-1.5Z"/></svg></a>
+        </div>
+      {% endif %}
+    </div>
+
+    {% assign step_blocks = section.blocks | where: 'type', 'step' %}
+    {% if step_blocks.size > 0 %}
+      <div class="how">
+        {% if s.how_heading != blank %}<h3>{{ s.how_heading }}</h3>{% endif %}
+        <div class="steps">
+          {% for block in step_blocks %}
+            <div class="step" {{ block.shopify_attributes }}>
+              {% if block.settings.number != blank %}<div class="n">{{ block.settings.number }}</div>{% endif %}
+              {% if block.settings.title != blank %}<div class="t">{{ block.settings.title }}</div>{% endif %}
+              {% if block.settings.body != blank %}<div class="b">{{ block.settings.body }}</div>{% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if s.terms != blank %}<div class="terms">{{ s.terms }}</div>{% endif %}
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var root=document.getElementById('shopify-section-{{ uid }}'); if(!root) return;
+  // copy link
+  var btn=root.querySelector('[data-rf-copy]');
+  if(btn){ btn.addEventListener('click',function(){
+    var inp=document.getElementById(btn.getAttribute('data-rf-copy')); if(!inp) return;
+    var done=function(){ btn.textContent='Copied!'; btn.classList.add('done'); setTimeout(function(){ btn.textContent=btn.getAttribute('data-label'); btn.classList.remove('done'); },1800); };
+    if(navigator.clipboard){ navigator.clipboard.writeText(inp.value).then(done).catch(function(){ inp.select(); document.execCommand('copy'); done(); }); }
+    else { inp.select(); document.execCommand('copy'); done(); }
+  }); }
+  // share buttons
+  var wrap=root.querySelector('[data-rf-link]');
+  if(wrap){
+    var link=wrap.getAttribute('data-rf-link'); var msg=wrap.getAttribute('data-rf-msg');
+    var urls={
+      email:'mailto:?subject='+msg+'&body='+msg+'%20'+link,
+      sms:'sms:?&body='+msg+'%20'+link,
+      whatsapp:'https://wa.me/?text='+msg+'%20'+link,
+      x:'https://twitter.com/intent/tweet?text='+msg+'&url='+link,
+      facebook:'https://www.facebook.com/sharer/sharer.php?u='+link
+    };
+    wrap.querySelectorAll('[data-rf-share]').forEach(function(a){
+      var k=a.getAttribute('data-rf-share'); if(urls[k]){ a.setAttribute('href',urls[k]); a.setAttribute('target','_blank'); a.setAttribute('rel','noopener'); }
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "YumBud · Refer a Friend",
+  "tag": "section",
+  "class": "yumbud-refer-section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Refer a friend" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Give a treat, get a treat." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Share YumBud with a friend. They get a discount on their first order, and you get rewarded when they buy." },
+    { "type": "header", "content": "Reward strip" },
+    { "type": "text", "id": "give_amount", "label": "Give amount", "default": "15% off" },
+    { "type": "text", "id": "give_caption", "label": "Give caption", "default": "For your friend" },
+    { "type": "text", "id": "get_amount", "label": "Get amount", "default": "$10" },
+    { "type": "text", "id": "get_caption", "label": "Get caption", "default": "For you" },
+    { "type": "header", "content": "Share" },
+    { "type": "text", "id": "referral_link", "label": "Referral link", "info": "A referral app injects each customer's unique link. If you have no app, set one static link here (shareable, but not tracked per customer). Defaults to your store URL." },
+    { "type": "text", "id": "copy_label", "label": "Copy button label", "default": "Copy link" },
+    { "type": "checkbox", "id": "show_share_buttons", "label": "Show share buttons", "default": true },
+    { "type": "text", "id": "share_message", "label": "Share message", "default": "I think your dog would love YumBud — real, whole-food treats. Here's a discount on your first order:" },
+    { "type": "header", "content": "How it works" },
+    { "type": "text", "id": "how_heading", "label": "Heading", "default": "How it works" },
+    { "type": "header", "content": "Terms" },
+    { "type": "richtext", "id": "terms", "label": "Fine print", "default": "<p>Rewards are issued after your friend's first qualifying order. Discounts can't be combined with other offers. See full referral terms for details.</p>" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2F1EC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#574F46" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#535B72" },
+    { "type": "color", "id": "card_color", "label": "Link field background", "default": "#ECEAE3" },
+    { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "assistant_n4" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 88 }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "1" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Share your link" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Send your unique link to friends by text, email, or social." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "YumBud · Refer a Friend",
+      "blocks": [
+        { "type": "step", "settings": { "number": "1", "title": "Share your link", "body": "Send your unique link to friends by text, email, or social." } },
+        { "type": "step", "settings": { "number": "2", "title": "They save", "body": "Your friend gets a discount on their first YumBud order." } },
+        { "type": "step", "settings": { "number": "3", "title": "You get rewarded", "body": "Once they buy, your reward lands in your account — ready to spend." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

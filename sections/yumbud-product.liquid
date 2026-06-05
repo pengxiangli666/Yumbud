@@ -51,6 +51,7 @@
   #shopify-section-{{ uid }} .yb-storage-tips{ display:flex; flex-direction:column; gap:14px; margin-top:20px; }
   #shopify-section-{{ uid }} .yb-storage-tip{ display:flex; align-items:flex-start; gap:14px; font-size:14px; color:var(--muted); line-height:1.5; }
   #shopify-section-{{ uid }} .yb-storage-tip .tip-icon{ font-size:20px; flex:none; margin-top:1px; }
+  #shopify-section-{{ uid }} .yb-storage-tip .tip-img{ width:24px; height:24px; object-fit:contain; flex:none; margin-top:1px; }
 
   /* nutrition */
   #shopify-section-{{ uid }} .yb-nutr{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4vw,56px); align-items:end; }
@@ -201,9 +202,16 @@
                     {% for i in (1..4) %}
                       {%- assign ik = 'tip_' | append: i | append: '_icon' -%}
                       {%- assign tk = 'tip_' | append: i | append: '_text' -%}
+                      {%- assign imgk = 'tip_' | append: i | append: '_image' -%}
                       {% if block.settings[tk] != blank %}
                         <div class="yb-storage-tip">
-                          <span class="tip-icon">{{ block.settings[ik] | default: '📦' }}</span>
+                          {% if block.settings[imgk] != blank %}
+                            <img class="tip-img" src="{{ block.settings[imgk] | image_url: width: 48 }}" alt="" loading="lazy">
+                          {% elsif block.settings[ik] != blank %}
+                            <span class="tip-icon">{{ block.settings[ik] }}</span>
+                          {% else %}
+                            <span class="tip-icon">📦</span>
+                          {% endif %}
                           <span>{{ block.settings[tk] }}</span>
                         </div>
                       {% endif %}
@@ -408,16 +416,20 @@ document.querySelectorAll('[data-yb-ig-scroller]').forEach(function(el){
         { "type": "text", "id": "heading", "label": "Heading", "default": "How to store" },
         { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Keep your YumBud treats fresh with these simple tips.</p>" },
         { "type": "header", "content": "Tip 1" },
-        { "type": "text", "id": "tip_1_icon", "label": "Emoji icon", "default": "🌡️" },
+        { "type": "image_picker", "id": "tip_1_image", "label": "Icon image" },
+        { "type": "text", "id": "tip_1_icon", "label": "Emoji icon (fallback)", "default": "🌡️" },
         { "type": "text", "id": "tip_1_text", "label": "Text", "default": "Store in a cool, dry place away from direct sunlight." },
         { "type": "header", "content": "Tip 2" },
-        { "type": "text", "id": "tip_2_icon", "label": "Emoji icon", "default": "🔒" },
+        { "type": "image_picker", "id": "tip_2_image", "label": "Icon image" },
+        { "type": "text", "id": "tip_2_icon", "label": "Emoji icon (fallback)", "default": "🔒" },
         { "type": "text", "id": "tip_2_text", "label": "Text", "default": "Keep the bag sealed tightly after each use." },
         { "type": "header", "content": "Tip 3" },
-        { "type": "text", "id": "tip_3_icon", "label": "Emoji icon", "default": "📅" },
+        { "type": "image_picker", "id": "tip_3_image", "label": "Icon image" },
+        { "type": "text", "id": "tip_3_icon", "label": "Emoji icon (fallback)", "default": "📅" },
         { "type": "text", "id": "tip_3_text", "label": "Text", "default": "Best used within 3 months of opening." },
         { "type": "header", "content": "Tip 4" },
-        { "type": "text", "id": "tip_4_icon", "label": "Emoji icon" },
+        { "type": "image_picker", "id": "tip_4_image", "label": "Icon image" },
+        { "type": "text", "id": "tip_4_icon", "label": "Emoji icon (fallback)" },
         { "type": "text", "id": "tip_4_text", "label": "Text" }
       ]
     },
