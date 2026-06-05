@@ -300,7 +300,7 @@
         "eyebrow": "Why Subscribe",
         "heading": "The perks.",
         "columns": 4,
-        "bg_color": "#faf8f3",
+        "bg_color": "#f2f1ec",
         "text_color": "#2b2420",
         "muted_color": "#8c8578",
         "accent_color": "#535b72",
@@ -430,6 +430,9 @@
       "name": "YumBud · Product Content",
       "settings": {
         "card_width": 260,
+        "card_radius": 4,
+        "card_border_color": "#e5e1d7",
+        "card_border_width": 1,
         "label_bg": "#0000008c",
         "label_text_color": "#ffffff",
         "label_font_size": 12,
