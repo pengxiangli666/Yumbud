@@ -1,0 +1,353 @@
+{%- comment -%}
+  ============================================================
+  YumBud · About  (newspaper-editorial redesign, OS 2.0)
+  Same blocks + setting IDs as before (content carries over):
+    • chapter (nav_label, lead, eyebrow, heading, quote, body,
+      attribution, image, image_position, button_label, button_link)
+      + NEW optional: image_ratio, image_caption, two_column_body
+    • credentials (nav_label, heading, intro, image, badge_1/2,
+      item_1..5_title/text)  + NEW optional: image_caption
+    • section + NEW optional: masthead_kicker
+  Newspaper styling: masthead + double rule, small-caps kickers with
+  extending hairlines, drop cap on the first body chapter, serif italic
+  pull-quotes, figures that FILL their column with a keyline + caption
+  (fixes the floating-image problem), hairline dividers, sticky index.
+  ============================================================
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+
+<style>
+  #shopify-section-{{ uid }}{
+    --paper:{{ s.bg_color }}; --ink:{{ s.text_color }}; --muted:{{ s.muted_color }};
+    --accent:{{ s.accent_color }}; --card:{{ s.card_color }}; --line:{{ s.text_color }}24; --hair:{{ s.text_color }}14;
+    --badge-bg:{{ s.badge_bg }}; --badge-fg:{{ s.badge_fg }};
+    --serif:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};
+  }
+  #shopify-section-{{ uid }} .ab{ background:var(--paper); color:var(--ink); }
+  #shopify-section-{{ uid }} *{ box-sizing:border-box; }
+  #shopify-section-{{ uid }} img{ display:block; max-width:100%; }
+  #shopify-section-{{ uid }} a{ color:inherit; }
+
+  /* ---------- masthead ---------- */
+  #shopify-section-{{ uid }} .mast{ position:relative; }
+  #shopify-section-{{ uid }} .mast-img{ position:relative; height:{{ s.banner_height }}vh; min-height:300px; overflow:hidden; }
+  #shopify-section-{{ uid }} .mast-img img{ width:100%; height:100%; object-fit:cover; }
+  #shopify-section-{{ uid }} .mast-img::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.42)); }
+  #shopify-section-{{ uid }} .mast-img .mast-inner{ position:absolute; inset:0; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 24px; color:{{ s.banner_text_color }}; }
+  #shopify-section-{{ uid }} .mast-type{ text-align:center; padding:clamp(48px,7vw,92px) 24px clamp(28px,3.5vw,40px); }
+  #shopify-section-{{ uid }} .mast-kicker{ font-size:12px; letter-spacing:.24em; text-transform:uppercase; opacity:.85; margin-bottom:18px; }
+  #shopify-section-{{ uid }} .mast-title{ font-family:var(--serif); font-weight:500; line-height:1.02; font-size:clamp(40px,7vw,82px); letter-spacing:-.015em; margin:0; }
+  #shopify-section-{{ uid }} .mast-stand{ font-family:var(--serif); font-style:italic; font-size:clamp(17px,2vw,22px); margin:16px auto 0; max-width:46ch; opacity:.9; }
+  #shopify-section-{{ uid }} .dbl{ max-width:1180px; margin:0 auto; height:5px; border-top:3px solid var(--ink); border-bottom:1px solid var(--ink); }
+  #shopify-section-{{ uid }} .mast-img + .dbl{ margin-top:0; }
+
+  /* ---------- layout: article + index ---------- */
+  #shopify-section-{{ uid }} .wrap{ max-width:1180px; margin:0 auto; padding:clamp(36px,5vw,64px) clamp(20px,5vw,40px) clamp(60px,8vw,104px); display:grid; grid-template-columns:minmax(0,1fr) 232px; gap:clamp(40px,6vw,88px); align-items:start; }
+  #shopify-section-{{ uid }} .article{ min-width:0; }
+
+  /* index */
+  #shopify-section-{{ uid }} .index{ position:sticky; top:96px; }
+  #shopify-section-{{ uid }} .index .ttl{ font-family:var(--serif); font-size:22px; margin:0 0 18px; padding-bottom:14px; border-bottom:1px solid var(--ink); }
+  #shopify-section-{{ uid }} .index ol{ list-style:none; margin:0 0 26px; padding:0; }
+  #shopify-section-{{ uid }} .index li{ margin:0; }
+  #shopify-section-{{ uid }} .index a{ display:flex; gap:12px; align-items:baseline; padding:9px 0; text-decoration:none; color:var(--muted); border-bottom:1px solid var(--hair); transition:color .2s; }
+  #shopify-section-{{ uid }} .index a .num{ font-size:11px; letter-spacing:.1em; opacity:.6; min-width:20px; }
+  #shopify-section-{{ uid }} .index a .lab{ font-size:14px; }
+  #shopify-section-{{ uid }} .index a:hover{ color:var(--ink); }
+  #shopify-section-{{ uid }} .index a.active{ color:var(--ink); }
+  #shopify-section-{{ uid }} .index a.active .num{ opacity:1; color:var(--accent); }
+  #shopify-section-{{ uid }} .index .shop{ display:inline-flex; align-items:center; gap:10px; background:var(--ink); color:var(--paper); padding:13px 22px; font-size:12px; letter-spacing:.12em; text-transform:uppercase; text-decoration:none; }
+
+  /* ---------- chapters ---------- */
+  #shopify-section-{{ uid }} .chapter{ scroll-margin-top:90px; }
+  #shopify-section-{{ uid }} .chapter + .chapter,
+  #shopify-section-{{ uid }} .credentials{ margin-top:clamp(44px,6vw,76px); padding-top:clamp(44px,6vw,76px); border-top:1px solid var(--line); }
+
+  #shopify-section-{{ uid }} .lead-statement{ font-family:var(--serif); font-weight:500; font-size:clamp(27px,4vw,46px); line-height:1.16; letter-spacing:-.01em; margin:0; max-width:24ch; }
+  #shopify-section-{{ uid }} .lead-statement em{ font-style:italic; color:var(--accent); }
+
+  #shopify-section-{{ uid }} .kicker{ display:flex; align-items:center; gap:16px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin:0 0 18px; }
+  #shopify-section-{{ uid }} .kicker::after{ content:""; flex:1; height:1px; background:var(--line); }
+  #shopify-section-{{ uid }} .head{ font-family:var(--serif); font-weight:500; line-height:1.08; font-size:clamp(30px,4.4vw,52px); letter-spacing:-.012em; margin:0 0 22px; }
+  #shopify-section-{{ uid }} .head em{ font-style:italic; color:var(--accent); }
+
+  #shopify-section-{{ uid }} .row{ display:grid; grid-template-columns:0.92fr 1.08fr; gap:clamp(28px,4vw,56px); align-items:start; }
+  #shopify-section-{{ uid }} .row.right .figure{ order:2; }
+  #shopify-section-{{ uid }} .figure{ margin:0; }
+  #shopify-section-{{ uid }} .figure img{ width:100%; height:auto; border:1px solid var(--line); border-radius:2px; background:var(--card); }
+  #shopify-section-{{ uid }} .figure.r-portrait img{ aspect-ratio:4/5; object-fit:cover; height:auto; }
+  #shopify-section-{{ uid }} .figure.r-square img{ aspect-ratio:1/1; object-fit:cover; }
+  #shopify-section-{{ uid }} .figure.r-landscape img{ aspect-ratio:3/2; object-fit:cover; }
+  #shopify-section-{{ uid }} .figcaption{ font-size:12px; line-height:1.5; color:var(--muted); font-style:italic; margin-top:10px; padding-left:2px; }
+
+  #shopify-section-{{ uid }} .pullquote{ font-family:var(--serif); font-style:italic; font-size:clamp(21px,2.6vw,29px); line-height:1.32; color:var(--ink); border-left:2px solid var(--accent); padding-left:22px; margin:0 0 24px; }
+  #shopify-section-{{ uid }} .body{ font-size:16.5px; line-height:1.78; color:var(--ink); max-width:64ch; }
+  #shopify-section-{{ uid }} .row .body{ max-width:none; }
+  #shopify-section-{{ uid }} .body p{ margin:0 0 1.1em; } #shopify-section-{{ uid }} .body p:last-child{ margin-bottom:0; }
+  #shopify-section-{{ uid }} .body.cols{ max-width:none; column-count:2; column-gap:clamp(28px,3.5vw,48px); text-align:justify; -webkit-hyphens:auto; hyphens:auto; }
+  #shopify-section-{{ uid }} .body.drop > p:first-of-type::first-letter{ font-family:var(--serif); font-weight:500; float:left; font-size:3.5em; line-height:.78; padding:6px 10px 0 0; color:var(--ink); }
+  #shopify-section-{{ uid }} .attribution{ font-family:var(--serif); font-style:italic; font-size:17px; color:var(--muted); margin-top:20px; }
+  #shopify-section-{{ uid }} .btn{ display:inline-flex; align-items:center; gap:10px; margin-top:26px; border:1px solid var(--ink); padding:14px 28px; font-size:12px; letter-spacing:.13em; text-transform:uppercase; text-decoration:none; color:var(--ink); transition:background .25s,color .25s; }
+  #shopify-section-{{ uid }} .btn:hover{ background:var(--ink); color:var(--paper); }
+
+  /* ---------- credentials ---------- */
+  #shopify-section-{{ uid }} .cred-intro{ font-size:16.5px; line-height:1.78; color:var(--ink); max-width:62ch; margin:0 0 10px; }
+  #shopify-section-{{ uid }} .cred-badges{ display:flex; flex-wrap:wrap; gap:8px; margin:22px 0 0; }
+  #shopify-section-{{ uid }} .cred-badge{ font-size:11px; letter-spacing:.08em; text-transform:uppercase; background:var(--badge-bg); color:var(--badge-fg); padding:7px 14px; border-radius:30px; }
+  #shopify-section-{{ uid }} .cred-items{ margin-top:clamp(28px,3.5vw,40px); display:grid; grid-template-columns:1fr 1fr; gap:0 clamp(32px,4vw,56px); border-top:1px solid var(--line); }
+  #shopify-section-{{ uid }} .cred-item{ display:flex; gap:16px; padding:22px 0; border-bottom:1px solid var(--hair); }
+  #shopify-section-{{ uid }} .cred-item .n{ font-family:var(--serif); font-size:20px; color:var(--accent); line-height:1; min-width:30px; }
+  #shopify-section-{{ uid }} .cred-item .t{ font-family:var(--serif); font-size:19px; margin:0 0 5px; }
+  #shopify-section-{{ uid }} .cred-item .x{ font-size:14px; line-height:1.6; color:var(--muted); }
+
+  @media (max-width:900px){
+    #shopify-section-{{ uid }} .wrap{ grid-template-columns:1fr; gap:0; }
+    #shopify-section-{{ uid }} .index{ position:static; order:-1; margin-bottom:40px; padding-bottom:32px; border-bottom:1px solid var(--line); }
+    #shopify-section-{{ uid }} .row{ grid-template-columns:1fr; gap:20px; }
+    #shopify-section-{{ uid }} .row.right .figure{ order:0; }
+    #shopify-section-{{ uid }} .body.cols{ column-count:1; text-align:left; }
+    #shopify-section-{{ uid }} .cred-items{ grid-template-columns:1fr; }
+  }
+</style>
+
+<div class="ab">
+
+  <!-- MASTHEAD -->
+  <div class="mast">
+    {% if s.banner_image != blank %}
+      <div class="mast-img">
+        <img src="{{ s.banner_image | image_url: width: 2400 }}" alt="{{ s.banner_heading | escape }}" width="2400" height="1200">
+        <div class="mast-inner">
+          {% if s.masthead_kicker != blank %}<div class="mast-kicker">{{ s.masthead_kicker }}</div>{% endif %}
+          {% if s.banner_heading != blank %}<h1 class="mast-title">{{ s.banner_heading }}</h1>{% endif %}
+          {% if s.banner_subheading != blank %}<p class="mast-stand">{{ s.banner_subheading }}</p>{% endif %}
+        </div>
+      </div>
+    {% else %}
+      <div class="mast-type">
+        {% if s.masthead_kicker != blank %}<div class="mast-kicker">{{ s.masthead_kicker }}</div>{% endif %}
+        {% if s.banner_heading != blank %}<h1 class="mast-title">{{ s.banner_heading }}</h1>{% endif %}
+        {% if s.banner_subheading != blank %}<p class="mast-stand">{{ s.banner_subheading }}</p>{% endif %}
+      </div>
+    {% endif %}
+    <div class="dbl"></div>
+  </div>
+
+  <div class="wrap">
+    <!-- ARTICLE -->
+    <div class="article">
+      {%- assign dropped = false -%}
+      {% for block in section.blocks %}
+        {% case block.type %}
+
+        {% when 'chapter' %}
+          <section class="chapter" id="ch-{{ block.id }}" {{ block.shopify_attributes }}>
+            {% if block.settings.lead %}
+              {% if block.settings.heading != blank %}<p class="lead-statement">{{ block.settings.heading }}</p>{% endif %}
+            {% else %}
+              {% if block.settings.eyebrow != blank %}<div class="kicker">{{ block.settings.eyebrow }}</div>{% endif %}
+              {% if block.settings.heading != blank %}<h2 class="head">{{ block.settings.heading }}</h2>{% endif %}
+
+              {%- assign has_img = false -%}
+              {% if block.settings.image != blank and block.settings.image_position != 'none' %}{% assign has_img = true %}{% endif %}
+
+              {%- capture textcol -%}
+                {% if block.settings.quote != blank %}<p class="pullquote">{{ block.settings.quote }}</p>{% endif %}
+                {% if block.settings.body != blank %}
+                  {%- assign bclass = 'body' -%}
+                  {% if block.settings.two_column_body %}{% assign bclass = bclass | append: ' cols' %}{% endif %}
+                  {% unless dropped %}{% assign bclass = bclass | append: ' drop' %}{% assign dropped = true %}{% endunless %}
+                  <div class="{{ bclass }}">{{ block.settings.body }}</div>
+                {% endif %}
+                {% if block.settings.attribution != blank %}<p class="attribution">{{ block.settings.attribution }}</p>{% endif %}
+                {% if block.settings.button_label != blank %}<a class="btn" href="{{ block.settings.button_link | default: '#' }}">{{ block.settings.button_label }} <span>&rarr;</span></a>{% endif %}
+              {%- endcapture -%}
+
+              {% if has_img %}
+                <div class="row {{ block.settings.image_position }}">
+                  <figure class="figure r-{{ block.settings.image_ratio | default: 'natural' }}">
+                    <img src="{{ block.settings.image | image_url: width: 1400 }}" alt="{{ block.settings.image_caption | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
+                    {% if block.settings.image_caption != blank %}<figcaption class="figcaption">{{ block.settings.image_caption }}</figcaption>{% endif %}
+                  </figure>
+                  <div class="text">{{ textcol }}</div>
+                </div>
+              {% else %}
+                {{ textcol }}
+              {% endif %}
+            {% endif %}
+          </section>
+
+        {% when 'credentials' %}
+          <section class="credentials" id="ch-{{ block.id }}" {{ block.shopify_attributes }}>
+            {% if block.settings.heading != blank %}<h2 class="head">{{ block.settings.heading }}</h2>{% endif %}
+
+            {%- assign has_img = false -%}
+            {% if block.settings.image != blank %}{% assign has_img = true %}{% endif %}
+
+            {%- capture credtext -%}
+              {% if block.settings.intro != blank %}<div class="cred-intro">{{ block.settings.intro }}</div>{% endif %}
+              {% if block.settings.badge_1 != blank or block.settings.badge_2 != blank %}
+                <div class="cred-badges">
+                  {% if block.settings.badge_1 != blank %}<span class="cred-badge">{{ block.settings.badge_1 }}</span>{% endif %}
+                  {% if block.settings.badge_2 != blank %}<span class="cred-badge">{{ block.settings.badge_2 }}</span>{% endif %}
+                </div>
+              {% endif %}
+            {%- endcapture -%}
+
+            {% if has_img %}
+              <div class="row">
+                <figure class="figure r-{{ block.settings.image_ratio | default: 'portrait' }}">
+                  <img src="{{ block.settings.image | image_url: width: 1400 }}" alt="{{ block.settings.image_caption | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy">
+                  {% if block.settings.image_caption != blank %}<figcaption class="figcaption">{{ block.settings.image_caption }}</figcaption>{% endif %}
+                </figure>
+                <div class="text">{{ credtext }}</div>
+              </div>
+            {% else %}
+              {{ credtext }}
+            {% endif %}
+
+            <div class="cred-items">
+              {% for i in (1..5) %}
+                {%- assign tk = 'item_' | append: i | append: '_title' -%}
+                {%- assign xk = 'item_' | append: i | append: '_text' -%}
+                {% if block.settings[tk] != blank %}
+                  <div class="cred-item">
+                    <span class="n">{{ i | prepend: '0' }}</span>
+                    <div>
+                      <p class="t">{{ block.settings[tk] }}</p>
+                      {% if block.settings[xk] != blank %}<p class="x">{{ block.settings[xk] }}</p>{% endif %}
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </section>
+
+        {% endcase %}
+      {% endfor %}
+    </div>
+
+    <!-- INDEX -->
+    <aside class="index" aria-label="{{ s.nav_title }}">
+      {% if s.nav_title != blank %}<h2 class="ttl">{{ s.nav_title }}</h2>{% endif %}
+      <ol>
+        {% for block in section.blocks %}
+          {% if block.settings.nav_label != blank %}
+            <li><a href="#ch-{{ block.id }}" data-nav="ch-{{ block.id }}"><span class="num">{{ forloop.index | prepend: '0' }}</span><span class="lab">{{ block.settings.nav_label }}</span></a></li>
+          {% endif %}
+        {% endfor %}
+      </ol>
+      {% if s.shop_label != blank %}<a class="shop" href="{{ s.shop_link | default: '#' }}">{{ s.shop_label }} <span>&rarr;</span></a>{% endif %}
+    </aside>
+  </div>
+</div>
+
+<script>
+(function(){
+  var root=document.getElementById('shopify-section-{{ uid }}'); if(!root) return;
+  var links=root.querySelectorAll('.index a[data-nav]');
+  var map={}; links.forEach(function(a){ map[a.getAttribute('data-nav')]=a; });
+  var sections=[].slice.call(root.querySelectorAll('.article > section[id]'));
+  if(!('IntersectionObserver' in window) || !sections.length) return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(a){ a.classList.remove('active'); });
+        var a=map[e.target.id]; if(a) a.classList.add('active');
+      }
+    });
+  },{ rootMargin:'-45% 0px -50% 0px', threshold:0 });
+  sections.forEach(function(sec){ io.observe(sec); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "YumBud · About",
+  "tag": "section",
+  "class": "yumbud-about-section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "header", "content": "Masthead" },
+    { "type": "image_picker", "id": "banner_image", "label": "Banner image", "info": "Optional. With an image you get a photo masthead with the title over it; without one, a clean typographic masthead." },
+    { "type": "text", "id": "masthead_kicker", "label": "Kicker (small caps, above title)", "default": "The YumBud Story" },
+    { "type": "text", "id": "banner_heading", "label": "Title", "default": "The way treats should be." },
+    { "type": "text", "id": "banner_subheading", "label": "Standfirst (italic, under title)" },
+    { "type": "range", "id": "banner_height", "label": "Photo masthead height", "min": 40, "max": 90, "step": 5, "unit": "vh", "default": 62 },
+    { "type": "color", "id": "banner_text_color", "label": "Title colour (on photo)", "default": "#FFFFFF" },
+    { "type": "header", "content": "Overview index (sticky)" },
+    { "type": "text", "id": "nav_title", "label": "Title", "default": "Overview" },
+    { "type": "text", "id": "shop_label", "label": "Shop button label", "default": "Shop Now" },
+    { "type": "url", "id": "shop_link", "label": "Shop button link" },
+    { "type": "paragraph", "content": "The numbered index is built automatically from the sections below, using each block's “Nav label”." },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2F1EC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#574F46" },
+    { "type": "color", "id": "accent_color", "label": "Accent (italic words)", "default": "#535B72" },
+    { "type": "color", "id": "card_color", "label": "Image placeholder", "default": "#ECEAE3" },
+    { "type": "color", "id": "badge_bg", "label": "Badge background", "default": "#211D18" },
+    { "type": "color", "id": "badge_fg", "label": "Badge text", "default": "#FAF8F3" },
+    { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "assistant_n4" }
+  ],
+  "blocks": [
+    {
+      "type": "chapter",
+      "name": "Chapter (text / image)",
+      "settings": [
+        { "type": "text", "id": "nav_label", "label": "Nav label", "default": "Chapter" },
+        { "type": "checkbox", "id": "lead", "label": "Large lead statement (no image)", "default": false },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow (small caps)" },
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "info": "Italicise a word to tint it with the accent colour.", "default": "Heading goes <em>here.</em>" },
+        { "type": "text", "id": "quote", "label": "Pull quote (optional)" },
+        { "type": "richtext", "id": "body", "label": "Body" },
+        { "type": "checkbox", "id": "two_column_body", "label": "Two-column body (newspaper)", "info": "Best for long passages. Looks sparse on short text.", "default": false },
+        { "type": "text", "id": "attribution", "label": "Signature / attribution (optional)" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "select", "id": "image_position", "label": "Image position", "options": [ { "value": "none", "label": "No image" }, { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ], "default": "none" },
+        { "type": "select", "id": "image_ratio", "label": "Image shape", "options": [ { "value": "natural", "label": "Natural (no crop)" }, { "value": "portrait", "label": "Portrait 4:5" }, { "value": "square", "label": "Square 1:1" }, { "value": "landscape", "label": "Landscape 3:2" } ], "default": "natural" },
+        { "type": "text", "id": "image_caption", "label": "Image caption (optional)" },
+        { "type": "text", "id": "button_label", "label": "Button label (optional)" },
+        { "type": "url", "id": "button_link", "label": "Button link" }
+      ]
+    },
+    {
+      "type": "credentials",
+      "name": "Credentials list",
+      "settings": [
+        { "type": "text", "id": "nav_label", "label": "Nav label", "default": "Our Credentials" },
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Simple ingredients, <em>serious</em> standards." },
+        { "type": "richtext", "id": "intro", "label": "Intro" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "select", "id": "image_ratio", "label": "Image shape", "options": [ { "value": "natural", "label": "Natural (no crop)" }, { "value": "portrait", "label": "Portrait 4:5" }, { "value": "square", "label": "Square 1:1" }, { "value": "landscape", "label": "Landscape 3:2" } ], "default": "portrait" },
+        { "type": "text", "id": "image_caption", "label": "Image caption (optional)" },
+        { "type": "text", "id": "badge_1", "label": "Badge 1", "default": "Vet formulated" },
+        { "type": "text", "id": "badge_2", "label": "Badge 2", "default": "Food-grade facility" },
+        { "type": "header", "content": "List items (leave a title empty to hide it)" },
+        { "type": "text", "id": "item_1_title", "label": "Item 1 title", "default": "Vet-formulated" },
+        { "type": "text", "id": "item_1_text", "label": "Item 1 text", "default": "Every recipe is reviewed and balanced by a licensed veterinarian." },
+        { "type": "text", "id": "item_2_title", "label": "Item 2 title", "default": "Nutritionist-balanced" },
+        { "type": "text", "id": "item_2_text", "label": "Item 2 text", "default": "Built with a qualified pet nutritionist for complete, balanced nutrition — not guesswork." },
+        { "type": "text", "id": "item_3_title", "label": "Item 3 title", "default": "Made to food-grade standards" },
+        { "type": "text", "id": "item_3_text", "label": "Item 3 text", "default": "Produced in a registered, compliant facility — held to the same standard we'd hold our own food to." },
+        { "type": "text", "id": "item_4_title", "label": "Item 4 title", "default": "Whole-food ingredients" },
+        { "type": "text", "id": "item_4_text", "label": "Item 4 text", "default": "Real apples, garden herbs, leafy greens and chicken — superfoods you can name, nothing you can't." },
+        { "type": "text", "id": "item_5_title", "label": "Item 5 title" },
+        { "type": "text", "id": "item_5_text", "label": "Item 5 text" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "YumBud · About",
+      "blocks": [
+        { "type": "chapter", "settings": { "nav_label": "Intro", "lead": true, "heading": "Real food for the ones who <em>love us back.</em> No fillers, no mystery powders — just whole ingredients you can name." } },
+        { "type": "chapter", "settings": { "nav_label": "Our Story", "eyebrow": "Our Story", "heading": "It started with <em>Hermès.</em>", "quote": "If we wouldn't eat it, why were we asking him to?", "body": "<p>Hermès had been turning his nose up at dinner for a week. We flipped the bag over, read the label, and couldn't recognize half of what was on it.</p><p>So we started experimenting at home with real food already in our own pantry — crisp apples, fresh garden herbs, leafy arugula, a little real chicken. Not just leaving the bad stuff out, but putting good things in.</p><p>But love alone wasn't enough. To make every bite safe and properly balanced, we brought in the experts. Today every YumBud recipe is formulated by veterinarians and pet nutritionists, and made in a registered, food-grade facility — held to the same standard we'd hold our own food to.</p><p>Because the bond between a person and their dog was never a transaction. It's family.</p>", "attribution": "— The YumBud family, Los Angeles", "image_position": "left", "image_ratio": "portrait" } },
+        { "type": "credentials", "settings": { "nav_label": "Our Credentials", "heading": "Simple ingredients, <em>serious</em> standards.", "intro": "<p>Every YumBud recipe is formulated and balanced with a licensed veterinarian and a pet nutritionist — then made in a registered, food-grade facility. The ingredients stay simple. The standards behind them don't.</p>" } },
+        { "type": "chapter", "settings": { "nav_label": "Join Us", "heading": "Join the <em>pack.</em>", "body": "<p>We're dog people building something better — with integrity, taste, and a high bar for what goes in the bag. If that sounds like you, we'd love to hear from you.</p>", "image_position": "right", "image_ratio": "landscape", "button_label": "See open roles" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
