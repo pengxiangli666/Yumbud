@@ -94,7 +94,8 @@
           "settings": {
             "number": "02",
             "title": "Prepped by hand",
-            "body": "<p>Every cut is trimmed and every piece sliced by hand in our California kitchen. Nothing is ground into an unrecognisable paste or reshaped into something it isn't. What goes in looks like what it is — because it is.</p>"
+            "body": "<p>Every cut is trimmed and every piece sliced by hand in our California kitchen. Nothing is ground into an unrecognisable paste or reshaped into something it isn't. What goes in looks like what it is — because it is.</p>",
+            "image": "shopify://shop_images/ChatGPT_Image_202665_14_05_42.png"
           }
         },
         "step_dEc4bR": {
@@ -110,7 +111,8 @@
           "settings": {
             "number": "04",
             "title": "Cooled, rested, inspected",
-            "body": "<p>Once dried, each batch is cooled, rested, and checked by hand before it moves on — colour, texture, the snap. Small batches mean we actually look at what we make. If a batch isn't right, it doesn't leave the kitchen.</p>"
+            "body": "<p>Once dried, each batch is cooled, rested, and checked by hand before it moves on — colour, texture, the snap. Small batches mean we actually look at what we make. If a batch isn't right, it doesn't leave the kitchen.</p>",
+            "image": "shopify://shop_images/IMG_0968.jpg"
           }
         },
         "step_CtX7ip": {
@@ -142,14 +144,14 @@
         "standards_heading": "Our standards, start to finish",
         "standards_body": "<p>Every YumBud recipe is developed with veterinarians and pet nutritionists, and made in a single registered, food-grade facility in California — start to finish, under one roof. That's how the quality stays in our own hands, batch after batch.</p>",
         "closing_text": "Real food, made with care, devoured in seconds.",
-        "cta_label": "Shop the treats",
+        "cta_label": "",
         "cta_link": "shopify://collections/all",
         "compliance_note": "YumBud treats are intended for intermittent or supplementary feeding, alongside a complete and balanced diet.",
-        "bg_color": "#F2F1EC",
+        "bg_color": "#f2f1ec",
         "text_color": "#3d2e24",
-        "muted_color": "#574F46",
+        "muted_color": "#574f46",
         "accent_color": "#a0785a",
-        "card_color": "#ECEAE3",
+        "card_color": "#eceae3",
         "heading_font": "assistant_n4",
         "padding_top": 88,
         "padding_bottom": 96
