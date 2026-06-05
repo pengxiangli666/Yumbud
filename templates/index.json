@@ -251,7 +251,7 @@
         "body": "<p>Every batch is slow-dried over hours, not minutes.</p>",
         "button_label": "See how it's made",
         "button_link": "",
-        "badge_text": "Hover to play",
+        "badge_text": "",
         "stat1_number": "12h",
         "stat1_label": "Average gentle-dry time per batch",
         "stat2_number": "1",
