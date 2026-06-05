@@ -88,19 +88,6 @@
         "disabled": false,
         "settings": {}
       },
-      "1768834845299682660": {
-        "type": "shopify://apps/subscriptions/blocks/app-embed-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
-        "disabled": false,
-        "settings": {
-          "color_text_title": "#6d7175",
-          "color_text_body": "#6d7175",
-          "dividers_color": "#8f8d8d",
-          "bacgkround_color": "#ffffff",
-          "border_thickness": 1,
-          "border_radius": 0,
-          "subscription_policy_url": ""
-        }
-      },
       "15683396631634586217": {
         "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
         "disabled": false,
@@ -113,6 +100,42 @@
           "button_horizontal_position": "bottom_right",
           "button_vertical_position": "lowest",
           "greeting_message": ""
+        }
+      },
+      "6810535121229352664": {
+        "type": "shopify://apps/monster-cart-upsell-free-gifts/blocks/app-embed/a1b8e58a-bf1d-4e0f-8768-a387c3f643c0",
+        "disabled": true,
+        "settings": {
+          "markets_rounding": false,
+          "send_gtag_atc": false,
+          "disable_tiktok_tracking": false,
+          "disable_klaviyo_tracking": false,
+          "stop_cart_page": false,
+          "apply_discount_before_checkout": false,
+          "bag_selector": "",
+          "hide_when_opened": "",
+          "show_item_properties": false,
+          "stop_shopify_rate": true,
+          "dev_mode": false,
+          "force_v1_scripts": false,
+          "beta_version": false,
+          "collection_load_all_products": false,
+          "homepage_collections": "",
+          "custom_page_products": "",
+          "custom_code": "<script>\n    // custom code here\n</script>"
+        }
+      },
+      "1768834845299682660": {
+        "type": "shopify://apps/subscriptions/blocks/app-embed-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
+        "disabled": false,
+        "settings": {
+          "color_text_title": "#6d7175",
+          "color_text_body": "#6d7175",
+          "dividers_color": "#8f8d8d",
+          "bacgkround_color": "#ffffff",
+          "border_thickness": 1,
+          "border_radius": 0,
+          "subscription_policy_url": ""
         }
       },
       "10436698916776057164": {
