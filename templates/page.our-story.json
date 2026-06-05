@@ -140,7 +140,7 @@
         "banner_text_color": "#FFFFFF",
         "nav_title": "Overview",
         "shop_label": "Shop Now",
-        "shop_link": "",
+        "shop_link": "shopify://collections/all",
         "bg_color": "#F2F1EC",
         "text_color": "#2B2420",
         "muted_color": "#574F46",
