@@ -46,7 +46,7 @@
         "muted_color": "#6b5d54",
         "accent_color": "#a0785a",
         "heading_font": "assistant_n4",
-        "frame_color": "#ffffff",
+        "frame_color": "#a0785a",
         "frame_width": 1,
         "frame_inset": "62",
         "frame_opacity": 100,
