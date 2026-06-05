@@ -357,6 +357,7 @@
         },
         "accordion_8PNELk": {
           "type": "accordion",
+          "disabled": true,
           "settings": {
             "heading": "Good to know",
             "q_1": "Are these a complete meal?",
