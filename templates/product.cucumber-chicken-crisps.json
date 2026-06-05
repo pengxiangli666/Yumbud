@@ -309,21 +309,6 @@
             "item_4_text": "Small-batch, food-grade facility."
           }
         },
-        "storage_EzPXgg": {
-          "type": "storage",
-          "settings": {
-            "heading": "How to store",
-            "body": "<p>Keep your YumBud treats fresh with these simple tips.</p>",
-            "tip_1_icon": "🌡️",
-            "tip_1_text": "Store in a cool, dry place away from direct sunlight.",
-            "tip_2_icon": "🔒",
-            "tip_2_text": "Keep the bag sealed tightly after each use.",
-            "tip_3_icon": "📅",
-            "tip_3_text": "Best used within 3 months of opening.",
-            "tip_4_icon": "",
-            "tip_4_text": ""
-          }
-        },
         "nutrition_wAhCCe": {
           "type": "nutrition",
           "settings": {
@@ -355,6 +340,21 @@
             "badge_sub": "Real ingredients with guaranteed nutrition you can trust."
           }
         },
+        "storage_EzPXgg": {
+          "type": "storage",
+          "settings": {
+            "heading": "How to store",
+            "body": "<p>Keep your YumBud treats fresh with these simple tips.</p>",
+            "tip_1_icon": "🌡️",
+            "tip_1_text": "Store in a cool, dry place away from direct sunlight.",
+            "tip_2_icon": "🔒",
+            "tip_2_text": "Keep the bag sealed tightly after each use.",
+            "tip_3_icon": "📅",
+            "tip_3_text": "Best used within 3 months of opening.",
+            "tip_4_icon": "",
+            "tip_4_text": ""
+          }
+        },
         "accordion_GDAKnq": {
           "type": "accordion",
           "settings": {
@@ -375,8 +375,8 @@
       "block_order": [
         "ingredients_grid_p4wL8N",
         "highlights_kJMQRW",
-        "storage_EzPXgg",
         "nutrition_wAhCCe",
+        "storage_EzPXgg",
         "accordion_GDAKnq"
       ],
       "name": "YumBud · Product Content",
