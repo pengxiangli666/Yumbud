@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "give-back": {
+      "type": "yumbud-give-back",
+      "settings": {}
+    }
+  },
+  "order": ["give-back"]
+}
