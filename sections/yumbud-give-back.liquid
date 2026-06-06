@@ -1,0 +1,151 @@
+{%- assign s = section.settings -%}
+{%- assign uid = section.id -%}
+
+<style>
+  #shopify-section-{{ uid }}{
+    --bg:{{ s.bg_color }}; --ink:{{ s.text_color }}; --muted:{{ s.muted_color }};
+    --accent:{{ s.accent_color }}; --card:{{ s.card_color }};
+    --serif:{{ s.heading_font.family }},{{ s.heading_font.fallback_families }};
+  }
+  #shopify-section-{{ uid }} .gb{ background:var(--bg); color:var(--ink); padding:{{ s.padding_top }}px 0 {{ s.padding_bottom }}px; }
+  #shopify-section-{{ uid }} *{ box-sizing:border-box; }
+  #shopify-section-{{ uid }} img{ display:block; max-width:100%; }
+  #shopify-section-{{ uid }} .gb-in{ max-width:1100px; margin:0 auto; padding:0 clamp(20px,5vw,56px); }
+
+  /* header */
+  #shopify-section-{{ uid }} .gb-header{ text-align:center; margin-bottom:clamp(40px,5vw,64px); }
+  #shopify-section-{{ uid }} .gb-eyebrow{ font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  #shopify-section-{{ uid }} .gb-title{ font-family:var(--serif); font-weight:500; font-size:clamp(28px,4vw,52px); line-height:1.08; letter-spacing:-.01em; margin:0 0 18px; }
+  #shopify-section-{{ uid }} .gb-logos{ display:flex; align-items:center; justify-content:center; gap:24px; flex-wrap:wrap; margin-bottom:20px; }
+  #shopify-section-{{ uid }} .gb-logos img{ height:36px; width:auto; object-fit:contain; }
+  #shopify-section-{{ uid }} .gb-intro{ font-size:15px; line-height:1.7; color:var(--muted); max-width:58ch; margin:0 auto; }
+
+  /* split row */
+  #shopify-section-{{ uid }} .gb-split{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4vw,56px); align-items:center; margin-top:clamp(40px,5vw,64px); }
+  #shopify-section-{{ uid }} .gb-split.rev .gb-media{ order:2; }
+  #shopify-section-{{ uid }} .gb-media img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:2px; background:var(--card); }
+  #shopify-section-{{ uid }} .gb-text-kicker{ font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+  #shopify-section-{{ uid }} .gb-text-h{ font-family:var(--serif); font-size:clamp(22px,3vw,34px); font-weight:500; line-height:1.14; margin:0 0 16px; }
+  #shopify-section-{{ uid }} .gb-text-h em{ font-style:italic; color:var(--accent); }
+  #shopify-section-{{ uid }} .gb-text-body{ font-size:15px; line-height:1.75; color:var(--muted); }
+  #shopify-section-{{ uid }} .gb-text-body p{ margin:0 0 1em; }
+  #shopify-section-{{ uid }} .gb-text-body p:last-child{ margin-bottom:0; }
+  #shopify-section-{{ uid }} .gb-text-body strong{ color:var(--ink); font-weight:600; }
+
+  /* quote */
+  #shopify-section-{{ uid }} .gb-quote-wrap{ margin-top:clamp(40px,5vw,64px); }
+  #shopify-section-{{ uid }} .gb-quote-kicker{ font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
+  #shopify-section-{{ uid }} .gb-quote{ font-family:var(--serif); font-style:italic; font-size:clamp(22px,3vw,36px); line-height:1.28; color:var(--ink); margin:0 0 16px; max-width:32ch; }
+  #shopify-section-{{ uid }} .gb-quote-body{ font-size:15px; line-height:1.75; color:var(--muted); max-width:56ch; }
+  #shopify-section-{{ uid }} .gb-quote-body p{ margin:0 0 1em; }
+  #shopify-section-{{ uid }} .gb-quote-body p:last-child{ margin-bottom:0; }
+
+  /* reviews embed */
+  #shopify-section-{{ uid }} .gb-reviews{ margin-top:clamp(48px,6vw,80px); }
+
+  @media(max-width:800px){
+    #shopify-section-{{ uid }} .gb-split{ grid-template-columns:1fr; }
+    #shopify-section-{{ uid }} .gb-split.rev .gb-media{ order:0; }
+  }
+</style>
+
+<div class="gb">
+  <div class="gb-in">
+
+    <!-- Header -->
+    <div class="gb-header">
+      {% if s.eyebrow != blank %}<div class="gb-eyebrow">{{ s.eyebrow }}</div>{% endif %}
+      {% if s.title != blank %}<h2 class="gb-title">{{ s.title }}</h2>{% endif %}
+      <div class="gb-logos">
+        {% if s.logo_1 != blank %}<img src="{{ s.logo_1 | image_url: width: 200 }}" alt="{{ s.logo_1_alt }}">{% endif %}
+        {% if s.logo_2 != blank %}<img src="{{ s.logo_2 | image_url: width: 200 }}" alt="{{ s.logo_2_alt }}">{% endif %}
+      </div>
+      {% if s.intro != blank %}<p class="gb-intro">{{ s.intro }}</p>{% endif %}
+    </div>
+
+    <!-- Split row 1: image left, text right -->
+    {% if s.image_1 != blank or s.text_1_heading != blank %}
+    <div class="gb-split">
+      {% if s.image_1 != blank %}
+      <div class="gb-media">
+        <img src="{{ s.image_1 | image_url: width: 1000 }}" alt="{{ s.image_1_alt }}" loading="lazy">
+      </div>
+      {% endif %}
+      <div class="gb-text">
+        {% if s.text_1_kicker != blank %}<div class="gb-text-kicker">{{ s.text_1_kicker }}</div>{% endif %}
+        {% if s.text_1_heading != blank %}<h3 class="gb-text-h">{{ s.text_1_heading }}</h3>{% endif %}
+        {% if s.text_1_body != blank %}<div class="gb-text-body">{{ s.text_1_body }}</div>{% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Split row 2: quote left, image right -->
+    {% if s.image_2 != blank or s.quote != blank %}
+    <div class="gb-split rev">
+      {% if s.image_2 != blank %}
+      <div class="gb-media">
+        <img src="{{ s.image_2 | image_url: width: 1000 }}" alt="{{ s.image_2_alt }}" loading="lazy">
+      </div>
+      {% endif %}
+      <div class="gb-quote-wrap">
+        {% if s.quote_kicker != blank %}<div class="gb-quote-kicker">{{ s.quote_kicker }}</div>{% endif %}
+        {% if s.quote != blank %}<blockquote class="gb-quote">{{ s.quote }}</blockquote>{% endif %}
+        {% if s.quote_body != blank %}<div class="gb-quote-body">{{ s.quote_body }}</div>{% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Reviews embed (paste third-party widget code here) -->
+    {% if s.reviews_embed != blank %}
+    <div class="gb-reviews">
+      {{ s.reviews_embed }}
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "YumBud · Give Back",
+  "tag": "section",
+  "class": "yumbud-give-back-section",
+  "settings": [
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Give Back" },
+    { "type": "text", "id": "title", "label": "Title", "default": "From Our Small Corner to the World" },
+    { "type": "image_picker", "id": "logo_1", "label": "Partner logo 1" },
+    { "type": "text", "id": "logo_1_alt", "label": "Logo 1 alt text" },
+    { "type": "image_picker", "id": "logo_2", "label": "Partner logo 2" },
+    { "type": "text", "id": "logo_2_alt", "label": "Logo 2 alt text" },
+    { "type": "text", "id": "intro", "label": "Intro text", "default": "Every purchase you make helps us give back to something bigger." },
+    { "type": "header", "content": "Split row 1 (image left)" },
+    { "type": "image_picker", "id": "image_1", "label": "Image" },
+    { "type": "text", "id": "image_1_alt", "label": "Image alt text" },
+    { "type": "text", "id": "text_1_kicker", "label": "Kicker" },
+    { "type": "text", "id": "text_1_heading", "label": "Heading", "default": "Thank You for Being Part of Our Community" },
+    { "type": "richtext", "id": "text_1_body", "label": "Body" },
+    { "type": "header", "content": "Split row 2 (image right)" },
+    { "type": "image_picker", "id": "image_2", "label": "Image" },
+    { "type": "text", "id": "image_2_alt", "label": "Image alt text" },
+    { "type": "text", "id": "quote_kicker", "label": "Kicker" },
+    { "type": "text", "id": "quote", "label": "Pull quote", "default": "Reaching out with kindness that transcends our small beginnings." },
+    { "type": "richtext", "id": "quote_body", "label": "Body text below quote" },
+    { "type": "header", "content": "Reviews embed" },
+    { "type": "html", "id": "reviews_embed", "label": "Reviews widget embed code", "info": "Paste your third-party review widget embed code here (e.g. Judge.me, Okendo, Loox)." },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2F1EC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#574F46" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#A0714F" },
+    { "type": "color", "id": "card_color", "label": "Card background", "default": "#ECEAE3" },
+    { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "assistant_n4" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [
+    { "name": "YumBud · Give Back" }
+  ]
+}
+{% endschema %}
