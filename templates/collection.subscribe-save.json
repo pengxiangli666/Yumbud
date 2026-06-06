@@ -347,6 +347,7 @@
         "ingredient_TYeLgG": {
           "type": "ingredient",
           "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_202665_16_02_13.png",
             "name": "Apple",
             "note": "Crunch + natural sweetness"
           }
@@ -354,6 +355,7 @@
         "ingredient_kLKaPd": {
           "type": "ingredient",
           "settings": {
+            "image": "shopify://shop_images/removebg-preview_1_aabdd8ec-a5c8-4859-9c71-de6572fa75d1.png",
             "name": "Garden herbs",
             "note": "Fresh, aromatic, real"
           }
@@ -361,6 +363,7 @@
         "ingredient_KDmi6G": {
           "type": "ingredient",
           "settings": {
+            "image": "shopify://shop_images/IMG_0922-removebg-preview.png",
             "name": "Arugula",
             "note": "Leafy greens, peppery bite"
           }
@@ -368,6 +371,7 @@
         "ingredient_RG4xKa": {
           "type": "ingredient",
           "settings": {
+            "image": "shopify://shop_images/IMG_0926_e8832114-2d06-438d-91cd-87cfe9cc9c3a.jpg",
             "name": "Chicken",
             "note": "Real, lean protein"
           }
