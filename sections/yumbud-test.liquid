@@ -62,7 +62,7 @@
   /* ---------- chapters ---------- */
   #shopify-section-{{ uid }} .chapter{ scroll-margin-top:90px; }
   #shopify-section-{{ uid }} .chapter + .chapter,
-  #shopify-section-{{ uid }} .credentials{ margin-top:clamp(44px,6vw,76px); padding-top:clamp(44px,6vw,76px); border-top:1px solid var(--line); }
+  #shopify-section-{{ uid }} .credentials{ margin-top:clamp(44px,6vw,76px); padding-top:clamp(44px,6vw,76px); }
 
   #shopify-section-{{ uid }} .lead-statement{ font-family:var(--serif); font-weight:500; font-size:clamp(27px,4vw,46px); line-height:1.16; letter-spacing:-.01em; margin:0; max-width:24ch; }
   #shopify-section-{{ uid }} .lead-statement em{ font-style:italic; color:var(--accent); }
@@ -75,7 +75,7 @@
   #shopify-section-{{ uid }} .row{ display:grid; grid-template-columns:0.92fr 1.08fr; gap:clamp(28px,4vw,56px); align-items:start; }
   #shopify-section-{{ uid }} .row.right .figure{ order:2; }
   #shopify-section-{{ uid }} .figure{ margin:0; }
-  #shopify-section-{{ uid }} .figure img{ width:100%; height:auto; border:1px solid var(--line); border-radius:2px; background:var(--card); }
+  #shopify-section-{{ uid }} .figure img{ width:100%; height:auto; border-radius:2px; background:var(--card); }
   #shopify-section-{{ uid }} .figure.r-portrait img{ aspect-ratio:4/5; object-fit:cover; height:auto; }
   #shopify-section-{{ uid }} .figure.r-square img{ aspect-ratio:1/1; object-fit:cover; }
   #shopify-section-{{ uid }} .figure.r-landscape img{ aspect-ratio:3/2; object-fit:cover; }
@@ -280,7 +280,7 @@
     { "type": "text", "id": "nav_title", "label": "Title", "default": "Overview" },
     { "type": "text", "id": "shop_label", "label": "Shop button label", "default": "Shop Now" },
     { "type": "url", "id": "shop_link", "label": "Shop button link" },
-    { "type": "paragraph", "content": "The numbered index is built automatically from the sections below, using each block's “Nav label”." },
+    { "type": "paragraph", "content": "The numbered index is built automatically from the sections below, using each block's \u201cNav label\u201d." },
     { "type": "header", "content": "Colours" },
     { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2F1EC" },
     { "type": "color", "id": "text_color", "label": "Text", "default": "#2B2420" },
@@ -343,7 +343,7 @@
       "name": "YumBud · About",
       "blocks": [
         { "type": "chapter", "settings": { "nav_label": "Intro", "lead": true, "heading": "Real food for the ones who <em>love us back.</em> No fillers, no mystery powders — just whole ingredients you can name." } },
-        { "type": "chapter", "settings": { "nav_label": "Our Story", "eyebrow": "Our Story", "heading": "It started with <em>Hermès.</em>", "quote": "If we wouldn't eat it, why were we asking him to?", "body": "<p>Hermès had been turning his nose up at dinner for a week. We flipped the bag over, read the label, and couldn't recognize half of what was on it.</p><p>So we started experimenting at home with real food already in our own pantry — crisp apples, fresh garden herbs, leafy arugula, a little real chicken. Not just leaving the bad stuff out, but putting good things in.</p><p>But love alone wasn't enough. To make every bite safe and properly balanced, we brought in the experts. Today every YumBud recipe is formulated by veterinarians and pet nutritionists, and made in a registered, food-grade facility — held to the same standard we'd hold our own food to.</p><p>Because the bond between a person and their dog was never a transaction. It's family.</p>", "attribution": "— The YumBud family, Los Angeles", "image_position": "left", "image_ratio": "portrait" } },
+        { "type": "chapter", "settings": { "nav_label": "Our Story", "eyebrow": "Our Story", "heading": "It started with <em>Hermes.</em>", "quote": "If we wouldn't eat it, why were we asking him to?", "body": "<p>Hermes had been turning his nose up at dinner for a week. We flipped the bag over, read the label, and couldn't recognize half of what was on it.</p><p>So we started experimenting at home with real food already in our own pantry — crisp apples, fresh garden herbs, leafy arugula, a little real chicken. Not just leaving the bad stuff out, but putting good things in.</p><p>But love alone wasn't enough. To make every bite safe and properly balanced, we brought in the experts. Today every YumBud recipe is formulated by veterinarians and pet nutritionists, and made in a registered, food-grade facility — held to the same standard we'd hold our own food to.</p><p>Because the bond between a person and their dog was never a transaction. It's family.</p>", "attribution": "— The YumBud family, Los Angeles", "image_position": "left", "image_ratio": "portrait" } },
         { "type": "credentials", "settings": { "nav_label": "Our Credentials", "heading": "Simple ingredients, <em>serious</em> standards.", "intro": "<p>Every YumBud recipe is formulated and balanced with a licensed veterinarian and a pet nutritionist — then made in a registered, food-grade facility. The ingredients stay simple. The standards behind them don't.</p>" } },
         { "type": "chapter", "settings": { "nav_label": "Join Us", "heading": "Join the <em>pack.</em>", "body": "<p>We're dog people building something better — with integrity, taste, and a high bar for what goes in the bag. If that sounds like you, we'd love to hear from you.</p>", "image_position": "right", "image_ratio": "landscape", "button_label": "See open roles" } }
       ]
