@@ -59,6 +59,7 @@
       <div class="gb-logos">
         {% if s.logo_1 != blank %}<img src="{{ s.logo_1 | image_url: width: 200 }}" alt="{{ s.logo_1_alt }}">{% endif %}
         {% if s.logo_2 != blank %}<img src="{{ s.logo_2 | image_url: width: 200 }}" alt="{{ s.logo_2_alt }}">{% endif %}
+        {% if s.logo_3 != blank %}<img src="{{ s.logo_3 | image_url: width: 200 }}" alt="{{ s.logo_3_alt }}">{% endif %}
       </div>
       {% if s.intro != blank %}<p class="gb-intro">{{ s.intro }}</p>{% endif %}
     </div>
@@ -118,6 +119,8 @@
     { "type": "text", "id": "logo_1_alt", "label": "Logo 1 alt text" },
     { "type": "image_picker", "id": "logo_2", "label": "Partner logo 2" },
     { "type": "text", "id": "logo_2_alt", "label": "Logo 2 alt text" },
+    { "type": "image_picker", "id": "logo_3", "label": "Partner logo 3" },
+    { "type": "text", "id": "logo_3_alt", "label": "Logo 3 alt text" },
     { "type": "text", "id": "intro", "label": "Intro text", "default": "Every purchase you make helps us give back to something bigger." },
     { "type": "header", "content": "Split row 1 (image left)" },
     { "type": "image_picker", "id": "image_1", "label": "Image" },
