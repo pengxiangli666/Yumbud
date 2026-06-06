@@ -69,6 +69,7 @@
         "title",
         "content"
       ],
+      "disabled": true,
       "settings": {
         "content_direction": "column",
         "gap": 32,
@@ -90,11 +91,11 @@
         "label_message": "Comment",
         "btn_label": "Send",
         "success_msg": "Thanks for reaching out — we'll be in touch soon!",
-        "bg_color": "#F2F1EC",
-        "text_color": "#2B2420",
-        "muted_color": "#574F46",
-        "accent_color": "#A0714F",
-        "card_color": "#ECEAE3",
+        "bg_color": "#f2f1ec",
+        "text_color": "#2b2420",
+        "muted_color": "#574f46",
+        "accent_color": "#a0714f",
+        "card_color": "#eceae3",
         "heading_font": "assistant_n4",
         "padding_top": 64,
         "padding_bottom": 80
