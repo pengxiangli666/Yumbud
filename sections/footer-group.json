@@ -239,12 +239,12 @@
         "menu_1": "main-menu",
         "title_2": "LEARN",
         "menu_2": "learn",
-        "title_3": "TOOLS",
-        "menu_3": "tools",
+        "title_3": "",
+        "menu_3": "",
         "title_4": "",
         "menu_4": "",
         "contact_title": "CONTACT",
-        "contact_btn_text": "Go to the Help Center",
+        "contact_btn_text": "Any Question?",
         "contact_link": ""
       }
     },
