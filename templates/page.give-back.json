@@ -37,9 +37,38 @@
         "padding_top": 64,
         "padding_bottom": 80
       }
+    },
+    "yumbud_give_back_qEH7NJ": {
+      "type": "yumbud-give-back",
+      "name": "YumBud · Give Back",
+      "settings": {
+        "eyebrow": "",
+        "title": "",
+        "logo_1_alt": "",
+        "logo_2_alt": "",
+        "intro": "",
+        "image_1_alt": "",
+        "text_1_kicker": "",
+        "text_1_heading": "A Small Treat Can Carry a Bigger Meaning",
+        "text_1_body": "<p>To us, a treat is never just a snack.<br/><br/>It is a moment of love.<br/>A gesture of care.<br/>A way to say, “You matter.”<br/><br/>For dogs at home, it may be a daily moment of joy.<br/>For shelter pets and rescue animals, it may be a small comfort during a time of uncertainty.<br/><br/>That is why giving back is part of Yumbud’s purpose — because every dog deserves to feel cared for.</p>",
+        "image_2_alt": "",
+        "quote_kicker": "",
+        "quote": "Reaching out with kindness that transcends our small beginnings.",
+        "quote_body": "",
+        "reviews_embed": "",
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#574F46",
+        "accent_color": "#A0714F",
+        "card_color": "#ECEAE3",
+        "heading_font": "assistant_n4",
+        "padding_top": 64,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
-    "give-back"
+    "give-back",
+    "yumbud_give_back_qEH7NJ"
   ]
 }
