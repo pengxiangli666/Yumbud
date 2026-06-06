@@ -65,10 +65,68 @@
         "padding_top": 64,
         "padding_bottom": 80
       }
+    },
+    "yumbud_give_back_kxJcj4": {
+      "type": "yumbud-give-back",
+      "name": "YumBud · Give Back",
+      "settings": {
+        "eyebrow": "",
+        "title": "",
+        "logo_1_alt": "",
+        "logo_2_alt": "",
+        "intro": "",
+        "image_1_alt": "",
+        "text_1_kicker": "",
+        "text_1_heading": "To Our Valued Customers",
+        "text_1_body": "<p>Thank You for Being Part of the Yumbud Community<br/><br/>Your support allows us to do more than create beautiful, wholesome treats.<br/><br/>Every order helps Yumbud grow a brand rooted in compassion — one that cares not only about ingredients and quality, but also about the wider community of pets and people around us.<br/><br/>Because of you, we are able to continue sharing care with dogs beyond our own homes and contribute to organizations working every day to protect, shelter, and support animals in need.<br/><br/>Thank you for choosing Yumbud.<br/>Thank you for loving your dog with intention.<br/>And thank you for helping us pass that love forward.</p>",
+        "image_2_alt": "",
+        "quote_kicker": "",
+        "quote": "",
+        "quote_body": "",
+        "reviews_embed": "",
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#574F46",
+        "accent_color": "#A0714F",
+        "card_color": "#ECEAE3",
+        "heading_font": "assistant_n4",
+        "padding_top": 64,
+        "padding_bottom": 80
+      }
+    },
+    "yumbud_give_back_4Vawnw": {
+      "type": "yumbud-give-back",
+      "name": "YumBud · Give Back",
+      "settings": {
+        "eyebrow": "",
+        "title": "",
+        "logo_1_alt": "",
+        "logo_2_alt": "",
+        "intro": "",
+        "image_1_alt": "",
+        "text_1_kicker": "",
+        "text_1_heading": "From Los Angeles, With Love",
+        "text_1_body": "<p>Yumbud was born from a love for dogs and a belief that good things should be shared.<br/><br/>From our home city of Los Angeles to the wider pet community, we hope every Yumbud treat carries something more than flavor — a sense of warmth, care, and purpose.<br/><br/>Together, we can make treat time more meaningful.<br/><br/>One pup.<br/>One treat.<br/>One act of love at a time.</p>",
+        "image_2_alt": "",
+        "quote_kicker": "",
+        "quote": "",
+        "quote_body": "",
+        "reviews_embed": "",
+        "bg_color": "#F2F1EC",
+        "text_color": "#2B2420",
+        "muted_color": "#574F46",
+        "accent_color": "#A0714F",
+        "card_color": "#ECEAE3",
+        "heading_font": "assistant_n4",
+        "padding_top": 64,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
     "give-back",
-    "yumbud_give_back_qEH7NJ"
+    "yumbud_give_back_qEH7NJ",
+    "yumbud_give_back_kxJcj4",
+    "yumbud_give_back_4Vawnw"
   ]
 }
