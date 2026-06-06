@@ -270,6 +270,29 @@
         "padding-block-end": 0
       }
     },
+    "product_feature_detail_3najPU": {
+      "type": "product-feature-detail",
+      "blocks": {
+        "product_block_Gaz8N6": {
+          "type": "product_block",
+          "settings": {
+            "hook": "",
+            "title": "{{ closest.product.title }}",
+            "description": "Chicken & Herb Biscuits are thoughtfully baked with premium chicken breast, goat cheese, flaxseed meal, basil flakes, and mint to create a naturally flavorful and satisfying treat.Chicken breast provides high-quality protein to support healthy muscles and daily vitality, while goat cheese adds a rich, savory taste pets love. Flaxseed meal contributes natural fiber and plant-based nutrients, while basil and mint bring a refreshing herbal aroma that elevates every bite.Crafted with simple, wholesome ingredients and free from artificial colors, preservatives, and attractants, these biscuits are perfect for training rewards and everyday treating.",
+            "highlights": "Made with premium chicken breast and goat cheese\nContains flaxseed meal for natural fiber\nInfused with basil and mint for a refreshing aroma\nCrunchy texture ideal for training rewards\nNo artificial colors, preservatives, or attractants"
+          }
+        }
+      },
+      "block_order": [
+        "product_block_Gaz8N6"
+      ],
+      "name": "Product Feature Detail",
+      "settings": {
+        "bg_color": "#F2F1EC",
+        "text_color": "#3d2e24",
+        "accent_color": "#a0785a"
+      }
+    },
     "yumbud_product_rT8nit": {
       "type": "yumbud-product",
       "blocks": {
@@ -549,6 +572,7 @@
   },
   "order": [
     "main",
+    "product_feature_detail_3najPU",
     "yumbud_product_rT8nit",
     "product_recommendations_qggXJq"
   ]
