@@ -270,6 +270,29 @@
         "padding-block-end": 0
       }
     },
+    "product_feature_detail_XgtWyC": {
+      "type": "product-feature-detail",
+      "blocks": {
+        "product_block_YggqT8": {
+          "type": "product_block",
+          "settings": {
+            "hook": "",
+            "title": "{{ closest.product.title }}",
+            "description": "Chicken wrapped apple chew rings are thoughtfully crafted with fresh apple, premium chicken breast, and calendula petals, creating a unique treat that blends natural fruit sweetness with savory protein.\n\nApples provide natural dietary fiber and plant-based nutrients, while chicken breast offers high-quality protein to support healthy muscles and daily vitality. Calendula petals add a beautiful natural touch while enhancing the premium appeal of the recipe.\n\nWith a light, crunchy texture and naturally sweet aroma, Apple Delight Rings are a delightful everyday reward pets will love.",
+            "highlights": "Made with fresh apple and premium chicken breast\nEnhanced with calendula petals\nNaturally sweet fruit aroma\nHigh protein and low fat\nNo artificial colors, preservatives, or attractants"
+          }
+        }
+      },
+      "block_order": [
+        "product_block_YggqT8"
+      ],
+      "name": "Product Feature Detail",
+      "settings": {
+        "bg_color": "#F2F1EC",
+        "text_color": "#3d2e24",
+        "accent_color": "#a0785a"
+      }
+    },
     "yumbud_product_VLCVdK": {
       "type": "yumbud-product",
       "blocks": {
@@ -565,6 +588,7 @@
   },
   "order": [
     "main",
+    "product_feature_detail_XgtWyC",
     "yumbud_product_VLCVdK",
     "product_recommendations_qggXJq"
   ]
