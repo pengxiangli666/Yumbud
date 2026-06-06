@@ -270,6 +270,29 @@
         "padding-block-end": 0
       }
     },
+    "product_feature_detail_ETzz6b": {
+      "type": "product-feature-detail",
+      "blocks": {
+        "product_block_hXmeJJ": {
+          "type": "product_block",
+          "settings": {
+            "hook": "",
+            "title": "{{ closest.product.title }}",
+            "description": "Cucumber Chicken Crisps are crafted with premium chicken breast and fresh cucumber, combining high-quality protein with the natural goodness of vegetables. Gently baked at low temperatures, these light and crispy treats help preserve the natural flavor and nutrients of every ingredient.\n\nChicken breast provides lean protein to support healthy muscles and daily vitality, while cucumber naturally contains moisture, dietary fiber, and plant-based nutrients that complement a balanced diet and deliver a refreshing taste pets love.\n\nMade with a clean and simple recipe, these treats contain no artificial colors, preservatives, or attractants — offering a wholesome snack pet parents can feel good about serving.",
+            "highlights": "Made with premium chicken breast\nNaturally enriched with cucumber\nLight, low-fat recipe\nCrispy texture pets love\nNo artificial colors, preservatives, or attractants"
+          }
+        }
+      },
+      "block_order": [
+        "product_block_hXmeJJ"
+      ],
+      "name": "Product Feature Detail",
+      "settings": {
+        "bg_color": "#F2F1EC",
+        "text_color": "#3d2e24",
+        "accent_color": "#a0785a"
+      }
+    },
     "yumbud_product_Q88Gy6": {
       "type": "yumbud-product",
       "blocks": {
@@ -546,6 +569,7 @@
   },
   "order": [
     "main",
+    "product_feature_detail_ETzz6b",
     "yumbud_product_Q88Gy6",
     "product_recommendations_qggXJq"
   ]
