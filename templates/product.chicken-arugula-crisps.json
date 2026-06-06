@@ -281,40 +281,10 @@
             "description": "Chicken & Arugula Crisps is made with premium chicken breast and fresh arugula, gently air-dried to preserve the natural flavor and nutrition of the ingredients.\n\nChicken breast delivers lean, high-quality protein to support healthy muscles and daily vitality, while arugula provides natural plant nutrients and dietary fiber that complement a balanced diet.\n\nWith its rich meaty flavor, fresh vegetable notes, and chewy texture, this wholesome jerky makes an excellent reward for training sessions and everyday snacking.",
             "highlights": "Protein-rich chicken-based recipe\nMade with natural arugula\nHigh protein and low fat\nChewy texture pets love\nNo artificial colors or preservatives"
           }
-        },
-        "product_block_UWUe8j": {
-          "type": "product_block",
-          "settings": {
-            "hook": "Pure & Natural",
-            "title": "Premium Treat Name",
-            "description": "Describe the magic of your product here...",
-            "highlights": "Highlight 1\nHighlight 2\nHighlight 3\nHighlight 4"
-          }
-        },
-        "product_block_B99bzd": {
-          "type": "product_block",
-          "settings": {
-            "hook": "Pure & Natural",
-            "title": "Premium Treat Name",
-            "description": "Describe the magic of your product here...",
-            "highlights": "Highlight 1\nHighlight 2\nHighlight 3\nHighlight 4"
-          }
-        },
-        "product_block_FhFTe7": {
-          "type": "product_block",
-          "settings": {
-            "hook": "Pure & Natural",
-            "title": "Premium Treat Name",
-            "description": "Describe the magic of your product here...",
-            "highlights": "Highlight 1\nHighlight 2\nHighlight 3\nHighlight 4"
-          }
         }
       },
       "block_order": [
-        "product_block_wWJmJr",
-        "product_block_UWUe8j",
-        "product_block_B99bzd",
-        "product_block_FhFTe7"
+        "product_block_wWJmJr"
       ],
       "name": "Product Feature Detail",
       "settings": {
