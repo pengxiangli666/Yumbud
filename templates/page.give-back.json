@@ -11,8 +11,33 @@
   "sections": {
     "give-back": {
       "type": "yumbud-give-back",
-      "settings": {}
+      "settings": {
+        "eyebrow": "Give Back",
+        "title": "Treats Made with Purpose",
+        "logo_1_alt": "At Yumbud, we believe care should extend beyond the dogs we serve at home.Founded in Los Angeles, Yumbud was created with a simple intention: to make thoughtful, wholesome treats for dogs while contributing to a kinder pet community. Every recipe we create is guided by love, quality, and respect for the special bond between people and their pets.When you choose Yumbud, you are not only giving your dog a treat made with care — you are helping us support animals who are still waiting for safety, comfort, and a loving home.",
+        "logo_2_alt": "",
+        "intro": "Every purchase you make helps us give back to something bigger.",
+        "image_1_alt": "",
+        "text_1_kicker": "",
+        "text_1_heading": "Thank You for Being Part of Our Community",
+        "text_1_body": "",
+        "image_2_alt": "",
+        "quote_kicker": "",
+        "quote": "Reaching out with kindness that transcends our small beginnings.",
+        "quote_body": "",
+        "reviews_embed": "",
+        "bg_color": "#f2f1ec",
+        "text_color": "#2b2420",
+        "muted_color": "#574f46",
+        "accent_color": "#a0714f",
+        "card_color": "#eceae3",
+        "heading_font": "assistant_n4",
+        "padding_top": 64,
+        "padding_bottom": 80
+      }
     }
   },
-  "order": ["give-back"]
+  "order": [
+    "give-back"
+  ]
 }
