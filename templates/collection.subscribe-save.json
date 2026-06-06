@@ -316,28 +316,32 @@
           "type": "pillar",
           "settings": {
             "heading": "Tailor the Taste",
-            "body": "<p>Select the perfect natural, whole-food treats curated for your pup’s unique palate and health needs. Every bite is pure, nutrient-dense goodness.</p>"
+            "body": "<p>Select the perfect natural, whole-food treats curated for your pup’s unique palate and health needs. Every bite is pure, nutrient-dense goodness.</p>",
+            "image": "shopify://shop_images/IMG_0986.jpg"
           }
         },
         "pillar_n8C36J": {
           "type": "pillar",
           "settings": {
             "heading": "Set Your Pace",
-            "body": "<p>From a monthly delight to a quarterly pantry refill, you define the frequency. Enjoy total flexibility to adjust or pause your plan at any time.</p>"
+            "body": "<p>From a monthly delight to a quarterly pantry refill, you define the frequency. Enjoy total flexibility to adjust or pause your plan at any time.</p>",
+            "image": "shopify://shop_images/dingyue2.png"
           }
         },
         "pillar_YQF76f": {
           "type": "pillar",
           "settings": {
             "heading": "Simple Checkout",
-            "body": "<p>Never worry about an empty treat jar again. When the package arrives at your door, prepare for pure excitement—because they know the good stuff has arrived!</p>"
+            "body": "<p>Never worry about an empty treat jar again. When the package arrives at your door, prepare for pure excitement—because they know the good stuff has arrived!</p>",
+            "image": "shopify://shop_images/ChatGPT_Image_202665_17_24_56.png"
           }
         },
         "pillar_t3g7Ua": {
           "type": "pillar",
           "settings": {
             "heading": "Pure Joy, Delivered",
-            "body": "<p>That's our one rule. If it wouldn't pass our own kitchen, it doesn't go in the bag.</p>"
+            "body": "<p>That's our one rule. If it wouldn't pass our own kitchen, it doesn't go in the bag.</p>",
+            "image": "shopify://shop_images/1831BAB2-345E-4DBB-9399-FDEB0BAD2B07.jpg"
           }
         },
         "ingredient_TYeLgG": {
